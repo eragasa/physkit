@@ -34,3 +34,10 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+  "unit: fast, isolated tests",
+  "integration: crosses module boundaries",
+  "slow: long-running tests"
+]
+
