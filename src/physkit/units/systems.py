@@ -11,6 +11,7 @@
 from physkit.units.pressure import Pressure
 from physkit.units.length import Length
 from physkit.units.force import Force
+from physkit.units.temperature import Temperature
 
 class UnitsSI:
   """
@@ -21,7 +22,7 @@ class UnitsSI:
   length = Length.Units.m
   force = Force.Units.N
   pressure = Pressure.Units.Pa
-
+  temperature = Temperature.Units.K
 
 class UnitsCGS:
   """
@@ -32,7 +33,7 @@ class UnitsCGS:
   length = Length.Units.cm
   force = Force.Units.dyn
   pressure = Pressure.Units.Ba   # barye = dyn / cm^2
-
+  temperature = Temperature.Units.K
 
 class UnitsImperial:
   """
@@ -43,6 +44,7 @@ class UnitsImperial:
   length = Length.Units.ft
   force = Force.Units.lbf
   pressure = Pressure.Units.psi
+  temperature = Temperature.Units.R
 
 class UnitsUSCS:
   """
@@ -51,4 +53,4 @@ class UnitsUSCS:
   length = Length.Units.ft
   force = Force.Units.lbf
   pressure = Pressure.Units.psi
-
+  temperature = Temperature.Units.R

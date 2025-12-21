@@ -8,6 +8,7 @@ Physical quantity unit systems and converstions
 from .pressure import Pressure
 from .length import Length
 from .force import Force
+from .temperature import Temperature
 
 from .systems import UnitsSI, UnitsCGS, UnitsImperial, UnitsUSCS
 
