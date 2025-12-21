@@ -12,11 +12,6 @@
 import sympy as sp
 from abc import ABC, abstractmethod
 
-
-# Global coordinate symbol
-x = sp.symbols('x', real=True)
-
-
 # ------------------------------------------------------------
 # Base continuous operator
 # ------------------------------------------------------------

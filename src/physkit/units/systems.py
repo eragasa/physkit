@@ -8,10 +8,11 @@
 # These classes provide *conventional defaults* only.
 # They do NOT perform conversions and carry no state.
 
-from physkit.units.pressure import Pressure
-from physkit.units.length import Length
-from physkit.units.force import Force
-from physkit.units.temperature import Temperature
+from .pressure import Pressure
+from .length import Length
+from .force import Force
+from .temperature import Temperature
+from .energy import Energy
 
 class UnitsSI:
   """
@@ -23,6 +24,7 @@ class UnitsSI:
   force = Force.Units.N
   pressure = Pressure.Units.Pa
   temperature = Temperature.Units.K
+  energy = Energy.Units.J
 
 class UnitsCGS:
   """
@@ -34,6 +36,7 @@ class UnitsCGS:
   force = Force.Units.dyn
   pressure = Pressure.Units.Ba   # barye = dyn / cm^2
   temperature = Temperature.Units.K
+  energy = Energy.Units.erg
 
 class UnitsImperial:
   """

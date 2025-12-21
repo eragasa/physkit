@@ -9,6 +9,7 @@ from .pressure import Pressure
 from .length import Length
 from .force import Force
 from .temperature import Temperature
+from .energy import Energy
 
 from .systems import UnitsSI, UnitsCGS, UnitsImperial, UnitsUSCS
 
