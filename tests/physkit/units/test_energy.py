@@ -9,3 +9,4 @@ def test_ft_lbf_to_J():
 def test_in_lbf_to_ft_lbf():
     ft = Energy.convert(from_=(12.0, Energy.Units.in_lbf), to=Energy.Units.ft_lbf)
     assert np.isclose(ft, 1.0)
+ 
