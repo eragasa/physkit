@@ -13,6 +13,7 @@ from .length import Length
 from .force import Force
 from .temperature import Temperature
 from .energy import Energy
+from .mass import Mass
 
 class UnitsSI:
   """
@@ -22,6 +23,7 @@ class UnitsSI:
   """
   name = "SI"
   length = Length.Units.m
+  mass = Mass.Units.kg
   force = Force.Units.N
   pressure = Pressure.Units.Pa
   temperature = Temperature.Units.K
@@ -35,6 +37,7 @@ class UnitsCGS:
   """
   name = "CGS"
   length = Length.Units.cm
+  mass = Mass.Units.g
   force = Force.Units.dyn
   pressure = Pressure.Units.Ba   # barye = dyn / cm^2
   temperature = Temperature.Units.K
@@ -47,6 +50,7 @@ class UnitsImperial:
   Uses absolute force (lbf), not mass-based units.
   """
   length = Length.Units.ft
+  mass = Mass.Units.lbm
   force = Force.Units.lbf
   pressure = Pressure.Units.psi
   temperature = Temperature.Units.R
