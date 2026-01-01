@@ -20,6 +20,7 @@ class UnitsSI:
 
   This class defines conventional SI units for each quantity.
   """
+  name = "SI"
   length = Length.Units.m
   force = Force.Units.N
   pressure = Pressure.Units.Pa
@@ -32,6 +33,7 @@ class UnitsCGS:
 
   Explicitly uses centimeter–gram–second conventions.
   """
+  name = "CGS"
   length = Length.Units.cm
   force = Force.Units.dyn
   pressure = Pressure.Units.Ba   # barye = dyn / cm^2
