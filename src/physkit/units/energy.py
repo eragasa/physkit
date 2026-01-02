@@ -9,13 +9,10 @@ Implementation is intentionally minimal and explicit
 
 Notes:
 - eV is ubiquitous in solid-state physics.
-- This module treats eV as an energy unit: 1 eV = q J, where q is the
-  elementary charge in coulombs.
-
-LaTeX docstrings use raw strings to avoid backslash-escape issues.
+- kcal/mol is the canonical energy unit in LAMMPS 'real'.
+- Ha (Hartree) is the atomic unit of energy.
 """
 from enum import IntEnum
-import math
 
 
 class Energy:
@@ -23,9 +20,6 @@ class Energy:
     Energy quantity.
 
     Canonical unit: joule (J)
-
-    Mathematical meaning:
-    $E \in \mathbb{R}$, and when used as a scale, $E = k_B T$, $E=\hbar\omega$, etc.
     """
 
     class Units(IntEnum):
@@ -35,42 +29,55 @@ class Energy:
         MJ  = 2
 
         # Solid-state / atomic-scale
-        meV = 4
         eV  = 3
+        meV = 4
         keV = 5
-
         MeV = 6
         GeV = 7
 
         # CGS
         erg = 8
 
-        # imperial / uscs
+        # Imperial / USCS
         ft_lbf = 9
         in_lbf = 10
+
+        # Chemistry / LAMMPS
+        kcal = 11
+        kcal_per_mol = 12
+
+        # Atomic
+        Ha = 13
 
     # ------------------------------------------------------------------
     # Unit scale factors to canonical J
     # ------------------------------------------------------------------
-    # Exact SI elementary charge (C). 1 eV = q joules.
+    # Exact SI elementary charge (C). 1 eV = q J.
     _Q = 1.602176634e-19
 
+    # Hartree energy (J)
+    _EH = 4.3597447222071e-18
+
     _TO_J = (
-      1.0,          # J
-      1.0e3,        # kJ
-      1.0e6,        # MJ
+        1.0,            # J
+        1.0e3,          # kJ
+        1.0e6,          # MJ
 
-      1.0e-3*_Q,    # meV
-      1.0*_Q,       # eV
-      1.0e3*_Q,     # keV
+        1.0 * _Q,       # eV
+        1.0e-3 * _Q,    # meV
+        1.0e3 * _Q,     # keV
+        1.0e6 * _Q,     # MeV
+        1.0e9 * _Q,     # GeV
 
-      1.0e6*_Q,     # MeV
-      1.0e9*_Q,     # GeV
+        1.0e-7,         # erg
 
-      1.0e-7,       # erg
+        1.3558179483314,      # ft·lbf
+        1.3558179483314 / 12, # in·lbf
 
-      1.3558179483314,     # ft·lbf
-      1.3558179483314/12,  # in·lbf
+        4184.0,         # kcal
+        4184.0,         # kcal/mol → J/mol (energy scale per mole)
+
+        _EH,            # Ha
     )
 
     # ------------------------------------------------------------------
@@ -82,7 +89,6 @@ class Energy:
         Convert energy values between units.
         """
         value, unit_from = from_
-
         value_J = Energy._to_canonical(value, unit_from)
         return Energy._from_canonical(value_J, to)
 
