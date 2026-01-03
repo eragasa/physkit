@@ -1,5 +1,6 @@
 from typing import Protocol
 from dataclasses import dataclass
+import math
 
 class PhysicalConstantsProtocol(Protocol):
   """ Structural type for any constant container."""
@@ -10,7 +11,8 @@ class PhysicalConstantsProtocol(Protocol):
   me0: float  # mass, electron rest mass
   N_A: float  # per mol, Avogadro constant
   R_g: float  # energy/mol/temperature, gas constant
-
+  h: float    # planck's constant
+  hbar: float # reduced planck's constant
 
 @dataclass(frozen=True)
 class ConstantsSI:
@@ -24,6 +26,8 @@ class ConstantsSI:
     me0: float  = 9.1093837015e-31    # kg, electron rest mass
     N_A: float  = 6.02214076e23       # 1/mol, Avogadro constant
     R_g: float  = 8.314462618         # J/mol/K, gas constant
+    h: float    = 6.62607015e-34      # J s, Planck's Constant
+    hbar: float = h / (2.0 * math.pi) # J·s, reduced planck's constant
 
 from dataclasses import dataclass
 
@@ -39,3 +43,5 @@ class ConstantsCGS:
     me0: float  = 9.1093837015e-28    # g, electron rest mass
     N_A: float  = 6.02214076e23       # 1/mol, Avogadro constant
     R_g: float  = 8.314462618e7       # erg/mol/K, gas constant
+    h: float    = 6.62607015e-27      # erg s, planck's constant
+    hbar: float = h / (2.0 * math.pi) # erg·s, reduced planck's constant
