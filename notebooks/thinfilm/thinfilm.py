@@ -1,8 +1,8 @@
-
+from dataclasses import dataclass
 @dataclass(frozen=True)
 class Species:
     """
-    Physical species metadata for Hertz–Knudsen modeling.
+    Physical species metadata for Hertz-Knudsen modeling.
     """
     name: str
     molar_mass: float #g/mol
