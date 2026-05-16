@@ -59,13 +59,12 @@ class Time:
     # Core conversion
     # ------------------------------------------------------------------
     @staticmethod
-    def convert(*, from_, to: "Time.Units"):
+    def convert(value, units_from: "Time.Units", units_to: "Time.Units"):
         """
         Convert time values between units.
         """
-        value, unit_from = from_
-        value_s = Time._to_canonical(value, unit_from)
-        return Time._from_canonical(value_s, to)
+        value_s = Time._to_canonical(value, units_from)
+        return Time._from_canonical(value_s, units_to)
 
     # ------------------------------------------------------------------
     # Internal canonical helpers

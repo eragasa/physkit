@@ -3,8 +3,9 @@
 """
 physkit.units
 
-Physical quantity unit systems and converstions
+Physical quantity unit systems and conversions
 """
+from .protocols import UnitQuantityProtocol
 from .pressure import Pressure
 from .length import Length
 from .force import Force
@@ -20,21 +21,37 @@ from .dipole import Dipole
 from .density import Density
 from .electricfield import ElectricField
 from .systems import (
-  UnitsSI, 
-  UnitsCGS, 
-  UnitsImperial, 
-  UnitsUSCS,
-  UnitsElectron,
-  UnitsHartree,
-  UnitsReal,
-  UnitsMetal,
-
+    UnitsSI, 
+    UnitsCGS, 
+    UnitsImperial, 
+    UnitsUSCS,
+    UnitsElectron,
+    UnitsHartree,
+    UnitsReal,
+    UnitsMetal,
 )
 __all__ = [
-  "Pressure", "Length","Force",
-  "Temperature","Energy","Mass","Time",
-  "Charge", "Velocity","Torque","Viscosity","Dipole",
-  "Density", "ElectricField",
-  "UnitsSI","UnitsCGS","UnitsImperial","UnitsUSCS",
-  "UnitsElectron","UnitsHartree","UnitsReal","UnitsMetal"
+  "UnitQuantityProtocol",
+  "Pressure", 
+  "Length",
+  "Force",
+  "Temperature",
+  "Energy",
+  "Mass",
+  "Time",
+  "Charge",
+  "Velocity",
+  "Torque",
+  "Viscosity",
+  "Dipole",
+  "Density", 
+  "ElectricField",
+  "UnitsSI",
+  "UnitsCGS",
+  "UnitsImperial",
+  "UnitsUSCS",
+  "UnitsElectron",
+  "UnitsHartree",
+  "UnitsReal",
+  "UnitsMetal"
 ]

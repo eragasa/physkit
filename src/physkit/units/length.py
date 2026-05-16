@@ -31,17 +31,18 @@ class Length:
         um  = 4
         nm  = 5
         pm  = 6
+        fm  = 7
 
         # Atomic / solid state
-        A   = 7          # angstrom
-        Angstrom = 7
-        bohr = 8         # Bohr radius a0
+        A   = 8          # angstrom
+        Angstrom = 8
+        bohr = 9         # Bohr radius a0
 
         # Imperial / USCS (absolute)
-        in_ = 9          # inch (underscore avoids keyword)
-        ft  = 10         # foot
-        yd  = 11         # yard
-        mi  = 12         # mile
+        in_ = 10         # inch (underscore avoids keyword)
+        ft  = 11         # foot
+        yd  = 12         # yard
+        mi  = 13         # mile
 
     # ------------------------------------------------------------------
     # Unit scale factors to canonical meter (m)
@@ -49,34 +50,33 @@ class Length:
     _A0 = 5.29177210903e-11  # m
 
     _TO_M = (
-        1.0,                    # m
-        1.0e3,                  # km
-        1.0e-2,                 # cm
-        1.0e-3,                 # mm
-        1.0e-6,                 # um
-        1.0e-9,                 # nm
-        1.0e-12,                # pm
+        1.0,                    # 0, m
+        1.0e3,                  # 1, km
+        1.0e-2,                 # 2, cm
+        1.0e-3,                 # 3, mm
+        1.0e-6,                 # 4, um
+        1.0e-9,                 # 5, nm
+        1.0e-12,                # 6, pm
+        1.0e-15,                # 7, fm
+        1.0e-10,                # 8, Angstrom
+        _A0,                    # 9,bohr
 
-        1.0e-10,                # Å
-        _A0,  # bohr
-
-        0.0254,                 # inch
-        0.3048,                 # foot
-        0.9144,                 # yard
-        1609.344,               # mile
+        0.0254,                 # 10, inch
+        0.3048,                 # 11, foot
+        0.9144,                 # 12, yard
+        1609.344,               # 13, mile
     )
 
     # ------------------------------------------------------------------
     # Core conversion
     # ------------------------------------------------------------------
     @staticmethod
-    def convert(*, from_, to: "Length.Units"):
+    def convert(value, units_from, units_to: "Length.Units"):
         """
         Convert length values between units.
         """
-        value, unit_from = from_
-        value_m = Length._to_canonical(value, unit_from)
-        return Length._from_canonical(value_m, to)
+        value_m = Length._to_canonical(value, units_from)
+        return Length._from_canonical(value_m, units_to)
 
     # ------------------------------------------------------------------
     # Internal canonical helpers
