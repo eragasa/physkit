@@ -21,9 +21,9 @@ class VaporPressureCurve(Protocol):
     """
     Interface for equilibrium vapor-pressure models.
 
-    Implementations provide a canonical method `P_Pa(T)` returning the
-    equilibrium vapor pressure in Pascals. Optional metadata may describe
-    units, validity range, and data provenance.
+    Implementations must provide a method P_Pa(T) that returns the equilibrium 
+    vapor pressure in Pascals. This provides a common SI-normalized interface 
+    for downstream calculations.
 
     Attributes
     ----------
@@ -33,18 +33,18 @@ class VaporPressureCurve(Protocol):
     T_unit : Temperature.Units
         Temperature unit expected by the implementation. Conventions are
         implementation-defined.
-    valid_range_K : tuple[float, float] or None
-        Valid temperature range in Kelvin for which the correlation is valid.
+    T_valid_range : tuple[float, float] or None
+        Valid temperature range in `T_unit` for which the correlation is valid.
     source : str
         Human-readable citation or provenance string.
     """
     P_unit: Pressure.Units
     T_unit: Temperature.Units
-    valid_range_K: Optional[Tuple[float, float]]
+    T_valid_range: Optional[Tuple[float, float]]
     source: str
 
     def P_Pa(self, 
-             T: ArrayLike, 
+             T_K: ArrayLike, 
              check_range: bool = True
     ) -> ArrayLike:
         """
@@ -53,7 +53,7 @@ class VaporPressureCurve(Protocol):
         Parameters
         ----------
         T : ArrayLike
-            Temperature(s) in the units expected by the implementation.
+            Temperature(s) in the in Kelvin.
         check_range : bool, default=True
             If True and a validity range is defined, raise an error when
             temperatures are outside the stated range.

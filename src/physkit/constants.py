@@ -139,6 +139,7 @@ class ConstantsSI:
     hbar: float = h / (2.0 * math.pi) # J s
     m_u: float  = 1.660_539_068_92e-27   # kg
     m_u_u: float = 0.000_000_000_52e-27  # kg
+    c: float    = 299792458           # m/s
 
 # -----------------------------------------------------------------------------
 # CGS (Gaussian / esu) constants
