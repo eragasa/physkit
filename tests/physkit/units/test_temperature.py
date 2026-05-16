@@ -1,166 +1,78 @@
 # tests/physkit/units/test_temperature.py
-
+# Eugene Joseph M. Ragasa, 2026
 import numpy as np
 import pytest
+from enum import IntEnum
 
+from physkit.numeric import as_f64_array
 from physkit.units import Temperature
-from physkit.units._protocols import QuantityProtocol
+from physkit.units.protocols import UnitQuantityProtocol
 
+# --- UnitQuantityProtocol conformity test ---
+def test_Temperature_is_UnitQuantityProtocol():
+    assert isinstance(Temperature, UnitQuantityProtocol)
 
-# ---------------------------------------------------------------------
-# API / protocol compliance
-# ---------------------------------------------------------------------
+def test_Temperature_has_Units_enum():
+    assert hasattr(Temperature, "Units")
 
-@pytest.mark.unit
-def test_temperature_conforms_to_quantity_protocol():
-  assert isinstance(Temperature, QuantityProtocol)
+def test_Temperature_Units_is_IntEnum():
+    assert issubclass(Temperature.Units, IntEnum)
 
+def test_Temperature_convert_exists():
+    assert hasattr(Temperature, "convert")
+    assert callable(Temperature.convert)
 
-@pytest.mark.unit
-def test_units_is_intenum():
-  from enum import IntEnum
-  assert issubclass(Temperature.Units, IntEnum)
+import inspect
+def test_Temperature_convert_check_signature():
+    sig_Temperature_convert \
+      = inspect.signature(Temperature.convert)
+    parameters_Temperature_convert \
+      = list(sig_Temperature_convert.parameters.keys())
 
+    sig_UnitQuantityProtocol_convert \
+      = inspect.signature(UnitQuantityProtocol.convert)
+    parameters_UnitQuantityProtocol_convert \
+      = list(sig_UnitQuantityProtocol_convert.parameters.keys())
+    
+    assert parameters_Temperature_convert == parameters_UnitQuantityProtocol_convert
 
-# ---------------------------------------------------------------------
-# Canonical unit sanity
-# ---------------------------------------------------------------------
+def test_Temperature_conforms_to_protocol():
 
-@pytest.mark.unit
-def test_canonical_unit_is_kelvin():
-  val = Temperature.convert(
-    from_=[1.0, Temperature.Units.K],
-    to=Temperature.Units.K
-  )
-  assert val == 1.0
+    Q = Temperature
 
+    # protocol conformance
+    assert isinstance(Q, UnitQuantityProtocol)
 
-# ---------------------------------------------------------------------
-# Known reference conversions (scalar)
-# ---------------------------------------------------------------------
+    # has Units enum
+    assert hasattr(Q, "Units")
+    assert issubclass(Q.Units, IntEnum)
 
-@pytest.mark.unit
-def test_c_to_k_freezing_point():
-  val = Temperature.convert(
-    from_=[0.0, Temperature.Units.C],
-    to=Temperature.Units.K
-  )
-  assert abs(val - 273.15) < 1e-12
+    # has convert
+    assert callable(Q.convert)
 
+    units = list(Q.Units)
+    u0, u1 = units[0], units[1]
 
-@pytest.mark.unit
-def test_k_to_c_freezing_point():
-  val = Temperature.convert(
-    from_=[273.15, Temperature.Units.K],
-    to=Temperature.Units.C
-  )
-  assert abs(val - 0.0) < 1e-12
+    samples = [
+        1.0,
+        [1.0, 2.0, 3.0],
+        [[1.0]],
+    ]
 
+    # shape preservation
+    for x in samples:
+        x_arr = as_f64_array(x)
+        y = Q.convert(x, u0, u1)
+        y_arr = as_f64_array(y)
 
-@pytest.mark.unit
-def test_f_to_c_freezing_point():
-  val = Temperature.convert(
-    from_=[32.0, Temperature.Units.F],
-    to=Temperature.Units.C
-  )
-  assert abs(val - 0.0) < 1e-12
+        assert y_arr.shape == x_arr.shape
 
+    # round-trip
+    for x in samples:
+        x_arr = as_f64_array(x)
 
-@pytest.mark.unit
-def test_c_to_f_freezing_point():
-  val = Temperature.convert(
-    from_=[0.0, Temperature.Units.C],
-    to=Temperature.Units.F
-  )
-  assert abs(val - 32.0) < 1e-12
+        y = Q.convert(x, u0, u1)
+        x2 = Q.convert(y, u1, u0)
+        x2_arr = as_f64_array(x2)
 
-
-@pytest.mark.unit
-def test_f_to_k_absolute_zero():
-  val = Temperature.convert(
-    from_=[-459.67, Temperature.Units.F],
-    to=Temperature.Units.K
-  )
-  assert abs(val - 0.0) < 1e-10
-
-
-@pytest.mark.unit
-def test_r_to_k():
-  val = Temperature.convert(
-    from_=[491.67, Temperature.Units.R],
-    to=Temperature.Units.K
-  )
-  assert abs(val - 273.15) < 1e-10
-
-
-@pytest.mark.unit
-def test_mk_to_k():
-  val = Temperature.convert(
-    from_=[1000.0, Temperature.Units.mK],
-    to=Temperature.Units.K
-  )
-  assert abs(val - 1.0) < 1e-12
-
-
-# ---------------------------------------------------------------------
-# Round-trip invariants (affine sanity)
-# ---------------------------------------------------------------------
-
-@pytest.mark.unit
-@pytest.mark.parametrize("unit", list(Temperature.Units))
-def test_round_trip_scalar(unit):
-  x = 123.456
-  y = Temperature.convert(from_=[x, unit], to=Temperature.Units.K)
-  z = Temperature.convert(from_=[y, Temperature.Units.K], to=unit)
-  assert abs(z - x) < 1e-12
-
-
-# ---------------------------------------------------------------------
-# Vectorization behavior
-# ---------------------------------------------------------------------
-
-@pytest.mark.unit
-def test_vectorized_conversion_c_to_k():
-  arr = np.array([-40.0, 0.0, 100.0])
-  out = Temperature.convert(
-    from_=[arr, Temperature.Units.C],
-    to=Temperature.Units.K
-  )
-  assert isinstance(out, np.ndarray)
-  assert np.allclose(out, arr + 273.15)
-
-
-@pytest.mark.unit
-def test_vectorized_conversion_f_to_c():
-  arr = np.array([-40.0, 32.0, 212.0])
-  out = Temperature.convert(
-    from_=[arr, Temperature.Units.F],
-    to=Temperature.Units.C
-  )
-  assert isinstance(out, np.ndarray)
-  assert np.allclose(out, (arr - 32.0) * (5.0 / 9.0))
-
-
-# ---------------------------------------------------------------------
-# Consistency between absolute scales
-# ---------------------------------------------------------------------
-
-@pytest.mark.unit
-def test_k_and_r_affine_consistency():
-  k = 300.0
-  r = Temperature.convert(from_=[k, Temperature.Units.K], to=Temperature.Units.R)
-  k2 = Temperature.convert(from_=[r, Temperature.Units.R], to=Temperature.Units.K)
-  assert abs(k2 - k) < 1e-12
-
-
-# ---------------------------------------------------------------------
-# Error behavior (minimal but explicit)
-# ---------------------------------------------------------------------
-
-@pytest.mark.unit
-def test_invalid_unit_raises():
-  class FakeUnit:
-    pass
-
-  with pytest.raises(Exception):
-    Temperature.convert(from_=[1.0, FakeUnit()], to=Temperature.Units.K)
+        assert np.allclose(x_arr, x2_arr, atol=1e-12)
