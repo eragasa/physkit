@@ -1,0 +1,1 @@
+from .piab1d import ParticleInABox1D
