@@ -16,6 +16,16 @@ from physkit.qm.potentials import Potential1D
 
 FloatArray = NDArray[np.float64]
 
+class TISEAnalytical1D:
+    def __init__(self, x_min: float, x_max: float, mass: float, hbar: float):
+        self.x_min: float = x_min
+        self.x_max: float = x_max
+        self.mass: float = mass
+        self.hbar: float = mass
+
+class TISESymbolic1D:
+    def __init__(self):
+
 
 class TISESolver1D:
     """

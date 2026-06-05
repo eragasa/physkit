@@ -4,7 +4,9 @@ from physkit.qm.models.piab1d import ParticleInABox1D
 import math
 
 
-class ParticleInABoxAnalytical1D:
+class Tise1DAnalytical
+
+class ParticleInABox1DAnalytical(Tise1DAnalytical):
     def __init__(self, x_min, x_max, *, mass: float = 1, hbar: float = 1):
         self.x_min = x_min
         self.x_max = x_max

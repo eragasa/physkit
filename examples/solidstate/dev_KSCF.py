@@ -79,3 +79,4 @@ print(f"Calculated HF Band Gap   : {bandgap:.4f} eV")
 print("\n--- Real-Space Charge Mapping ---")
 # Computes the charge matrix density projection per atom in the cell
 mf.mulliken_pop()
+
