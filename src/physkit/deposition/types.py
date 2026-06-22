@@ -3,6 +3,7 @@ from typing import Union
 import numpy as np
 
 ArrayLike = Union[float, np.ndarray]
+ArrayFloat64 = np.typing.NDArray[np.float64]
 
 def asarray_f(x: ArrayLike) -> np.ndarray:
     return np.asarray(x, dtype=float)
