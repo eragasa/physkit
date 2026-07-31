@@ -1,189 +1,158 @@
-# physkit/constants.py
+# src/physkit/constants.py
 # Eugene Joseph M. Ragasa 2025-2026
 
 r"""
-Physical constants containers (SI and CGS/Gaussian).
+Physical constants for explicit numerical unit systems.
 
-Design goals
-------------
-- Minimal and explicit: no unit algebra, no parsing, no dependencies.
-- Constants are provided as simple immutable dataclass containers.
-- Intended for direct numerical work and reproducible pedagogy.
-- A structural Protocol defines the minimum attribute set expected by downstream code.
+The module provides immutable constants containers for direct numerical
+work. A physical model receives a constants object explicitly, and all
+model parameters must be expressed consistently in that constants
+object's unit system.
 
-Important caveat about "CGS"
-----------------------------
-`ConstantsCGS` below is specifically **Gaussian CGS (esu)** for charge.
-In Gaussian CGS, $\varepsilon_0$ is not used as a dimensional constant in the
-formulas (Coulomb's law is written without $\varepsilon_0$). We include `eps0`
-only to satisfy a uniform structural interface; it is set to `1.0` and should
-be treated as a **placeholder**, not as an SI-like permittivity.
+Examples
+--------
+Construct a model using SI constants:
 
-Units summary
--------------
-ConstantsSI:
-- a0   [m]
-- q    [C]
-- k_B  [J/K]
-- eps0 [F/m]
-- me0  [kg]
-- N_A  [1/mol]
-- R_g  [J/(mol K)]
-- h    [J s]
-- hbar [J s]
-- m_u  [kg]   atomic mass constant (u, dalton)
-- m_u_u [kg]  standard uncertainty for m_u
+>>> model = Piab1D(
+...     x_lower=0.0,
+...     x_upper=1.0e-9,
+...     mass=SI.me0,
+...     constants=SI,
+... )
 
-ConstantsCGS (Gaussian/esu):
-- a0   [cm]
-- q    [statC] (esu)
-- k_B  [erg/K]
-- eps0 [dimensionless placeholder (=1.0)]
-- me0  [g]
-- N_A  [1/mol]
-- R_g  [erg/(mol K)]
-- h    [erg s]
-- hbar [erg s]
-- m_u  [g]
-- m_u_u [g]
+Construct the equivalent model using Gaussian CGS constants:
+
+>>> model = Piab1D(
+...     x_lower=0.0,
+...     x_upper=1.0e-7,
+...     mass=GAUSSIAN_CGS.me0,
+...     constants=GAUSSIAN_CGS,
+... )
+
+Unit consistency is the responsibility of the model configuration. This
+module does not perform dimensional analysis, automatic unit conversion,
+or conversion between SI and Gaussian CGS equation forms.
 """
 
 from __future__ import annotations
 
-from typing import Protocol, runtime_checkable
 from dataclasses import dataclass
 import math
+from typing import (
+    Final,
+    TypeAlias,
+)
 
 
-# -----------------------------------------------------------------------------
-# Protocol (structural interface)
-# -----------------------------------------------------------------------------
-@runtime_checkable
-class PhysicalConstantsProtocol(Protocol):
-  r"""
-  Structural type for a "constants container".
-
-  Purpose
-  -------
-  Downstream code may depend on a small set of named constants without tying
-  itself to a specific container class. This Protocol defines that minimal
-  attribute set.
-
-  Runtime behavior
-  ---------------
-  - `@runtime_checkable` enables `isinstance(obj, PhysicalConstantsProtocol)`.
-  - This checks only that the attributes exist (structural check).
-  - It does NOT validate numeric values, units, or dimensional consistency.
-
-  Required attributes
-  -------------------
-  All attributes are required to exist on the container object.
-
-  Notes on eps0
-  -------------
-  `eps0` is an SI concept. In Gaussian CGS it is not used in the same way.
-  If you use a CGS container, treat `eps0` as a placeholder unless your
-  formula set is explicitly written to use it.
-  """
-
-  a0: float     # Bohr radius
-  q: float      # elementary charge
-  k_B: float    # Boltzmann constant
-  eps0: float   # vacuum permittivity (SI; placeholder in Gaussian CGS)
-  me0: float    # electron rest mass
-  N_A: float    # Avogadro constant
-  R_g: float    # molar gas constant
-  h: float      # Planck constant
-  hbar: float   # reduced Planck constant
-  m_u: float    # atomic mass constant (u, dalton)
-  m_u_u: float  # standard uncertainty of m_u (same units as m_u)
-
-
-# -----------------------------------------------------------------------------
-# SI constants
-# -----------------------------------------------------------------------------
-@dataclass(frozen=True)
+@dataclass(
+    frozen=True,
+    slots=True,
+)
 class ConstantsSI:
-    r"""
+    """
     Physical constants in SI units.
 
-    Policy
-    ------
-    - This container stores numerical values in SI base/derived units.
-    - Some constants are exact by SI definition (e.g., q, k_B, N_A, h).
-      Others are experimentally determined (e.g., eps0, me0, a0).
-    - Values are intended to be stable references for computation.
-
-    Attribute units
-    ---------------
-    a0   [m]
-    q    [C]
-    k_B  [J/K]
-    eps0 [F/m]
-    me0  [kg]
-    N_A  [1/mol]
-    R_g  [J/(mol K)]
-    h    [J s]
-    hbar [J s]
-    m_u  [kg]
-    m_u_u [kg]
+    Attributes
+    ----------
+    a0:
+        Bohr radius in meters.
+    q:
+        Elementary charge in coulombs.
+    k_B:
+        Boltzmann constant in joules per kelvin.
+    eps0:
+        Vacuum permittivity in farads per meter.
+    me0:
+        Electron rest mass in kilograms.
+    N_A:
+        Avogadro constant in reciprocal moles.
+    R_g:
+        Molar gas constant in joules per mole kelvin.
+    h:
+        Planck constant in joule seconds.
+    hbar:
+        Reduced Planck constant in joule seconds.
+    m_u:
+        Atomic mass constant in kilograms.
+    m_u_u:
+        Standard uncertainty of the atomic mass constant in kilograms.
+    c:
+        Speed of light in meters per second.
     """
-    a0: float   = 5.29177210903e-11   # m, Bohr radius
-    q: float    = 1.602176634e-19     # C
-    k_B: float  = 1.380649e-23        # J/K
-    eps0: float = 8.854187812e-12     # F/m
-    me0: float  = 9.1093837015e-31    # kg
-    N_A: float  = 6.02214076e23       # 1/mol
-    R_g: float  = 8.314462618         # J/(mol K)
-    h: float    = 6.62607015e-34      # J s
-    hbar: float = h / (2.0 * math.pi) # J s
-    m_u: float  = 1.660_539_068_92e-27   # kg
-    m_u_u: float = 0.000_000_000_52e-27  # kg
-    c: float    = 299792458           # m/s
 
-# -----------------------------------------------------------------------------
-# CGS (Gaussian / esu) constants
-# -----------------------------------------------------------------------------
-@dataclass(frozen=True)
-class ConstantsCGS:
-    r"""
-    Physical constants in Gaussian CGS (esu) units.
+    a0: float = 5.291_772_109_03e-11
+    q: float = 1.602_176_634e-19
+    k_B: float = 1.380_649e-23
+    eps0: float = 8.854_187_812_8e-12
+    me0: float = 9.109_383_713_9e-31
+    N_A: float = 6.022_140_76e23
+    R_g: float = 8.314_462_618_153_24
+    h: float = 6.626_070_15e-34
+    hbar: float = h / (2.0 * math.pi)
+    m_u: float = 1.660_539_068_92e-27
+    m_u_u: float = 0.000_000_000_52e-27
+    c: float = 299_792_458.0
 
-    Scope
+
+@dataclass(
+    frozen=True,
+    slots=True,
+)
+class ConstantsGaussianCGS:
+    """
+    Physical constants in Gaussian CGS units.
+
+    Attributes
+    ----------
+    a0:
+        Bohr radius in centimeters.
+    q:
+        Elementary charge in statcoulombs.
+    k_B:
+        Boltzmann constant in ergs per kelvin.
+    me0:
+        Electron rest mass in grams.
+    N_A:
+        Avogadro constant in reciprocal moles.
+    R_g:
+        Molar gas constant in ergs per mole kelvin.
+    h:
+        Planck constant in erg seconds.
+    hbar:
+        Reduced Planck constant in erg seconds.
+    m_u:
+        Atomic mass constant in grams.
+    m_u_u:
+        Standard uncertainty of the atomic mass constant in grams.
+    c:
+        Speed of light in centimeters per second.
+
+    Notes
     -----
-    This container is for computations written consistently in Gaussian CGS.
-    It is NOT intended to be mixed with SI formulas unless you explicitly
-    convert units and rewrite electromagnetic relations appropriately.
-
-    eps0 warning
-    ------------
-    In Gaussian CGS, $\varepsilon_0$ is not a dimensional constant in the
-    Maxwell/Coulomb relations. We keep `eps0 = 1.0` as a placeholder ONLY
-    to satisfy `PhysicalConstantsProtocol`. Do not interpret it as an SI-like
-    permittivity.
-
-    Attribute units
-    ---------------
-    a0   [cm]
-    q    [statC] (esu)
-    k_B  [erg/K]
-    eps0 [dimensionless placeholder (=1.0)]
-    me0  [g]
-    N_A  [1/mol]
-    R_g  [erg/(mol K)]
-    h    [erg s]
-    hbar [erg s]
-    m_u  [g]
-    m_u_u [g]
+    This container intentionally does not define ``eps0``. Gaussian CGS
+    electromagnetic equations do not use vacuum permittivity in the same
+    form as SI electromagnetic equations.
     """
-    a0: float   = 5.29177210903e-9       # cm, Bohr radius (1 m = 100 cm)
-    q: float    = 4.80320471e-10         # statC (esu)
-    k_B: float  = 1.380649e-16           # erg/K  (1 J = 1e7 erg)
-    eps0: float = 1.0
-    me0: float  = 9.1093837015e-28       # g
-    N_A: float  = 6.02214076e23          # 1/mol
-    R_g: float  = 8.314462618e7          # erg/(mol K)
-    h: float    = 6.62607015e-27         # erg s
-    hbar: float = h / (2.0 * math.pi)    # erg s
-    m_u: float  = 1.660_539_068_92e-24   # g
-    m_u_u: float = 0.000_000_000_52e-24  # g
+
+    a0: float = 5.291_772_109_03e-9
+    q: float = 4.803_204_712_57e-10
+    k_B: float = 1.380_649e-16
+    me0: float = 9.109_383_713_9e-28
+    N_A: float = 6.022_140_76e23
+    R_g: float = 8.314_462_618_153_24e7
+    h: float = 6.626_070_15e-27
+    hbar: float = h / (2.0 * math.pi)
+    m_u: float = 1.660_539_068_92e-24
+    m_u_u: float = 0.000_000_000_52e-24
+    c: float = 2.997_924_58e10
+
+
+Constants: TypeAlias = (
+    ConstantsSI
+    | ConstantsGaussianCGS
+)
+
+
+SI: Final[ConstantsSI] = ConstantsSI()
+
+GAUSSIAN_CGS: Final[ConstantsGaussianCGS] = ConstantsGaussianCGS()

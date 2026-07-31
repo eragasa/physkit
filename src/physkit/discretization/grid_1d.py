@@ -1,75 +1,85 @@
+# ./src/physkit/grid_1d.py
+
+from __future__ import annotations
+
 from dataclasses import dataclass
-import numpy as np
 from enum import Enum, auto
 
-class GridType1D(Enum):
-  LEFT_CLOSED  = auto()   # [a, b)
-  RIGHT_CLOSED = auto()   # (a, b]
-  OPEN         = auto()   # (a, b) (abstract open interval)
-  INTERIOR     = auto()   # (a, b) with N interior points (Dirichlet-style)
-  MIDPOINT     = auto()   # cell-centered
-  CLOSED       = auto()   # [a, b]
+import numpy as np
+
+
+class ActiveSetType1D(Enum):
+    """Active index sets on a full closed reference grid."""
+
+    ALL = auto()
+    INTERIOR = auto()
+    LEFT_CLOSED = auto()
+    RIGHT_CLOSED = auto()
+    LEFT_BOUNDARY = auto()
+    RIGHT_BOUNDARY = auto()
+    BOUNDARY = auto()
+
 
 @dataclass(frozen=True)
 class Grid1D:
-  a: float
-  b: float
-  N: int
-  grid_type: GridType1D = GridType1D.CLOSED
-  
-  def __post_init__(self):
-    if self.b <= self.a:
-      raise ValueError("Require b > a")
-    if self.N <= 0:
-      raise ValueError("Require N > 0")
-    if self.grid_type is GridType1D.CLOSED and self.N < 2:
-      raise ValueError("For CLOSED grid, require N >=2")
+    """Uniform 1D reference grid on the closed interval [a,b].
 
-  @property
-  def L(self):
-    return self.b - self.a
+    The full coordinate grid always includes both endpoints:
 
+        x = np.linspace(a, b, N)
 
-  @property
-  def dx(self) -> float:
-    if self.grid_type is GridType1D.CLOSED:
-      return self.L / (self.N - 1)
-    elif self.grid_type is GridType1D.OPEN:
-      return self.L / (self.N + 1)
-    elif self.grid_type is GridType1D.INTERIOR:
-      return self.L / (self.N + 1)
-    else:
-      return self.L / self.N
-    
-  @property
-  def x_arr(self) -> np.ndarray:
-    dx = self.dx
-
-    if self.grid_type is GridType1D.LEFT_CLOSED:
-      return self.a + dx * np.arange(self.N)
-
-    elif self.grid_type is GridType1D.RIGHT_CLOSED:
-      return self.a + dx * (np.arange(self.N) + 1)
-
-    elif self.grid_type is GridType1D.OPEN:
-      return self.a + dx * (np.arange(self.N) + 1)
-
-    elif self.grid_type is GridType1D.INTERIOR:
-      return self.a + dx * (np.arange(self.N) + 1)
-
-    elif self.grid_type is GridType1D.MIDPOINT:
-      return self.a + dx * (np.arange(self.N) + 0.5)
-
-    elif self.grid_type is GridType1D.CLOSED:
-      return np.linspace(self.a, self.b, self.N)
-
-    else:
-      raise RuntimeError(f"Unhandled {self.grid_type}")
-    
-  @property
-  def X(self) -> np.ndarray:
-    r"""
-    Discrete configuration `X` (implemented as an array of points).
-    $x \in X$
+    The active set selects which grid points are used as degrees of freedom.
     """
-    return self.x_arr
+
+    a: float
+    b: float
+    N: int
+    active_type: ActiveSetType1D = ActiveSetType1D.ALL
+
+    def __post_init__(self) -> None:
+        if self.b <= self.a:
+            raise ValueError("Require b > a.")
+
+        if self.N < 2:
+            raise ValueError("Require N >= 2.")
+
+    @property
+    def L(self) -> float:
+        return self.b - self.a
+
+    @property
+    def dx(self) -> float:
+        return self.L / (self.N - 1)
+
+    @property
+    def x(self) -> np.ndarray:
+        return np.linspace(self.a, self.b, self.N)
+
+    @property
+    def active_indices(self) -> np.ndarray:
+        if self.active_type is ActiveSetType1D.ALL:
+            return np.arange(0, self.N)
+
+        if self.active_type is ActiveSetType1D.INTERIOR:
+            return np.arange(1, self.N - 1)
+
+        if self.active_type is ActiveSetType1D.LEFT_CLOSED:
+            return np.arange(0, self.N - 1)
+
+        if self.active_type is ActiveSetType1D.RIGHT_CLOSED:
+            return np.arange(1, self.N)
+
+        if self.active_type is ActiveSetType1D.LEFT_BOUNDARY:
+            return np.array([0])
+
+        if self.active_type is ActiveSetType1D.RIGHT_BOUNDARY:
+            return np.array([self.N - 1])
+
+        if self.active_type is ActiveSetType1D.BOUNDARY:
+            return np.array([0, self.N - 1])
+
+        raise ValueError(f"Unknown active_type: {self.active_type}")
+
+    @property
+    def x_active(self) -> np.ndarray:
+        return self.x[self.active_indices]

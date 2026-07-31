@@ -9,7 +9,7 @@ import scipy.sparse.linalg as spla
 from numpy.typing import NDArray
 from scipy.sparse import csr_matrix
 
-from physkit.core.bc import BoundaryCondition, DirichletBC
+from physkit.core.boundaries import BoundaryCondition, DirichletBC
 from physkit.core.grids import CartesianGrid1D
 from physkit.numerics.finite_difference import Laplacian1D
 from physkit.qm.potentials import Potential1D
@@ -17,15 +17,20 @@ from physkit.qm.potentials import Potential1D
 FloatArray = NDArray[np.float64]
 
 class TISEAnalytical1D:
-    def __init__(self, x_min: float, x_max: float, mass: float, hbar: float):
-        self.x_min: float = x_min
-        self.x_max: float = x_max
+    def __init__(self,
+        x_lower: float,
+        x_upper: float,
+        mass: float,
+        hbar: float
+    ):
+        self.x_min: float = x_lower
+        self.x_max: float = x_upper
         self.mass: float = mass
         self.hbar: float = mass
 
 class TISESymbolic1D:
     def __init__(self):
-
+        ...
 
 class TISESolver1D:
     """
@@ -83,10 +88,10 @@ class TISESolver1D:
             bc_x_max=self.bc_x_max,
         )
 
-        self.L: csr_matrix = self.laplacian.build()
-        self.T: csr_matrix = self.build_kinetic_matrix()
-        self.V: csr_matrix = self.build_potential_matrix()
-        self.H: csr_matrix = self.build_hamiltonian_matrix()
+        self.laplacian_matrix: csr_matrix = self.laplacian.build()
+        self.kinetic_matrix: csr_matrix = self.build_kinetic_matrix()
+        self.potential_matrix: csr_matrix = self.build_potential_matrix()
+        self.hamiltonian_matrix: csr_matrix = self.build_hamiltonian_matrix()
 
         self.eigval: np.ndarray|None = None
         self.eigvec: np.ndarray|None = None

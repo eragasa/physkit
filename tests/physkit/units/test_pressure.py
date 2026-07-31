@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from physkit.units import Pressure
-from physkit.units._protocols import QuantityProtocol
+from physkit.units.protocols import UnitQuantityProtocol
 
 
 # ---------------------------------------------------------------------
@@ -13,7 +13,7 @@ from physkit.units._protocols import QuantityProtocol
 
 @pytest.mark.unit
 def test_pressure_conforms_to_quantity_protocol():
-  assert isinstance(Pressure, QuantityProtocol)
+  assert isinstance(Pressure, UnitQuantityProtocol)
 
 
 @pytest.mark.unit

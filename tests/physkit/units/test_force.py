@@ -4,13 +4,13 @@ import numpy as np
 import pytest
 
 from physkit.units import Force
-from physkit.units._protocols import QuantityProtocol
+from physkit.units.protocols import UnitQuantityProtocol
 
 
 # --- API / protocol compliance
 @pytest.mark.unit
 def test_force_conforms_to_quantity_protocol():
-  assert isinstance(Force, QuantityProtocol)
+  assert isinstance(Force, UnitQuantityProtocol)
 
 
 @pytest.mark.unit
