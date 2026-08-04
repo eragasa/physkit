@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 3,
+  "state_revision": 4,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -37,38 +37,39 @@
   },
   "control_plane_phase": "operational",
   "active_task": {
-    "task_id": "planning.subject-taxonomy-multiview-classification.mode-a.001",
-    "task_kind": "subject-taxonomy-and-multiview-classification-review",
+    "task_id": "planning.notebook-canonical-path-mapping.mode-a.001",
+    "task_kind": "notebook-canonical-path-mapping-review",
     "status": "awaiting-human-acceptance",
     "review_mode": "Mode A — Single-File Verification",
-    "material_artifact": "docs/harness/physkit.harness.06-subject-taxonomy-and-multiview-classification.md",
+    "material_artifact": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
     "allowed_paths": [
       ".pi/active-state.json",
-      "docs/harness/physkit.harness.06-subject-taxonomy-and-multiview-classification.md"
+      "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md"
     ],
     "prohibited_work": [
-      "select or prescribe a final folder hierarchy, course sequence, curriculum ordering, or exclusive subject identity",
-      "require one exclusive primary_subject or interpret a physical path as exclusive intellectual ownership",
-      "specify exact notebook destination paths, map all 127 notebooks, or authorize notebook migration",
-      "create or implement a schema, manifest, metadata convention, curriculum map, generated index, or validator",
-      "move, rename, edit, execute, delete, repair, or otherwise modify notebooks",
+      "interpret an administrative path as exclusive intellectual ownership or require one exclusive primary_subject",
+      "prescribe a course sequence or create curriculum views",
+      "create or implement a schema, structured relationship manifest, generated index, metadata convention, or validator",
+      "move, rename, edit, execute, delete, repair, normalize, or otherwise modify notebooks",
+      "select or act on duplicate survivors or invalid-artifact dispositions",
+      "authorize or perform notebook migration",
       "modify source, tests, examples, dependencies, packaging, or continuous-integration configuration",
       "resume PIAB contract, API, notebook, evidence, tolerance, lifecycle, validation, or implementation work",
       "create or modify any other path"
     ],
     "responsibility_ownership": {
-      "parent_coordinator_and_final_verifier": "coordinates the bounded taxonomy proposal, validation, review disposition, repository safety, and human handoff",
+      "parent_coordinator_and_final_verifier": "coordinates the bounded 127-notebook path-mapping proposal, validation, review disposition, repository safety, and human handoff",
       "artifact_owner": "drafts and corrects the sole material artifact and updates active runtime coordination within the two allowed paths",
-      "independent_read_only_reviewer": "reviews the taxonomy proposal and active-state agreement without repairing findings",
+      "independent_read_only_reviewer": "reviews mapping completeness, uniqueness, multiview consistency, exception handling, and active-state agreement without repairing findings",
       "human_decision_owner": "human"
     },
-    "stop_condition": "explicit human acceptance, revision, rejection, or deferral of docs/harness/physkit.harness.06-subject-taxonomy-and-multiview-classification.md"
+    "stop_condition": "explicit human acceptance, revision, rejection, or deferral of docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md"
   },
   "checkpoint": {
-    "checkpoint_id": "planning.subject-taxonomy-multiview-classification.acceptance.001",
+    "checkpoint_id": "planning.notebook-canonical-path-mapping.acceptance.001",
     "type": "human-acceptance",
     "state": "pending",
-    "artifact": "docs/harness/physkit.harness.06-subject-taxonomy-and-multiview-classification.md",
+    "artifact": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
     "allowed_decisions": [
       "accept",
       "revise",
@@ -79,28 +80,20 @@
   },
   "blockers": [
     {
-      "blocker_id": "subject-taxonomy-multiview.pending-review",
-      "condition": "pending human review of docs/harness/physkit.harness.06-subject-taxonomy-and-multiview-classification.md"
+      "blocker_id": "notebook-path-mapping.pending-acceptance",
+      "condition": "pending human path acceptance through review of docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md"
     },
     {
-      "blocker_id": "subject-vocabulary.unresolved",
-      "condition": "subject vocabulary unresolved"
+      "blocker_id": "notebook-duplicates.pending-decisions",
+      "condition": "exact- and near-duplicate survivor and retention decisions remain pending"
     },
     {
-      "blocker_id": "storage-strategy.unresolved",
-      "condition": "administrative storage strategy unresolved"
-    },
-    {
-      "blocker_id": "relationship-mechanism.unresolved",
-      "condition": "relationship mechanism unresolved"
-    },
-    {
-      "blocker_id": "notebook-mapping.not-authorized",
-      "condition": "exact notebook mapping not authorized"
+      "blocker_id": "invalid-notebooks.pending-decisions",
+      "condition": "invalid-artifact repair, preservation, and classification decisions remain pending"
     },
     {
       "blocker_id": "notebook-migration.not-authorized",
-      "condition": "notebook migration not authorized"
+      "condition": "notebook migration is not authorized"
     }
   ],
   "parked_work": [
@@ -351,14 +344,59 @@
       "decision_date": "2026-08-04",
       "provenance": "explicit human instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-subject-taxonomy-multiview.001",
+      "subject": "docs/harness/physkit.harness.06-subject-taxonomy-and-multiview-classification.md",
+      "disposition": "accepted as the conceptual model for notebook classification",
+      "authority_granted": [
+        "one canonical physical notebook artifact",
+        "nonexclusive subject memberships",
+        "multiple curriculum views",
+        "stable broad-domain storage as the administrative default",
+        "pedagogical emphasis as the storage tie-breaker",
+        "Markdown curriculum views as the initial preference",
+        "continued refusal to prescribe a course sequence"
+      ],
+      "authority_not_granted": [
+        "exact path acceptance",
+        "notebook migration",
+        "curriculum-view implementation",
+        "structured relationship manifest",
+        "PIAB resumption"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "accepted_revision": "01b2b73bf5ac7268ce5019fd3543036603b4ad71",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-notebook-path-mapping-proposal.001",
+      "subject": "complete administrative path mapping of 127 committed notebooks",
+      "disposition": "authorized for one bounded Mode A proposal only",
+      "authority_granted": [
+        "draft, independently review, validate, commit, and push docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
+        "update active runtime coordination for pending human review of the proposal"
+      ],
+      "authority_not_granted": [
+        "human acceptance of proposed paths or filenames",
+        "notebook migration, modification, repair, execution, deletion, or duplicate resolution",
+        "curriculum-view creation",
+        "structured relationship manifest",
+        "successor work",
+        "PIAB resumption"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "operational Mode A notebook curriculum inventory-and-options review",
-    "to": "operational Mode A subject-taxonomy-and-multiview-classification review",
-    "timestamp_utc": "2026-08-04T16:54:34Z",
+    "from": "operational Mode A subject-taxonomy-and-multiview-classification review",
+    "to": "operational Mode A notebook-canonical-path-mapping review",
+    "timestamp_utc": "2026-08-04T17:42:50Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "283c72e988f8bbcbd8b8792cdba25436ce325e2f",
-    "reason": "explicit human acceptance of the notebook inventory snapshot and authorization of one corrected nonexclusive subject-taxonomy and multiview-classification proposal"
+    "observed_starting_git_revision": "9466e493f72c3a2cd72c5fb32fbff9723929a592",
+    "reason": "explicit human acceptance of the multiview classification model and authorization of one complete 127-notebook administrative path-mapping proposal"
   }
 }
