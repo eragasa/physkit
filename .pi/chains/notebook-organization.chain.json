@@ -1,0 +1,128 @@
+{
+  "name": "NOTEBOOK-ORG-1",
+  "package": "physkit",
+  "description": "Ordered, human-gated notebook-organization workflow for small exact batches.",
+  "status": "awaiting-human-scope",
+  "active_task": ".pi/tasks/notebook-organization.md",
+  "current_checkpoint": {
+    "checkpoint_id": "NOTEBOOK-ORG-1-HC01",
+    "state": "pending"
+  },
+  "execution": {
+    "concurrency": false,
+    "path_scope_expansion": false,
+    "successor_authorized": false,
+    "successor": null
+  },
+  "chain": [
+    {
+      "stage": "human_scope_checkpoint",
+      "order": 1,
+      "type": "human_checkpoint",
+      "checkpoint": "NOTEBOOK-ORG-1-HC01",
+      "state": "pending",
+      "blocks": [
+        "curator_prepare_change",
+        "curator_correction"
+      ],
+      "required_decision": "Human selects, revises, or rejects one exact batch and, for selection, specifies source paths, destination paths, filename decisions, content-change permission, reference-update permission, required verification, and exclusions.",
+      "write_scope_before_resolution": []
+    },
+    {
+      "stage": "curator_prepare_change",
+      "order": 2,
+      "type": "writer",
+      "agent": "physkit.physkit-notebook-curator",
+      "requires": [
+        "NOTEBOOK-ORG-1-HC01:affirmatively-resolved",
+        "exact-path-ownership:recorded"
+      ],
+      "may_write_only": "human-approved path set"
+    },
+    {
+      "stage": "deterministic_verification",
+      "order": 3,
+      "type": "read_only_verification",
+      "agent": "physkit.physkit-notebook-verifier",
+      "requires": [
+        "curator_prepare_change:completed"
+      ],
+      "read_only": true
+    },
+    {
+      "stage": "integration_review",
+      "order": 4,
+      "type": "independent_read_only_review",
+      "agent": "physkit.physkit-integration-reviewer",
+      "requires": [
+        "deterministic_verification:successful"
+      ],
+      "read_only": true
+    },
+    {
+      "stage": "curator_correction",
+      "order": 5,
+      "type": "conditional_writer",
+      "agent": "physkit.physkit-notebook-curator",
+      "condition": "deterministic_verification or integration_review reports accepted in-scope findings",
+      "requires": [
+        "NOTEBOOK-ORG-1-HC01:affirmatively-resolved",
+        "parent_coordinator:remand-to-curator"
+      ],
+      "may_write_only": "unchanged human-approved path set"
+    },
+    {
+      "stage": "verification_replay",
+      "order": 6,
+      "type": "conditional_read_only_verification",
+      "agent": "physkit.physkit-notebook-verifier",
+      "condition": "curator_correction executed",
+      "requires": [
+        "curator_correction:completed"
+      ],
+      "read_only": true
+    },
+    {
+      "stage": "integration_rereview",
+      "order": 7,
+      "type": "conditional_independent_read_only_review",
+      "agent": "physkit.physkit-integration-reviewer",
+      "condition": "curator_correction executed",
+      "requires": [
+        "verification_replay:successful"
+      ],
+      "read_only": true
+    },
+    {
+      "stage": "parent_verification",
+      "order": 8,
+      "type": "parent_verification",
+      "role": "parent coordinator",
+      "requires": [
+        "latest_deterministic_verification:successful",
+        "latest_independent_integration_review:no-unresolved-material-findings"
+      ],
+      "is_human_acceptance": false
+    },
+    {
+      "stage": "human_final_acceptance",
+      "order": 9,
+      "type": "human_checkpoint",
+      "requires": [
+        "parent_verification:successful"
+      ],
+      "acceptance_inference": false,
+      "decision_owner": "human"
+    },
+    {
+      "stage": "closeout",
+      "order": 10,
+      "type": "closeout",
+      "requires": [
+        "human_final_acceptance:explicitly-accepted"
+      ],
+      "successor_authorized": false,
+      "successor": null
+    }
+  ]
+}

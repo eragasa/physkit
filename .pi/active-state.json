@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 4,
+  "state_revision": 5,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -37,51 +37,75 @@
   },
   "control_plane_phase": "operational",
   "active_task": {
-    "task_id": "planning.notebook-canonical-path-mapping.mode-a.001",
-    "task_kind": "notebook-canonical-path-mapping-review",
-    "status": "awaiting-human-acceptance",
-    "review_mode": "Mode A — Single-File Verification",
-    "material_artifact": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
-    "allowed_paths": [
-      ".pi/active-state.json",
-      "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md"
+    "task_id": "NOTEBOOK-ORG-1",
+    "task_kind": "bounded-notebook-organization",
+    "status": "awaiting-human-scope",
+    "purpose": "Perform small, human-selected notebook-organization batches under explicit ownership, ordered verification, independent review, correction, parent verification, and final human acceptance.",
+    "task_record": ".pi/tasks/notebook-organization.md",
+    "chain_id": "NOTEBOOK-ORG-1",
+    "chain_record": ".pi/chains/notebook-organization.chain.json",
+    "current_authorized_scope": [
+      "await exact first-batch selection at NOTEBOOK-ORG-1-HC01",
+      "maintain parent-owned active-state and task coordination"
     ],
+    "notebook_write_scope": [],
+    "no_notebook_paths_currently_writable": true,
+    "advisory_input": {
+      "path": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
+      "acceptance": "deferred",
+      "use": "advisory planning input only",
+      "not_blanket_accepted": [
+        "127 proposed paths",
+        "filename changes",
+        "duplicate dispositions",
+        "migration batches"
+      ]
+    },
     "prohibited_work": [
-      "interpret an administrative path as exclusive intellectual ownership or require one exclusive primary_subject",
-      "prescribe a course sequence or create curriculum views",
-      "create or implement a schema, structured relationship manifest, generated index, metadata convention, or validator",
-      "move, rename, edit, execute, delete, repair, normalize, or otherwise modify notebooks",
-      "select or act on duplicate survivors or invalid-artifact dispositions",
-      "authorize or perform notebook migration",
-      "modify source, tests, examples, dependencies, packaging, or continuous-integration configuration",
+      "move, rename, edit, execute, delete, repair, normalize, or otherwise modify any notebook before NOTEBOOK-ORG-1-HC01 affirmatively identifies exact paths and permissions",
+      "preselect viscoelasticity, PIAB, or any other migration batch",
+      "infer acceptance of any path, filename, duplicate disposition, repair, or batch from docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
+      "select curriculum, mapping, duplicate, lifecycle, canonical-artifact, physical-validation, or pedagogical-validation decisions",
+      "modify source, tests, examples, dependencies, packaging, continuous-integration configuration, or harness policy documents",
       "resume PIAB contract, API, notebook, evidence, tolerance, lifecycle, validation, or implementation work",
-      "create or modify any other path"
+      "begin or authorize a successor task"
     ],
     "responsibility_ownership": {
-      "parent_coordinator_and_final_verifier": "coordinates the bounded 127-notebook path-mapping proposal, validation, review disposition, repository safety, and human handoff",
-      "artifact_owner": "drafts and corrects the sole material artifact and updates active runtime coordination within the two allowed paths",
-      "independent_read_only_reviewer": "reviews mapping completeness, uniqueness, multiview consistency, exception handling, and active-state agreement without repairing findings",
-      "human_decision_owner": "human"
+      "parent_coordinator": "owns .pi/active-state.json, task coordination, exact-scope recording, correction routing, parent verification, repository safety, and human handoff",
+      "physkit-notebook-curator": "sole notebook writer; owns only exact human-authorized notebook and notebook-local reference paths; current ownership is empty",
+      "physkit-notebook-verifier": "read-only deterministic verification",
+      "physkit-integration-reviewer": "independent read-only integration review",
+      "human_decision_owner": "owns curriculum, mapping, filename, duplicate, repair, evidence-acceptance, final-acceptance, and successor decisions"
     },
-    "stop_condition": "explicit human acceptance, revision, rejection, or deferral of docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md"
+    "stop_condition": "Stop at NOTEBOOK-ORG-1-HC01 pending an exact human batch decision; no notebook migration is authorized and no successor may start."
   },
   "checkpoint": {
-    "checkpoint_id": "planning.notebook-canonical-path-mapping.acceptance.001",
-    "type": "human-acceptance",
+    "checkpoint_id": "NOTEBOOK-ORG-1-HC01",
+    "type": "human-scope",
     "state": "pending",
-    "artifact": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
-    "allowed_decisions": [
-      "accept",
-      "revise",
-      "reject",
-      "defer"
+    "task_record": ".pi/tasks/notebook-organization.md",
+    "chain_record": ".pi/chains/notebook-organization.chain.json",
+    "decision_required": "Select, revise, or reject one exact first notebook-organization batch.",
+    "required_affirmative_fields": [
+      "exact source paths",
+      "exact destination paths",
+      "accepted filename changes",
+      "content-change permission and limits",
+      "reference-update permission and path limits",
+      "required verification",
+      "explicit exclusions"
     ],
+    "notebook_write_scope_while_pending": [],
     "successor_authorized": false
   },
   "blockers": [
     {
-      "blocker_id": "notebook-path-mapping.pending-acceptance",
-      "condition": "pending human path acceptance through review of docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md"
+      "blocker_id": "notebook-batch.pending-human-selection",
+      "condition": "human selection, revision, or rejection of one exact first batch remains pending at NOTEBOOK-ORG-1-HC01"
+    },
+    {
+      "blocker_id": "notebook-paths.pending-exact-authorization",
+      "condition": "exact source, destination, filename, content-change, reference-update, verification, and exclusion boundaries are not yet authorized"
     },
     {
       "blocker_id": "notebook-duplicates.pending-decisions",
@@ -93,7 +117,7 @@
     },
     {
       "blocker_id": "notebook-migration.not-authorized",
-      "condition": "notebook migration is not authorized"
+      "condition": "notebook migration is not authorized while NOTEBOOK-ORG-1-HC01 is pending"
     }
   ],
   "parked_work": [
@@ -123,7 +147,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "Completion, commit, push, review, apparent readiness, or control-plane operational status does not authorize a successor."
+    "denial_basis": "NOTEBOOK-ORG-1 closeout authorizes no successor. Completion, commit, push, review, apparent readiness, or human acceptance of one batch does not activate another batch or task."
   },
   "human_decisions": [
     {
@@ -389,14 +413,37 @@
       "decision_date": "2026-08-04",
       "provenance": "explicit human instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-minimal-notebook-workflow-harness.001",
+      "subject": "minimal repository-local Pi machinery for bounded notebook organization",
+      "disposition": "blanket acceptance of .07 deferred; prior viscoelasticity migration instruction cancelled and superseded; minimal operational harness slice authorized",
+      "authority_granted": [
+        "update .pi/active-state.json from state revision 4 to 5",
+        "create the three specified notebook workflow agent definitions",
+        "create .pi/tasks/notebook-organization.md",
+        "create .pi/chains/notebook-organization.chain.json",
+        "independently review, validate, commit, and push exactly the six authorized harness paths",
+        "initialize NOTEBOOK-ORG-1 at pending checkpoint NOTEBOOK-ORG-1-HC01"
+      ],
+      "authority_not_granted": [
+        "blanket acceptance of any mapping, filename, duplicate disposition, or batch in .07",
+        "selection of viscoelasticity, PIAB, or any other first batch",
+        "notebook movement, renaming, editing, repair, execution, deletion, or migration",
+        "curriculum, lifecycle, physical-validation, pedagogical-validation, or canonical-artifact decisions",
+        "successor work or PIAB resumption"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "operational Mode A subject-taxonomy-and-multiview-classification review",
-    "to": "operational Mode A notebook-canonical-path-mapping review",
-    "timestamp_utc": "2026-08-04T17:42:50Z",
+    "from": "operational Mode A notebook-canonical-path-mapping review",
+    "to": "operational NOTEBOOK-ORG-1 awaiting human scope",
+    "timestamp_utc": "2026-08-04T18:07:01Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "9466e493f72c3a2cd72c5fb32fbff9723929a592",
-    "reason": "explicit human acceptance of the multiview classification model and authorization of one complete 127-notebook administrative path-mapping proposal"
+    "observed_starting_git_revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
+    "reason": "explicit human deferral of blanket .07 acceptance, cancellation of the prior viscoelasticity migration instruction, and authorization to build the minimal operational notebook-workflow harness slice"
   }
 }
