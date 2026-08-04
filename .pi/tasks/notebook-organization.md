@@ -1,9 +1,9 @@
 # NOTEBOOK-ORG-1 — Bounded notebook organization
 
-**Status:** Awaiting human final acceptance
+**Status:** Closed — human-accepted
 **Task ID:** `NOTEBOOK-ORG-1`
 **Chain ID:** `NOTEBOOK-ORG-1`
-**Current checkpoint:** `human_final_acceptance` (`pending`; existing chain Stage 9)
+**Final stage:** `human_final_acceptance` (`ACCEPT`); `closeout` completed
 
 ## Purpose
 
@@ -21,7 +21,7 @@ None of `.07`'s 127 paths, filename changes, duplicate dispositions, or proposed
 
 ## Authorized scope and current status
 
-Current status is **Awaiting human final acceptance**. The human accepted exactly four path-only viscoelasticity mappings at `NOTEBOOK-ORG-1-HC01`, and those four byte-preserving moves have completed verification, independent review, and parent verification. The eight source/destination identities below are the completed bounded scope; no notebook path is currently writable. Notebook content changes, reference updates, notebook execution, closeout, and every other notebook path remain prohibited.
+Current status is **Closed — human-accepted**. The human accepted exactly four path-only viscoelasticity mappings at `NOTEBOOK-ORG-1-HC01`, accepted the demonstrated structural outcome at the existing `human_final_acceptance` stage, and authorized administrative closeout only. The eight source/destination identities below are the completed bounded scope; no notebook path is writable. Every other notebook mapping and all successor work remain unauthorized.
 
 ## Human scope checkpoint — NOTEBOOK-ORG-1-HC01
 
@@ -142,6 +142,66 @@ No notebook or coordination correction was required after deterministic verifica
 The parent coordinator independently replayed the mapping, baseline/worktree JSON parsing, byte comparisons, SHA-256 checks, source/destination existence, baseline destination absence, staged `R100` pairs, zero insertion/deletion checks, excluded-path checks, `git diff --check --cached`, agent/chain nonmutation, PIAB parking, and successor denial. **Parent verification: PASS.**
 
 The batch is ready to commit and push after final staged-scope validation and immediate remote re-fetch. Commit and push do not imply human acceptance. Final human acceptance remains pending at the existing chain Stage 9 identifier `human_final_acceptance`; no `NOTEBOOK-ORG-1-HC02` identifier existed consistently in the unchanged task and chain, so none was invented. Closeout and successor work remain unauthorized.
+
+## Final human acceptance and administrative closeout
+
+**Final-human-acceptance disposition:** `ACCEPT`
+**Task status:** `closed`
+**Closeout status:** `human-accepted`
+**Correction cycles:** none
+**Successor authorization:** `false`
+**Successor:** `null`
+**PIAB:** remains parked
+
+### Human response recorded verbatim
+
+```text
+I accept the completed four-mapping, byte-preserving viscoelasticity migration presented at the `human_final_acceptance` stage of `NOTEBOOK-ORG-1`.
+
+Accepted outcome:
+
+1. `notebooks/viscoelasticity/01-compliance-functions.ipynb`
+   → `notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb`
+
+2. `notebooks/viscoelasticity/02-stress-relaxation.ipynb`
+   → `notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb`
+
+3. `notebooks/viscoelasticity/03-laplace-transform-and-oscillations.ipynb`
+   → `notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb`
+
+4. `notebooks/viscoelasticity/04-time-temperature-superposition.ipynb`
+   → `notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb`
+
+I accept only the demonstrated structural outcome:
+
+- four Git R100 renames;
+- byte-identical notebook contents;
+- valid notebook JSON;
+- no broken operational references;
+- accepted ownership and path isolation;
+- successful verifier, integration-reviewer, and parent-verification results.
+
+This acceptance does not establish:
+
+- notebook execution;
+- numerical verification;
+- physical validation;
+- pedagogical validation;
+- canonical capability status;
+- lifecycle status;
+- acceptance of the remaining `.07` mappings;
+- authorization of another migration;
+- PIAB authorization;
+- successor authorization.
+
+I authorize administrative closeout of `NOTEBOOK-ORG-1` only.
+```
+
+### Accepted scope and evidence boundary
+
+Acceptance is limited to the four completed mappings recorded above and to the demonstrated structural evidence: four `R100` renames, byte identity, valid JSON, no broken operational references, exact ownership/path isolation, and successful verifier, integration-reviewer, and parent-verification results.
+
+The human explicitly did **not** accept notebook execution, numerical verification, physical validation, pedagogical validation, canonical capability status, lifecycle status, remaining `.07` mappings, another migration, PIAB work, or a successor. Administrative closeout creates no active task and no next batch.
 
 ## Stop behavior
 

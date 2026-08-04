@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 6,
+  "state_revision": 7,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -36,173 +36,9 @@
     ]
   },
   "control_plane_phase": "operational",
-  "active_task": {
-    "task_id": "NOTEBOOK-ORG-1",
-    "task_kind": "bounded-notebook-organization",
-    "status": "awaiting-human-final-acceptance",
-    "purpose": "Perform small, human-selected notebook-organization batches under explicit ownership, ordered verification, independent review, correction, parent verification, and final human acceptance.",
-    "task_record": ".pi/tasks/notebook-organization.md",
-    "chain_id": "NOTEBOOK-ORG-1",
-    "chain_record": ".pi/chains/notebook-organization.chain.json",
-    "current_authorized_scope": [
-      "completed exactly four human-accepted byte-preserving viscoelasticity notebook moves",
-      "await explicit human acceptance at existing chain Stage 9 human_final_acceptance"
-    ],
-    "notebook_write_scope": [],
-    "no_notebook_paths_currently_writable": true,
-    "advisory_input": {
-      "path": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
-      "acceptance": "exactly four viscoelasticity mappings accepted for this batch; blanket acceptance remains deferred",
-      "use": "advisory planning input only",
-      "not_blanket_accepted": [
-        "127 proposed paths",
-        "filename changes",
-        "duplicate dispositions",
-        "migration batches"
-      ]
-    },
-    "prohibited_work": [
-      "modify any notebook while final human acceptance is pending",
-      "perform notebook content changes, reference updates, or notebook execution",
-      "act on any mapping outside the four completed bounded moves",
-      "select curriculum, mapping, duplicate, repair, lifecycle, canonical-artifact, physical-validation, or pedagogical-validation decisions",
-      "modify source, tests, examples, dependencies, packaging, continuous-integration configuration, AGENTS.md, .01-.07, agent definitions, or the chain",
-      "resume PIAB contract, API, notebook, evidence, tolerance, lifecycle, validation, or implementation work",
-      "close NOTEBOOK-ORG-1 or begin or authorize a successor task"
-    ],
-    "responsibility_ownership": {
-      "parent_coordinator": "owns .pi/active-state.json, task coordination, exact-scope recording, correction routing, parent verification, repository safety, and human handoff",
-      "physkit-notebook-curator": "sole notebook writer for the completed eight-path bounded scope; no notebook correction is pending and current notebook write scope is empty",
-      "physkit-notebook-verifier": "read-only deterministic verification",
-      "physkit-integration-reviewer": "independent read-only integration review",
-      "human_decision_owner": "owns curriculum, mapping, filename, duplicate, repair, evidence-acceptance, final-acceptance, and successor decisions"
-    },
-    "stop_condition": "Stop at the existing human_final_acceptance chain stage. Commit and push readiness do not imply acceptance; closeout and successors remain unauthorized.",
-    "accepted_scope_source": {
-      "path": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
-      "revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
-      "scope": "exactly four valid high-confidence viscoelasticity mappings"
-    },
-    "operation_limits": {
-      "allowed": "git mv for the four accepted mappings only",
-      "content_changes": false,
-      "reference_updates": false,
-      "notebook_execution": false,
-      "additional_notebook_paths": false
-    },
-    "stage_results": {
-      "human_scope_checkpoint": {
-        "status": "accepted",
-        "checkpoint_id": "NOTEBOOK-ORG-1-HC01"
-      },
-      "curator_prepare_change": {
-        "status": "completed",
-        "operations": "four exact git mv operations; no notebook content changes, execution, or reference updates",
-        "preflight_replay": "one safe preflight stop caused by a harness-generated untracked artifact and unavailable python; replayed with artifact creation disabled and python3",
-        "tracked_reference_result": "only nonbreaking coordination provenance and historical/advisory inventory mapping prose"
-      },
-      "deterministic_verification": {
-        "status": "passed",
-        "result": "four R100 pure renames; valid source/destination JSON; matching pre/post SHA-256; zero notebook insertions/deletions; staged-path isolation; diff check passed",
-        "sha256": {
-          "notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb": "c23d7c945bccdb96a7eed70c0e0632b6bb69e8593f8e1eb9aeff4e2f0bf42c9d",
-          "notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb": "89c218784fec4475202e9fa9476848232c625db2e1c2b6b43eba7c645c463bab",
-          "notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb": "86d3016a67fe92e461ce58d2c0eae84a7ec36df2e9a522b0e152b536444fda56",
-          "notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb": "f10226ebf34461ea45a36d73d81347788c94acd328b2e27989c4ebe9b2db50ae"
-        }
-      },
-      "integration_review": {
-        "status": "passed",
-        "result": "independent read-only review found no material findings; exact scope, R100 identity, verification evidence, exclusions, active coordination, PIAB parking, and successor denial passed",
-        "residual_limitations": [
-          "unchanged chain and curator-agent definitions retain initialization-era status/scope prose; active state is sole current-state authority and task records exact accepted scope"
-        ]
-      },
-      "curator_correction": {
-        "status": "skipped-not-required"
-      },
-      "verification_replay": {
-        "status": "skipped-not-required"
-      },
-      "integration_rereview": {
-        "status": "skipped-not-required"
-      },
-      "parent_verification": {
-        "status": "passed",
-        "result": "parent independently confirmed exact human scope, four byte-identical R100 mappings, verifier PASS, integration-review PASS, ownership and exclusion compliance, no protected decision, PIAB parking, and successor denial"
-      },
-      "human_final_acceptance": {
-        "status": "pending",
-        "checkpoint_id": "human_final_acceptance"
-      },
-      "closeout": {
-        "status": "not-authorized"
-      }
-    },
-    "completed_bounded_scope": [
-      {
-        "source": "notebooks/viscoelasticity/01-compliance-functions.ipynb",
-        "destination": "notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb"
-      },
-      {
-        "source": "notebooks/viscoelasticity/02-stress-relaxation.ipynb",
-        "destination": "notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb"
-      },
-      {
-        "source": "notebooks/viscoelasticity/03-laplace-transform-and-oscillations.ipynb",
-        "destination": "notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb"
-      },
-      {
-        "source": "notebooks/viscoelasticity/04-time-temperature-superposition.ipynb",
-        "destination": "notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb"
-      }
-    ]
-  },
-  "checkpoint": {
-    "checkpoint_id": "human_final_acceptance",
-    "chain_stage": "human_final_acceptance",
-    "type": "human-final-acceptance",
-    "state": "pending",
-    "task_record": ".pi/tasks/notebook-organization.md",
-    "chain_record": ".pi/chains/notebook-organization.chain.json",
-    "identifier_note": "The unchanged existing chain names Stage 9 human_final_acceptance and does not define NOTEBOOK-ORG-1-HC02; no new identifier was invented.",
-    "decision_required": "Accept, remand, limit, or reject the completed four-mapping byte-preserving batch. Acceptance does not authorize closeout or a successor.",
-    "successor_authorized": false
-  },
-  "blockers": [
-    {
-      "blocker_id": "notebook-org-1.final-human-acceptance.pending",
-      "condition": "explicit human acceptance, remand, limitation, or rejection of the completed four-mapping batch remains pending"
-    },
-    {
-      "blocker_id": "notebook-mappings.remaining-human-decisions",
-      "condition": "all notebook mappings outside the completed four-path batch remain unaccepted and blocked"
-    },
-    {
-      "blocker_id": "notebook-duplicates.pending-decisions",
-      "condition": "exact- and near-duplicate survivor and retention decisions remain pending"
-    },
-    {
-      "blocker_id": "invalid-notebooks.pending-decisions",
-      "condition": "invalid-artifact repair, preservation, and classification decisions remain pending"
-    },
-    {
-      "blocker_id": "saved-errors.pending-decisions",
-      "condition": "saved-error cleanup decisions remain pending"
-    },
-    {
-      "blocker_id": "notebook-reference-updates.not-authorized",
-      "condition": "reference updates remain unauthorized"
-    },
-    {
-      "blocker_id": "notebook-closeout.not-authorized",
-      "condition": "NOTEBOOK-ORG-1 closeout is not authorized by the current human instruction"
-    },
-    {
-      "blocker_id": "notebook-successor.not-authorized",
-      "condition": "no additional migration batch or successor task is authorized"
-    }
-  ],
+  "active_task": null,
+  "checkpoint": null,
+  "blockers": [],
   "parked_work": [
     {
       "work_id": "pilot.piab-1d-analytical-stationary-states",
@@ -225,12 +61,27 @@
         "explicit successor authorization for bounded PIAB work"
       ],
       "placement_prerequisite": "PIAB placement depends on later accepted multiview classification and a separate human placement decision"
+    },
+    {
+      "work_id": "notebook-organization.remaining-mappings-and-decisions",
+      "subject": "Notebook mappings and protected decisions outside the closed four-mapping viscoelasticity batch",
+      "current_state": "inactive; no active task or authorized next batch",
+      "unresolved": [
+        "remaining .07 path and filename mappings",
+        "exact- and near-duplicate survivor and retention decisions",
+        "invalid-notebook repair, preservation, and classification decisions",
+        "saved-error cleanup decisions",
+        "reference updates",
+        "curriculum views and any later notebook-organization batch"
+      ],
+      "activation_requirement": "separate explicit human authorization establishing a new bounded task and exact scope",
+      "successor_authorized": false
     }
   ],
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "NOTEBOOK-ORG-1 closeout authorizes no successor. Completion, commit, push, review, apparent readiness, or human acceptance of one batch does not activate another batch or task."
+    "denial_basis": "Administrative closeout of NOTEBOOK-ORG-1 authorizes no next migration batch, PIAB work, or other successor. A separate explicit human decision is required."
   },
   "human_decisions": [
     {
@@ -542,15 +393,66 @@
       "provenance": "explicit human response to NOTEBOOK-ORG-1-HC01",
       "mapping_source_revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-and-close-notebook-org-1.001",
+      "subject": "NOTEBOOK-ORG-1 human_final_acceptance and administrative closeout",
+      "disposition": "ACCEPT; completed four-mapping byte-preserving viscoelasticity migration human-accepted and task administratively closed",
+      "accepted_scope": [
+        {
+          "source": "notebooks/viscoelasticity/01-compliance-functions.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb"
+        },
+        {
+          "source": "notebooks/viscoelasticity/02-stress-relaxation.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb"
+        },
+        {
+          "source": "notebooks/viscoelasticity/03-laplace-transform-and-oscillations.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb"
+        },
+        {
+          "source": "notebooks/viscoelasticity/04-time-temperature-superposition.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb"
+        }
+      ],
+      "accepted_evidence_boundary": [
+        "four Git R100 renames",
+        "byte-identical notebook contents",
+        "valid notebook JSON",
+        "no broken operational references",
+        "accepted ownership and path isolation",
+        "successful notebook-verifier, integration-reviewer, and parent-verification results"
+      ],
+      "authority_granted": [
+        "resolve existing human_final_acceptance stage as accepted",
+        "complete administrative closeout of NOTEBOOK-ORG-1 only",
+        "set active task and checkpoint to null"
+      ],
+      "authority_not_granted": [
+        "notebook execution",
+        "numerical verification",
+        "physical validation",
+        "pedagogical validation",
+        "canonical capability status",
+        "lifecycle status",
+        "remaining .07 mappings",
+        "another migration",
+        "PIAB authorization",
+        "successor authorization"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human final decision",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "operational NOTEBOOK-ORG-1 execution under accepted HC01 scope",
-    "to": "operational NOTEBOOK-ORG-1 awaiting human final acceptance",
-    "timestamp_utc": "2026-08-04T18:32:50Z",
+    "from": "operational NOTEBOOK-ORG-1 awaiting human final acceptance",
+    "to": "operational with no active task after human-accepted NOTEBOOK-ORG-1 administrative closeout",
+    "timestamp_utc": "2026-08-04T23:55:12Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "79d0ee46ff69209f7010b5ab3ac57fc6eed35045",
-    "reason": "four exact byte-preserving moves passed deterministic verification, independent integration review, and parent verification; closeout remains unauthorized"
+    "observed_starting_git_revision": "adb683c98f4c7be7ac9f5079d0d9151cc14ec6e1",
+    "reason": "explicit human ACCEPT decision for the demonstrated structural outcome and authorization of administrative closeout only; no successor activated"
   },
   "resolved_checkpoints": [
     {
@@ -558,6 +460,128 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "exact four-mapping viscoelasticity path-only scope accepted; no content changes, reference updates, or execution"
+    }
+  ],
+  "closed_tasks": [
+    {
+      "task_id": "NOTEBOOK-ORG-1",
+      "task_kind": "bounded-notebook-organization",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "task_record": ".pi/tasks/notebook-organization.md",
+      "chain_id": "NOTEBOOK-ORG-1",
+      "chain_record": ".pi/chains/notebook-organization.chain.json",
+      "accepted_scope_source": {
+        "path": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
+        "revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
+        "scope": "exactly four valid high-confidence viscoelasticity mappings"
+      },
+      "accepted_scope": [
+        {
+          "source": "notebooks/viscoelasticity/01-compliance-functions.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb"
+        },
+        {
+          "source": "notebooks/viscoelasticity/02-stress-relaxation.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb"
+        },
+        {
+          "source": "notebooks/viscoelasticity/03-laplace-transform-and-oscillations.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb"
+        },
+        {
+          "source": "notebooks/viscoelasticity/04-time-temperature-superposition.ipynb",
+          "destination": "notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb"
+        }
+      ],
+      "accepted_evidence_boundary": [
+        "four Git R100 renames",
+        "byte-identical notebook contents",
+        "valid notebook JSON",
+        "no broken operational references",
+        "accepted ownership and path isolation",
+        "successful notebook-verifier, integration-reviewer, and parent-verification results"
+      ],
+      "claims_not_accepted": [
+        "notebook execution",
+        "numerical verification",
+        "physical validation",
+        "pedagogical validation",
+        "canonical capability status",
+        "lifecycle status",
+        "remaining .07 mappings",
+        "another migration",
+        "PIAB authorization",
+        "successor authorization"
+      ],
+      "stage_results": {
+        "human_scope_checkpoint": {
+          "status": "accepted",
+          "checkpoint_id": "NOTEBOOK-ORG-1-HC01"
+        },
+        "curator_prepare_change": {
+          "status": "completed",
+          "operations": "four exact git mv operations; no notebook content changes, execution, or reference updates",
+          "preflight_replay": "one safe preflight stop caused by a harness-generated untracked artifact and unavailable python; replayed with artifact creation disabled and python3",
+          "tracked_reference_result": "only nonbreaking coordination provenance and historical/advisory inventory mapping prose"
+        },
+        "deterministic_verification": {
+          "status": "passed",
+          "result": "four R100 pure renames; valid source/destination JSON; matching pre/post SHA-256; zero notebook insertions/deletions; staged-path isolation; diff check passed",
+          "sha256": {
+            "notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb": "c23d7c945bccdb96a7eed70c0e0632b6bb69e8593f8e1eb9aeff4e2f0bf42c9d",
+            "notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb": "89c218784fec4475202e9fa9476848232c625db2e1c2b6b43eba7c645c463bab",
+            "notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb": "86d3016a67fe92e461ce58d2c0eae84a7ec36df2e9a522b0e152b536444fda56",
+            "notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb": "f10226ebf34461ea45a36d73d81347788c94acd328b2e27989c4ebe9b2db50ae"
+          }
+        },
+        "integration_review": {
+          "status": "passed",
+          "result": "independent read-only review found no material findings; exact scope, R100 identity, verification evidence, exclusions, active coordination, PIAB parking, and successor denial passed",
+          "residual_limitations": [
+            "unchanged chain and curator-agent definitions retain initialization-era status/scope prose; active state is sole current-state authority and task records exact accepted scope"
+          ]
+        },
+        "curator_correction": {
+          "status": "skipped-not-required"
+        },
+        "verification_replay": {
+          "status": "skipped-not-required"
+        },
+        "integration_rereview": {
+          "status": "skipped-not-required"
+        },
+        "parent_verification": {
+          "status": "passed",
+          "result": "parent independently confirmed exact human scope, four byte-identical R100 mappings, verifier PASS, integration-review PASS, ownership and exclusion compliance, no protected decision, PIAB parking, and successor denial"
+        },
+        "human_final_acceptance": {
+          "status": "accepted",
+          "stage": "human_final_acceptance",
+          "decision_owner": "human"
+        },
+        "closeout": {
+          "status": "completed",
+          "result": "administrative closeout authorized and recorded; no successor activated"
+        }
+      },
+      "correction_cycles": "none",
+      "successor_authorized": false,
+      "successor": null
+    }
+  ],
+  "resolved_stages": [
+    {
+      "task_id": "NOTEBOOK-ORG-1",
+      "stage": "human_final_acceptance",
+      "state": "accepted",
+      "decision_owner": "human"
+    },
+    {
+      "task_id": "NOTEBOOK-ORG-1",
+      "stage": "closeout",
+      "state": "completed",
+      "authority": "explicit human authorization for administrative closeout only"
     }
   ]
 }
