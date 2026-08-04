@@ -293,10 +293,20 @@ accepted scope.
 **Allowed work**
 
 - use within the accepted support boundary;
-- maintenance, documentation, examples, and compatible extension;
+- maintenance, documentation, and examples within that boundary;
+- development and evaluation of proposed extensions while the previously
+  accepted capability remains Supported within its unchanged scope;
 - deterministic regression checks and evidence renewal;
 - proposed contract changes evaluated through Candidate work;
 - correction that preserves the accepted contract and historical record.
+
+New behavior, parameter regimes, models, audiences, APIs, or artifacts do not
+inherit Supported status automatically. An extension becomes part of the
+Supported claim only after the necessary contract, evidence,
+canonical-artifact, and human-approval requirements are satisfied. The
+previously accepted capability may remain Supported within its unchanged scope
+while the extension is evaluated separately. No additional lifecycle state is
+created for extensions.
 
 **Prohibited claims**
 
@@ -475,6 +485,21 @@ records are not rewritten to imply that earlier reviewers knew the later fact.
 9. Transition records must preserve the prior state, decision, evidence available
    at the time, approver, rationale, effective scope, and later superseding
    decision. This policy does not prescribe a schema for those records.
+10. Every human-declared hold, regression, or deprecation of a Supported
+    capability must identify:
+    - the affected capability and versions;
+    - affected uses, artifacts, parameter regimes, or audiences where known;
+    - the effective time;
+    - the claims that must no longer be made;
+    - required user-facing notice or documentation; and
+    - the planned review, correction, migration, or withdrawal path.
+
+    An urgent human-declared hold may take effect immediately when continued use
+    could mislead users or produce materially incorrect results. The complete
+    disposition may follow, but the affected support claim must be visibly
+    limited in the meantime. Regression to Candidate must not silently remove a
+    previously public support claim. This policy does not design the storage or
+    notification mechanism for these decisions and notices.
 
 ## 7. Capability–artifact relationships
 
@@ -682,7 +707,40 @@ such classification.
 Evidence obligations must be tailored to the capability's claims and risks. A
 unit conversion, analytic model, numerical solver, empirical materials
 correlation, and teaching visualization need not satisfy identical evidence
-plans.
+plans. Proportionality determines the depth and method of evidence; it does not
+permit evidence essential to a capability's declared claim to be marked not
+applicable.
+
+### 12.1 Minimum evidence floors
+
+The following minimum requirements apply before promotion to Supported:
+
+- **Executable public library capability:** software verification is Required.
+- **Capability making numerical-result claims:** numerical verification is
+  Required.
+- **Student-facing pedagogical capability:** pedagogical validation is Required.
+  Its proportional minimum may be expert instructor review against declared
+  learning objectives; formal classroom studies or learner-outcome research
+  are not universally required.
+- **Capability claiming adequacy for a real physical system or regime:**
+  physical validation is Required or Conditionally required under explicitly
+  accepted conditions.
+- **Purely mathematical, illustrative, or synthetic capability:** physical
+  validation may be Not applicable only when its claims and documentation do
+  not imply real-system adequacy.
+- **Uncertainty quantification:** its disposition depends on the capability's
+  claims, risks, inputs, model form, parameter sensitivity, and intended use.
+
+A Not applicable disposition must not be used merely because evidence is
+missing, difficult to obtain, or not yet reviewed. An Unresolved—blocking
+promotion disposition remains required whenever an essential evidence
+obligation has not been decided or satisfied.
+
+Pedagogical validation remains distinct from formal educational research.
+Requiring pedagogical evidence does not automatically require publication-grade
+learner studies.
+
+### 12.2 Evidence dispositions
 
 For each capability and each evidence classification, humans must accept one of
 these dispositions:
