@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 5,
+  "state_revision": 6,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -39,20 +39,20 @@
   "active_task": {
     "task_id": "NOTEBOOK-ORG-1",
     "task_kind": "bounded-notebook-organization",
-    "status": "awaiting-human-scope",
+    "status": "awaiting-human-final-acceptance",
     "purpose": "Perform small, human-selected notebook-organization batches under explicit ownership, ordered verification, independent review, correction, parent verification, and final human acceptance.",
     "task_record": ".pi/tasks/notebook-organization.md",
     "chain_id": "NOTEBOOK-ORG-1",
     "chain_record": ".pi/chains/notebook-organization.chain.json",
     "current_authorized_scope": [
-      "await exact first-batch selection at NOTEBOOK-ORG-1-HC01",
-      "maintain parent-owned active-state and task coordination"
+      "completed exactly four human-accepted byte-preserving viscoelasticity notebook moves",
+      "await explicit human acceptance at existing chain Stage 9 human_final_acceptance"
     ],
     "notebook_write_scope": [],
     "no_notebook_paths_currently_writable": true,
     "advisory_input": {
       "path": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
-      "acceptance": "deferred",
+      "acceptance": "exactly four viscoelasticity mappings accepted for this batch; blanket acceptance remains deferred",
       "use": "advisory planning input only",
       "not_blanket_accepted": [
         "127 proposed paths",
@@ -62,50 +62,121 @@
       ]
     },
     "prohibited_work": [
-      "move, rename, edit, execute, delete, repair, normalize, or otherwise modify any notebook before NOTEBOOK-ORG-1-HC01 affirmatively identifies exact paths and permissions",
-      "preselect viscoelasticity, PIAB, or any other migration batch",
-      "infer acceptance of any path, filename, duplicate disposition, repair, or batch from docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
-      "select curriculum, mapping, duplicate, lifecycle, canonical-artifact, physical-validation, or pedagogical-validation decisions",
-      "modify source, tests, examples, dependencies, packaging, continuous-integration configuration, or harness policy documents",
+      "modify any notebook while final human acceptance is pending",
+      "perform notebook content changes, reference updates, or notebook execution",
+      "act on any mapping outside the four completed bounded moves",
+      "select curriculum, mapping, duplicate, repair, lifecycle, canonical-artifact, physical-validation, or pedagogical-validation decisions",
+      "modify source, tests, examples, dependencies, packaging, continuous-integration configuration, AGENTS.md, .01-.07, agent definitions, or the chain",
       "resume PIAB contract, API, notebook, evidence, tolerance, lifecycle, validation, or implementation work",
-      "begin or authorize a successor task"
+      "close NOTEBOOK-ORG-1 or begin or authorize a successor task"
     ],
     "responsibility_ownership": {
       "parent_coordinator": "owns .pi/active-state.json, task coordination, exact-scope recording, correction routing, parent verification, repository safety, and human handoff",
-      "physkit-notebook-curator": "sole notebook writer; owns only exact human-authorized notebook and notebook-local reference paths; current ownership is empty",
+      "physkit-notebook-curator": "sole notebook writer for the completed eight-path bounded scope; no notebook correction is pending and current notebook write scope is empty",
       "physkit-notebook-verifier": "read-only deterministic verification",
       "physkit-integration-reviewer": "independent read-only integration review",
       "human_decision_owner": "owns curriculum, mapping, filename, duplicate, repair, evidence-acceptance, final-acceptance, and successor decisions"
     },
-    "stop_condition": "Stop at NOTEBOOK-ORG-1-HC01 pending an exact human batch decision; no notebook migration is authorized and no successor may start."
+    "stop_condition": "Stop at the existing human_final_acceptance chain stage. Commit and push readiness do not imply acceptance; closeout and successors remain unauthorized.",
+    "accepted_scope_source": {
+      "path": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
+      "revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
+      "scope": "exactly four valid high-confidence viscoelasticity mappings"
+    },
+    "operation_limits": {
+      "allowed": "git mv for the four accepted mappings only",
+      "content_changes": false,
+      "reference_updates": false,
+      "notebook_execution": false,
+      "additional_notebook_paths": false
+    },
+    "stage_results": {
+      "human_scope_checkpoint": {
+        "status": "accepted",
+        "checkpoint_id": "NOTEBOOK-ORG-1-HC01"
+      },
+      "curator_prepare_change": {
+        "status": "completed",
+        "operations": "four exact git mv operations; no notebook content changes, execution, or reference updates",
+        "preflight_replay": "one safe preflight stop caused by a harness-generated untracked artifact and unavailable python; replayed with artifact creation disabled and python3",
+        "tracked_reference_result": "only nonbreaking coordination provenance and historical/advisory inventory mapping prose"
+      },
+      "deterministic_verification": {
+        "status": "passed",
+        "result": "four R100 pure renames; valid source/destination JSON; matching pre/post SHA-256; zero notebook insertions/deletions; staged-path isolation; diff check passed",
+        "sha256": {
+          "notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb": "c23d7c945bccdb96a7eed70c0e0632b6bb69e8593f8e1eb9aeff4e2f0bf42c9d",
+          "notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb": "89c218784fec4475202e9fa9476848232c625db2e1c2b6b43eba7c645c463bab",
+          "notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb": "86d3016a67fe92e461ce58d2c0eae84a7ec36df2e9a522b0e152b536444fda56",
+          "notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb": "f10226ebf34461ea45a36d73d81347788c94acd328b2e27989c4ebe9b2db50ae"
+        }
+      },
+      "integration_review": {
+        "status": "passed",
+        "result": "independent read-only review found no material findings; exact scope, R100 identity, verification evidence, exclusions, active coordination, PIAB parking, and successor denial passed",
+        "residual_limitations": [
+          "unchanged chain and curator-agent definitions retain initialization-era status/scope prose; active state is sole current-state authority and task records exact accepted scope"
+        ]
+      },
+      "curator_correction": {
+        "status": "skipped-not-required"
+      },
+      "verification_replay": {
+        "status": "skipped-not-required"
+      },
+      "integration_rereview": {
+        "status": "skipped-not-required"
+      },
+      "parent_verification": {
+        "status": "passed",
+        "result": "parent independently confirmed exact human scope, four byte-identical R100 mappings, verifier PASS, integration-review PASS, ownership and exclusion compliance, no protected decision, PIAB parking, and successor denial"
+      },
+      "human_final_acceptance": {
+        "status": "pending",
+        "checkpoint_id": "human_final_acceptance"
+      },
+      "closeout": {
+        "status": "not-authorized"
+      }
+    },
+    "completed_bounded_scope": [
+      {
+        "source": "notebooks/viscoelasticity/01-compliance-functions.ipynb",
+        "destination": "notebooks/materials-physics/viscoelasticity/compliance-functions.ipynb"
+      },
+      {
+        "source": "notebooks/viscoelasticity/02-stress-relaxation.ipynb",
+        "destination": "notebooks/materials-physics/viscoelasticity/stress-relaxation.ipynb"
+      },
+      {
+        "source": "notebooks/viscoelasticity/03-laplace-transform-and-oscillations.ipynb",
+        "destination": "notebooks/materials-physics/viscoelasticity/laplace-transform-and-oscillations.ipynb"
+      },
+      {
+        "source": "notebooks/viscoelasticity/04-time-temperature-superposition.ipynb",
+        "destination": "notebooks/materials-physics/viscoelasticity/time-temperature-superposition.ipynb"
+      }
+    ]
   },
   "checkpoint": {
-    "checkpoint_id": "NOTEBOOK-ORG-1-HC01",
-    "type": "human-scope",
+    "checkpoint_id": "human_final_acceptance",
+    "chain_stage": "human_final_acceptance",
+    "type": "human-final-acceptance",
     "state": "pending",
     "task_record": ".pi/tasks/notebook-organization.md",
     "chain_record": ".pi/chains/notebook-organization.chain.json",
-    "decision_required": "Select, revise, or reject one exact first notebook-organization batch.",
-    "required_affirmative_fields": [
-      "exact source paths",
-      "exact destination paths",
-      "accepted filename changes",
-      "content-change permission and limits",
-      "reference-update permission and path limits",
-      "required verification",
-      "explicit exclusions"
-    ],
-    "notebook_write_scope_while_pending": [],
+    "identifier_note": "The unchanged existing chain names Stage 9 human_final_acceptance and does not define NOTEBOOK-ORG-1-HC02; no new identifier was invented.",
+    "decision_required": "Accept, remand, limit, or reject the completed four-mapping byte-preserving batch. Acceptance does not authorize closeout or a successor.",
     "successor_authorized": false
   },
   "blockers": [
     {
-      "blocker_id": "notebook-batch.pending-human-selection",
-      "condition": "human selection, revision, or rejection of one exact first batch remains pending at NOTEBOOK-ORG-1-HC01"
+      "blocker_id": "notebook-org-1.final-human-acceptance.pending",
+      "condition": "explicit human acceptance, remand, limitation, or rejection of the completed four-mapping batch remains pending"
     },
     {
-      "blocker_id": "notebook-paths.pending-exact-authorization",
-      "condition": "exact source, destination, filename, content-change, reference-update, verification, and exclusion boundaries are not yet authorized"
+      "blocker_id": "notebook-mappings.remaining-human-decisions",
+      "condition": "all notebook mappings outside the completed four-path batch remain unaccepted and blocked"
     },
     {
       "blocker_id": "notebook-duplicates.pending-decisions",
@@ -116,8 +187,20 @@
       "condition": "invalid-artifact repair, preservation, and classification decisions remain pending"
     },
     {
-      "blocker_id": "notebook-migration.not-authorized",
-      "condition": "notebook migration is not authorized while NOTEBOOK-ORG-1-HC01 is pending"
+      "blocker_id": "saved-errors.pending-decisions",
+      "condition": "saved-error cleanup decisions remain pending"
+    },
+    {
+      "blocker_id": "notebook-reference-updates.not-authorized",
+      "condition": "reference updates remain unauthorized"
+    },
+    {
+      "blocker_id": "notebook-closeout.not-authorized",
+      "condition": "NOTEBOOK-ORG-1 closeout is not authorized by the current human instruction"
+    },
+    {
+      "blocker_id": "notebook-successor.not-authorized",
+      "condition": "no additional migration batch or successor task is authorized"
     }
   ],
   "parked_work": [
@@ -436,14 +519,45 @@
       "decision_date": "2026-08-04",
       "provenance": "explicit human instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-notebook-org-1-hc01-viscoelasticity-batch.001",
+      "subject": "NOTEBOOK-ORG-1-HC01 exact first notebook-organization batch",
+      "disposition": "accepted exactly four versioned viscoelasticity source-to-destination mappings for byte-preserving movement through final-human-acceptance",
+      "authority_granted": [
+        "record HC01 as accepted bounded scope",
+        "assign curator ownership to exactly four source and four destination path identities",
+        "perform git mv for exactly four mappings incorporated from .07 at revision 68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
+        "perform required static verification, independent review, parent verification, commit, and push",
+        "advance to the existing human_final_acceptance chain stage after successful parent verification"
+      ],
+      "authority_not_granted": [
+        "notebook content changes or execution",
+        "reference updates",
+        "any additional notebook path",
+        "duplicate resolution, invalid-notebook repair, saved-error cleanup, or curriculum-view creation",
+        "source, tests, examples, dependencies, packaging, CI, harness redesign, PIAB, package-lock.json, closeout, or successor work"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human response to NOTEBOOK-ORG-1-HC01",
+      "mapping_source_revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "operational Mode A notebook-canonical-path-mapping review",
-    "to": "operational NOTEBOOK-ORG-1 awaiting human scope",
-    "timestamp_utc": "2026-08-04T18:07:01Z",
+    "from": "operational NOTEBOOK-ORG-1 execution under accepted HC01 scope",
+    "to": "operational NOTEBOOK-ORG-1 awaiting human final acceptance",
+    "timestamp_utc": "2026-08-04T18:32:50Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
-    "reason": "explicit human deferral of blanket .07 acceptance, cancellation of the prior viscoelasticity migration instruction, and authorization to build the minimal operational notebook-workflow harness slice"
-  }
+    "observed_starting_git_revision": "79d0ee46ff69209f7010b5ab3ac57fc6eed35045",
+    "reason": "four exact byte-preserving moves passed deterministic verification, independent integration review, and parent verification; closeout remains unauthorized"
+  },
+  "resolved_checkpoints": [
+    {
+      "checkpoint_id": "NOTEBOOK-ORG-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact four-mapping viscoelasticity path-only scope accepted; no content changes, reference updates, or execution"
+    }
+  ]
 }
