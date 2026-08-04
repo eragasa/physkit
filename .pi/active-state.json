@@ -1,9 +1,9 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 1,
+  "state_revision": 2,
   "authority": {
-    "status": "proposed",
+    "status": "accepted",
     "governs_only": [
       "current task identity",
       "current bounded scope",
@@ -35,35 +35,38 @@
       "support claims"
     ]
   },
-  "control_plane_phase": "bootstrap",
+  "control_plane_phase": "operational",
   "active_task": {
-    "task_id": "bootstrap.active-state.mode-a.001",
-    "task_kind": "active-state-authority-review",
+    "task_id": "planning.notebook-curriculum-inventory-options.mode-a.001",
+    "task_kind": "notebook-curriculum-inventory-and-options-review",
     "status": "awaiting-human-acceptance",
     "review_mode": "Mode A — Single-File Verification",
-    "material_artifact": ".pi/active-state.json",
+    "material_artifact": "docs/harness/physkit.harness.05-notebook-curriculum-inventory-and-options.md",
     "allowed_paths": [
-      ".pi/active-state.json"
+      ".pi/active-state.json",
+      "docs/harness/physkit.harness.05-notebook-curriculum-inventory-and-options.md"
     ],
     "prohibited_work": [
-      "create or modify any other control-plane artifact",
-      "modify AGENTS.md or docs/harness/physkit.harness.01-capability-baseline.md through docs/harness/physkit.harness.04-minimal-pi-control-plane.md",
-      "modify source, tests, notebooks, examples, dependencies, packaging, or continuous-integration configuration",
-      "resume PIAB contract, API, notebook, evidence, tolerance, lifecycle, validation, or implementation work"
+      "select or prescribe a final curriculum hierarchy or mandatory topic sequence",
+      "specify exact notebook destination paths or authorize notebook migration",
+      "move, rename, edit, execute, delete, repair, or otherwise modify notebooks",
+      "modify source, tests, examples, dependencies, packaging, or continuous-integration configuration",
+      "resume PIAB contract, API, notebook, evidence, tolerance, lifecycle, validation, or implementation work",
+      "create or modify any other path"
     ],
     "responsibility_ownership": {
-      "parent_coordinator_and_final_verifier": "coordinates scope, validation, review disposition, repository safety, and human handoff",
-      "artifact_owner": "drafts and corrects only .pi/active-state.json",
-      "independent_read_only_reviewer": "reviews the artifact and reports findings without repair",
+      "parent_coordinator_and_final_verifier": "coordinates bounded static inventory, validation, review disposition, repository safety, and human handoff",
+      "artifact_owner": "drafts and corrects the sole material artifact and updates active runtime coordination within the two allowed paths",
+      "independent_read_only_reviewer": "reviews the inventory and active-state agreement without repairing findings",
       "human_decision_owner": "human"
     },
-    "stop_condition": "explicit human acceptance, revision, rejection, or deferral of .pi/active-state.json"
+    "stop_condition": "explicit human acceptance, revision, rejection, or deferral of docs/harness/physkit.harness.05-notebook-curriculum-inventory-and-options.md"
   },
   "checkpoint": {
-    "checkpoint_id": "bootstrap.active-state.acceptance.001",
+    "checkpoint_id": "planning.notebook-curriculum-inventory-options.acceptance.001",
     "type": "human-acceptance",
     "state": "pending",
-    "artifact": ".pi/active-state.json",
+    "artifact": "docs/harness/physkit.harness.05-notebook-curriculum-inventory-and-options.md",
     "allowed_decisions": [
       "accept",
       "revise",
@@ -74,16 +77,20 @@
   },
   "blockers": [
     {
-      "blocker_id": "bootstrap.active-state.pending-acceptance",
-      "condition": "pending human acceptance of .pi/active-state.json"
+      "blocker_id": "curriculum-inventory-options.pending-review",
+      "condition": "pending human review of docs/harness/physkit.harness.05-notebook-curriculum-inventory-and-options.md"
     },
     {
-      "blocker_id": "bootstrap.closeout.not-authorized",
-      "condition": "pending explicit bootstrap-closeout authorization"
+      "blocker_id": "curriculum.organization.not-selected",
+      "condition": "organizational model not selected"
     },
     {
-      "blocker_id": "piab.resume.not-authorized",
-      "condition": "absence of explicit authorization to resume PIAB"
+      "blocker_id": "curriculum.hierarchy.not-accepted",
+      "condition": "exact hierarchy not accepted"
+    },
+    {
+      "blocker_id": "notebook.migration.not-authorized",
+      "condition": "notebook migration not authorized"
     }
   ],
   "parked_work": [
@@ -93,7 +100,7 @@
       "candidate_comparison": "docs/harness/physkit.harness.03-pilot-capability-selection.md",
       "human_selection": "Option A",
       "selection_authority": "future contract and evidence-obligation planning only",
-      "current_state": "contract planning parked",
+      "current_state": "contract planning and implementation parked",
       "not_accepted": [
         "public API",
         "canonical artifact",
@@ -104,15 +111,16 @@
         "implementation"
       ],
       "resumption_requirements": [
-        "human-accepted control-plane bootstrap closeout",
-        "explicit successor authorization"
-      ]
+        "human acceptance of the relevant notebook hierarchy and PIAB placement boundary",
+        "explicit successor authorization for bounded PIAB work"
+      ],
+      "placement_prerequisite": "human selection of a notebook organizational model and hierarchy boundary must precede PIAB placement"
     }
   ],
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "Completion, commit, push, review, or apparent readiness does not authorize a successor."
+    "denial_basis": "Completion, commit, push, review, apparent readiness, or control-plane operational status does not authorize a successor."
   },
   "human_decisions": [
     {
@@ -190,14 +198,99 @@
       "decision_date": "2026-08-04",
       "provenance": "explicit human instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-active-state.001",
+      "subject": ".pi/active-state.json",
+      "disposition": "accepted as sole authority for current runtime coordination",
+      "authority_granted": [
+        "current runtime coordination within the accepted authority boundary"
+      ],
+      "authority_not_granted": [
+        "scientific, API, evidence, validation, lifecycle, or support decisions",
+        "PIAB resumption"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "accepted_revision": "b4d59fb3511b5df372c10f04862e544aa94144b3",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.close-minimal-control-plane-bootstrap.001",
+      "subject": "minimal control-plane bootstrap",
+      "disposition": "closed; control-plane phase authorized to become operational",
+      "authority_granted": [
+        "transition control_plane_phase from bootstrap to operational"
+      ],
+      "authority_not_granted": [
+        "successor work by operational status alone",
+        "PIAB resumption"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-notebook-inventory-options.001",
+      "subject": "committed notebook inventory and curriculum-hierarchy options",
+      "disposition": "authorized for bounded static inventory and Mode A decision support",
+      "authority_granted": [
+        "static inventory of all committed notebooks",
+        "preparation of alternative curriculum-hierarchy options for human review"
+      ],
+      "authority_not_granted": [
+        "final hierarchy selection",
+        "mandatory topic sequence",
+        "exact destination paths",
+        "notebook migration or modification",
+        "PIAB planning or implementation"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.set-curriculum-level-anchors.001",
+      "subject": "curriculum textbook references",
+      "disposition": "accepted as approximate level, scope, and intellectual-orientation anchors only",
+      "authority_granted": [
+        "use named references only to estimate notebook level, scope, and orientation"
+      ],
+      "authority_not_granted": [
+        "textbook prose or proprietary structure reproduction",
+        "mandatory sequence",
+        "course packaging",
+        "directory naming",
+        "module numbering",
+        "chapter correspondence",
+        "prerequisite edges",
+        "canonical placement"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.defer-detailed-curriculum-sequence.001",
+      "subject": "detailed PhysKit curriculum sequence",
+      "disposition": "not authorized at this stage",
+      "authority_granted": [
+        "decision-support options without final selection"
+      ],
+      "authority_not_granted": [
+        "prescription or finalization of a detailed curriculum sequence"
+      ],
+      "decision_date": "2026-08-04",
+      "provenance": "explicit human instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "no durable active-state authority",
-    "to": "proposed bootstrap active state",
-    "timestamp_utc": "2026-08-04T15:18:59Z",
+    "from": "accepted bootstrap active state awaiting closeout",
+    "to": "operational Mode A notebook curriculum inventory-and-options review",
+    "timestamp_utc": "2026-08-04T15:58:51Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "a806fcdd5c1c63881a3bd41c7aea2827300818b9",
-    "reason": "explicit human authorization to draft the active-state authority"
+    "observed_starting_git_revision": "b4d59fb3511b5df372c10f04862e544aa94144b3",
+    "reason": "explicit human acceptance of active state, bootstrap closeout, and authorization of static notebook inventory and curriculum-hierarchy options"
   }
 }
