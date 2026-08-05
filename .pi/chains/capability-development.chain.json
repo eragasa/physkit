@@ -1,0 +1,176 @@
+{
+  "name": "PHYSKIT-CAPABILITY-DEVELOPMENT",
+  "package": "physkit",
+  "description": "Reusable human-gated workflow for bounded PhysKit capability development without selecting a capability.",
+  "status": "inactive",
+  "reusable": true,
+  "active_task": null,
+  "selected_capability": null,
+  "execution": {
+    "default_concurrency": false,
+    "multiple_specialized_writers_required": true,
+    "exact_nonoverlapping_ownership_required": true,
+    "review_read_only": true,
+    "lifecycle_promotion_in_scope": false,
+    "successor_authorized": false,
+    "successor": null
+  },
+  "ownership_model": {
+    "parent_coordinator": "activation, task and active-state coordination, exact ownership assignment, correction routing, parent verification, and human checkpoint presentation",
+    "physkit-capability-architect": "exact task-owned capability contract and architecture paths only",
+    "physkit-implementation": "exact task-owned production paths under src/physkit only",
+    "physkit-verification": "exact task-owned test paths under tests and separately justified evidence-summary paths only",
+    "physkit-notebook-documentation": "exact task-owned notebook and user-facing documentation paths only",
+    "physkit-capability-integration-reviewer": "read-only integrated review",
+    "human": "all protected scientific, numerical, API, pedagogical, evidence-acceptance, canonical-artifact, lifecycle, final-acceptance, and successor decisions"
+  },
+  "concurrency_rules": {
+    "default": "ordered and sequential",
+    "allowed": "read-only inspection; deterministic nonmutating checks; or writers with exact nonoverlapping paths and an explicit integration seam",
+    "forbidden": "overlapping writers, verification against partial source, library reconstruction before accepted API implementation, or correction concurrent with affected review",
+    "stage_7_exception": "explicit notebook construction may begin after human contract acceptance when it does not depend on unaccepted implementation behavior and its paths do not overlap other writers"
+  },
+  "chain": [
+    {
+      "stage": "human_capability_scope",
+      "order": 1,
+      "type": "human_checkpoint",
+      "state": "inactive",
+      "required_decision": "Human identifies one bounded capability, learner purpose, intended use, initial exclusions, and authority to draft a contract.",
+      "blocks": ["contract_drafting"],
+      "capability_before_resolution": null
+    },
+    {
+      "stage": "contract_drafting",
+      "order": 2,
+      "type": "writer",
+      "agent": "physkit.physkit-capability-architect",
+      "requires": ["human_capability_scope:affirmatively-resolved", "contract-path-ownership:exact-and-recorded"],
+      "may_write_only": "task-owned contract or architecture paths"
+    },
+    {
+      "stage": "human_contract_acceptance",
+      "order": 3,
+      "type": "human_checkpoint",
+      "requires": ["contract_drafting:completed"],
+      "blocks": ["implementation", "software_and_numerical_verification", "explicit_notebook_construction", "library_notebook_reconstruction", "exploration_and_documentation"],
+      "acceptance_inference": false
+    },
+    {
+      "stage": "ownership_and_implementation_plan",
+      "order": 4,
+      "type": "parent_coordination",
+      "role": "parent coordinator",
+      "requires": ["human_contract_acceptance:explicitly-accepted"],
+      "result_required": "exact nonoverlapping path ownership, dependencies, checks, handoffs, exclusions, correction routing, and stop rules"
+    },
+    {
+      "stage": "implementation",
+      "order": 5,
+      "type": "writer",
+      "agent": "physkit.physkit-implementation",
+      "requires": ["human_contract_acceptance:explicitly-accepted", "ownership_and_implementation_plan:completed"],
+      "may_write_only": "exact task-owned paths under src/physkit"
+    },
+    {
+      "stage": "software_and_numerical_verification",
+      "order": 6,
+      "type": "test_and_evidence_writer",
+      "agent": "physkit.physkit-verification",
+      "requires": ["implementation:completed", "verification-path-ownership:exact-and-recorded"],
+      "evidence_classes_must_remain_distinct": ["software verification", "numerical verification", "physical validation", "pedagogical validation", "uncertainty quantification"]
+    },
+    {
+      "stage": "explicit_notebook_construction",
+      "order": 7,
+      "type": "notebook_documentation_writer",
+      "agent": "physkit.physkit-notebook-documentation",
+      "earliest_start": "human_contract_acceptance:explicitly-accepted",
+      "requires": ["notebook-documentation-path-ownership:exact-and-recorded"],
+      "must_not_depend_on": "unaccepted implementation behavior",
+      "content": "explicit physical, mathematical, numerical, code, and direct-verification construction without hiding the target behind PhysKit"
+    },
+    {
+      "stage": "library_notebook_reconstruction",
+      "order": 8,
+      "type": "notebook_documentation_writer",
+      "agent": "physkit.physkit-notebook-documentation",
+      "requires": ["implementation:completed", "accepted-public-api:implemented", "explicit_notebook_construction:completed"],
+      "content": "reconstruct the shared baseline with the accepted PhysKit API and explicitly compare it with Stage 7"
+    },
+    {
+      "stage": "exploration_and_documentation",
+      "order": 9,
+      "type": "notebook_documentation_writer",
+      "agent": "physkit.physkit-notebook-documentation",
+      "requires": ["library_notebook_reconstruction:completed"],
+      "content": "multiple cases, parameter sweeps, comparisons, visualization, bounded interpretation, and accurate user documentation"
+    },
+    {
+      "stage": "integration_review",
+      "order": 10,
+      "type": "independent_read_only_review",
+      "agent": "physkit.physkit-capability-integration-reviewer",
+      "requires": ["implementation:completed", "software_and_numerical_verification:completed", "exploration_and_documentation:completed"],
+      "read_only": true
+    },
+    {
+      "stage": "owner_specific_correction",
+      "order": 11,
+      "type": "conditional_multi_owner_correction",
+      "condition": "integration_review reports accepted in-scope findings",
+      "routing": {
+        "contract": "physkit.physkit-capability-architect",
+        "source": "physkit.physkit-implementation",
+        "test_or_evidence": "physkit.physkit-verification",
+        "notebook_or_documentation": "physkit.physkit-notebook-documentation",
+        "coordination": "parent coordinator"
+      },
+      "scope_rule": "each writer remains within unchanged exact ownership; no concurrent overlapping corrections"
+    },
+    {
+      "stage": "verification_replay",
+      "order": 12,
+      "type": "conditional_test_and_evidence_writer",
+      "agent": "physkit.physkit-verification",
+      "condition": "owner_specific_correction executed",
+      "requires": ["owner_specific_correction:completed"],
+      "rule": "replay every affected deterministic and evidence-producing check without changing accepted tolerances"
+    },
+    {
+      "stage": "integration_rereview",
+      "order": 13,
+      "type": "conditional_independent_read_only_review",
+      "agent": "physkit.physkit-capability-integration-reviewer",
+      "condition": "owner_specific_correction executed",
+      "requires": ["verification_replay:successful"],
+      "read_only": true
+    },
+    {
+      "stage": "parent_verification",
+      "order": 14,
+      "type": "parent_verification",
+      "role": "parent coordinator",
+      "requires": ["latest-verification:successful", "latest-integration-review:no-unresolved-material-findings"],
+      "is_human_acceptance": false
+    },
+    {
+      "stage": "human_final_acceptance",
+      "order": 15,
+      "type": "human_checkpoint",
+      "requires": ["parent_verification:successful"],
+      "decision_owner": "human",
+      "acceptance_inference": false,
+      "lifecycle_promotion": "outside this chain unless separately human-authorized"
+    },
+    {
+      "stage": "closeout",
+      "order": 16,
+      "type": "closeout",
+      "requires": ["human_final_acceptance:explicitly-accepted"],
+      "automatic_successor": false,
+      "successor_authorized": false,
+      "successor": null
+    }
+  ]
+}
