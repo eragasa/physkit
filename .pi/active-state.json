@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 14,
+  "state_revision": 15,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -39,8 +39,8 @@
   "active_task": {
     "task_id": "FOUNDATIONS-FD1",
     "task_kind": "capability-contract-drafting",
-    "status": "awaiting-human-contract-acceptance",
-    "purpose": "Draft one proposed integrated, internally layered, discrete-first capability contract for a uniform closed 1D grid, homogeneous-Dirichlet active state, discrete linear operator, and finite-difference Laplacian.",
+    "status": "awaiting-human-contract-redisposition",
+    "purpose": "Correct proposed contract revision 3 under explicit HC02 REMAND while preserving the accepted bounded capability scope and implementation gate.",
     "task_record": ".pi/tasks/foundations-fd1.md",
     "material_intake": "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md",
     "material_contract": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
@@ -49,7 +49,7 @@
       "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
       "template_record": ".pi/chains/capability-development.chain.json",
       "current_stage": "human_contract_acceptance",
-      "stage_state": "pending",
+      "stage_state": "pending-human-redisposition-after-remand",
       "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
       "artifact_path": "A",
       "applicability_axes": {
@@ -57,7 +57,9 @@
         "notebook_artifact": "required"
       },
       "active_writer_roles": [],
-      "correction_cycle_count": 1
+      "correction_cycle_count": 1,
+      "human_remand_count": 1,
+      "contract_revision_target": 3
     },
     "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
     "capability_structure": "one integrated but internally layered contract",
@@ -114,54 +116,86 @@
     ],
     "review": {
       "mode": "Mode A",
-      "independent_read_only_review": "PASS after one consolidated correction and fresh rereview",
+      "independent_read_only_review": "PASS after HC02 human-remand correction; no material or protected findings",
       "repository_artifact_creation": false,
       "architect_startup_preflight": "passed",
-      "ordinary_contract_correction_limit": 1,
-      "correction_cycle_count": 1,
-      "finding_classification": "initial in-scope proposal conformance findings corrected; fresh rereview found no blocker, major, or minor findings",
+      "human_remand_correction_count": 1,
+      "automatic_followup_correction_authorized": false,
       "material_findings": [],
-      "rereview_required": false
+      "limitations": [
+        "static proposal review only; no implementation, notebook, Sphinx build, or evidence was run"
+      ]
     },
     "validation": {
       "parent_contract_verification": "passed",
       "checks": [
-        "expected starting revision and repository identity",
+        "expected starting revision and initial remote revision",
         "duplicate-free JSON",
-        "HC01 accepted and HC02 pending consistency",
-        "selected integrated discrete-first capability and Path A axes",
+        "HC02 REMAND recorded without acceptance",
+        "contract revision 3 and state revision 15",
         "exact architect ownership",
-        "empty production/test/evidence/notebook/Sphinx implementation ownership",
+        "empty source/test/evidence/notebook/Sphinx implementation ownership",
         "immutable template and role files",
-        "all 28 contract areas and proposal status",
-        "single correction cycle and independent rereview PASS",
+        "grid geometry/state-space separation",
+        "restriction and embedding semantics",
+        "operator domain/codomain and composition deferral",
+        "scaling, CSR, sign, dtype, ownership, and N=3",
+        "exact weighted norm/error/order formulas and refinement pairs",
+        "MyST/Sphinx paths, dependencies, configuration, build, and Graphviz requirement",
+        "ten stable equation categories and equation-infrastructure prohibition",
+        "diagram and notebook synchronization",
+        "Path A, five evidence classes, VVUQ, migration and implementation gates",
         "exact three-path isolation",
-        "source/test/notebook/dependency/packaging/CI/Sphinx exclusions",
-        "no repository-local temporary artifacts",
+        "no excluded or temporary artifacts",
         "git diff --check"
       ],
-      "limitations": "static contract validation only; no production imports, tests, Sphinx build, notebook execution, evidence result, validation conclusion, lifecycle state, or support claim"
+      "limitations": "static corrected-contract verification only; no implementation, tests, evidence, Sphinx build, notebook execution, contract acceptance, validation conclusion, lifecycle state, or support claim"
     },
     "implementation_authorized": false,
     "successor_authorized": false,
     "successor": null,
-    "stop_condition": "Stop at human_contract_acceptance after the proposed contract is reviewed, validated, committed, and pushed. Do not begin implementation or successor work."
+    "stop_condition": "Stop at FOUNDATIONS-FD1-HC02 human_contract_acceptance after correction, one fresh review, validation, commit, and push. Any remaining material review finding returns to the human without automatic correction.",
+    "hc02_remand": {
+      "disposition": "REMAND",
+      "contract_accepted": false,
+      "starting_revision": "1ce0e53afe435cba8551875166ff5fc34bd68945",
+      "contract_revision_target": 3,
+      "findings": [
+        "grid geometry improperly owns homogeneous-Dirichlet state-space behavior",
+        "operator compatibility identity omits active-index, boundary, domain, and codomain semantics",
+        "relative discrete L2 norm and observed-order formulas are undefined",
+        "maintained Sphinx API/concept pages must use MyST Markdown",
+        "equations require durable labeled storage in the maintained Markdown concept page without runtime equation-decoration infrastructure"
+      ],
+      "required_corrections": [
+        "separate UniformGrid1D geometry from HomogeneousDirichletStateSpace1D semantics",
+        "make discrete operator domain and codomain explicit immutable state spaces",
+        "retain scalar scaling and defer general public composition",
+        "define weighted norm, relative error, observed order, and exact refinement pairs",
+        "propose MyST/Sphinx paths, configuration, stable labels, diagrams, and notebook synchronization",
+        "retain lightweight VVUQ, evidence, migration, implementation, and successor boundaries"
+      ],
+      "automatic_correction_after_review_authorized": false
+    }
   },
   "checkpoint": {
     "checkpoint_id": "FOUNDATIONS-FD1-HC02",
     "type": "human-contract-acceptance",
-    "state": "pending",
+    "state": "pending-human-redisposition",
+    "latest_disposition": "REMAND",
+    "contract_accepted": false,
     "task_record": ".pi/tasks/foundations-fd1.md",
     "material_artifact": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
     "material_artifact_status": "Proposed for human review",
-    "decision_required": "Accept, revise, reject, or defer the complete integrated discrete-first capability contract.",
+    "contract_revision_target": 3,
+    "decision_required_after_correction": "Accept, revise, reject, or defer corrected contract revision 3.",
     "implementation_authorized": false,
     "successor_authorized": false
   },
   "blockers": [
     {
-      "blocker_id": "foundations-fd1.human-contract-acceptance.pending",
-      "condition": "the corrected proposed contract passed fresh Mode A rereview; implementation and every dependent stage remain blocked pending explicit human contract acceptance"
+      "blocker_id": "foundations-fd1.hc02-human-contract-acceptance.pending-after-remand",
+      "condition": "contract revision 3 passed the single fresh Mode A review; contract remains unaccepted and implementation/dependent stages remain blocked pending explicit human redisposition"
     },
     {
       "blocker_id": "piab.parked",
@@ -744,15 +778,34 @@
       "external_reference_revision": "ksdft2effmass@355df16a7ca4071b70bc844a00ba21949af7c7c6",
       "provenance": "explicit human resolution and contract-drafting authorization",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.remand-foundations-fd1-hc02.001",
+      "subject": "FOUNDATIONS-FD1-HC02 proposed discrete Laplacian contract revision 2",
+      "disposition": "REMAND; contract not accepted; one narrow architectural and documentation correction authorized",
+      "authority_granted": [
+        "modify exactly active state, task record, and existing contract",
+        "produce contract revision 3 with grid/state-space separation, state-space domain/codomain, composition deferral, exact numerical formulas, MyST/equation/diagram/notebook corrections",
+        "perform one fresh independent read-only Mode A review",
+        "validate, commit with specified message, and fast-forward push exactly three authorized paths"
+      ],
+      "authority_not_granted": [
+        "contract acceptance",
+        "production implementation, tests, evidence, Sphinx files, notebook changes, dependencies, packaging, CI, migration, repair, deprecation, lifecycle, PIAB, or successor work",
+        "another automatic review/correction loop"
+      ],
+      "starting_revision": "1ce0e53afe435cba8551875166ff5fc34bd68945",
+      "provenance": "explicit human HC02 REMAND",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "FOUNDATIONS-FD1 one allowed consolidated contract correction and rereview",
-    "to": "FOUNDATIONS-FD1 awaiting human contract acceptance",
-    "timestamp_utc": "2026-08-05T05:29:44Z",
+    "from": "FOUNDATIONS-FD1 HC02 human-remand contract correction and final Mode A review",
+    "to": "FOUNDATIONS-FD1 awaiting human redisposition of contract revision 3 at HC02",
+    "timestamp_utc": "2026-08-05T06:25:13Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "a056157909f1dabc679332c73cabdda956075417",
-    "reason": "corrected proposal received fresh independent Mode A PASS; no implementation authorized"
+    "observed_starting_git_revision": "1ce0e53afe435cba8551875166ff5fc34bd68945",
+    "reason": "fresh independent review passed with no material or protected findings; contract remains unaccepted"
   },
   "resolved_checkpoints": [
     {
@@ -967,7 +1020,7 @@
     "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
     "template_record": ".pi/chains/capability-development.chain.json",
     "current_stage": "human_contract_acceptance",
-    "stage_state": "pending",
+    "stage_state": "pending-human-redisposition-after-remand",
     "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
     "artifact_path": "A",
     "applicability_axes": {
@@ -975,7 +1028,9 @@
       "notebook_artifact": "required"
     },
     "active_writer_roles": [],
-    "correction_cycle_count": 1
+    "correction_cycle_count": 1,
+    "human_remand_count": 1,
+    "contract_revision_target": 3
   },
   "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
   "capability_ownership": {
