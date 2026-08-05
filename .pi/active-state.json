@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 11,
+  "state_revision": 12,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -36,99 +36,9 @@
     ]
   },
   "control_plane_phase": "operational",
-  "active_task": {
-    "task_id": "HARNESS-CAPABILITY-1",
-    "task_kind": "reusable-capability-workflow-bootstrap",
-    "status": "awaiting-renewed-human-review-after-correction",
-    "purpose": "Correct one deterministic blocking-evidence routing defect in the reusable template without selecting or instantiating a capability.",
-    "task_record": ".pi/tasks/capability-workflow-bootstrap.md",
-    "selected_capability": null,
-    "role_files": [
-      ".pi/agents/physkit-capability-architect.md",
-      ".pi/agents/physkit-implementation.md",
-      ".pi/agents/physkit-verification.md",
-      ".pi/agents/physkit-notebook-documentation.md",
-      ".pi/agents/physkit-capability-integration-reviewer.md"
-    ],
-    "authorized_paths": [
-      ".pi/chains/capability-development.chain.json",
-      ".pi/tasks/capability-workflow-bootstrap.md",
-      ".pi/active-state.json"
-    ],
-    "active_ownership": {
-      "parent_coordinator": "exact three narrow correction paths in authorized_paths",
-      "capability_contract_paths": [],
-      "production_source_paths": [],
-      "test_or_evidence_paths": [],
-      "notebook_or_documentation_paths": []
-    },
-    "multiple_writer_model": "retained for later capability tasks through specialized architect, implementation, verification, and notebook/documentation writers with exact nonoverlapping ownership",
-    "prohibited_work": [
-      "modify any path outside the exact three authorized paths",
-      "modify any role file or create any file",
-      "select, instantiate, scope, contract, implement, verify, document, or activate a physics capability",
-      "grant capability contract, source, test, evidence, notebook, or documentation ownership",
-      "resume PIAB, activate remaining notebook work, perform closeout, or authorize a successor"
-    ],
-    "operational_lessons": [
-      "use python3 when Python is required",
-      "treat unexpected repository-local subagent artifacts as a stop condition",
-      "do not leave .pi-subagents or similar temporary directories in the repository",
-      "prefer temporary artifacts outside the repository or disable repository artifact creation",
-      "validate exact staged-path isolation before commit",
-      "do not infer success from a subagent report without parent verification"
-    ],
-    "review": {
-      "independent_read_only_review": "PASS after one narrow-routing remand/correction cycle and fresh rereview",
-      "repository_artifact_creation": false,
-      "findings_remaining": []
-    },
-    "final_human_acceptance": "pending-after-narrow-remand",
-    "successor_authorized": false,
-    "successor": null,
-    "stop_condition": "Stop for renewed human accept, remand, limit, reject, or defer disposition. Do not close out, instantiate a capability workflow, select a capability, resume PIAB, or authorize a successor.",
-    "validation": {
-      "parent_structural_verification": "passed",
-      "checks": [
-        "duplicate-free JSON",
-        "exclusive blocking-evidence classification",
-        "exactly one successor per classification",
-        "three routing traces",
-        "preserved A/B/C/D and immutable template",
-        "preserved contract reacceptance and evidence authority",
-        "state revision and empty instance/ownership",
-        "PIAB and notebook-work parking",
-        "successor denial",
-        "exact three-path isolation",
-        "no role-file diff",
-        "temporary-artifact absence",
-        "git diff --check"
-      ],
-      "limitations": "structural routing validation only; no capability instance or evidence result was executed"
-    },
-    "chain_template": {
-      "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
-      "record": ".pi/chains/capability-development.chain.json",
-      "availability": "available-for-human-authorized-instantiation",
-      "runtime_authority": ".pi/active-state.json",
-      "instantiated_capability_task": null
-    },
-    "capability_workflow_instance": null
-  },
-  "checkpoint": {
-    "checkpoint_id": "HARNESS-CAPABILITY-1-HC01",
-    "type": "human-final-acceptance",
-    "state": "pending-renewed-human-review",
-    "task_record": ".pi/tasks/capability-workflow-bootstrap.md",
-    "decision_required": "Accept, remand, limit, reject, or defer the corrected reusable template.",
-    "capability_activation_authorized": false,
-    "successor_authorized": false
-  },
+  "active_task": null,
+  "checkpoint": null,
   "blockers": [
-    {
-      "blocker_id": "harness-capability-1.renewed-human-review.pending",
-      "condition": "narrow routing correction passed structural validation and independent review; human disposition remains pending and closeout is prohibited"
-    },
     {
       "blocker_id": "capability-scope.not-selected",
       "condition": "no physics capability scope is selected or authorized"
@@ -188,7 +98,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "HARNESS-CAPABILITY-1 remains active under narrow routing REMAND; no capability instance, closeout, PIAB work, notebook successor, or successor is authorized."
+    "denial_basis": "HARNESS-CAPABILITY-1 closeout activates no successor. No capability task, PIAB work, or remaining notebook work is authorized."
   },
   "human_decisions": [
     {
@@ -633,15 +543,47 @@
       "starting_revision": "4909d3593b9816e2592aa912787648ccc866e8df",
       "provenance": "explicit human narrow REMAND instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-and-close-harness-capability-1.001",
+      "subject": "HARNESS-CAPABILITY-1 reusable inactive PhysKit capability-development workflow template",
+      "disposition": "ACCEPT at exact revision b6595c3163589b00a4afe76f86b4b9e223088bb8; administrative closeout authorized",
+      "accepted_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8",
+      "accepted_scope": [
+        "immutable reusable template with active-state/task-instance separation",
+        "independent A/B/C/D applicability paths",
+        "human-owned scope and contract gates",
+        "exact writer ownership and role separation",
+        "five-class evidence handling",
+        "evidence readiness separated from human acceptance",
+        "deterministic single-successor correction routing",
+        "renewed contract acceptance after material changes",
+        "one bounded automatic correction cycle then human escalation",
+        "parent verification before human final acceptance"
+      ],
+      "authority_granted": [
+        "record human final acceptance within the stated structural boundary",
+        "complete administrative closeout of HARNESS-CAPABILITY-1",
+        "set active task and checkpoint to null"
+      ],
+      "authority_not_granted": [
+        "capability selection or instantiation",
+        "physics model, API, notebook, evidence result, validation conclusion, canonical artifact, lifecycle state, or support claim acceptance",
+        "PIAB resumption",
+        "remaining notebook work",
+        "successor authorization or new task activation"
+      ],
+      "provenance": "explicit human acceptance and closeout instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "HARNESS-CAPABILITY-1 narrow routing correction in progress",
-    "to": "HARNESS-CAPABILITY-1 awaiting renewed human review after narrow routing correction",
-    "timestamp_utc": "2026-08-05T02:51:46Z",
+    "from": "HARNESS-CAPABILITY-1 awaiting renewed human review after narrow routing correction",
+    "to": "operational with no active task after human-accepted HARNESS-CAPABILITY-1 administrative closeout",
+    "timestamp_utc": "2026-08-05T03:02:26Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "4909d3593b9816e2592aa912787648ccc866e8df",
-    "reason": "deterministic routing correction, parent validation, and fresh independent read-only review passed without acceptance, closeout, or capability instantiation"
+    "observed_starting_git_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8",
+    "reason": "explicit human acceptance of the structurally verified reusable inactive template and authorization for administrative closeout only"
   },
   "resolved_checkpoints": [
     {
@@ -649,6 +591,13 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "exact four-mapping viscoelasticity path-only scope accepted; no content changes, reference updates, or execution"
+    },
+    {
+      "checkpoint_id": "HARNESS-CAPABILITY-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "accepted_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8",
+      "resolution": "reusable inactive workflow template accepted within stated structural boundary; closeout authorized"
     }
   ],
   "closed_tasks": [
@@ -757,6 +706,44 @@
       "correction_cycles": "none",
       "successor_authorized": false,
       "successor": null
+    },
+    {
+      "task_id": "HARNESS-CAPABILITY-1",
+      "task_kind": "reusable-capability-workflow-bootstrap",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "task_record": ".pi/tasks/capability-workflow-bootstrap.md",
+      "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
+      "template_record": ".pi/chains/capability-development.chain.json",
+      "accepted_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8",
+      "accepted_boundary": "structurally verified reusable inactive coordination design only",
+      "claims_not_accepted": [
+        "capability selection or instance",
+        "physics model",
+        "public API",
+        "notebook",
+        "evidence result or adequacy",
+        "validation conclusion",
+        "canonical artifact",
+        "lifecycle state",
+        "support claim",
+        "PIAB",
+        "remaining notebook work",
+        "successor"
+      ],
+      "stage_results": {
+        "human_final_acceptance": {
+          "status": "accepted",
+          "decision_owner": "human",
+          "accepted_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8"
+        },
+        "closeout": {
+          "status": "completed",
+          "result": "administrative closeout recorded; no capability or successor activated"
+        }
+      },
+      "successor_authorized": false,
+      "successor": null
     }
   ],
   "resolved_stages": [
@@ -771,6 +758,35 @@
       "stage": "closeout",
       "state": "completed",
       "authority": "explicit human authorization for administrative closeout only"
+    },
+    {
+      "task_id": "HARNESS-CAPABILITY-1",
+      "stage": "human_final_acceptance",
+      "state": "accepted",
+      "decision_owner": "human",
+      "accepted_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8"
+    },
+    {
+      "task_id": "HARNESS-CAPABILITY-1",
+      "stage": "closeout",
+      "state": "completed",
+      "authority": "explicit human administrative closeout authorization"
     }
-  ]
+  ],
+  "reusable_templates": {
+    "PHYSKIT-CAPABILITY-DEVELOPMENT": {
+      "record": ".pi/chains/capability-development.chain.json",
+      "availability": "available-for-human-authorized-instantiation",
+      "instantiated_task": null,
+      "accepted_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8"
+    }
+  },
+  "capability_workflow_instance": null,
+  "selected_capability": null,
+  "capability_ownership": {
+    "capability_contract_paths": [],
+    "production_source_paths": [],
+    "test_or_evidence_paths": [],
+    "notebook_or_documentation_paths": []
+  }
 }
