@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 10,
+  "state_revision": 11,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -40,7 +40,7 @@
     "task_id": "HARNESS-CAPABILITY-1",
     "task_kind": "reusable-capability-workflow-bootstrap",
     "status": "awaiting-renewed-human-review-after-correction",
-    "purpose": "Correct the reusable capability-workflow template without selecting or instantiating a physics capability.",
+    "purpose": "Correct one deterministic blocking-evidence routing defect in the reusable template without selecting or instantiating a capability.",
     "task_record": ".pi/tasks/capability-workflow-bootstrap.md",
     "selected_capability": null,
     "role_files": [
@@ -51,17 +51,12 @@
       ".pi/agents/physkit-capability-integration-reviewer.md"
     ],
     "authorized_paths": [
-      ".pi/active-state.json",
-      ".pi/tasks/capability-workflow-bootstrap.md",
       ".pi/chains/capability-development.chain.json",
-      ".pi/agents/physkit-capability-architect.md",
-      ".pi/agents/physkit-implementation.md",
-      ".pi/agents/physkit-notebook-documentation.md",
-      ".pi/agents/physkit-capability-integration-reviewer.md",
-      ".pi/agents/physkit-verification.md"
+      ".pi/tasks/capability-workflow-bootstrap.md",
+      ".pi/active-state.json"
     ],
     "active_ownership": {
-      "parent_coordinator": "exact eight correction paths in authorized_paths; verification role changed only for required immutable-template startup consistency",
+      "parent_coordinator": "exact three narrow correction paths in authorized_paths",
       "capability_contract_paths": [],
       "production_source_paths": [],
       "test_or_evidence_paths": [],
@@ -69,11 +64,10 @@
     },
     "multiple_writer_model": "retained for later capability tasks through specialized architect, implementation, verification, and notebook/documentation writers with exact nonoverlapping ownership",
     "prohibited_work": [
-      "select, scope, plan, contract, implement, verify, document, or activate a physics capability",
-      "activate the reusable PHYSKIT-CAPABILITY-DEVELOPMENT chain",
-      "grant source, test, evidence-summary, notebook, user-documentation, or capability-contract ownership",
-      "modify any agent, task, chain, notebook, source, test, example, dependency, packaging, CI, AGENTS.md, or planning document outside the eight authorized HARNESS-CAPABILITY-1 paths",
-      "create any file, including skills, evidence stores, checkpoint files, schemas, validators, runtime code, source modules, tests, notebooks, curriculum views, or planning documents",
+      "modify any path outside the exact three authorized paths",
+      "modify any role file or create any file",
+      "select, instantiate, scope, contract, implement, verify, document, or activate a physics capability",
+      "grant capability contract, source, test, evidence, notebook, or documentation ownership",
       "resume PIAB, activate remaining notebook work, perform closeout, or authorize a successor"
     ],
     "operational_lessons": [
@@ -85,15 +79,11 @@
       "do not infer success from a subagent report without parent verification"
     ],
     "review": {
-      "independent_read_only_review": "PASS after three remand/correction review cycles and final fresh rereview",
+      "independent_read_only_review": "PASS after one narrow-routing remand/correction cycle and fresh rereview",
       "repository_artifact_creation": false,
-      "findings_remaining": [],
-      "verification_role_modification": "strictly required and limited to immutable-template/task-instance startup semantics",
-      "governance_debt": [
-        "Excluded historical status markers in AGENTS.md, .02, and .04 remain unchanged."
-      ]
+      "findings_remaining": []
     },
-    "final_human_acceptance": "pending-after-second-remand",
+    "final_human_acceptance": "pending-after-narrow-remand",
     "successor_authorized": false,
     "successor": null,
     "stop_condition": "Stop for renewed human accept, remand, limit, reject, or defer disposition. Do not close out, instantiate a capability workflow, select a capability, resume PIAB, or authorize a successor.",
@@ -101,22 +91,20 @@
       "parent_structural_verification": "passed",
       "checks": [
         "duplicate-free JSON",
-        "exact agent and ordered stage resolution",
-        "four independent-axis paths",
-        "immutable template and sole runtime authority",
-        "five role task-instance preflights",
-        "evidence readiness versus human acceptance",
-        "blocking evidence routing",
-        "preserved contract and correction gates",
-        "seven structural traces",
+        "exclusive blocking-evidence classification",
+        "exactly one successor per classification",
+        "three routing traces",
+        "preserved A/B/C/D and immutable template",
+        "preserved contract reacceptance and evidence authority",
         "state revision and empty instance/ownership",
         "PIAB and notebook-work parking",
         "successor denial",
-        "exact eight-path isolation",
+        "exact three-path isolation",
+        "no role-file diff",
         "temporary-artifact absence",
         "git diff --check"
       ],
-      "limitations": "structural template validation only; no capability instance or multi-writer workflow was executed"
+      "limitations": "structural routing validation only; no capability instance or evidence result was executed"
     },
     "chain_template": {
       "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
@@ -139,7 +127,7 @@
   "blockers": [
     {
       "blocker_id": "harness-capability-1.renewed-human-review.pending",
-      "condition": "second-REMAND correction passed structural validation and independent review; human disposition remains pending and closeout is prohibited"
+      "condition": "narrow routing correction passed structural validation and independent review; human disposition remains pending and closeout is prohibited"
     },
     {
       "blocker_id": "capability-scope.not-selected",
@@ -200,7 +188,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "HARNESS-CAPABILITY-1 remains active under second REMAND; no capability instance, closeout, PIAB work, notebook successor, or successor is authorized."
+    "denial_basis": "HARNESS-CAPABILITY-1 remains active under narrow routing REMAND; no capability instance, closeout, PIAB work, notebook successor, or successor is authorized."
   },
   "human_decisions": [
     {
@@ -625,15 +613,35 @@
       "starting_revision": "eae9dbc4b960a8e655d9e281f7e25afea3e82a63",
       "provenance": "explicit human second REMAND instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.remand-harness-capability-1.003",
+      "subject": "HARNESS-CAPABILITY-1 blocking-evidence correction routing",
+      "disposition": "REMAND; not accepted; remove ambiguous special evidence outcome/route and use deterministic existing finding taxonomy",
+      "authority_granted": [
+        "modify exactly chain template, capability bootstrap task, and active state",
+        "validate and independently review without repository artifacts",
+        "commit with specified message and push only by fast-forward",
+        "return for renewed human review"
+      ],
+      "authority_not_granted": [
+        "role-file changes or file creation",
+        "human acceptance or closeout",
+        "capability instance, selection, implementation, evidence, notebook, API, physics, lifecycle, or support work",
+        "PIAB, remaining notebook work, or successor authorization"
+      ],
+      "starting_revision": "4909d3593b9816e2592aa912787648ccc866e8df",
+      "provenance": "explicit human narrow REMAND instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "HARNESS-CAPABILITY-1 second REMAND correction in progress",
-    "to": "HARNESS-CAPABILITY-1 awaiting renewed human review after correction",
-    "timestamp_utc": "2026-08-05T02:23:56Z",
+    "from": "HARNESS-CAPABILITY-1 narrow routing correction in progress",
+    "to": "HARNESS-CAPABILITY-1 awaiting renewed human review after narrow routing correction",
+    "timestamp_utc": "2026-08-05T02:51:46Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "eae9dbc4b960a8e655d9e281f7e25afea3e82a63",
-    "reason": "corrections completed; deterministic validation and final fresh independent read-only review passed without acceptance, closeout, or capability instantiation"
+    "observed_starting_git_revision": "4909d3593b9816e2592aa912787648ccc866e8df",
+    "reason": "deterministic routing correction, parent validation, and fresh independent read-only review passed without acceptance, closeout, or capability instantiation"
   },
   "resolved_checkpoints": [
     {

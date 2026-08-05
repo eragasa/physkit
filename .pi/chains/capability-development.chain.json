@@ -438,17 +438,23 @@
       "type": "parent_coordination",
       "role": "parent coordinator",
       "requires": [
-        "latest-integration-review:completed"
+        "latest-integration-review-or-rereview:completed"
       ],
       "outcomes": [
         "no-material-findings",
         "accepted-in-scope-nonmaterial-conformance",
         "material-protected-decision",
         "material-contract-revision",
-        "bounded-cycle-exhausted",
-        "evidence-result-violates-accepted-blocking-rule"
+        "bounded-cycle-exhausted"
       ],
-      "rule": "Classify before any correction; final human acceptance cannot retroactively replace a required contract-reacceptance gate."
+      "rule": "Classify every finding exactly once before routing; final human acceptance cannot retroactively replace contract reacceptance or waive an accepted blocking rule.",
+      "blocking_evidence_classification": {
+        "correction_cycle_count>=1-and-any-unresolved-finding": "bounded-cycle-exhausted",
+        "correction_cycle_count<1-and-resolution-requires-accepting-a-failed-result-waiving-a-blocking-requirement-limiting-a-claim-beyond-the-accepted-contract-or-another-protected-decision": "material-protected-decision",
+        "correction_cycle_count<1-and-resolution-requires-changing-an-accepted-method-reference-criterion-tolerance-applicability-evidence-obligation-API-model-learning-objective-or-claim-boundary-and-does-not-require-a-protected-human-disposition": "material-contract-revision",
+        "correction_cycle_count<1-and-correctable-without-changing-any-accepted-applicability-model-convention-API-method-reference-criterion-tolerance-learning-objective-evidence-obligation-claim-boundary-or-claim-limit": "accepted-in-scope-nonmaterial-conformance"
+      },
+      "classification_precedence": "Classify exactly once in this order: (1) correction-cycle exhaustion, (2) protected human disposition, (3) material contract revision only when no protected disposition is required, (4) in-scope nonmaterial conformance. The first matching condition is exclusive and controls routing."
     },
     {
       "stage": "nonmaterial_owner_specific_correction",
@@ -558,24 +564,24 @@
       "type": "parent_coordination",
       "role": "parent coordinator",
       "requires": [
-        "latest-integration-review-or-rereview:completed"
+        "latest-integration-review-or-rereview:completed",
+        "correction_classification:completed"
       ],
       "routes": {
-        "no-material-findings": "parent_verification",
-        "ordinary-correctable-finding-and-correction_cycle_count<1": "nonmaterial_owner_specific_correction",
-        "material-protected-decision": "human_escalation",
-        "material-contract-revision-and-correction_cycle_count<1": "material_contract_correction",
-        "any-finding-and-correction_cycle_count>=1": "human_escalation",
-        "evidence-result-violates-accepted-blocking-rule": "correction_classification-or-human_escalation"
+        "correction_classification:bounded-cycle-exhausted": "human_escalation",
+        "correction_classification:no-material-findings": "parent_verification",
+        "correction_classification:accepted-in-scope-nonmaterial-conformance-and-correction_cycle_count<1": "nonmaterial_owner_specific_correction",
+        "correction_classification:material-contract-revision-and-correction_cycle_count<1": "material_contract_correction",
+        "correction_classification:material-protected-decision": "human_escalation"
       },
-      "route_precedence": "any finding at or above the cycle limit routes to human escalation before finding-type routing",
-      "bounded_loop": "maximum one automatic ordinary correction/replay/re-review cycle; record count; no unlimited loop"
+      "route_precedence": "bounded-cycle-exhausted is selected before all other routing when correction_cycle_count>=1; every classification has exactly one successor and no route contains an ambiguous or.",
+      "bounded_loop": "maximum one automatic ordinary correction/replay/re-review cycle; record count; no second automatic correction"
     },
     {
       "stage": "human_escalation",
       "order": 21,
       "type": "conditional_human_checkpoint",
-      "condition": "material protected decision, or any new or unresolved finding when correction_cycle_count>=1",
+      "condition": "correction_classification:material-protected-decision or correction_classification:bounded-cycle-exhausted",
       "requires": [
         "correction_cycle_disposition:human-escalation-required"
       ],
@@ -625,8 +631,8 @@
       ],
       "routing": {
         "accept": "closeout",
-        "remand": "appropriate-owned-stage-or-human-checkpoint",
-        "limit": "appropriate-owned-stage-or-human-checkpoint-with-explicit-claim-limit",
+        "remand": "human-specified-single-remand-target",
+        "limit": "human-specified-single-limit-target-with-explicit-claim-limit",
         "reject": "stop",
         "defer": "stop"
       },
@@ -683,6 +689,6 @@
       "support claims"
     ],
     "contract_acceptance_rule": "Earlier contract acceptance accepts obligations and blocking rules, not later evidence results or adequacy.",
-    "blocking_violation_route": "Any incomplete, deferred, failed, or unresolved result that violates its accepted blocking rule routes to correction_classification or human_escalation before parent_verification."
+    "blocking_violation_route": "Blocking evidence is classified exactly once: accepted-in-scope-nonmaterial-conformance for correctable first-cycle conformance work, material-contract-revision for accepted-contract changes, material-protected-decision for protected dispositions, or bounded-cycle-exhausted when correction_cycle_count>=1. The resulting single route occurs before parent_verification."
   }
 }

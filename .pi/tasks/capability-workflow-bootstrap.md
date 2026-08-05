@@ -1,6 +1,6 @@
 # HARNESS-CAPABILITY-1 — Reusable capability-workflow bootstrap
 
-**Status:** Awaiting renewed human review after second REMAND correction
+**Status:** Awaiting renewed human review after narrow blocking-evidence REMAND correction
 **Task ID:** `HARNESS-CAPABILITY-1`
 **Reusable template ID:** `PHYSKIT-CAPABILITY-DEVELOPMENT`
 **Current checkpoint:** `HARNESS-CAPABILITY-1-HC01` (`pending-renewed-human-review`)
@@ -8,6 +8,8 @@
 ## Human disposition and bounded intake
 
 The human issued a second `REMAND` at revision `eae9dbc4b960a8e655d9e281f7e25afea3e82a63`. This is not acceptance. HARNESS-CAPABILITY-1 remains active; closeout and successor work remain prohibited.
+
+The human issued a further narrow `REMAND` at revision `4909d3593b9816e2592aa912787648ccc866e8df` for one deterministic blocking-evidence routing defect. This correction owns exactly `.pi/chains/capability-development.chain.json`, this task record, and `.pi/active-state.json`. It removes the ambiguous special evidence outcome/route while preserving all accepted template, A/B/C/D applicability, contract-reacceptance, bounded-correction, evidence-readiness, and human-acceptance boundaries. No role file is authorized or changed.
 
 - **Requested outcome:** separate library/notebook applicability, make the reusable chain an immutable template, separate evidence readiness from human evidence acceptance, validate, commit, push, and stop for renewed review.
 - **Repository / branch / starting revision:** `/Users/eugene/repos/physkit`; `main`; `eae9dbc4b960a8e655d9e281f7e25afea3e82a63`.
@@ -179,9 +181,51 @@ No trace selects a real capability or modifies production artifacts.
 
 All traces fail if either axis silently determines the other, a role treats the template as runtime authority, parent verification accepts evidence/validation, or blocking evidence advances.
 
+## Deterministic blocking-evidence classification and routing
+
+The special `evidence-result-violates-accepted-blocking-rule` outcome and ambiguous `correction_classification-or-human_escalation` route are removed. Blocking evidence now uses the existing taxonomy with correction-cycle exhaustion taking precedence:
+
+| Condition/classification | Exactly one next route |
+|---|---|
+| `correction_cycle_count >= 1` and any unresolved finding → `bounded-cycle-exhausted` | `human_escalation` |
+| First-cycle evidence failure correctable without changing any accepted applicability, model, convention, API, method/reference, criterion/tolerance, learning objective, evidence obligation, or claim boundary/limit → `accepted-in-scope-nonmaterial-conformance` | exact responsible owner through `nonmaterial_owner_specific_correction` → `verification_replay` → `integration_rereview` → new classification/disposition |
+| Resolution accepts a failed result, waives a blocking requirement, limits a claim beyond the contract, or makes another protected decision → `material-protected-decision` | `human_escalation` |
+| Otherwise, resolution changes an accepted method, reference, criterion, tolerance, applicability, evidence obligation, API, model, learning objective, or claim boundary without requiring a protected disposition → `material-contract-revision` | `material_contract_correction` → renewed human contract acceptance → revised plan → replay every invalidated applicable stage → independent review |
+| `no-material-findings` | `parent_verification` |
+
+Parent verification remains blocked until correction disposition reports no material finding, the evidence result is consistent with its accepted blocking rule, and no blocking evidence violation remains.
+
+## Three narrow structural traces
+
+### Blocking Trace 1 — correctable first-cycle evidence failure
+
+- **Classification:** `accepted-in-scope-nonmaterial-conformance`; count is below one and no accepted contract choice changes.
+- **Single route:** responsible evidence owner via `nonmaterial_owner_specific_correction` → `verification_replay` → `integration_rereview` → fresh classification and correction-cycle disposition.
+- **Parent gate:** blocked until replay/re-review yields a successful no-material-finding disposition consistent with the blocking rule.
+- **Final stop:** re-review/classification if unresolved; otherwise parent readiness, never direct final acceptance.
+
+### Blocking Trace 2 — criterion or claim change
+
+- **Classification:** apply exclusive precedence: protected human disposition first; therefore accepting failure, waiving the block, or imposing a beyond-contract limitation is `material-protected-decision`. Only a criterion/claim change that requires no protected disposition is `material-contract-revision`.
+- **Single route:** the first exclusive match controls: protected decision → `human_escalation`; otherwise contract revision → architect/reacceptance/revised plan/full invalidated replay/review.
+- **Ordinary correction:** prohibited; neither classification may enter `nonmaterial_owner_specific_correction`.
+- **Final stop:** renewed contract checkpoint or human escalation.
+
+### Blocking Trace 3 — correction-cycle exhaustion
+
+- **Classification:** `bounded-cycle-exhausted` takes precedence for any unresolved finding when count is at least one.
+- **Single route:** `human_escalation`.
+- **Automatic correction:** no second owner correction/replay loop is allowed.
+- **Parent/final gates:** parent verification and human final acceptance remain blocked.
+- **Final stop:** human escalation.
+
+Each trace has exactly one next route under its stated condition. Classification precedence is exhaustion, then protected disposition, then material contract revision, then nonmaterial conformance. Route values containing ambiguous `or` alternatives are prohibited, including human-final remand and limit routing, which must name one human-specified target.
+
 ## Validation and review status
 
-The first fresh independent review of this second REMAND returned `REMAND` with four findings: two residual runtime-like template fields, a contradictory Path D reconstruction skip requirement, no explicit failed-evidence representation, and task/active-state checkpoint disagreement. The parent corrected all four. The next fresh re-review returned `REMAND` for two consistency findings: Stage 11 omitted failed/unresolved outcomes in its applicability prose, and the verification role still referred to an “actual chain” rather than task-instance prerequisite resolution. The parent corrected both. A third fresh re-review correctly found that expanding the verification role beyond startup semantics exceeded its conditional authorization. The parent restored that file to a startup-only diff and encoded failure truthfully in the template as a separate observed outcome alongside the obligation state. A fourth fresh independent read-only re-review returned `PASS` with no blocker, high, medium, or low findings. Deterministic validation and parent verification passed. Exact staging, remote freshness, commit, and fast-forward push remain required before presentation.
+The first fresh independent review of this second REMAND returned `REMAND` with four findings: two residual runtime-like template fields, a contradictory Path D reconstruction skip requirement, no explicit failed-evidence representation, and task/active-state checkpoint disagreement. The parent corrected all four. The next fresh re-review returned `REMAND` for two consistency findings: Stage 11 omitted failed/unresolved outcomes in its applicability prose, and the verification role still referred to an “actual chain” rather than task-instance prerequisite resolution. The parent corrected both. A third fresh re-review correctly found that expanding the verification role beyond startup semantics exceeded its conditional authorization. The parent restored that file to a startup-only diff and encoded failure truthfully in the template as a separate observed outcome alongside the obligation state. A fourth fresh independent read-only re-review returned `PASS` with no blocker, high, medium, or low findings. Deterministic validation and parent verification passed.
+
+For the narrow routing REMAND, the first fresh review found overlapping protected/contract classifications and residual ambiguous human-final route values. The parent made classification precedence exclusive and replaced those values with single human-specified targets. Fresh independent re-review returned `PASS`. Narrow deterministic validation and parent verification passed. Exact staging, remote freshness, commit, and fast-forward push remain required before presentation.
 
 Separate excluded governance debt remains unchanged: historical status markers in `AGENTS.md`, `.02`, and `.04`.
 
