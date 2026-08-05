@@ -1,24 +1,28 @@
 # Uniform-grid homogeneous-Dirichlet 1D Laplacian capability contract
 
-**Status:** Proposed for human review
+**Status:** Human-accepted capability contract
 
 **Task:** `FOUNDATIONS-FD1`
 
-**Contract revision:** 3 (HC02 REMAND correction proposal; no accepted contract revision exists)
+**Contract revision:** 3
 
-**Artifact path proposal:** Path A — library plus notebook
+**Accepted source revision:** `5766b281bfea890cc522cf651f36bd93c0493cbb`
 
-## 1. Authority, preflight, and proposal status
+**Accepted artifact path:** Path A — library plus notebook
+
+## 1. Authority, preflight, and acceptance status
 
 This is the sole material contract path assigned to the capability architect by the human-authorized `FOUNDATIONS-FD1` instance of `PHYSKIT-CAPABILITY-DEVELOPMENT`. Startup preflight reconciled `AGENTS.md`, `.pi/active-state.json` state revision 15, `.pi/tasks/foundations-fd1.md`, the reusable chain template, repository `https://github.com/eragasa/physkit`, branch `main`, starting revision `1ce0e53afe435cba8551875166ff5fc34bd68945`, `origin`, the complete working tree, the HC02 REMAND, exact ownership, prohibited paths, evidence obligations, the stop condition, and denial of successor authorization. The unrelated untracked `package-lock.json` was not inspected.
 
-Every public name, signature, criterion, artifact role, and evidence disposition below is a **proposal pending explicit human contract acceptance**. The contract remains unaccepted and implementation-blocked. This document does not implement, accept, validate, canonicalize, support, or assign a lifecycle state.
+The human explicitly accepted contract revision 3 exactly as represented at `5766b281bfea890cc522cf651f36bd93c0493cbb`. Acceptance covers the integrated Path A boundary, public names and APIs, mathematical and numerical conventions, criteria and tolerances, documentation and notebook requirements, M1 clean-surface direction, and all five evidence dispositions. It does not authorize implementation, source or test changes, evidence production or acceptance, Sphinx or notebook creation or execution, adapters, migration, legacy repair, lifecycle or support status, PIAB, or successor work.
+
+The accepted general `LinearOperator.domain -> object` and `LinearOperator.codomain -> object` annotations are a minimal typing boundary for this capability only. They establish no general PhysKit state-space hierarchy. `FiniteDifferenceLaplacian1D` must narrow both properties to `HomogeneousDirichletStateSpace1D`; any general state-space abstraction, protocol, generic type system, or composition framework requires a separate future contract.
 
 Observed repository facts remain those in `docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md`: competing grid and operator representations exist; the closest sparse Laplacian is inconsistent with committed imports and grid attributes; and a differentiation notebook imports an absent class. Those facts do not select a survivor. The read-only technical reference `eragasa/ksdft2effmass@355df16a7ca4071b70bc844a00ba21949af7c7c6` informs only proportional documentation, exception semantics, Sphinx organization, synchronization, and VVUQ distinctions.
 
 ## 2. Learner purpose, audience, and intended use
 
-This proposed capability serves learners and instructors in introductory computational physics and PhysKit developers needing a small, inspectable finite-difference foundation. A learner should be able to:
+This accepted capability contract serves learners and instructors in introductory computational physics and PhysKit developers needing a small, inspectable finite-difference foundation. A learner should be able to:
 
 1. distinguish an interval, immutable grid geometry, a homogeneous-Dirichlet state space, active degrees of freedom, a discrete state, and an operator matrix;
 2. derive the centered three-point second-derivative stencil;
@@ -30,7 +34,7 @@ Intended use is deterministic teaching, examples, small inspections, and reuse a
 
 ## 3. Integrated discrete-first boundary
 
-The capability is one integrated but internally layered proposal: immutable closed uniform-grid geometry; a separate immutable homogeneous-Dirichlet state space containing that grid; a general linear-operator interface and discrete one-dimensional specialization with explicit domain and codomain; and a centered finite-difference representation of $+d^2/dx^2$.
+The capability is one integrated but internally layered contract: immutable closed uniform-grid geometry; a separate immutable homogeneous-Dirichlet state space containing that grid; a general linear-operator interface and discrete one-dimensional specialization with explicit domain and codomain; and a centered finite-difference representation of $+d^2/dx^2$.
 
 The following remain distinct: the continuous target $D_2:u\mapsto u''$ with domain $H^2(a,b)\cap H_0^1(a,b)$ and codomain $L^2(a,b)$; grid coordinates; the active state; prescribed zero endpoints; the approximation rule; its CSR matrix; the software operator; an independent analytical oracle; and any later physical operator. The continuous statement explains the target for smooth references but creates no continuous or symbolic public API.
 
@@ -137,7 +141,7 @@ LinearOperator
     └── FiniteDifferenceLaplacian1D
 ```
 
-`UniformGrid1D` is geometry only. `HomogeneousDirichletStateSpace1D` contains a grid and owns the boundary, active-index, active-coordinate, dimension, restriction, embedding, and real/complex vector-interpretation semantics. General `LinearOperator` owns immutable semantic state-space metadata for its domain and codomain, without requiring those state spaces to use homogeneous-Dirichlet semantics; it also owns shape, dtype, application, and scalar scaling. No additional public general state-space class is proposed. `DiscreteLinearOperator1D` adds the canonical finite matrix. This capability's concrete `FiniteDifferenceLaplacian1D` is constructed from one `HomogeneousDirichletStateSpace1D` and returns that same immutable concrete state space as both domain and codomain.
+`UniformGrid1D` is geometry only. `HomogeneousDirichletStateSpace1D` contains a grid and owns the boundary, active-index, active-coordinate, dimension, restriction, embedding, and real/complex vector-interpretation semantics. General `LinearOperator` owns immutable semantic state-space metadata for its domain and codomain, without requiring those state spaces to use homogeneous-Dirichlet semantics; it also owns shape, dtype, application, and scalar scaling. No additional public general state-space class is accepted. `DiscreteLinearOperator1D` adds the canonical finite matrix. This capability's concrete `FiniteDifferenceLaplacian1D` is constructed from one `HomogeneousDirichletStateSpace1D` and returns that same immutable concrete state space as both domain and codomain.
 
 A state space's canonical semantic identity is the exact value tuple
 
@@ -153,11 +157,11 @@ A state space's canonical semantic identity is the exact value tuple
 
 It therefore includes grid geometry, endpoint inclusion, active-index convention, homogeneous boundary convention, and admitted real/complex interpretation. Domain/codomain compatibility is exact equality of this semantic identity, not object identity, shape alone, or approximate coordinate equality. This identity is representation compatibility, not cross-grid physical equivalence.
 
-All proposed grid, state-space, operator, and scaled-operator objects are observably immutable after successful construction: their public properties do not permit reassignment; returned arrays and matrices do not alias mutable internal storage; and behavior cannot change through caller-held inputs. This is a behavioral requirement and does **not** prescribe a frozen dataclass or any particular implementation mechanism.
+All accepted grid, state-space, operator, and scaled-operator objects are observably immutable after successful construction: their public properties do not permit reassignment; returned arrays and matrices do not alias mutable internal storage; and behavior cannot change through caller-held inputs. This is a behavioral requirement and does **not** prescribe a frozen dataclass or any particular implementation mechanism.
 
-## 7. Proposed modules, public imports, and exact APIs
+## 7. Accepted modules, public imports, and exact APIs
 
-The proposed public imports are:
+The accepted public imports are:
 
 ```python
 from physkit.discretization import UniformGrid1D, HomogeneousDirichletStateSpace1D
@@ -168,7 +172,7 @@ from physkit.operators import (
 )
 ```
 
-Proposed defining modules are `physkit.discretization.grid_1d`, `physkit.discretization.state_space_1d`, `physkit.operators.base`, `physkit.operators.discrete_1d`, and `physkit.operators.finite_difference_1d`. Package `__init__.py` files would re-export exactly these names.
+Accepted defining modules are `physkit.discretization.grid_1d`, `physkit.discretization.state_space_1d`, `physkit.operators.base`, `physkit.operators.discrete_1d`, and `physkit.operators.finite_difference_1d`. Package `__init__.py` files must re-export exactly these names.
 
 ```python
 class UniformGrid1D:
@@ -246,7 +250,7 @@ class FiniteDifferenceLaplacian1D(DiscreteLinearOperator1D):
     def codomain(self) -> HomogeneousDirichletStateSpace1D: ...
 ```
 
-At the general `LinearOperator` level, the `object` annotation deliberately avoids introducing another public state-space base class. The returned `domain` and `codomain` objects nevertheless contractually represent observably immutable semantic state-space metadata suitable for exact compatibility decisions; they are not merely shapes or grids. The concrete Laplacian annotations narrow both properties to `HomogeneousDirichletStateSpace1D`. These exact module, signature, property, and name proposals remain unaccepted.
+At the general `LinearOperator` level, the `object` annotation deliberately avoids introducing another public state-space base class. The returned `domain` and `codomain` objects nevertheless contractually represent observably immutable semantic state-space metadata suitable for exact compatibility decisions; they are not merely shapes or grids. The concrete Laplacian annotations narrow both properties to `HomogeneousDirichletStateSpace1D`. These exact modules, signatures, properties, and names are accepted contract requirements.
 
 ## 8. Construction, ownership, dtype, and exceptions
 
@@ -260,7 +264,7 @@ At the general `LinearOperator` level, the `object` annotation deliberately avoi
 
 `scaled` accepts one finite non-Boolean Python/NumPy real or complex scalar. It eagerly canonicalizes the factor to built-in `float` or `complex`, retains only a private reference to the immutable operand, freezes `shape` and `dtype`, and stores no applied state. The result preserves the operand's exact `domain` and `codomain`; its semantic compatibility is unchanged. Its dtype is `np.result_type(operand.dtype,factor)`, constrained here to `float64` or `complex128`, and application returns a new owned array of `np.result_type(wrapper.dtype,canonical_state.dtype)`.
 
-Wrong semantic types raise `TypeError`; correctly typed values violating invariants raise `ValueError`. No silent conversion of numeric strings, clipping, reshaping, boundary correction, real truncation, coordinate remapping, approximate identity, or recovery is allowed. Hashing, serialization, mutable updates, and custom public exceptions are not proposed.
+Wrong semantic types raise `TypeError`; correctly typed values violating invariants raise `ValueError`. No silent conversion of numeric strings, clipping, reshaping, boundary correction, real truncation, coordinate remapping, approximate identity, or recovery is allowed. Hashing, serialization, mutable updates, and custom public exceptions are not accepted.
 
 ## 9. Canonical CSR and the $N=3$ edge case
 
@@ -287,13 +291,13 @@ For $N=3$, $M=1$ and the exact result is the `1 x 1` CSR matrix $[-2/h^2]`; no i
 
 ## 10. Scaling retained; composition deferred
 
-Scalar scaling is part of the initial public proposal and must preserve exact domain and codomain as specified above. A future quantum kinetic-energy operator could use or scale a `FiniteDifferenceLaplacian1D` by $-\hbar^2/(2m)$; it must not inherit from the Laplacian.
+Scalar scaling is part of the accepted initial public API and must preserve exact domain and codomain as specified above. A future quantum kinetic-energy operator could use or scale a `FiniteDifferenceLaplacian1D` by $-\hbar^2/(2m)$; it must not inherit from the Laplacian.
 
 There is **no public `compose` method in the initial API**, no composed-wrapper public name, and no initial composition acceptance criterion, test requirement, evidence claim, or notebook requirement. General operator composition is informative future work only. A later contract may propose domain/codomain compatibility and application ordering without retroactively changing this API. `QuantumKineticEnergy1D`, masses, $\hbar$, units, Hamiltonians, eigensolvers, and all related evidence remain deferred.
 
 ## 11. Equation authority and source documentation
 
-Every maintained first-party proposed module must have a NumPy-style module docstring stating purpose; represented objects; mathematical/numerical scope; assumptions; invariants; sign, endpoint, boundary, dtype, shape, ownership, and exception conventions; exclusions; neighboring-module relationships; and separate VVUQ claim boundaries. Every public class, property, and method must document applicable `Parameters`, `Attributes`, `Returns`, `Raises`, `Notes`, `Examples`, and `See Also`. Nontrivial private numerical policy receives concise responsibility/invariant comments.
+Every maintained first-party accepted module must have a NumPy-style module docstring stating purpose; represented objects; mathematical/numerical scope; assumptions; invariants; sign, endpoint, boundary, dtype, shape, ownership, and exception conventions; exclusions; neighboring-module relationships; and separate VVUQ claim boundaries. Every public class, property, and method must document applicable `Parameters`, `Attributes`, `Returns`, `Raises`, `Notes`, `Examples`, and `See Also`. Nontrivial private numerical policy receives concise responsibility/invariant comments.
 
 After implementation, `docs/concepts/uniform-grid-dirichlet-laplacian.md` is the maintained pedagogical equation surface. It must store these exact ten equation categories as ten distinct equations under ten stable, unique MyST labels, using the exact Section 5 formulas:
 
@@ -314,7 +318,7 @@ The initial capability explicitly rejects `EquationSpecification`, `EquationSpec
 
 ## 12. MyST/Sphinx documentation and diagram contract
 
-Later implementation is proposed at exactly these Markdown documentation surfaces, with no parallel RST pages:
+Later implementation is required at exactly these Markdown documentation surfaces, with no parallel RST pages:
 
 - `docs/index.md`;
 - `docs/api/operators.md`;
@@ -343,7 +347,7 @@ napoleon_numpy_docstring = True
 exclude_patterns = ["_build"]
 ```
 
-It must not mock public imports, suppress import warnings, or commit `_build` output. Supporting both configured suffixes does not authorize parallel duplicate RST and Markdown pages: each maintained API or concept subject has one source page, and the pages proposed by this contract are the Markdown paths above. `docs/index.md` uses a MyST `{toctree}` containing `api/operators` and `concepts/uniform-grid-dirichlet-laplacian`. `docs/api/operators.md` uses MyST `{automodule}`/`{autoclass}` directives and this generated inheritance directive:
+It must not mock public imports, suppress import warnings, or commit `_build` output. Supporting both configured suffixes does not authorize parallel duplicate RST and Markdown pages: each maintained API or concept subject has one source page, and the pages required by this contract are the Markdown paths above. `docs/index.md` uses a MyST `{toctree}` containing `api/operators` and `concepts/uniform-grid-dirichlet-laplacian`. `docs/api/operators.md` uses MyST `{automodule}`/`{autoclass}` directives and this generated inheritance directive:
 
 ````markdown
 ```{inheritance-diagram} physkit.operators.LinearOperator physkit.operators.DiscreteLinearOperator1D physkit.operators.FiniteDifferenceLaplacian1D
@@ -378,9 +382,9 @@ The conceptual DOT must be valid Graphviz and show:
 
 The generated inheritance diagram and source-controlled conceptual diagram are distinct surfaces. Rendered Graphviz products are not committed.
 
-## 13. Exact proposed acceptance criteria
+## 13. Exact accepted criteria
 
-All criteria remain pending human acceptance:
+The human accepted the following criteria as contract obligations:
 
 1. Public imports and exact APIs in Section 7 match, including geometry/state-space separation and absence of public composition.
 2. Observable immutability, scalar/vector validation, semantic identity, restriction/embed behavior, ownership, exceptions, domain/codomain, and dtype behavior match Sections 6–8.
@@ -393,9 +397,9 @@ All criteria remain pending human acceptance:
 9. All five evidence records contain every Section 16 field, and required or unresolved evidence truthfully blocks handoff as specified.
 10. Fresh independent read-only Mode A review has no unresolved material finding; parent verification establishes readiness only, never contract or evidence acceptance.
 
-## 14. Exact three-stage canonical-notebook proposal
+## 14. Exact three-stage canonical-notebook requirement
 
-`notebooks/numerics/differentiation/uniform-grid-dirichlet-laplacian.ipynb` remains the proposed required canonical notebook path.
+`notebooks/numerics/differentiation/uniform-grid-dirichlet-laplacian.ipynb` is the accepted required canonical notebook path.
 
 **Stage 1 — explicit construction without PhysKit.** Define $[a,b]$, $N$, $h$, full coordinates, a separate explicit homogeneous-Dirichlet state-space construction, active indices/coordinates, dimension, zero boundaries, exact restriction and embedding, and real/complex ownership. Construct eager CSR from the visible single diagonal rule, inspect defensive dense form, apply the positive-second-derivative stencil to real and complex vectors, show $N=3$, and use the exact ten labeled concept-page equations without runtime equation machinery.
 
@@ -414,15 +418,15 @@ Neither axis determines the other. Their one consistent selection is **Path A �
 
 ## 16. Five-class evidence dispositions
 
-Every row is a proposed obligation; all observed outcomes are currently `not-run`.
+Every row is an accepted obligation or disposition; all observed outcomes remain `not-run`.
 
-| Evidence class | Applicability / proposed non-applicability rationale | Required claim | Producer / responsible role | Exact artifact or evidence-summary path when written | Method / reference | Human-accepted criterion or unresolved criterion | Reviewer | Result state | Observed outcome | Limitations and claim boundary | Unresolved blocks final handoff? |
+| Evidence class | Applicability / accepted non-applicability rationale | Required claim | Producer / responsible role | Exact artifact or evidence-summary path when written | Method / reference | Human-accepted criterion or unresolved criterion | Reviewer | Result state | Observed outcome | Limitations and claim boundary | Unresolved blocks final handoff? |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| Software verification | Required for the public interface | Implementation conforms to accepted geometry/state-space separation, API, invariants, errors, copies, CSR, real/complex behavior, domain/codomain, and scaling | `physkit.physkit-verification` | `tests/physkit/discretization/test_uniform_grid_1d.py`, `tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py`, `tests/physkit/operators/test_linear_operator.py`, `tests/physkit/operators/test_finite_difference_laplacian_1d.py`; summary `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` | Independent arrays; public imports; Sections 6–13 | Unresolved until human accepts criteria 1–4 and 6 | `physkit.physkit-capability-integration-reviewer` | `required-incomplete` | `not-run` | Contract conformance only; no physical/pedagogical adequacy; composition excluded | Yes |
-| Numerical verification | Required for approximation/convergence claims | Stencil implements $D_{2,h}$ and meets the bounded second-order claim | `physkit.physkit-verification` | `tests/physkit/operators/test_finite_difference_laplacian_1d.py`; same summary | Direct tridiagonal oracle; exact sine family, weighted norm, relative error, refinement pairs; Sections 5 and 13 | Unresolved until human accepts criteria 3–5 | `physkit.physkit-capability-integration-reviewer` | `required-incomplete` | `not-run` | Limited to accepted interval, modes, grids, norm, binary64, and homogeneous boundaries; not physical validation | Yes |
-| Physical validation | Proposed `not-applicable-human-accepted-rationale`: no physical-model adequacy claim exists | Only that no physical-validation conclusion is claimed | `physkit.physkit-verification` records; human accepts applicability | `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` | Sections 4–5 and VVUQ boundary | Human acceptance of non-applicability unresolved | `physkit.physkit-capability-integration-reviewer` | `unresolved-blocking` | `not-run` | Any later physical use needs model-specific validation; numerical agreement cannot fill this class | Yes |
-| Pedagogical validation | Required, proportional to one foundational notebook | Human checklist confirms the accepted distinctions/objectives are exposed correctly without material ambiguity | `physkit.physkit-notebook-documentation` prepares material; `physkit.physkit-verification` records; human assesses/accepts | Section 14 notebook; same summary | Human checklist against Section 2, exact three stages, equations, and synchronization; no formal learner study required | Proposed criterion: every objective and stage is correctly explained and no material misconception/accessibility blocker remains; acceptance unresolved | `physkit.physkit-capability-integration-reviewer`, then human | `required-incomplete` | `not-run` | Checklist does not establish broad educational effectiveness; execution is insufficient | Yes |
-| Uncertainty quantification | Proposed `not-applicable-human-accepted-rationale`: deterministic exact inputs and no uncertainty distribution/interval claim | Only that no UQ conclusion is claimed | `physkit.physkit-verification` records; human accepts applicability | `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` | Sections 4–5; absence of uncertainty propagation | Human acceptance of non-applicability unresolved | `physkit.physkit-capability-integration-reviewer` | `unresolved-blocking` | `not-run` | Truncation/error and deterministic tolerances are numerical verification, not UQ | Yes |
+| Software verification | Required for the public interface | Implementation conforms to accepted geometry/state-space separation, API, invariants, errors, copies, CSR, real/complex behavior, domain/codomain, and scaling | `physkit.physkit-verification` | `tests/physkit/discretization/test_uniform_grid_1d.py`, `tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py`, `tests/physkit/operators/test_linear_operator.py`, `tests/physkit/operators/test_finite_difference_laplacian_1d.py`; summary `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` | Independent arrays; public imports; Sections 6–13 | Accepted criteria 1–4 and 6 | `physkit.physkit-capability-integration-reviewer` | `required-incomplete` | `not-run` | Contract conformance only; no physical/pedagogical adequacy; composition excluded | Yes |
+| Numerical verification | Required for approximation/convergence claims | Stencil implements $D_{2,h}$ and meets the bounded second-order claim | `physkit.physkit-verification` | `tests/physkit/operators/test_finite_difference_laplacian_1d.py`; same summary | Direct tridiagonal oracle; exact sine family, weighted norm, relative error, refinement pairs; Sections 5 and 13 | Accepted criteria 3–5 | `physkit.physkit-capability-integration-reviewer` | `required-incomplete` | `not-run` | Limited to accepted interval, modes, grids, norm, binary64, and homogeneous boundaries; not physical validation | Yes |
+| Physical validation | `not-applicable-human-accepted-rationale`: no physical-model adequacy claim exists | Only that no physical-validation conclusion is claimed | `physkit.physkit-verification` records the accepted applicability disposition | `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` | Sections 4–5 and VVUQ boundary | Human-accepted Not applicable rationale | `physkit.physkit-capability-integration-reviewer` | `not-applicable-human-accepted-rationale` | `not-run` | Any later physical use needs model-specific validation; numerical agreement cannot fill this class | No |
+| Pedagogical validation | Required, proportional to one foundational notebook | Human checklist confirms the accepted distinctions/objectives are exposed correctly without material ambiguity | `physkit.physkit-notebook-documentation` prepares material; `physkit.physkit-verification` records; human assesses/accepts | Section 14 notebook; same summary | Human checklist against Section 2, exact three stages, equations, and synchronization; no formal learner study required | Accepted criterion: every objective and stage is correctly explained and no material misconception/accessibility blocker remains; evidence outcome and acceptance remain pending | `physkit.physkit-capability-integration-reviewer`, then human | `required-incomplete` | `not-run` | Checklist does not establish broad educational effectiveness; execution is insufficient | Yes |
+| Uncertainty quantification | `not-applicable-human-accepted-rationale`: deterministic exact inputs and no uncertainty distribution/interval claim | Only that no UQ conclusion is claimed | `physkit.physkit-verification` records the accepted applicability disposition | `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` | Sections 4–5; absence of uncertainty propagation | Human-accepted Not applicable rationale | `physkit.physkit-capability-integration-reviewer` | `not-applicable-human-accepted-rationale` | `not-run` | Truncation error, convergence, resolution loss, and floating-point behavior remain numerical verification, not UQ | No |
 
 Humans own applicability, criteria, adequacy, physical/pedagogical validation conclusions, and acceptance. Missing, failed, deferred, difficult, unavailable, or unreviewed evidence is not Not applicable.
 
@@ -443,7 +447,7 @@ The proportional sequence remains:
 
 This wording requires MyST Markdown documentation, not parallel RST pages. It requires no imported external control-plane ceremony, extra checkpoints for deterministic details, new agents/chains/skills/schemas, evidence IDs, checksum catalogs, separate evidence stores, class-per-file test rules, formal learner studies, physical evidence for unmade claims, or UQ evidence for no uncertainty claim. Ordinary tests need clear assertions, not ceremonial per-test evidence records.
 
-## 18. Migration boundary, exclusions, and unresolved decisions
+## 18. Migration boundary, exclusions, and remaining decisions
 
 Existing paths remain untouched observations. After acceptance, alternatives for a separate decision are: M1, a new clean surface implementing Section 7 while leaving competing representations untouched; M2, separately authorized thin adapters; or M3, later replacement/deprecation only after inventory and compatibility evidence. M1 remains the recommendation because it least conflates semantics, but no migration, adapter, warning, repair, deletion, relocation, or replacement is authorized.
 
@@ -451,6 +455,6 @@ Excluded are nonuniform/multidimensional grids; arbitrary active sets; inhomogen
 
 The external reference contributes technical documentation and proportional VVUQ distinctions only; PhysKit rejects its harness/CPN model, campaign controls, schemas, persistence, serialization, Rust, HPC, class-per-file, evidence-ID, checksum, ownership-manifest, skill, chain, and agent ceremony.
 
-Residual protected decisions are the human disposition—accept, revise, reject, or defer—of the proposed public modules/names/signatures, semantic identity, mathematical/numerical conventions, tolerances, Path A artifact roles, MyST/Sphinx/equation surfaces, notebook role, migration recommendation, and all five evidence dispositions. No proposal is accepted by appearing here.
+No protected contract choice remains unresolved for ownership and implementation planning. Evidence outcomes and adequacy, physical- and pedagogical-validation conclusions, lifecycle or support status, migration or repair authorization, PIAB, and successors remain outside this acceptance boundary.
 
-**Implementation gate:** stop at `FOUNDATIONS-FD1-HC02 — human_contract_acceptance`. Source, tests/evidence, notebook, Markdown/Sphinx implementation, dependencies, packaging, CI, adapters, repairs, migrations, lifecycle work, PIAB, and successors remain unauthorized. Review, validation, commit, push, or apparent completeness is not contract acceptance. Successor authorization is `false`.
+**Implementation gate:** contract acceptance permits only the recorded HC02 resolution and the exact ownership and implementation plan. No production, verification, evidence, notebook, Markdown/Sphinx, dependency, packaging, or CI writer stage begins without separate authorization after plan completion. Adapters, repairs, migrations, lifecycle work, PIAB, and successors remain unauthorized. Successor authorization is `false`.

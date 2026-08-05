@@ -1,28 +1,28 @@
-# FOUNDATIONS-FD1 — Documented discrete 1D Laplacian capability contract
+# FOUNDATIONS-FD1 — Accepted contract and implementation-plan handoff
 
-**Status:** Awaiting human redisposition of corrected contract revision 3; contract unaccepted
+**Status:** HC02 `ACCEPT` resolved; ownership and implementation plan completed; implementation inactive pending separate human authorization
 
 **Task ID:** `FOUNDATIONS-FD1`
 
 **Template ID:** `PHYSKIT-CAPABILITY-DEVELOPMENT`
 
-**Active stage:** `human_contract_acceptance`
+**Current stage:** `ownership_and_implementation_plan`
 
-**Active checkpoint:** `FOUNDATIONS-FD1-HC02`
+**Resolved checkpoint:** `FOUNDATIONS-FD1-HC02 — ACCEPT`
 
-**Latest HC02 disposition:** `REMAND`
-
-**Contract revision target:** 3
+**Accepted contract:** revision 3, exact artifact at `5766b281bfea890cc522cf651f36bd93c0493cbb`
 
 **Artifact path:** Path A — reusable library interface required and notebook artifact required
 
+**Implementation authorized:** `false`
+
 **Successor authorization:** `false`; successor `null`
 
-## Repository and starting state
+## Repository and administrative scope
 
 - Repository: `https://github.com/eragasa/physkit`
 - Branch: `main`
-- Starting revision and initial `origin/main`: `1ce0e53afe435cba8551875166ff5fc34bd68945`
+- Starting revision and initial `origin/main`: `5766b281bfea890cc522cf651f36bd93c0493cbb`
 - Initial working tree:
 
   ```text
@@ -30,58 +30,210 @@
   ?? package-lock.json
   ```
 
-The unrelated untracked `package-lock.json` must remain uninspected, unmodified, unstaged, and undeleted.
+This administrative step modifies exactly:
 
-## Accepted HC01 scope retained
+1. `.pi/active-state.json` — parent coordinator;
+2. `.pi/tasks/foundations-fd1.md` — parent coordinator; and
+3. `docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md` — capability architect scope, limited to acceptance status and acceptance record.
 
-The capability remains one integrated, internally layered, discrete-first Path A capability covering a closed uniform grid, homogeneous-Dirichlet active state space, discrete linear-operator hierarchy, centered finite-difference $+d^2/dx^2$, real/complex state application, CSR with dense inspection, synchronized source/MyST/Sphinx/notebook documentation, and proportional VVUQ. HC01 did not accept a public API, implementation, notebook, evidence result, lifecycle state, validation conclusion, or support claim.
+The unrelated untracked `package-lock.json` remains uninspected, unmodified, unstaged, and undeleted. The reusable chain and all role files remain immutable. Production, verification, evidence, Sphinx, documentation, notebook, dependency, packaging, and CI ownership remain inactive during this step.
 
-## HC02 human REMAND
+## HC02 acceptance record
 
-The proposed contract is not accepted. The human requires contract revision 3 to:
+The human resolved `FOUNDATIONS-FD1-HC02 — human_contract_acceptance` with disposition `ACCEPT` for contract revision 3 exactly as represented at `5766b281bfea890cc522cf651f36bd93c0493cbb`.
 
-1. separate immutable `UniformGrid1D` geometry from homogeneous-Dirichlet state-space semantics;
-2. introduce a proposed public `HomogeneousDirichletStateSpace1D` equivalent owning boundary data, active indices/coordinates/dimension, restriction, embedding, real/complex vector interpretation, and semantic identity;
-3. make discrete operator domain and codomain explicit state spaces rather than grid/shape identities;
-4. retain scalar scaling with domain/codomain and defer the general public `compose` method;
-5. define the exact weighted norm, relative error, and observed-order formulas and exact accepted refinement pairs;
-6. use MyST Markdown Sphinx pages and stable equation labels in the maintained concept page;
-7. correct inheritance/containment/association/deferred-use diagrams and notebook synchronization; and
-8. prohibit runtime equation registries, specifications, LaTeX metadata APIs, symbolic catalogs, or custom renderers.
+Acceptance includes one integrated, internally layered Path A capability; immutable geometry-only `UniformGrid1D`; separate `HomogeneousDirichletStateSpace1D`; homogeneous-Dirichlet active space $V_h=\mathbb F^{N-2}$ for real or complex fields; `LinearOperator`; `DiscreteLinearOperator1D`; `FiniteDifferenceLaplacian1D`; explicit domain and codomain; scalar scaling with general composition deferred; positive $+d^2/dx^2$ convention; eager canonical SciPy CSR with dense inspection derived from CSR; real and complex application; the $N=3$ edge case; exact weighted norm, relative error, observed-order definitions, modes, grids, refinement pairs, and tolerances; complete NumPy-style source documentation; MyST/Sphinx documentation; generated inheritance and conceptual Graphviz diagrams; the canonical three-stage notebook; the lightweight VVUQ profile; and M1 new-clean-surface direction with competing implementations untouched.
 
-This human-authorized remand is the only correction pass for this disposition. After correction, one fresh independent read-only Mode A review is required. Any remaining material or protected finding returns directly to the human; no automatic review/correction loop is authorized.
+Accepted evidence dispositions are:
 
-## Exact ownership
+- software verification: required;
+- numerical verification: required;
+- physical validation: `not-applicable-human-accepted-rationale`, because the capability makes no physical-model adequacy claim;
+- pedagogical validation: required through proportional human checklist review; no formal learner study is required; and
+- uncertainty quantification: `not-applicable-human-accepted-rationale`, because the capability makes no uncertainty-bearing claim.
 
-Parent coordinator owns exactly:
+Truncation error, convergence, resolution loss, and floating-point behavior remain numerical verification rather than UQ.
 
-1. `.pi/active-state.json`;
-2. `.pi/tasks/foundations-fd1.md`.
+At the general base-class level, `LinearOperator.domain -> object` and `LinearOperator.codomain -> object` are accepted only as the minimal typing boundary for this capability. They establish no general PhysKit state-space hierarchy. `FiniteDifferenceLaplacian1D` must narrow both properties to `HomogeneousDirichletStateSpace1D`. Any general state-space abstraction, protocol, generic type system, or composition framework requires a separate future contract.
 
-Capability architect owns exactly:
+Acceptance does not authorize implementation, source changes, tests or evidence production, Sphinx creation, notebook creation or execution, adapters, migration, legacy repair, deprecation, deletion or relocation, symbolic operators, equation metadata infrastructure, quantum kinetic energy, Hamiltonians, eigensolvers, PIAB, lifecycle assignment, or successor work.
 
-1. `docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md`.
+## Exact planned ownership — inactive until separately authorized
 
-Production source, tests/evidence, notebooks/user documentation implementation, Sphinx implementation, dependencies, packaging, and CI have empty ownership. The immutable template and role files remain unchanged.
+Every anticipated repository write path has exactly one owner. “Create” and “modify” refer to the anticipated implementation operation, not authorization in this step.
 
-## Required retained boundaries
+| Role owner | Exact path | Operation | Planned responsibility |
+|---|---|---:|---|
+| parent coordinator, narrow configuration exception | `pyproject.toml` | modify | add only a `docs` optional-dependency group containing `sphinx>=8,<10` and `myst-parser>=5.1,<6`; no notebook, Graphviz-wrapper, equation, or unrelated dependency |
+| `physkit.physkit-implementation` | `src/physkit/discretization/grid_1d.py` | modify additively | add geometry-only `UniformGrid1D`; preserve existing `Grid1D` and `ActiveSetType1D` declarations and behavior |
+| `physkit.physkit-implementation` | `src/physkit/discretization/state_space_1d.py` | create | implement `HomogeneousDirichletStateSpace1D` |
+| `physkit.physkit-implementation` | `src/physkit/operators/base.py` | create | implement `LinearOperator` and private scalar-scaled wrapper behavior |
+| `physkit.physkit-implementation` | `src/physkit/operators/discrete_1d.py` | create | implement `DiscreteLinearOperator1D` |
+| `physkit.physkit-implementation` | `src/physkit/operators/finite_difference_1d.py` | create | implement `FiniteDifferenceLaplacian1D` and eager canonical CSR stencil |
+| `physkit.physkit-implementation` | `src/physkit/discretization/__init__.py` | modify | export `UniformGrid1D` and `HomogeneousDirichletStateSpace1D` while preserving legacy exports |
+| `physkit.physkit-implementation` | `src/physkit/operators/__init__.py` | create | export exactly the accepted operator names |
+| `physkit.physkit-verification` | `tests/physkit/discretization/test_uniform_grid_1d.py` | create | grid validation, geometry, immutability, ownership, and public discretization import checks |
+| `physkit.physkit-verification` | `tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py` | create | state-space identity, active data, restriction, embedding, dtype, exceptions, ownership, and public import checks |
+| `physkit.physkit-verification` | `tests/physkit/operators/test_linear_operator.py` | create | base/discrete operator contracts, scalar scaling, domain/codomain preservation, typing limitation, and public operator import checks |
+| `physkit.physkit-verification` | `tests/physkit/operators/test_finite_difference_laplacian_1d.py` | create | independent tridiagonal and componentwise stencil oracles; CSR, sign, $N=3,4,8$, real/complex application, scaling, and exact convergence tests |
+| `physkit.physkit-verification` | `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` | create | single proportional VVUQ and five-class evidence summary, including recorded pedagogical checklist disposition |
+| `physkit.physkit-notebook-documentation` | `docs/conf.py` | create | exact accepted MyST/Sphinx configuration |
+| `physkit.physkit-notebook-documentation` | `docs/index.md` | create | exact toctree and Graphviz `dot` installation/PATH prerequisite documentation |
+| `physkit.physkit-notebook-documentation` | `docs/api/operators.md` | create | MyST autodoc/autoclass and generated inheritance diagram |
+| `physkit.physkit-notebook-documentation` | `docs/concepts/uniform-grid-dirichlet-laplacian.md` | create | maintained concept surface and exactly ten stable labeled equations |
+| `physkit.physkit-notebook-documentation` | `docs/_static/diagrams/uniform-grid-dirichlet-laplacian.dot` | create | conceptual Graphviz diagram and legend |
+| `physkit.physkit-notebook-documentation` | `notebooks/numerics/differentiation/uniform-grid-dirichlet-laplacian.ipynb` | create | canonical three-stage notebook and proportional pedagogical-checklist material |
+| `physkit.physkit-capability-integration-reviewer` | all planned artifacts above | read-only | independent integrated review; no repairs |
+| capability architect | accepted contract path only | inactive/read-only | writes only if a material contract finding is routed, followed by renewed human contract acceptance |
 
-Retain the inheritance hierarchy `LinearOperator -> DiscreteLinearOperator1D -> FiniteDifferenceLaplacian1D`, positive second-derivative sign, homogeneous-Dirichlet $N=3$ matrix $[-2/h^2]$, eager canonical CSR construction, defensive sparse/dense ownership, real-to-`float64` and complex-to-`complex128` behavior, future kinetic-energy scaling seam without Laplacian inheritance, Path A, five evidence dispositions, source-documentation standard, three-stage notebook, clean-surface migration recommendation, and ten-step lightweight VVUQ process.
+The narrow planned `pyproject.toml` assignment is an explicit parent-owned configuration exception because the current specialized writer role definitions do not authorize packaging metadata. It remains inactive and requires separate implementation authorization. Jupyter and `nbconvert` are external execution-environment prerequisites, not planned repository dependencies: preflight must run `python -m jupyter nbconvert --version` and import `nbformat` and `nbconvert` before notebook work. If either prerequisite is unavailable, stop and request human authorization for an exact repository-managed dependency change rather than adding one silently.
 
-Do not add a boundary-validation method without a concrete consumer. Do not add general composition. Do not add programmatic equation metadata. Existing competing implementations remain untouched.
+## Dependency order and permitted concurrency
 
-## Review boundary
+1. **Plan activation gate.** A later explicit human instruction must activate exact planned ownership and implementation; until then all planned writer ownership is inactive.
+2. **Dependency metadata.** The parent-owned `pyproject.toml` change precedes reproducible Sphinx environment installation.
+3. **Production foundation.** `UniformGrid1D` precedes `HomogeneousDirichletStateSpace1D`; both precede the operator hierarchy. `LinearOperator` precedes `DiscreteLinearOperator1D`, which precedes `FiniteDifferenceLaplacian1D`; package exports follow defining modules.
+4. **Explicit notebook Stage 1.** After ownership activation, Stage 1 may run concurrently with production implementation because it uses direct NumPy/SciPy construction only, does not import the new API, and its path does not overlap source paths.
+5. **Library reconstruction.** Notebook Stage 2 and API-facing documentation wait for completed accepted API implementation and public exports.
+6. **Exploration and synchronization.** Notebook Stage 3, concept equations, API page, conceptual DOT, and synchronization checks follow Stage 2.
+7. **Verification.** Software and numerical verification begin only after all selected Path A implementation, documentation, and notebook artifacts are complete; verification does not assess partial source.
+8. **Evidence summary.** The consolidated five-class summary follows test execution, notebook execution, Sphinx build, and documentation synchronization checks.
+9. **Independent review.** Read-only integration review follows all writer handoffs and the complete evidence summary.
+10. **Correction.** Any correction is sequential with respect to review of affected artifacts; affected checks replay before re-review.
+11. **Parent verification and human stop.** Parent verification follows successful review/correction disposition and stops at `human_final_acceptance`.
 
-The fresh review must check grid/state-space separation; restriction/embedding; semantic identity; operator domain/codomain; composition deferral and scaling retention; sign/CSR/$N=3$; exact numerical formulas; observable immutability; MyST/Sphinx buildability; equation labels/authority; class diagrams; notebook synchronization; VVUQ proportionality; and absence of equation infrastructure or implementation.
+Read-only inspection and nonmutating checks may run concurrently. Parent configuration work, source work, and notebook Stage 1 may run concurrently only after separate ownership activation because their paths and seams are nonoverlapping. No overlapping writers are permitted.
 
-Mechanical formatting may be corrected before this single final review. A review PASS is proposal readiness only, not contract acceptance.
+## Integration seams
 
-## Prohibited work and stop condition
+- `src/physkit/discretization/__init__.py` is the public seam for accepted grid and state-space imports used by tests, docs, and notebook Stage 2.
+- `src/physkit/operators/__init__.py` is the public seam for the exact operator hierarchy.
+- `HomogeneousDirichletStateSpace1D.semantic_identity` is the compatibility seam among geometry, state interpretation, operator domain/codomain, tests, diagrams, and notebook comparison.
+- The immutable state-space instance is both concrete Laplacian domain and codomain; base-class `object` annotations do not create a general hierarchy.
+- The eager owned CSR matrix is the computational authority; dense inspection derives only from CSR. Tests use independent direct tridiagonal and componentwise-stencil oracles, not production matrix construction helpers.
+- `docs/concepts/uniform-grid-dirichlet-laplacian.md` is the maintained equation authority; source docstrings remain API-behavior authority; tests and notebook synchronize with both.
+- Notebook Stage 1 is independent of PhysKit; Stage 2 compares the accepted API to Stage 1; Stage 3 uses the exact accepted modes, grids, norms, refinement pairs, and tolerances.
+- `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` is the single final evidence-summary path consumed by independent review and parent verification.
+- Pedagogical checklist material is prepared in the notebook by `physkit.physkit-notebook-documentation`; the actual checklist disposition is recorded, without inventing human acceptance, in the verification-owned summary.
 
-Do not modify source, tests, notebooks, examples, dependencies, packaging, CI, Sphinx implementation files, intake/harness documents, chain templates, role files, closed task records, or `package-lock.json`. Do not begin implementation, verification writing, evidence production, notebook editing, migration, repair, deprecation, PIAB, lifecycle, or successor work.
+## Planned implementation slices
 
-After correction, fresh review, parent validation, exact commit, and fast-forward push, stop again at `FOUNDATIONS-FD1-HC02 — human_contract_acceptance` for explicit human disposition.
+### Production source
 
-## HC02 final review result
+1. Add `UniformGrid1D` to `src/physkit/discretization/grid_1d.py` without changing existing competing declarations. Implement accepted scalar validation, $N\ge3$, spacing, coordinates, defensive `float64` copies, geometry-only behavior, and observable immutability.
+2. Create `src/physkit/discretization/state_space_1d.py` with exact semantic identity, immutable grid containment, boundaries, active indices/coordinates, dimension, restriction and embedding, finite numeric validation, dtype rules, exceptions, and owned C-contiguous outputs.
+3. Create the three operator defining modules. Implement exact domain/codomain, shape/dtype, `apply`, `@`, private scalar scaling, eager canonical owned CSR, defensive sparse/dense copies, and the $N=3$ construction branch. Do not add public composition or any general state-space abstraction.
+4. Update/create package exports only after defining modules exist. Every maintained first-party module and public member receives complete NumPy-style documentation.
 
-The single fresh independent read-only Mode A review returned `PASS` with no material or protected findings. No automatic follow-up correction is authorized. Parent deterministic validation passed. Remote freshness remains required immediately before the exact boundary commit and fast-forward push. After those checks, the task remains stopped at `FOUNDATIONS-FD1-HC02 — human_contract_acceptance`; the latest disposition remains `REMAND` and contract revision 3 remains proposed and unaccepted.
+### Verification and evidence
+
+- Public-import checks live in the four exact test paths above; no fifth import-test path is planned.
+- Independent oracle coverage lives in `test_finite_difference_laplacian_1d.py` and directly constructs expected arrays/stencil values without calling production construction helpers.
+- Convergence coverage in that same file uses $u_n=\sin(n\pi x)$ for $n=1,2$, $N=17,33,65,129$, the exact weighted norm and relative error, monotonic decrease, and only $p_{n;33,65}$ and $p_{n;65,129}\in[1.90,2.10]$.
+- Software and numerical verification remain distinct in assertions and summary claims. Physical validation and UQ retain the accepted Not-applicable rationales. Pedagogical validation remains required and human-owned through the proportional checklist; notebook execution is not pedagogical acceptance.
+
+### Notebook and documentation
+
+- Stage 1 exposes raw mathematical/computational construction, restriction/embedding, CSR/dense forms, real/complex action, and $N=3$ without PhysKit.
+- Stage 2 reconstructs Stage 1 with the accepted public API and compares geometry, semantic identity, domain/codomain, matrices, real/complex action, and scaling.
+- Stage 3 performs the accepted convergence exploration and a bounded under-resolution illustration, explicitly classifying truncation, resolution, and floating-point effects as numerical verification.
+- `docs/index.md` documents that Sphinx does not install Graphviz and that the system `dot` executable must be installed and on `PATH`.
+- No rendered Graphviz product or `docs/_build` output is committed.
+
+## Proposed validation commands
+
+Environment and imports:
+
+```bash
+git rev-parse --show-toplevel
+git rev-parse HEAD
+git branch --show-current
+git remote -v
+git status --short --branch --untracked-files=all
+python -m pip install -e '.[dev,docs]'
+python -m compileall -q src/physkit
+python -c "from physkit.discretization import UniformGrid1D, HomogeneousDirichletStateSpace1D; from physkit.operators import LinearOperator, DiscreteLinearOperator1D, FiniteDifferenceLaplacian1D"
+```
+
+Tests:
+
+```bash
+python -m pytest -q \
+  tests/physkit/discretization/test_uniform_grid_1d.py \
+  tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py \
+  tests/physkit/operators/test_linear_operator.py \
+  tests/physkit/operators/test_finite_difference_laplacian_1d.py
+python -m pytest -q
+```
+
+Sphinx and Graphviz:
+
+```bash
+dot -V
+dot -Tsvg docs/_static/diagrams/uniform-grid-dirichlet-laplacian.dot \
+  -o /tmp/uniform-grid-dirichlet-laplacian.svg
+sphinx-build -W --keep-going -b html docs docs/_build/html
+```
+
+Notebook execution uses the externally provisioned Jupyter/nbconvert environment and fails closed if preflight is unavailable:
+
+```bash
+python -m jupyter nbconvert --version
+python -c "import nbformat, nbconvert; print(nbformat.__version__, nbconvert.__version__)"
+python -m jupyter nbconvert --execute --to notebook \
+  notebooks/numerics/differentiation/uniform-grid-dirichlet-laplacian.ipynb \
+  --output-dir /tmp \
+  --output uniform-grid-dirichlet-laplacian.executed.ipynb
+```
+
+Final deterministic checks:
+
+```bash
+git diff --check
+git status --short --branch --untracked-files=all
+```
+
+Also parse source and executed notebook JSON and reject any `output_type: error`; confirm each of the ten required MyST equation labels occurs exactly once repository-wide; confirm no public `compose`, equation registry/specification/decorator/renderer/catalog, parallel RST page, or tracked `_build`/rendered Graphviz product was introduced; and report any pre-existing legacy full-suite failure without repairing excluded paths or changing accepted criteria.
+
+## M1 excluded legacy paths and work
+
+M1 is additive. The only planned legacy-containing file modification is the addition of `UniformGrid1D` beside existing declarations in `src/physkit/discretization/grid_1d.py`; existing `Grid1D` and `ActiveSetType1D` behavior remains untouched. The existing `src/physkit/discretization/__init__.py` is modified only to add accepted exports while preserving legacy exports.
+
+Explicitly untouched:
+
+- `src/physkit/core/boundaries.py`;
+- `src/physkit/core/grids.py`;
+- `src/physkit/core/state.py`;
+- `src/physkit/core/operator.py`;
+- `src/physkit/numerics/finite_difference.py`;
+- `src/physkit/numerics/differentiation/__init__.py`;
+- `src/physkit/numerics/differentiation/laplacian.py`;
+- `src/physkit/math/operators/__init__.py`;
+- `src/physkit/math/operators/base.py`;
+- `src/physkit/math/operators/continuous1d.py`;
+- `src/physkit/math/operators/discrete1d.py`;
+- `tests/physkit/discretization/test_ActiveSetType1D.py`;
+- `tests/physkit/discretization/test_Grid1D.py`;
+- `notebooks/numerics/differentiation/finite-difference-laplacian-1d.ipynb`;
+- all existing QM, PIAB, Hamiltonian, eigensolver, Poisson, example, adapter, migration, deprecation, lifecycle, and CI paths; and
+- `package-lock.json`.
+
+No adapter, migration, repair, deprecation, deletion, relocation, replacement, symbolic operator, equation metadata infrastructure, kinetic-energy operator, Hamiltonian, eigensolver, PIAB work, lifecycle assignment, or successor is planned or authorized.
+
+## Correction routing and review
+
+- production-source finding → `physkit.physkit-implementation` within unchanged exact source ownership;
+- test or evidence finding → `physkit.physkit-verification`;
+- notebook, MyST/Sphinx, conceptual DOT, or user-documentation finding → `physkit.physkit-notebook-documentation`;
+- task, active-state, ownership, dependency-metadata, or orchestration finding → parent coordinator;
+- nonmaterial contract clarification → capability architect after parent classification;
+- material contract revision → capability architect, then renewed explicit human contract acceptance and a recomputed ownership plan before dependent replay;
+- protected decision → immediate human escalation.
+
+The independent reviewer never repairs reviewed work. `correction_cycle_count` is already `1` from the HC02 remand correction, so the immutable workflow's one ordinary automatic correction allowance is exhausted and **no automatic implementation correction/replay/re-review cycle remains**. Any later finding routes directly to `bounded-cycle-exhausted` and human escalation unless a separate human decision explicitly authorizes otherwise.
+
+## Completion and stop
+
+This plan is complete as a handoff only. Planned production, verification, evidence, notebook, documentation, Sphinx, dependency, and packaging ownership is inactive. Implementation requires a separate explicit human authorization that cites this accepted contract and plan.
+
+After any later authorized implementation, complete evidence production, independent read-only review, correction disposition, and parent verification, stop at `human_final_acceptance` with a Mode B report. Only the human may accept, remand, limit, reject, or defer the implemented outcome and evidence. Tests, notebook execution, Sphinx build, review, commit, push, silence, or plan completion do not imply acceptance, lifecycle status, support, closeout, or successor authorization.
