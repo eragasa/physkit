@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 13,
+  "state_revision": 14,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -38,93 +38,130 @@
   "control_plane_phase": "operational",
   "active_task": {
     "task_id": "FOUNDATIONS-FD1",
-    "task_kind": "bounded-capability-intake",
-    "status": "awaiting-human-capability-scope",
-    "purpose": "Prepare descriptive and advisory scope intake for uniform 1D grids, active degrees of freedom, homogeneous Dirichlet boundary conditions, and the finite-difference 1D Laplacian.",
+    "task_kind": "capability-contract-drafting",
+    "status": "awaiting-human-contract-acceptance",
+    "purpose": "Draft one proposed integrated, internally layered, discrete-first capability contract for a uniform closed 1D grid, homogeneous-Dirichlet active state, discrete linear operator, and finite-difference Laplacian.",
     "task_record": ".pi/tasks/foundations-fd1.md",
     "material_intake": "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md",
+    "material_contract": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
     "template_instance": {
       "instance_id": "FOUNDATIONS-FD1",
       "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
       "template_record": ".pi/chains/capability-development.chain.json",
-      "current_stage": "bounded_intake",
-      "stage_state": "completed-awaiting-human-capability-scope",
-      "selected_capability": null,
-      "artifact_path": "unresolved-pending-human-scope-and-contract",
-      "active_writer_roles": []
+      "current_stage": "human_contract_acceptance",
+      "stage_state": "pending",
+      "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
+      "artifact_path": "A",
+      "applicability_axes": {
+        "reusable_library_interface": "required",
+        "notebook_artifact": "required"
+      },
+      "active_writer_roles": [],
+      "correction_cycle_count": 1
     },
-    "selected_capability": null,
-    "artifact_path": "unresolved",
+    "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
+    "capability_structure": "one integrated but internally layered contract",
+    "primary_representation": "discrete-first",
+    "artifact_path": "A",
+    "applicability_axes": {
+      "reusable_library_interface": "required",
+      "notebook_artifact": "required"
+    },
+    "accepted_scope_decisions": {
+      "mathematical_scope": "closed [a,b], b>a, N>=3, h=(b-a)/(N-1), active interior 1..N-2, homogeneous Dirichlet endpoints, V_h=F^(N-2), F real or complex, D2,h=h^-2 tridiag(1,-2,1) representing d2/dx2",
+      "operator_architecture": "general LinearOperator -> DiscreteLinearOperator1D -> FiniteDifferenceLaplacian1D meaning; exact public names remain contract proposals; quantum kinetic energy uses/scales rather than inherits from Laplacian",
+      "matrix_representation": "propose SciPy CSR as canonical computational form with explicit dense inspection and one stencil construction rule",
+      "documentation_standard": "ksdft2effmass revision 355df16a7ca4071b70bc844a00ba21949af7c7c6 used only as technical reference for complete NumPy docstrings, scientific/numerical documentation, exception semantics, Sphinx API documentation, VVUQ classification, and synchronization",
+      "sphinx_and_diagrams": "propose minimal Sphinx bootstrap, warnings-as-errors build, generated inheritance diagram, and source-controlled conceptual Graphviz diagram; no build artifacts committed",
+      "lightweight_vvuq": "accepted ten-step proportional execution profile; no imported external control-plane ceremony",
+      "evidence_proposals": {
+        "software verification": "required",
+        "numerical verification": "required",
+        "physical validation": "proposed human-approved Not applicable",
+        "pedagogical validation": "required but proportional",
+        "uncertainty quantification": "proposed human-approved Not applicable"
+      }
+    },
     "authorized_paths": [
       ".pi/active-state.json",
       ".pi/tasks/foundations-fd1.md",
-      "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md"
+      "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md"
     ],
     "active_ownership": {
       "parent_coordinator": [
         ".pi/active-state.json",
-        ".pi/tasks/foundations-fd1.md",
-        "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md"
+        ".pi/tasks/foundations-fd1.md"
       ],
-      "capability_contract_paths": [],
+      "capability_architect": [
+        "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md"
+      ],
+      "capability_contract_paths": [
+        "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md"
+      ],
       "production_source_paths": [],
       "test_or_evidence_paths": [],
-      "notebook_or_documentation_paths": []
+      "notebook_or_documentation_paths": [],
+      "sphinx_implementation_paths": []
     },
     "prohibited_work": [
-      "capability-contract drafting or acceptance",
-      "canonical implementation or artifact selection",
-      "source, test, evidence, notebook, example, dependency, packaging, CI, chain-template, role, existing-task, AGENTS.md, or existing harness document modification",
+      "production source, test, evidence, notebook, example, dependency, packaging, CI, or Sphinx implementation changes",
+      "chain-template or role changes",
       "implementation or API acceptance",
-      "evidence or validation acceptance",
-      "lifecycle assignment",
-      "notebook migration",
+      "evidence-result or validation acceptance",
+      "migration, deprecation, repair, or lifecycle assignment",
       "PIAB work",
       "successor work"
     ],
     "review": {
-      "independent_read_only_review": "PASS after one markdown-whitespace correction and fresh rereview",
+      "mode": "Mode A",
+      "independent_read_only_review": "PASS after one consolidated correction and fresh rereview",
       "repository_artifact_creation": false,
+      "architect_startup_preflight": "passed",
+      "ordinary_contract_correction_limit": 1,
+      "correction_cycle_count": 1,
+      "finding_classification": "initial in-scope proposal conformance findings corrected; fresh rereview found no blocker, major, or minor findings",
       "material_findings": [],
-      "limitations": [
-        "review was structural and static; notebooks were not executed"
-      ]
+      "rereview_required": false
     },
     "validation": {
-      "parent_structural_verification": "passed",
+      "parent_contract_verification": "passed",
       "checks": [
-        "complete required and directly relevant path inventory",
+        "expected starting revision and repository identity",
         "duplicate-free JSON",
-        "active-state/task-instance/template consistency",
-        "immutable-template preservation",
-        "empty writer ownership",
-        "all five required notebooks parsed statically without execution",
+        "HC01 accepted and HC02 pending consistency",
+        "selected integrated discrete-first capability and Path A axes",
+        "exact architect ownership",
+        "empty production/test/evidence/notebook/Sphinx implementation ownership",
+        "immutable template and role files",
+        "all 28 contract areas and proposal status",
+        "single correction cycle and independent rereview PASS",
         "exact three-path isolation",
-        "excluded-path preservation",
-        "temporary-artifact absence",
+        "source/test/notebook/dependency/packaging/CI/Sphinx exclusions",
+        "no repository-local temporary artifacts",
         "git diff --check"
       ],
-      "limitations": "intake evidence only; no capability scope, contract, API, artifact path, evidence applicability, or lifecycle decision is accepted"
+      "limitations": "static contract validation only; no production imports, tests, Sphinx build, notebook execution, evidence result, validation conclusion, lifecycle state, or support claim"
     },
+    "implementation_authorized": false,
     "successor_authorized": false,
     "successor": null,
-    "stop_condition": "Stop at FOUNDATIONS-FD1-HC01 for human capability-scope review. Do not draft a contract, modify implementation/tests/notebooks, resume PIAB, or activate a successor."
+    "stop_condition": "Stop at human_contract_acceptance after the proposed contract is reviewed, validated, committed, and pushed. Do not begin implementation or successor work."
   },
   "checkpoint": {
-    "checkpoint_id": "FOUNDATIONS-FD1-HC01",
-    "type": "human-capability-scope",
+    "checkpoint_id": "FOUNDATIONS-FD1-HC02",
+    "type": "human-contract-acceptance",
     "state": "pending",
     "task_record": ".pi/tasks/foundations-fd1.md",
-    "material_artifact": "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md",
-    "decision_required": "Accept, revise, reject, or defer a bounded capability scope and decide whether separate contract drafting may be authorized.",
-    "contract_drafting_authorized": false,
-    "capability_activation_authorized": false,
+    "material_artifact": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
+    "material_artifact_status": "Proposed for human review",
+    "decision_required": "Accept, revise, reject, or defer the complete integrated discrete-first capability contract.",
+    "implementation_authorized": false,
     "successor_authorized": false
   },
   "blockers": [
     {
-      "blocker_id": "foundations-fd1.human-capability-scope.pending",
-      "condition": "bounded intake is complete; human capability scope remains unresolved and contract drafting, writer ownership, artifact-path selection, and implementation are blocked"
+      "blocker_id": "foundations-fd1.human-contract-acceptance.pending",
+      "condition": "the corrected proposed contract passed fresh Mode A rereview; implementation and every dependent stage remain blocked pending explicit human contract acceptance"
     },
     {
       "blocker_id": "piab.parked",
@@ -177,7 +214,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "FOUNDATIONS-FD1 authorizes bounded intake and human-scope preparation only. Contract drafting, PIAB, remaining notebook work, implementation, and successor activation are not authorized."
+    "denial_basis": "FOUNDATIONS-FD1 authorizes one proposed contract only. Implementation, PIAB, remaining notebook work, and successor activation are not authorized."
   },
   "human_decisions": [
     {
@@ -681,15 +718,41 @@
       "starting_revision": "46e313afb3dbccd320968c16df7f72b77a76774a",
       "provenance": "explicit human FOUNDATIONS-FD1 intake authorization",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-foundations-fd1-hc01-and-authorize-contract.001",
+      "subject": "FOUNDATIONS-FD1-HC01 capability scope and bounded contract drafting",
+      "disposition": "accepted exact integrated discrete-first scope and authorized one proposed contract",
+      "authority_granted": [
+        "resolve FOUNDATIONS-FD1-HC01 as accepted",
+        "select one integrated but internally layered discrete-first capability",
+        "select Path A with reusable library interface and notebook both required",
+        "require discrete operator inheritance and composition seam for future quantum kinetic energy",
+        "require complete source documentation, minimal Sphinx/API/concept documentation, generated and conceptual diagrams, three-stage notebook, and lightweight VVUQ profile",
+        "assign architect ownership of exactly docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
+        "review, correct at most once, validate, commit, and fast-forward push exactly three authorized paths"
+      ],
+      "authority_not_granted": [
+        "human contract acceptance",
+        "production implementation, tests, evidence, notebook, Sphinx, dependencies, packaging, CI, migration, deprecation, or repair",
+        "exact public API acceptance",
+        "evidence results or validation conclusions",
+        "lifecycle assignment",
+        "PIAB or successor work"
+      ],
+      "starting_revision": "a056157909f1dabc679332c73cabdda956075417",
+      "external_reference_revision": "ksdft2effmass@355df16a7ca4071b70bc844a00ba21949af7c7c6",
+      "provenance": "explicit human resolution and contract-drafting authorization",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "operational with no active task after HARNESS-CAPABILITY-1 closeout",
-    "to": "FOUNDATIONS-FD1 bounded intake complete and awaiting human capability scope",
-    "timestamp_utc": "2026-08-05T03:16:59Z",
+    "from": "FOUNDATIONS-FD1 one allowed consolidated contract correction and rereview",
+    "to": "FOUNDATIONS-FD1 awaiting human contract acceptance",
+    "timestamp_utc": "2026-08-05T05:29:44Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "46e313afb3dbccd320968c16df7f72b77a76774a",
-    "reason": "explicit human authorization to instantiate the accepted reusable template for bounded intake and human-scope preparation only"
+    "observed_starting_git_revision": "a056157909f1dabc679332c73cabdda956075417",
+    "reason": "corrected proposal received fresh independent Mode A PASS; no implementation authorized"
   },
   "resolved_checkpoints": [
     {
@@ -704,6 +767,12 @@
       "decision_owner": "human",
       "accepted_revision": "b6595c3163589b00a4afe76f86b4b9e223088bb8",
       "resolution": "reusable inactive workflow template accepted within stated structural boundary; closeout authorized"
+    },
+    {
+      "checkpoint_id": "FOUNDATIONS-FD1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "one integrated internally layered discrete-first capability; Path A; exact mathematical, operator, documentation, Sphinx/diagram, notebook, and proportional VVUQ scope authorized for one contract proposal only"
     }
   ],
   "closed_tasks": [
@@ -877,6 +946,12 @@
       "stage": "closeout",
       "state": "completed",
       "authority": "explicit human administrative closeout authorization"
+    },
+    {
+      "task_id": "FOUNDATIONS-FD1",
+      "stage": "human_capability_scope",
+      "state": "accepted",
+      "decision_owner": "human"
     }
   ],
   "reusable_templates": {
@@ -891,17 +966,28 @@
     "instance_id": "FOUNDATIONS-FD1",
     "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
     "template_record": ".pi/chains/capability-development.chain.json",
-    "current_stage": "bounded_intake",
-    "stage_state": "completed-awaiting-human-capability-scope",
-    "selected_capability": null,
-    "artifact_path": "unresolved-pending-human-scope-and-contract",
-    "active_writer_roles": []
+    "current_stage": "human_contract_acceptance",
+    "stage_state": "pending",
+    "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
+    "artifact_path": "A",
+    "applicability_axes": {
+      "reusable_library_interface": "required",
+      "notebook_artifact": "required"
+    },
+    "active_writer_roles": [],
+    "correction_cycle_count": 1
   },
-  "selected_capability": null,
+  "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
   "capability_ownership": {
-    "capability_contract_paths": [],
+    "capability_architect": [
+      "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md"
+    ],
+    "capability_contract_paths": [
+      "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md"
+    ],
     "production_source_paths": [],
     "test_or_evidence_paths": [],
-    "notebook_or_documentation_paths": []
+    "notebook_or_documentation_paths": [],
+    "sphinx_implementation_paths": []
   }
 }
