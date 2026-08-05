@@ -11,163 +11,567 @@
     "multiple_specialized_writers_required": true,
     "exact_nonoverlapping_ownership_required": true,
     "review_read_only": true,
+    "ordinary_correction_cycle_limit": 1,
     "lifecycle_promotion_in_scope": false,
     "successor_authorized": false,
     "successor": null
   },
   "ownership_model": {
-    "parent_coordinator": "activation, task and active-state coordination, exact ownership assignment, correction routing, parent verification, and human checkpoint presentation",
+    "parent_coordinator": "bounded intake, activation, task and active-state coordination, exact ownership assignment, correction classification and routing, parent verification, and human checkpoint presentation",
     "physkit-capability-architect": "exact task-owned capability contract and architecture paths only",
     "physkit-implementation": "exact task-owned production paths under src/physkit only",
     "physkit-verification": "exact task-owned test paths under tests and separately justified evidence-summary paths only",
     "physkit-notebook-documentation": "exact task-owned notebook and user-facing documentation paths only",
     "physkit-capability-integration-reviewer": "read-only integrated review",
-    "human": "all protected scientific, numerical, API, pedagogical, evidence-acceptance, canonical-artifact, lifecycle, final-acceptance, and successor decisions"
+    "human": "all protected scientific, numerical, API, pedagogical, evidence applicability, criteria, adequacy, validation, canonical-artifact, lifecycle, final-acceptance, and successor decisions"
+  },
+  "startup_preflight": {
+    "applies_to": [
+      "physkit-capability-architect",
+      "physkit-implementation",
+      "physkit-verification",
+      "physkit-notebook-documentation",
+      "physkit-capability-integration-reviewer"
+    ],
+    "required": [
+      "read and reconcile AGENTS.md",
+      "read and reconcile .pi/active-state.json",
+      "confirm active task and active chain",
+      "read the active task record and active chain",
+      "read the human-accepted capability contract when it exists; initial contract drafting must verify that its authorized stage explicitly permits the contract to be absent",
+      "confirm exact task-owned and prohibited paths",
+      "read applicable evidence obligations",
+      "inspect repository identity, starting revision, branch, remotes, and complete working-tree state without inspecting unrelated untracked contents",
+      "confirm stop conditions and successor authorization"
+    ],
+    "fail_closed_if": "authority is missing, stale, contradictory, ambiguous, inactive, or does not assign the role's exact work",
+    "reviewer_additional_check": "verify every writer recorded successful startup preflight before reviewing"
+  },
+  "artifact_path_selection": {
+    "decision_owner": "human through the accepted capability contract",
+    "exactly_one_required": true,
+    "agents_may_select": false,
+    "paths": {
+      "A": {
+        "name": "library-backed pedagogical capability",
+        "required_stages": [
+          "implementation",
+          "evidence_production_and_assessment",
+          "explicit_notebook_construction",
+          "library_notebook_reconstruction",
+          "exploration_and_documentation"
+        ],
+        "required_pattern": "explicit construction, PhysKit reconstruction, and exploration/documentation"
+      },
+      "B": {
+        "name": "notebook-only capability",
+        "required_stages": [
+          "evidence_production_and_assessment",
+          "explicit_notebook_construction",
+          "exploration_and_documentation"
+        ],
+        "prohibits": [
+          "inventing a reusable public API",
+          "library_notebook_reconstruction"
+        ]
+      },
+      "C": {
+        "name": "human-approved notebook or reusable-interface exception",
+        "required_stages": [
+          "evidence_production_and_assessment",
+          "alternative_pedagogical_artifact"
+        ],
+        "contract_must_name": [
+          "explicit rationale",
+          "adequate alternative pedagogical artifact",
+          "affected claims and limitations"
+        ]
+      }
+    },
+    "skip_rule": "Every skipped stage must cite the accepted contract clause and human-approved rationale; missing work is neither an exception nor Not applicable."
+  },
+  "evidence_disposition_contract": {
+    "classes": [
+      "software verification",
+      "numerical verification",
+      "physical validation",
+      "pedagogical validation",
+      "uncertainty quantification"
+    ],
+    "required_in": [
+      "human-accepted capability contract",
+      "ownership and implementation plan"
+    ],
+    "fields_per_class": [
+      "applicability or accepted non-applicability rationale",
+      "required claim",
+      "producer or responsible role",
+      "exact artifact or evidence-summary path when written",
+      "method or reference",
+      "human-accepted criterion or unresolved criterion",
+      "reviewer",
+      "result state",
+      "limitations and claim boundary",
+      "whether unresolved status blocks final handoff"
+    ],
+    "allowed_result_states": [
+      "required-completed",
+      "required-incomplete",
+      "not-applicable-human-accepted-rationale",
+      "deferred-explicit-claim-limitation",
+      "unresolved-blocking"
+    ],
+    "candidate_rule": "A bounded Candidate outcome may retain required-incomplete or deferred evidence only with explicit claim limits and an explicit blocking/nonblocking final-handoff disposition accepted by a human.",
+    "authority_rule": "Agents collect and assess evidence; only humans accept applicability, criteria, adequacy, physical validation, and pedagogical validation.",
+    "anti_collapse_rule": "Deferred, missing, difficult, unavailable, and unreviewed evidence are not Not applicable and are not satisfied evidence."
   },
   "concurrency_rules": {
     "default": "ordered and sequential",
-    "allowed": "read-only inspection; deterministic nonmutating checks; or writers with exact nonoverlapping paths and an explicit integration seam",
+    "allowed": "read-only inspection; deterministic nonmutating checks; or writers with exact nonoverlapping paths and an explicit accepted integration seam",
     "forbidden": "overlapping writers, verification against partial source, library reconstruction before accepted API implementation, or correction concurrent with affected review",
-    "stage_7_exception": "explicit notebook construction may begin after human contract acceptance when it does not depend on unaccepted implementation behavior and its paths do not overlap other writers"
+    "explicit_notebook_exception": "Explicit notebook construction may run concurrently with implementation only after explicit human contract acceptance and completed ownership and implementation planning, when the accepted plan records independence from unaccepted implementation behavior and exact paths do not overlap."
   },
+  "material_contract_change_definition": [
+    "capability scope",
+    "physical model",
+    "approximation",
+    "mathematical convention",
+    "numerical convention",
+    "public API",
+    "intended use",
+    "learning objective",
+    "canonical-artifact requirement",
+    "evidence obligation",
+    "reference",
+    "invariant",
+    "tolerance",
+    "claim boundary"
+  ],
   "chain": [
     {
-      "stage": "human_capability_scope",
+      "stage": "bounded_intake",
       "order": 1,
+      "type": "parent_coordination",
+      "role": "parent coordinator",
+      "records": [
+        "requested outcome",
+        "repository, branch, and starting revision",
+        "complete working-tree state without inspecting unrelated untracked contents",
+        "initially allowed and prohibited paths",
+        "known user work",
+        "protected decisions",
+        "expected evidence",
+        "review mode",
+        "stop conditions",
+        "successor authorization"
+      ]
+    },
+    {
+      "stage": "human_capability_scope",
+      "order": 2,
       "type": "human_checkpoint",
       "state": "inactive",
+      "requires": [
+        "bounded_intake:completed"
+      ],
       "required_decision": "Human identifies one bounded capability, learner purpose, intended use, initial exclusions, and authority to draft a contract.",
-      "blocks": ["contract_drafting"],
+      "blocks": [
+        "contract_drafting"
+      ],
       "capability_before_resolution": null
     },
     {
       "stage": "contract_drafting",
-      "order": 2,
+      "order": 3,
       "type": "writer",
       "agent": "physkit.physkit-capability-architect",
-      "requires": ["human_capability_scope:affirmatively-resolved", "contract-path-ownership:exact-and-recorded"],
+      "requires": [
+        "bounded_intake:completed",
+        "human_capability_scope:affirmatively-resolved",
+        "contract-path-ownership:exact-and-recorded",
+        "agent_startup_preflight:passed"
+      ],
+      "must_define": [
+        "exactly one artifact path A, B, or C",
+        "all five evidence-class dispositions"
+      ],
       "may_write_only": "task-owned contract or architecture paths"
     },
     {
       "stage": "human_contract_acceptance",
-      "order": 3,
+      "order": 4,
       "type": "human_checkpoint",
-      "requires": ["contract_drafting:completed"],
-      "blocks": ["implementation", "software_and_numerical_verification", "explicit_notebook_construction", "library_notebook_reconstruction", "exploration_and_documentation"],
+      "requires": [
+        "contract_drafting:completed",
+        "artifact-path-selection:exactly-one",
+        "five-evidence-class-dispositions:complete"
+      ],
+      "blocks": [
+        "ownership_and_implementation_plan",
+        "implementation",
+        "evidence_production_and_assessment",
+        "explicit_notebook_construction",
+        "library_notebook_reconstruction",
+        "exploration_and_documentation",
+        "alternative_pedagogical_artifact"
+      ],
       "acceptance_inference": false
     },
     {
       "stage": "ownership_and_implementation_plan",
-      "order": 4,
+      "order": 5,
       "type": "parent_coordination",
       "role": "parent coordinator",
-      "requires": ["human_contract_acceptance:explicitly-accepted"],
-      "result_required": "exact nonoverlapping path ownership, dependencies, checks, handoffs, exclusions, correction routing, and stop rules"
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted"
+      ],
+      "result_required": "exact nonoverlapping path ownership, selected artifact path, conditional applicability and accepted skip clauses, all five evidence-class dispositions and paths, dependencies, concurrency independence, checks, handoffs, exclusions, correction routing, correction-cycle count and stop rules"
     },
     {
       "stage": "implementation",
-      "order": 5,
-      "type": "writer",
-      "agent": "physkit.physkit-implementation",
-      "requires": ["human_contract_acceptance:explicitly-accepted", "ownership_and_implementation_plan:completed"],
-      "may_write_only": "exact task-owned paths under src/physkit"
-    },
-    {
-      "stage": "software_and_numerical_verification",
       "order": 6,
-      "type": "test_and_evidence_writer",
-      "agent": "physkit.physkit-verification",
-      "requires": ["implementation:completed", "verification-path-ownership:exact-and-recorded"],
-      "evidence_classes_must_remain_distinct": ["software verification", "numerical verification", "physical validation", "pedagogical validation", "uncertainty quantification"]
+      "type": "conditional_writer",
+      "agent": "physkit.physkit-implementation",
+      "applicable_when": "accepted-artifact-path:A",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "ownership_and_implementation_plan:completed",
+        "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "implementation-path-ownership:exact-and-recorded",
+        "agent_startup_preflight:passed"
+      ],
+      "skip_requires": [
+        "accepted-contract-clause:path-B-or-C",
+        "human-approved-rationale:recorded"
+      ],
+      "may_write_only": "exact task-owned paths under src/physkit"
     },
     {
       "stage": "explicit_notebook_construction",
       "order": 7,
-      "type": "notebook_documentation_writer",
+      "type": "conditional_notebook_documentation_writer",
       "agent": "physkit.physkit-notebook-documentation",
-      "earliest_start": "human_contract_acceptance:explicitly-accepted",
-      "requires": ["notebook-documentation-path-ownership:exact-and-recorded"],
-      "must_not_depend_on": "unaccepted implementation behavior",
+      "applicable_when": "accepted-artifact-path:A-or-B",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "ownership_and_implementation_plan:completed",
+        "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "notebook-documentation-path-ownership:exact-and-recorded",
+        "agent_startup_preflight:passed"
+      ],
+      "concurrent_with_implementation_only_if": [
+        "accepted-plan:records-independence-from-unaccepted-implementation-behavior",
+        "exact-paths:nonoverlapping"
+      ],
+      "skip_requires": [
+        "accepted-contract-clause:path-C",
+        "human-approved-rationale:recorded"
+      ],
       "content": "explicit physical, mathematical, numerical, code, and direct-verification construction without hiding the target behind PhysKit"
     },
     {
       "stage": "library_notebook_reconstruction",
       "order": 8,
-      "type": "notebook_documentation_writer",
+      "type": "conditional_notebook_documentation_writer",
       "agent": "physkit.physkit-notebook-documentation",
-      "requires": ["implementation:completed", "accepted-public-api:implemented", "explicit_notebook_construction:completed"],
+      "applicable_when": "accepted-artifact-path:A",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "ownership_and_implementation_plan:completed",
+        "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "implementation:completed",
+        "accepted-public-api:implemented",
+        "explicit_notebook_construction:completed",
+        "notebook-documentation-path-ownership:exact-and-recorded",
+        "agent_startup_preflight:passed"
+      ],
+      "skip_requires": [
+        "accepted-contract-clause:path-B-or-C",
+        "human-approved-rationale:recorded"
+      ],
       "content": "reconstruct the shared baseline with the accepted PhysKit API and explicitly compare it with Stage 7"
     },
     {
       "stage": "exploration_and_documentation",
       "order": 9,
-      "type": "notebook_documentation_writer",
+      "type": "conditional_notebook_documentation_writer",
       "agent": "physkit.physkit-notebook-documentation",
-      "requires": ["library_notebook_reconstruction:completed"],
-      "content": "multiple cases, parameter sweeps, comparisons, visualization, bounded interpretation, and accurate user documentation"
+      "applicable_when": "accepted-artifact-path:A-or-B",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "ownership_and_implementation_plan:completed",
+        "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "selected-path-prior-notebook-stages:completed",
+        "notebook-documentation-path-ownership:exact-and-recorded",
+        "agent_startup_preflight:passed"
+      ],
+      "skip_requires": [
+        "accepted-contract-clause:path-C",
+        "human-approved-rationale:recorded"
+      ],
+      "content": "multiple cases, parameter sweeps, comparisons, visualization, bounded interpretation, and accurate user documentation as applicable"
+    },
+    {
+      "stage": "alternative_pedagogical_artifact",
+      "order": 10,
+      "type": "conditional_notebook_documentation_writer",
+      "agent": "physkit.physkit-notebook-documentation",
+      "applicable_when": "accepted-artifact-path:C",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "ownership_and_implementation_plan:completed",
+        "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "alternative-artifact-path-ownership:exact-and-recorded",
+        "agent_startup_preflight:passed"
+      ],
+      "skip_requires": [
+        "accepted-contract-clause:path-A-or-B",
+        "human-approved-rationale:recorded"
+      ],
+      "content": "human-approved adequate alternative pedagogical representation with rationale and claim limits"
+    },
+    {
+      "stage": "evidence_production_and_assessment",
+      "order": 11,
+      "type": "conditional_multi_role_evidence_production_and_assessment",
+      "applicable_when": "always as a disposition-and-assessment stage; actual production is obligation-driven and may be completed, incomplete, deferred, or human-accepted Not applicable per class",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "ownership_and_implementation_plan:completed",
+        "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "every-selected-artifact-path-required-stage-except-evidence:completed",
+        "each-evidence-producer-path-ownership:exact-and-recorded-when-writing",
+        "each-evidence-producer-startup-preflight:passed"
+      ],
+      "must_report": "all five distinct evidence dispositions, including incomplete or deferred evidence, claim limits, reviewers, and final-handoff blocking status; the stage itself may not be skipped",
+      "default_agent": "physkit.physkit-verification",
+      "responsible_roles": "accepted five-class evidence matrix; each producer writes only exact assigned paths and reviewers remain read-only"
     },
     {
       "stage": "integration_review",
-      "order": 10,
+      "order": 12,
       "type": "independent_read_only_review",
       "agent": "physkit.physkit-capability-integration-reviewer",
-      "requires": ["implementation:completed", "software_and_numerical_verification:completed", "exploration_and_documentation:completed"],
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "ownership_and_implementation_plan:completed",
+        "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "every-selected-artifact-path-required-stage:completed",
+        "every-skipped-stage:accepted-clause-and-human-rationale-recorded",
+        "five-evidence-class-dispositions:complete-and-truthful",
+        "all-writer-startup-preflights:passed",
+        "reviewer-startup-preflight:passed"
+      ],
       "read_only": true
     },
     {
-      "stage": "owner_specific_correction",
-      "order": 11,
+      "stage": "correction_classification",
+      "order": 13,
+      "type": "parent_coordination",
+      "role": "parent coordinator",
+      "requires": [
+        "latest-integration-review:completed"
+      ],
+      "outcomes": [
+        "no-material-findings",
+        "accepted-in-scope-nonmaterial-conformance",
+        "material-protected-decision",
+        "material-contract-revision",
+        "bounded-cycle-exhausted"
+      ],
+      "rule": "Classify before any correction; final human acceptance cannot retroactively replace a required contract-reacceptance gate."
+    },
+    {
+      "stage": "nonmaterial_owner_specific_correction",
+      "order": 14,
       "type": "conditional_multi_owner_correction",
-      "condition": "integration_review reports accepted in-scope findings",
+      "condition": "correction_classification:accepted-in-scope-nonmaterial-conformance and correction_cycle_count<1",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "correction_classification:completed",
+        "all-correcting-writer-startup-preflights:passed"
+      ],
       "routing": {
-        "contract": "physkit.physkit-capability-architect",
+        "contract-clarification-with-no-protected-decision-change": "physkit.physkit-capability-architect",
         "source": "physkit.physkit-implementation",
         "test_or_evidence": "physkit.physkit-verification",
         "notebook_or_documentation": "physkit.physkit-notebook-documentation",
         "coordination": "parent coordinator"
       },
-      "scope_rule": "each writer remains within unchanged exact ownership; no concurrent overlapping corrections"
+      "scope_rule": "each writer remains within unchanged exact ownership; no concurrent overlapping corrections",
+      "counter_update": "increment correction_cycle_count"
+    },
+    {
+      "stage": "material_contract_correction",
+      "order": 15,
+      "type": "conditional_writer",
+      "agent": "physkit.physkit-capability-architect",
+      "condition": "correction_classification:material-contract-revision and correction_cycle_count<1",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "correction_classification:completed",
+        "contract-path-ownership:exact-and-recorded",
+        "agent_startup_preflight:passed"
+      ],
+      "result": "revised contract proposal",
+      "invalidates": [
+        "ownership_and_implementation_plan",
+        "implementation",
+        "evidence_production_and_assessment",
+        "explicit_notebook_construction",
+        "library_notebook_reconstruction",
+        "exploration_and_documentation",
+        "alternative_pedagogical_artifact",
+        "integration_review",
+        "parent_verification"
+      ],
+      "must_not_route_to": "verification_replay"
+    },
+    {
+      "stage": "renewed_human_contract_acceptance",
+      "order": 16,
+      "type": "conditional_human_checkpoint",
+      "condition": "material_contract_correction:completed",
+      "requires": [
+        "material_contract_correction:revised-proposal-completed"
+      ],
+      "acceptance_inference": false,
+      "blocks": [
+        "revised_ownership_and_implementation_plan",
+        "all-invalidated-dependent-work"
+      ]
+    },
+    {
+      "stage": "revised_ownership_and_implementation_plan",
+      "order": 17,
+      "type": "conditional_parent_coordination",
+      "role": "parent coordinator",
+      "condition": "renewed_human_contract_acceptance:explicitly-accepted",
+      "requires": [
+        "renewed_human_contract_acceptance:explicitly-accepted"
+      ],
+      "result_required": "recompute exact ownership, selected artifact path, all evidence dispositions, dependencies, invalidated work replay, and stop rules before returning to applicable Stage 6-12 work"
     },
     {
       "stage": "verification_replay",
-      "order": 12,
+      "order": 18,
       "type": "conditional_test_and_evidence_writer",
       "agent": "physkit.physkit-verification",
-      "condition": "owner_specific_correction executed",
-      "requires": ["owner_specific_correction:completed"],
-      "rule": "replay every affected deterministic and evidence-producing check without changing accepted tolerances"
+      "condition": "nonmaterial_owner_specific_correction:completed",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
+        "nonmaterial_owner_specific_correction:completed",
+        "ownership_and_implementation_plan:completed",
+        "verification-or-evidence-path-ownership:exact-and-recorded-when-writing",
+        "agent_startup_preflight:passed"
+      ],
+      "rule": "replay every affected deterministic and evidence-producing check without changing accepted criteria"
     },
     {
       "stage": "integration_rereview",
-      "order": 13,
+      "order": 19,
       "type": "conditional_independent_read_only_review",
       "agent": "physkit.physkit-capability-integration-reviewer",
-      "condition": "owner_specific_correction executed",
-      "requires": ["verification_replay:successful"],
+      "condition": "verification_replay:completed",
+      "requires": [
+        "human_contract_acceptance:explicitly-accepted",
+        "verification_replay:successful",
+        "all-writer-startup-preflights:passed",
+        "reviewer-startup-preflight:passed"
+      ],
       "read_only": true
     },
     {
+      "stage": "correction_cycle_disposition",
+      "order": 20,
+      "type": "parent_coordination",
+      "role": "parent coordinator",
+      "requires": [
+        "latest-integration-review-or-rereview:completed"
+      ],
+      "routes": {
+        "no-material-findings": "parent_verification",
+        "ordinary-correctable-finding-and-correction_cycle_count<1": "nonmaterial_owner_specific_correction",
+        "material-protected-decision": "human_escalation",
+        "material-contract-revision-and-correction_cycle_count<1": "material_contract_correction",
+        "any-finding-and-correction_cycle_count>=1": "human_escalation"
+      },
+      "route_precedence": "any finding at or above the cycle limit routes to human escalation before finding-type routing",
+      "bounded_loop": "maximum one automatic ordinary correction/replay/re-review cycle; record count; no unlimited loop"
+    },
+    {
+      "stage": "human_escalation",
+      "order": 21,
+      "type": "conditional_human_checkpoint",
+      "condition": "material protected decision, or any new or unresolved finding when correction_cycle_count>=1",
+      "requires": [
+        "correction_cycle_disposition:human-escalation-required"
+      ],
+      "outcomes": [
+        "remand-within-scope",
+        "limit-at-owned-stage-or-checkpoint",
+        "reject",
+        "defer"
+      ],
+      "scope_rule": "No outcome silently widens scope; new protected or expanded work requires explicit human authorization."
+    },
+    {
       "stage": "parent_verification",
-      "order": 14,
+      "order": 22,
       "type": "parent_verification",
       "role": "parent coordinator",
-      "requires": ["latest-verification:successful", "latest-integration-review:no-unresolved-material-findings"],
+      "requires": [
+        "correction_cycle_disposition:no-material-findings",
+        "latest-applicable-verification:successful-or-human-accepted-truthfully-limited",
+        "evidence-dispositions:no-unresolved-blocking-and-no-required-incomplete-marked-blocking",
+        "every-nonblocking-incomplete-or-deferred-disposition:human-accepted-with-explicit-claim-limit",
+        "latest-integration-review:no-unresolved-material-findings",
+        "correction-cycle-count:recorded",
+        "all-selected-path-stages:resolved"
+      ],
       "is_human_acceptance": false
     },
     {
       "stage": "human_final_acceptance",
-      "order": 15,
+      "order": 23,
       "type": "human_checkpoint",
-      "requires": ["parent_verification:successful"],
+      "requires": [
+        "parent_verification:successful"
+      ],
       "decision_owner": "human",
+      "allowed_dispositions": [
+        "accept",
+        "remand",
+        "limit",
+        "reject",
+        "defer"
+      ],
+      "routing": {
+        "accept": "closeout",
+        "remand": "appropriate-owned-stage-or-human-checkpoint",
+        "limit": "appropriate-owned-stage-or-human-checkpoint-with-explicit-claim-limit",
+        "reject": "stop",
+        "defer": "stop"
+      },
       "acceptance_inference": false,
       "lifecycle_promotion": "outside this chain unless separately human-authorized"
     },
     {
       "stage": "closeout",
-      "order": 16,
+      "order": 24,
       "type": "closeout",
-      "requires": ["human_final_acceptance:explicitly-accepted"],
+      "requires": [
+        "human_final_acceptance:explicitly-accepted"
+      ],
       "automatic_successor": false,
       "successor_authorized": false,
       "successor": null
