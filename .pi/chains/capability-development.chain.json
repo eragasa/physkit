@@ -2,10 +2,6 @@
   "name": "PHYSKIT-CAPABILITY-DEVELOPMENT",
   "package": "physkit",
   "description": "Reusable human-gated workflow for bounded PhysKit capability development without selecting a capability.",
-  "status": "inactive",
-  "reusable": true,
-  "active_task": null,
-  "selected_capability": null,
   "execution": {
     "default_concurrency": false,
     "multiple_specialized_writers_required": true,
@@ -13,8 +9,7 @@
     "review_read_only": true,
     "ordinary_correction_cycle_limit": 1,
     "lifecycle_promotion_in_scope": false,
-    "successor_authorized": false,
-    "successor": null
+    "successor_requires_separate_human_authorization": true
   },
   "ownership_model": {
     "parent_coordinator": "bounded intake, activation, task and active-state coordination, exact ownership assignment, correction classification and routing, parent verification, and human checkpoint presentation",
@@ -35,60 +30,102 @@
     ],
     "required": [
       "read and reconcile AGENTS.md",
-      "read and reconcile .pi/active-state.json",
-      "confirm active task and active chain",
-      "read the active task record and active chain",
-      "read the human-accepted capability contract when it exists; initial contract drafting must verify that its authorized stage explicitly permits the contract to be absent",
+      "read and reconcile .pi/active-state.json as the sole runtime authority",
+      "read the reusable chain template",
+      "read the active task record",
+      "verify active state and the active task explicitly instantiate this template ID for a human-authorized capability task",
+      "verify the role current stage and exact ownership are active in that task instance",
+      "read the human-accepted capability contract when it exists; initial contract drafting must verify that its authorized instance stage explicitly permits the contract to be absent",
       "confirm exact task-owned and prohibited paths",
       "read applicable evidence obligations",
       "inspect repository identity, starting revision, branch, remotes, and complete working-tree state without inspecting unrelated untracked contents",
       "confirm stop conditions and successor authorization"
     ],
-    "fail_closed_if": "authority is missing, stale, contradictory, ambiguous, inactive, or does not assign the role's exact work",
-    "reviewer_additional_check": "verify every writer recorded successful startup preflight before reviewing"
+    "fail_closed_if": "runtime authority or task-instance authority is missing, stale, contradictory, ambiguous, inactive, does not instantiate this template ID, or does not activate the role current stage and exact work; template availability alone is never activation",
+    "reviewer_additional_check": "verify every writer recorded successful startup preflight before reviewing",
+    "template_rule": "Do not fail merely because the immutable reusable template has no mutable active-task status; fail when active state and the active task lack an active authorized instance."
   },
   "artifact_path_selection": {
     "decision_owner": "human through the accepted capability contract",
     "exactly_one_required": true,
     "agents_may_select": false,
+    "independent_contract_axes": {
+      "reusable_library_interface": [
+        "required",
+        "not-required-with-human-rationale"
+      ],
+      "notebook_artifact": [
+        "required",
+        "exception-with-human-rationale"
+      ]
+    },
+    "axis_independence_rule": "No decision on reusable_library_interface determines notebook_artifact, and no notebook decision determines reusable library applicability.",
     "paths": {
       "A": {
-        "name": "library-backed pedagogical capability",
+        "name": "library plus notebook",
+        "axis_values": {
+          "reusable_library_interface": "required",
+          "notebook_artifact": "required"
+        },
         "required_stages": [
           "implementation",
-          "evidence_production_and_assessment",
           "explicit_notebook_construction",
           "library_notebook_reconstruction",
-          "exploration_and_documentation"
-        ],
-        "required_pattern": "explicit construction, PhysKit reconstruction, and exploration/documentation"
+          "exploration_and_documentation",
+          "evidence_production_and_assessment"
+        ]
       },
       "B": {
-        "name": "notebook-only capability",
+        "name": "notebook only",
+        "axis_values": {
+          "reusable_library_interface": "not-required-with-human-rationale",
+          "notebook_artifact": "required"
+        },
         "required_stages": [
-          "evidence_production_and_assessment",
           "explicit_notebook_construction",
-          "exploration_and_documentation"
+          "exploration_and_documentation",
+          "evidence_production_and_assessment"
         ],
-        "prohibits": [
-          "inventing a reusable public API",
-          "library_notebook_reconstruction"
-        ]
+        "excluded_unless_separately_authorized": [
+          "reusable public API",
+          "production implementation",
+          "PhysKit notebook reconstruction"
+        ],
+        "lifecycle_inference": false
       },
       "C": {
-        "name": "human-approved notebook or reusable-interface exception",
+        "name": "library plus approved notebook exception",
+        "axis_values": {
+          "reusable_library_interface": "required",
+          "notebook_artifact": "exception-with-human-rationale"
+        },
         "required_stages": [
-          "evidence_production_and_assessment",
-          "alternative_pedagogical_artifact"
+          "implementation",
+          "exploration_and_documentation",
+          "alternative_pedagogical_artifact",
+          "evidence_production_and_assessment"
         ],
-        "contract_must_name": [
-          "explicit rationale",
-          "adequate alternative pedagogical artifact",
-          "affected claims and limitations"
-        ]
+        "alternative_requirement": "demonstrate or explain accepted library behavior to the extent required by the accepted contract"
+      },
+      "D": {
+        "name": "neither library nor notebook",
+        "axis_values": {
+          "reusable_library_interface": "not-required-with-human-rationale",
+          "notebook_artifact": "exception-with-human-rationale"
+        },
+        "required_stages": [
+          "alternative_pedagogical_artifact",
+          "evidence_production_and_assessment"
+        ],
+        "separate_rationales_required": [
+          "reusable library omission rationale",
+          "notebook exception rationale"
+        ],
+        "claim_limits_required": true
       }
     },
-    "skip_rule": "Every skipped stage must cite the accepted contract clause and human-approved rationale; missing work is neither an exception nor Not applicable."
+    "path_consistency_rule": "The selected path must exactly match the two separately accepted axis values.",
+    "skip_rule": "Every skipped stage must cite its axis-specific accepted contract clause and human-approved rationale; one axis rationale cannot satisfy the other, and missing work is neither an exception nor Not applicable."
   },
   "evidence_disposition_contract": {
     "classes": [
@@ -111,6 +148,7 @@
       "human-accepted criterion or unresolved criterion",
       "reviewer",
       "result state",
+      "observed outcome: passed, failed, indeterminate, or not-run",
       "limitations and claim boundary",
       "whether unresolved status blocks final handoff"
     ],
@@ -123,7 +161,14 @@
     ],
     "candidate_rule": "A bounded Candidate outcome may retain required-incomplete or deferred evidence only with explicit claim limits and an explicit blocking/nonblocking final-handoff disposition accepted by a human.",
     "authority_rule": "Agents collect and assess evidence; only humans accept applicability, criteria, adequacy, physical validation, and pedagogical validation.",
-    "anti_collapse_rule": "Deferred, missing, difficult, unavailable, and unreviewed evidence are not Not applicable and are not satisfied evidence."
+    "anti_collapse_rule": "Failed, deferred, missing, difficult, unavailable, and unreviewed evidence are not Not applicable and are not satisfied evidence.",
+    "allowed_observed_outcomes": [
+      "passed",
+      "failed",
+      "indeterminate",
+      "not-run"
+    ],
+    "failure_recording_rule": "A required evidence obligation with observed outcome failed remains required-incomplete and must also record observed outcome failed, method, provenance, limitations, claim boundary, and blocking disposition; failure must never be hidden as mere absence."
   },
   "concurrency_rules": {
     "default": "ordered and sequential",
@@ -170,15 +215,13 @@
       "stage": "human_capability_scope",
       "order": 2,
       "type": "human_checkpoint",
-      "state": "inactive",
       "requires": [
         "bounded_intake:completed"
       ],
       "required_decision": "Human identifies one bounded capability, learner purpose, intended use, initial exclusions, and authority to draft a contract.",
       "blocks": [
         "contract_drafting"
-      ],
-      "capability_before_resolution": null
+      ]
     },
     {
       "stage": "contract_drafting",
@@ -192,7 +235,8 @@
         "agent_startup_preflight:passed"
       ],
       "must_define": [
-        "exactly one artifact path A, B, or C",
+        "exactly one artifact path A, B, C, or D",
+        "both independent applicability axes and any required human rationales",
         "all five evidence-class dispositions"
       ],
       "may_write_only": "task-owned contract or architecture paths"
@@ -203,7 +247,8 @@
       "type": "human_checkpoint",
       "requires": [
         "contract_drafting:completed",
-        "artifact-path-selection:exactly-one",
+        "artifact-path-selection:exactly-one-of-A-B-C-D",
+        "applicability-axes:separately-recorded-and-path-consistent",
         "five-evidence-class-dispositions:complete"
       ],
       "blocks": [
@@ -225,14 +270,14 @@
       "requires": [
         "human_contract_acceptance:explicitly-accepted"
       ],
-      "result_required": "exact nonoverlapping path ownership, selected artifact path, conditional applicability and accepted skip clauses, all five evidence-class dispositions and paths, dependencies, concurrency independence, checks, handoffs, exclusions, correction routing, correction-cycle count and stop rules"
+      "result_required": "exact nonoverlapping path ownership, separately accepted library/notebook axis values, selected consistent artifact path, conditional applicability and axis-specific skip clauses, all five evidence-class dispositions and paths, dependencies, concurrency independence, checks, handoffs, exclusions, correction routing, correction-cycle count and stop rules"
     },
     {
       "stage": "implementation",
       "order": 6,
       "type": "conditional_writer",
       "agent": "physkit.physkit-implementation",
-      "applicable_when": "accepted-artifact-path:A",
+      "applicable_when": "accepted-artifact-path:A-or-C and reusable_library_interface:required",
       "requires": [
         "human_contract_acceptance:explicitly-accepted",
         "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
@@ -242,8 +287,8 @@
         "agent_startup_preflight:passed"
       ],
       "skip_requires": [
-        "accepted-contract-clause:path-B-or-C",
-        "human-approved-rationale:recorded"
+        "accepted-contract-clause:reusable_library_interface:not-required-with-human-rationale",
+        "human-approved-library-omission-rationale:recorded"
       ],
       "may_write_only": "exact task-owned paths under src/physkit"
     },
@@ -252,7 +297,7 @@
       "order": 7,
       "type": "conditional_notebook_documentation_writer",
       "agent": "physkit.physkit-notebook-documentation",
-      "applicable_when": "accepted-artifact-path:A-or-B",
+      "applicable_when": "accepted-artifact-path:A-or-B and notebook_artifact:required",
       "requires": [
         "human_contract_acceptance:explicitly-accepted",
         "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
@@ -266,8 +311,8 @@
         "exact-paths:nonoverlapping"
       ],
       "skip_requires": [
-        "accepted-contract-clause:path-C",
-        "human-approved-rationale:recorded"
+        "accepted-contract-clause:notebook_artifact:exception-with-human-rationale",
+        "human-approved-notebook-exception-rationale-and-claim-limits:recorded"
       ],
       "content": "explicit physical, mathematical, numerical, code, and direct-verification construction without hiding the target behind PhysKit"
     },
@@ -276,7 +321,7 @@
       "order": 8,
       "type": "conditional_notebook_documentation_writer",
       "agent": "physkit.physkit-notebook-documentation",
-      "applicable_when": "accepted-artifact-path:A",
+      "applicable_when": "accepted-artifact-path:A only; both reusable_library_interface and notebook_artifact are required",
       "requires": [
         "human_contract_acceptance:explicitly-accepted",
         "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
@@ -288,39 +333,54 @@
         "notebook-documentation-path-ownership:exact-and-recorded",
         "agent_startup_preflight:passed"
       ],
-      "skip_requires": [
-        "accepted-contract-clause:path-B-or-C",
-        "human-approved-rationale:recorded"
-      ],
-      "content": "reconstruct the shared baseline with the accepted PhysKit API and explicitly compare it with Stage 7"
+      "content": "reconstruct the shared baseline with the accepted PhysKit API and explicitly compare it with Stage 7",
+      "skip_requires_by_path": {
+        "B": [
+          "accepted-contract-clause:reusable_library_interface:not-required-with-human-rationale"
+        ],
+        "C": [
+          "accepted-contract-clause:notebook_artifact:exception-with-human-rationale"
+        ],
+        "D": [
+          "accepted-contract-clause:reusable_library_interface:not-required-with-human-rationale",
+          "accepted-contract-clause:notebook_artifact:exception-with-human-rationale"
+        ]
+      }
     },
     {
       "stage": "exploration_and_documentation",
       "order": 9,
       "type": "conditional_notebook_documentation_writer",
       "agent": "physkit.physkit-notebook-documentation",
-      "applicable_when": "accepted-artifact-path:A-or-B",
+      "applicable_when": "accepted-artifact-path:A-or-B-or-C",
       "requires": [
         "human_contract_acceptance:explicitly-accepted",
         "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
         "ownership_and_implementation_plan:completed",
         "revised_ownership_and_implementation_plan:completed-when-material-revision",
-        "selected-path-prior-notebook-stages:completed",
+        "selected-path-prior-artifact-stages:completed",
+        "implementation:completed-when-path-C",
         "notebook-documentation-path-ownership:exact-and-recorded",
         "agent_startup_preflight:passed"
       ],
       "skip_requires": [
-        "accepted-contract-clause:path-C",
-        "human-approved-rationale:recorded"
+        "accepted-contract-clause:path-D",
+        "accepted-contract-clauses:both-library-omission-and-notebook-exception-recorded",
+        "human-approved-resulting-claim-limits:recorded"
       ],
-      "content": "multiple cases, parameter sweeps, comparisons, visualization, bounded interpretation, and accurate user documentation as applicable"
+      "content": "Path A: exploration and API-consistent user documentation; Path B: appropriate exploration/documentation without library claims; Path C: API-consistent user documentation; Path D: skipped only under both separate accepted omission clauses.",
+      "mode_by_path": {
+        "A": "exploration and API-consistent user documentation",
+        "B": "appropriate notebook exploration and documentation without a reusable API claim",
+        "C": "API-consistent user documentation for the implemented accepted library behavior"
+      }
     },
     {
       "stage": "alternative_pedagogical_artifact",
       "order": 10,
       "type": "conditional_notebook_documentation_writer",
       "agent": "physkit.physkit-notebook-documentation",
-      "applicable_when": "accepted-artifact-path:C",
+      "applicable_when": "accepted-artifact-path:C-or-D and notebook_artifact:exception-with-human-rationale",
       "requires": [
         "human_contract_acceptance:explicitly-accepted",
         "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
@@ -330,16 +390,16 @@
         "agent_startup_preflight:passed"
       ],
       "skip_requires": [
-        "accepted-contract-clause:path-A-or-B",
-        "human-approved-rationale:recorded"
+        "accepted-contract-clause:notebook_artifact:required",
+        "accepted-artifact-path:A-or-B"
       ],
-      "content": "human-approved adequate alternative pedagogical representation with rationale and claim limits"
+      "content": "Human-approved adequate alternative pedagogical representation with notebook-exception rationale and claim limits; for Path C it demonstrates or explains accepted library behavior to the contract-required extent; Path D additionally records the separate accepted library-omission rationale."
     },
     {
       "stage": "evidence_production_and_assessment",
       "order": 11,
       "type": "conditional_multi_role_evidence_production_and_assessment",
-      "applicable_when": "always as a disposition-and-assessment stage; actual production is obligation-driven and may be completed, incomplete, deferred, or human-accepted Not applicable per class",
+      "applicable_when": "always as a disposition-and-assessment stage; each class records both obligation state and observed outcome, including completed/passed, incomplete/failed, deferred, unresolved-blocking, or Not applicable only with human-accepted rationale",
       "requires": [
         "human_contract_acceptance:explicitly-accepted",
         "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
@@ -363,8 +423,9 @@
         "renewed_human_contract_acceptance:explicitly-accepted-when-material-revision",
         "ownership_and_implementation_plan:completed",
         "revised_ownership_and_implementation_plan:completed-when-material-revision",
+        "applicability-axes:separate-and-selected-path-consistent",
         "every-selected-artifact-path-required-stage:completed",
-        "every-skipped-stage:accepted-clause-and-human-rationale-recorded",
+        "every-skipped-stage:axis-specific-accepted-clause-and-human-rationale-recorded",
         "five-evidence-class-dispositions:complete-and-truthful",
         "all-writer-startup-preflights:passed",
         "reviewer-startup-preflight:passed"
@@ -384,7 +445,8 @@
         "accepted-in-scope-nonmaterial-conformance",
         "material-protected-decision",
         "material-contract-revision",
-        "bounded-cycle-exhausted"
+        "bounded-cycle-exhausted",
+        "evidence-result-violates-accepted-blocking-rule"
       ],
       "rule": "Classify before any correction; final human acceptance cannot retroactively replace a required contract-reacceptance gate."
     },
@@ -503,7 +565,8 @@
         "ordinary-correctable-finding-and-correction_cycle_count<1": "nonmaterial_owner_specific_correction",
         "material-protected-decision": "human_escalation",
         "material-contract-revision-and-correction_cycle_count<1": "material_contract_correction",
-        "any-finding-and-correction_cycle_count>=1": "human_escalation"
+        "any-finding-and-correction_cycle_count>=1": "human_escalation",
+        "evidence-result-violates-accepted-blocking-rule": "correction_classification-or-human_escalation"
       },
       "route_precedence": "any finding at or above the cycle limit routes to human escalation before finding-type routing",
       "bounded_loop": "maximum one automatic ordinary correction/replay/re-review cycle; record count; no unlimited loop"
@@ -531,14 +594,19 @@
       "role": "parent coordinator",
       "requires": [
         "correction_cycle_disposition:no-material-findings",
-        "latest-applicable-verification:successful-or-human-accepted-truthfully-limited",
-        "evidence-dispositions:no-unresolved-blocking-and-no-required-incomplete-marked-blocking",
-        "every-nonblocking-incomplete-or-deferred-disposition:human-accepted-with-explicit-claim-limit",
+        "evidence-package:every-required-class-has-truthful-recorded-result",
+        "evidence-package:applicability-and-nonapplicability-trace-to-accepted-contract",
+        "evidence-package:required-fields-and-provenance-present",
+        "evidence-package:incomplete-deferred-failed-unresolved-truthfully-labeled",
+        "evidence-results:consistent-with-accepted-blocking-rules",
+        "blocking-evidence-violations:none",
+        "applicable-deterministic-checks-and-independent-reviews:completed",
         "latest-integration-review:no-unresolved-material-findings",
         "correction-cycle-count:recorded",
         "all-selected-path-stages:resolved"
       ],
-      "is_human_acceptance": false
+      "is_human_acceptance": false,
+      "result": "evidence and artifact package ready for human disposition; no evidence, validation, canonical, lifecycle, or support conclusion is accepted by the parent"
     },
     {
       "stage": "human_final_acceptance",
@@ -563,7 +631,16 @@
         "defer": "stop"
       },
       "acceptance_inference": false,
-      "lifecycle_promotion": "outside this chain unless separately human-authorized"
+      "lifecycle_promotion": "outside this workflow unless independently human-authorized",
+      "owns_disposition_of": [
+        "implemented or pedagogical outcome",
+        "evidence claims and adequacy",
+        "physical-validation and pedagogical-validation conclusions",
+        "uncertainty conclusions",
+        "artifact roles and canonical proposals",
+        "claim limits",
+        "any separately proposed lifecycle disposition"
+      ]
     },
     {
       "stage": "closeout",
@@ -573,8 +650,39 @@
         "human_final_acceptance:explicitly-accepted"
       ],
       "automatic_successor": false,
-      "successor_authorized": false,
-      "successor": null
+      "successor_requires_separate_human_authorization": true
     }
-  ]
+  ],
+  "record_kind": "reusable-chain-template",
+  "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
+  "template_semantics": {
+    "availability": "available-for-human-authorized-instantiation",
+    "runtime_authority": ".pi/active-state.json",
+    "instantiation_rule": "A human-authorized active task instantiates this template by recording the template ID, task-instance identity, active stage, and exact ownership in active state and the active task record.",
+    "mutation_rule": "Capability activation and task-instance progress update active state and the task record; they do not mutate this reusable template into a current-state record.",
+    "template_is_runtime_state": false
+  },
+  "evidence_readiness_authority": {
+    "parent_verification_may_establish": [
+      "every required evidence class has a truthful recorded result",
+      "applicability and non-applicability rationales trace to the accepted contract",
+      "required methods, references, criteria, provenance, paths, reviewers, results, limitations, and claim boundaries are present",
+      "incomplete, deferred, failed, and unresolved evidence is labeled truthfully",
+      "no evidence result contradicts its accepted blocking rule",
+      "every applicable deterministic check and independent review completed",
+      "no unresolved material integration finding remains",
+      "the package is ready for human disposition"
+    ],
+    "parent_verification_must_not_accept": [
+      "evidence adequacy",
+      "physical-validation conclusions",
+      "pedagogical-validation conclusions",
+      "uncertainty conclusions",
+      "canonical-artifact status",
+      "lifecycle status",
+      "support claims"
+    ],
+    "contract_acceptance_rule": "Earlier contract acceptance accepts obligations and blocking rules, not later evidence results or adequacy.",
+    "blocking_violation_route": "Any incomplete, deferred, failed, or unresolved result that violates its accepted blocking rule routes to correction_classification or human_escalation before parent_verification."
+  }
 }

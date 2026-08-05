@@ -1,173 +1,190 @@
 # HARNESS-CAPABILITY-1 — Reusable capability-workflow bootstrap
 
-**Status:** Awaiting renewed human final review after REMAND correction
+**Status:** Awaiting renewed human review after second REMAND correction
 **Task ID:** `HARNESS-CAPABILITY-1`
-**Reusable chain ID:** `PHYSKIT-CAPABILITY-DEVELOPMENT` (`inactive`)
+**Reusable template ID:** `PHYSKIT-CAPABILITY-DEVELOPMENT`
 **Current checkpoint:** `HARNESS-CAPABILITY-1-HC01` (`pending-renewed-human-review`)
 
-## Human disposition and boundary
+## Human disposition and bounded intake
 
-The human remanded the workflow at revision `b5fab2caf6971b7866f85133c99387c70dc629a8` for material reusable-control-flow corrections. This is `REMAND`/`REVISE`, not acceptance. Administrative closeout is prohibited. HARNESS-CAPABILITY-1 remains active; no successor is authorized.
+The human issued a second `REMAND` at revision `eae9dbc4b960a8e655d9e281f7e25afea3e82a63`. This is not acceptance. HARNESS-CAPABILITY-1 remains active; closeout and successor work remain prohibited.
 
-The parent coordinator is the sole writer and owns exactly these existing paths:
-
-1. `.pi/active-state.json`
-2. `.pi/tasks/capability-workflow-bootstrap.md`
-3. `.pi/chains/capability-development.chain.json`
-4. `.pi/agents/physkit-capability-architect.md`
-5. `.pi/agents/physkit-implementation.md`
-6. `.pi/agents/physkit-verification.md`
-7. `.pi/agents/physkit-notebook-documentation.md`
-8. `.pi/agents/physkit-capability-integration-reviewer.md`
-
-No other file may be created or modified. The unrelated untracked `package-lock.json` remains uninspected, unmodified, and unstaged. No capability contract, source, test, evidence, notebook, documentation, API, physics, lifecycle, or pedagogical artifact is selected or changed. PIAB remains parked and remaining notebook work remains inactive.
-
-## Bounded bootstrap intake
-
-- **Requested outcome:** harden the existing reusable inactive workflow gates and stop for renewed human review.
-- **Repository / branch / starting revision:** `/Users/eugene/repos/physkit`; `main`; `b5fab2caf6971b7866f85133c99387c70dc629a8`.
-- **Complete starting working-tree state:** `main...origin/main` with only unrelated untracked `package-lock.json`; its contents were not inspected.
-- **Initially allowed paths:** exactly the eight paths above.
-- **Prohibited paths/work:** every other path; production capability work; chain activation; capability selection; PIAB; remaining notebook work; closeout; successor work.
-- **Known user work:** unrelated untracked `package-lock.json`, preserved without content inspection.
-- **Protected decisions:** capability scope, intended use, physical model, approximation, mathematical/numerical convention, API, learning objectives, canonical artifacts, evidence applicability/criteria/adequacy, physical and pedagogical validation, tolerances, claim boundaries, lifecycle, final acceptance, and successor authorization.
-- **Expected evidence:** duplicate-free JSON; exact agent resolution; gate and branch structure; five dry-run traces; independent fresh read-only review; parent verification; exact staged-path isolation; remote freshness; diff check.
-- **Review mode:** Mode A material control-plane correction with independent read-only review and renewed human review.
-- **Stop conditions:** missing or contradictory authority; unexpected worktree changes; scope/ownership ambiguity; failed deterministic check; unresolved reviewer material finding; inability to fast-forward push; any protected decision.
+- **Requested outcome:** separate library/notebook applicability, make the reusable chain an immutable template, separate evidence readiness from human evidence acceptance, validate, commit, push, and stop for renewed review.
+- **Repository / branch / starting revision:** `/Users/eugene/repos/physkit`; `main`; `eae9dbc4b960a8e655d9e281f7e25afea3e82a63`.
+- **Complete starting status:** `## main...origin/main` and unrelated untracked `package-lock.json` only; its contents were not inspected.
+- **Initially authorized paths:** active state, this task, chain template, architect, implementation, notebook/documentation, and integration-reviewer definitions.
+- **Conditionally authorized path:** `.pi/agents/physkit-verification.md`, modified only because Correction 2 explicitly requires every specialized role to use template/task-instance startup semantics; leaving its old “active chain” preflight would deterministically contradict the immutable-template model.
+- **Prohibited work:** every other path; creation of any file; capability selection or activation; capability source/test/notebook/evidence work; PIAB; remaining notebook work; closeout; successor work.
+- **Known user work:** untracked `package-lock.json`, preserved uninspected, unmodified, unstaged, and undeleted.
+- **Protected decisions:** all capability, scientific, numerical, API, pedagogical, evidence-acceptance, validation, canonical-artifact, lifecycle, support, final-acceptance, and successor decisions.
+- **Expected evidence:** duplicate-free JSON, agent and stage resolution, four paths and independent axes, immutable-template semantics, seven structural traces, fresh read-only review, parent verification, exact staging, remote freshness, and diff check.
+- **Review mode:** material control-plane correction with independent read-only review and renewed human checkpoint.
+- **Stop conditions:** missing/contradictory authority, unexpected worktree change, ambiguous ownership, failed deterministic check, unresolved material review finding, non-fast-forward remote, or protected decision.
 - **Successor authorization:** `false`; successor `null`.
 
-## Corrected reusable control flow
+The prior bounded-intake, explicit contract gate, five-class evidence records, material-contract reacceptance, bounded correction/escalation, and common role-preflight mechanisms are preserved.
 
-The reusable chain now has 24 ordered stages:
+## Immutable reusable-template model
 
-1. `bounded_intake`
-2. `human_capability_scope`
-3. `contract_drafting`
-4. `human_contract_acceptance`
-5. `ownership_and_implementation_plan`
-6. `implementation` (conditional path A)
-7. `explicit_notebook_construction` (conditional paths A/B)
-8. `library_notebook_reconstruction` (conditional path A)
-9. `exploration_and_documentation` (conditional paths A/B)
-10. `alternative_pedagogical_artifact` (conditional path C)
-11. `evidence_production_and_assessment` (mandatory five-class disposition stage after selected artifacts)
-12. `integration_review`
-13. `correction_classification`
-14. `nonmaterial_owner_specific_correction`
-15. `material_contract_correction`
-16. `renewed_human_contract_acceptance`
-17. `revised_ownership_and_implementation_plan`
-18. `verification_replay`
-19. `integration_rereview`
-20. `correction_cycle_disposition`
-21. `human_escalation`
-22. `parent_verification`
-23. `human_final_acceptance`
-24. `closeout`
+`.pi/chains/capability-development.chain.json` is a static `reusable-chain-template`, not current runtime state. It records:
 
-Human capability scope requires completed bounded intake. Every implementation, test/evidence, notebook, documentation, alternative-artifact, correction-writer, or replay stage includes `human_contract_acceptance:explicitly-accepted` in its actual prerequisite list. Material contract correction then creates a renewed acceptance gate and revised plan before invalidated dependent work can resume. Earliest-start prose is not used as the contract gate.
+- availability for human-authorized instantiation;
+- `.pi/active-state.json` as the sole runtime authority;
+- the requirement that a human-authorized active task instantiate the template ID with a task-instance identity, active stage, and exact ownership; and
+- the rule that activation and progress update active state and the task record, never the template’s runtime status.
 
-## Human-selected artifact path
+The template therefore has no mutable `status`, `active_task`, or `selected_capability` fields. Template availability alone grants no work. The current bootstrap records no capability-workflow instance, no selected capability, and no capability ownership.
 
-The accepted contract, never an agent, must select exactly one:
+Every specialized role reads the template but reconstructs current authority from active state and the active task. It must verify an explicit template-ID instantiation, active current stage, and exact ownership. It fails on missing or inactive task-instance authority, not merely because the immutable template has no mutable active status.
 
-- **A — library-backed pedagogical capability:** implementation, explicit notebook construction, PhysKit reconstruction, exploration/documentation, and evidence production/assessment.
-- **B — notebook-only capability:** explicit construction, appropriate exploration/documentation, and evidence production/assessment; reusable API and library reconstruction are prohibited.
-- **C — human-approved notebook or reusable-interface exception:** an adequate alternative pedagogical artifact and evidence production/assessment, with explicit rationale and affected claim limits.
+## Independent applicability axes and four paths
 
-Every skipped stage must cite the accepted contract clause and human-approved rationale. Missing work cannot be silently treated as an exception or `Not applicable`. Integration review waits for every required stage of the selected path and verifies every skip record.
+The accepted capability contract must separately record:
 
-Explicit construction additionally requires completed ownership and implementation planning and exact notebook/documentation ownership. It may overlap source implementation only when the accepted plan records independence from unaccepted implementation behavior and the paths are exact and nonoverlapping.
+```text
+reusable_library_interface: required | not-required-with-human-rationale
+notebook_artifact: required | exception-with-human-rationale
+```
 
-## Five-class evidence disposition mechanism
+No decision on one axis determines the other. The human-accepted contract selects exactly one path consistent with both values:
 
-The accepted contract and completed ownership plan must each record, for software verification, numerical verification, physical validation, pedagogical validation, and uncertainty quantification:
+| Path | Library axis | Notebook axis | Required stages | Axis-specific skips |
+|---|---|---|---|---|
+| A — library plus notebook | required | required | implementation; explicit notebook; PhysKit reconstruction; exploration/API documentation; five-class evidence | alternative artifact skipped because notebook is required |
+| B — notebook only | not required with human rationale | required | explicit notebook; appropriate exploration/documentation; five-class evidence | implementation and reconstruction skipped only under accepted library-omission clause; no lifecycle state inferred |
+| C — library plus approved notebook exception | required | exception with human rationale | implementation; API-consistent documentation; adequate alternative explaining/demonstrating accepted library behavior; five-class evidence | notebook stages skipped only under accepted notebook-exception clause and claim limits |
+| D — neither library nor notebook | not required with human rationale | exception with human rationale | adequate alternative; five-class evidence | production and notebook stages require two separate accepted clauses, two rationales, and resulting claim limits |
 
-- applicability or human-accepted non-applicability rationale;
-- required claim;
-- producer or responsible role;
-- exact artifact/evidence-summary path when written;
-- method or reference;
-- human-accepted criterion or unresolved criterion;
-- reviewer;
-- result state;
-- limitations and claim boundary; and
-- whether unresolved status blocks final handoff.
+One omission rationale cannot satisfy the other axis. A skipped stage must cite its exact accepted contract clause. Missing work is not an exception or Not applicable.
 
-Result states distinguish `required-completed`, `required-incomplete`, `not-applicable-human-accepted-rationale`, `deferred-explicit-claim-limitation`, and `unresolved-blocking`. A bounded Candidate handoff may retain incomplete or deferred evidence only with explicit claim limits and a human-owned blocking/nonblocking disposition. Deferred, missing, difficult, unavailable, or unreviewed evidence is neither Not applicable nor satisfied. Agents collect and assess; humans accept applicability, criteria, adequacy, physical validation, and pedagogical validation.
+## Preserved 24-stage dependency sequence
 
-## Contract correction, correction loop, and final dispositions
+1. bounded intake
+2. human capability scope
+3. contract drafting with both axes and A/B/C/D selection
+4. human contract acceptance
+5. ownership and implementation plan
+6. conditional implementation (A/C)
+7. conditional explicit notebook construction (A/B)
+8. conditional PhysKit notebook reconstruction (A)
+9. conditional exploration/user documentation (A/B/C)
+10. conditional alternative pedagogical artifact (C/D)
+11. mandatory five-class evidence production and assessment
+12. independent integration review
+13. correction classification
+14. bounded nonmaterial owner correction
+15. material contract correction
+16. renewed human contract acceptance
+17. revised ownership and implementation plan
+18. verification replay
+19. independent re-review
+20. correction-cycle disposition
+21. human escalation
+22. parent readiness verification
+23. human final disposition
+24. closeout only after explicit human acceptance
 
-The parent classifies findings before correction:
+Every claim-bearing writer retains actual `human_contract_acceptance:explicitly-accepted` prerequisites. Material contract revision still invalidates affected work, requires renewed acceptance and a revised plan, and cannot route directly to verification replay. One ordinary automatic correction/replay/re-review cycle remains the limit.
 
-- nonmaterial conformance clarification leaves every accepted protected decision unchanged;
-- material contract revision changes capability scope, physical model, approximation, mathematical/numerical convention, public API, intended use, learning objective, canonical-artifact requirement, evidence obligation, reference, invariant, tolerance, or claim boundary.
+## Evidence readiness versus human acceptance
 
-A material revision returns to the architect, produces a revised proposal, invalidates affected implementation/evidence/notebook/documentation/review results, stops at renewed explicit human contract acceptance, and requires a revised ownership and implementation plan. It cannot route directly to verification replay, and final acceptance cannot retroactively substitute for contract reacceptance.
+Parent verification checks readiness only. It verifies truthful five-class result records; traceability to accepted applicability clauses; required methods, references, criteria, provenance, paths, reviewers, results, limitations, and claim boundaries; truthful obligation states plus observed outcomes (`passed`, `failed`, `indeterminate`, or `not-run`); consistency with accepted blocking rules; completed applicable checks and independent review; no unresolved material integration finding; and readiness for human disposition. A failed required obligation remains `required-incomplete` with observed outcome `failed`; the failure cannot be hidden as absence.
 
-One automatic ordinary nonmaterial correction/replay/re-review cycle is permitted and counted. No material findings route to parent verification. In-scope nonmaterial findings route to the exact owner, replay every affected check, and receive independent re-review. A protected decision or material revision goes to its human gate. Any new or unresolved finding after the one-cycle limit requires human escalation.
+Parent verification does **not** accept evidence adequacy, physical or pedagogical validation, uncertainty conclusions, canonical-artifact status, lifecycle status, or support claims. Earlier contract acceptance accepts obligations and blocking rules, not later evidence results.
 
-Final human dispositions are `accept`, `remand`, `limit`, `reject`, or `defer`. Only explicit `accept` permits closeout. Remand and limit return to an exact owned stage or human checkpoint without widening scope; reject and defer stop.
+Any incomplete, deferred, failed, or unresolved result that violates its accepted blocking rule routes to correction classification or human escalation before parent verification. It cannot reach human final disposition through a readiness pass.
 
-## Mandatory role startup preflight
+The human final checkpoint alone owns acceptance, limitation, remand, rejection, or deferral of the implemented/pedagogical outcome, evidence claims and adequacy, physical/pedagogical validation conclusions, uncertainty conclusions, artifact roles and canonical proposals, claim limits, and any separately authorized lifecycle proposal. Lifecycle assignment remains outside this workflow unless independently authorized.
 
-All five specialized role definitions now require authority reconstruction before work: `AGENTS.md`, active state, active task, active chain, accepted contract when it exists, exact owned/prohibited paths, evidence obligations, repository identity/revision/branch/remotes/full status, stop conditions, and successor authorization. Initial contract drafting must explicitly verify its authorized exception to contract presence. Every role fails closed on missing, stale, contradictory, ambiguous, inactive, or insufficient authority. The read-only reviewer performs the same reconstruction and verifies every writer's preflight record.
+## Seven hypothetical structural traces
 
-## Required dry-run traces
+No trace selects a real capability or modifies production artifacts.
 
-These traces are structural and hypothetical only; no capability or production artifact is selected or modified.
+### Trace 1 — Path A: library plus notebook
 
-### Trace 1 — normal library-backed capability
+- **Applicability-axis decisions:** library `required`; notebook `required`.
+- **Applicable and skipped stages:** implementation, explicit notebook, reconstruction, exploration/API docs, and evidence apply; alternative is skipped.
+- **Skip authority:** accepted notebook-required contract clause.
+- **Ownership:** exact separate contract, source, notebook/docs, and evidence paths; reviewer read-only.
+- **Startup preflight result:** PASS only with active state/task instance, template ID, active stage, and exact ownership.
+- **Evidence state:** five truthful class records consistent with blocking rules.
+- **Human checkpoints:** scope, contract acceptance, and final disposition; parent performs readiness verification only.
+- **Final stop:** human final checkpoint; no closeout without accept.
 
-- **Applicable:** bounded intake, scope, contract draft/acceptance, plan, implementation, evidence, explicit notebook, library reconstruction, exploration/documentation, integration review, correction disposition, parent verification, final human checkpoint.
-- **Skipped:** alternative pedagogical artifact, citing accepted path-A clause; conditional correction stages absent when no findings.
-- **Prerequisites:** source and every notebook/evidence writer waits for explicit contract acceptance and completed plan; reconstruction also waits for implementation/API and explicit construction.
-- **Ownership:** exact separate contract, source, test/evidence, notebook/documentation paths; reviewer read-only.
-- **Evidence:** all five class records required; incomplete/deferred states retain claim limits and blockers.
-- **Correction:** nonmaterial finding gets at most one owner/replay/re-review cycle; material contract finding uses renewed acceptance.
-- **Final stop:** human final checkpoint; no closeout without explicit accept.
+### Trace 2 — Path B: notebook only
 
-### Trace 2 — notebook-only Candidate, no reusable API
+- **Applicability-axis decisions:** library `not-required-with-human-rationale`; notebook `required`.
+- **Applicable and skipped stages:** explicit notebook, exploration/docs, and evidence apply; implementation, reconstruction, and alternative are skipped.
+- **Skip authority:** accepted library-omission clause for implementation/reconstruction and notebook-required clause for the alternative.
+- **Ownership:** no source ownership; exact notebook/docs and evidence paths.
+- **Startup preflight result:** PASS only for active instance/stage/ownership; template availability insufficient.
+- **Evidence state:** five truthful records; no Candidate or other lifecycle inference.
+- **Human checkpoints:** contract acceptance and final disposition; parent performs readiness verification only.
+- **Final stop:** human final disposition.
 
-- **Applicable:** intake, scope, contract/acceptance, plan, evidence, explicit construction, exploration/documentation, integration review, disposition, parent verification, final human checkpoint.
-- **Skipped:** implementation and library reconstruction, each citing accepted path-B clause and human rationale; alternative artifact cites path-B clause.
-- **Prerequisites:** notebook/evidence work still requires explicit contract acceptance and completed plan.
-- **Ownership:** exact contract, notebook/documentation, and applicable evidence paths; no source ownership.
-- **Evidence:** five dispositions remain mandatory; Candidate may truthfully carry required-incomplete/deferred evidence with explicit limits and human-owned handoff blocking status.
-- **Correction/final stop:** bounded routing as above; stop at human final checkpoint.
+### Trace 3 — Path C: library plus approved notebook exception
 
-### Trace 3 — human-approved exception with adequate alternative
+- **Applicability-axis decisions:** library `required`; notebook `exception-with-human-rationale`.
+- **Applicable and skipped stages:** implementation, API-consistent docs, adequate alternative, and evidence apply; explicit notebook/reconstruction are skipped.
+- **Skip authority:** accepted notebook-exception clause and explicit claim limits; notebook exception does not remove implementation.
+- **Ownership:** exact source, docs/alternative, and evidence paths.
+- **Startup preflight result:** PASS only for instantiated active task, active stages, and exact ownership.
+- **Evidence state:** alternative explains/demonstrates accepted library behavior and all five classes are recorded truthfully.
+- **Human checkpoints:** contract/exception acceptance and final disposition; parent performs readiness verification only.
+- **Final stop:** human final disposition.
 
-- **Applicable:** intake, scope, contract/acceptance, plan, evidence, alternative pedagogical artifact, integration review, disposition, parent verification, final checkpoint.
-- **Skipped:** implementation, explicit notebook, library reconstruction, and exploration only with accepted path-C clause, human rationale, adequate alternative, and claim limits.
-- **Prerequisites:** alternative writer and evidence work require explicit contract acceptance and completed plan.
-- **Ownership:** exact contract, alternative-artifact/documentation, and evidence paths; no inferred source/test/notebook ownership.
-- **Evidence:** five explicit records; exception does not imply evidence non-applicability.
-- **Correction/final stop:** bounded routing; stop at human final checkpoint.
+### Trace 4 — Path D: neither library nor notebook
 
-### Trace 4 — material contract finding at integration review
+- **Applicability-axis decisions:** library `not-required-with-human-rationale`; notebook `exception-with-human-rationale`.
+- **Applicable and skipped stages:** adequate alternative and evidence apply; implementation and all notebook stages are skipped.
+- **Skip authority:** two separate accepted clauses—library omission and notebook exception—with separate rationales and claim limits.
+- **Ownership:** no source/notebook ownership; exact alternative and evidence paths.
+- **Startup preflight result:** PASS only with active instance/stage/ownership.
+- **Evidence state:** two rationales and resulting claim limits plus five truthful evidence records.
+- **Human checkpoints:** contract acceptance and final disposition; parent performs readiness verification only.
+- **Final stop:** human final disposition.
 
-- **Route:** integration review → correction classification (`material-contract-revision`) → architect revised proposal → renewed human contract acceptance.
-- **Invalidation:** affected plan, source, evidence, notebook/documentation/alternative, review, and parent results become invalid.
-- **Resume prerequisite:** explicit reacceptance plus revised plan; then replay every applicable selected-path stage and review.
-- **Failure guard:** direct architect-to-verification replay is forbidden.
-- **Final stop:** renewed contract checkpoint until human reaccepts; later human final checkpoint only after rebuilt work passes.
+### Trace 5 — immutable-template activation
 
-### Trace 5 — new material finding after permitted cycle
+- **Applicability-axis decisions:** a human-authorized task separately selects both axes and one consistent path.
+- **Applicable and skipped stages:** resolved from that selected path without mutating the template.
+- **Skip authority:** accepted axis-specific contract clauses.
+- **Ownership:** exact task-instance ownership recorded in active state and the active task.
+- **Startup preflight result:** PASS because runtime authority explicitly instantiates the template; template remains unchanged and is not treated as active state.
+- **Evidence state:** selected-path five-class obligations are active but no result is inferred from template availability.
+- **Human checkpoints:** scope and contract gates remain task-instance runtime state.
+- **Final stop:** active task stage or human checkpoint recorded only in runtime authority; template retains no runtime status.
 
-- **Route:** initial in-scope nonmaterial finding → exact owner correction → affected verification replay → independent re-review; count becomes one. Any new material or unresolved finding → correction-cycle disposition → human escalation.
-- **No loop:** a second automatic correction is prohibited.
-- **Ownership/evidence:** unchanged exact owners and all affected evidence remain unresolved until human direction.
-- **Final stop:** human escalation with remand, limit, reject, or defer options; parent verification and closeout remain blocked.
+### Trace 6 — complete evidence package
 
-All five traces fail closed if implementation can precede explicit contract acceptance, material revision can bypass renewed acceptance, or missing/deferred evidence can become Not applicable without human-accepted rationale.
+- **Applicability-axis decisions:** any separately accepted valid A/B/C/D combination.
+- **Applicable and skipped stages:** every required selected-path stage is complete and every skip is resolved.
+- **Skip authority:** axis-specific accepted clauses.
+- **Ownership:** exact producers and read-only reviewer recorded in the task instance.
+- **Startup preflight result:** PASS for the active instance, stage, and ownership.
+- **Evidence state:** required fields and provenance complete; results obey blocking rules; independent review complete.
+- **Human checkpoints:** parent verifies readiness without accepting adequacy; human final checkpoint owns evidence and validation disposition.
+- **Final stop:** human accept/remand/limit/reject/defer decision; no inferred closeout.
 
-## Validation and governance debt
+### Trace 7 — blocking-rule violation
 
-Initial fresh independent review returned REMAND after finding an evidence self-dependency, missing revised-plan prerequisites, ambiguous cycle-limit precedence, a blocking-evidence handoff bypass, a parent-verification disposition bypass, and one stale stage reference. The parent corrected each finding. A second fresh independent read-only reviewer returned PASS with no blocker, high, medium, or low findings. Parent structural verification passed. Review artifacts were disabled and no repository-local review artifact was created. Exact staging, remote freshness, commit, and fast-forward push are the remaining execution checks before renewed human review.
+- **Applicability-axis decisions:** any valid path; axis decisions remain unchanged by the evidence failure.
+- **Applicable and skipped stages:** selected-path applicability remains intact; no new skip is inferred.
+- **Skip authority:** existing axis-specific accepted clauses only.
+- **Ownership:** exact evidence owner and reviewer identify the violation.
+- **Startup preflight result:** PASS for authorized evidence assessment in the active instance.
+- **Evidence state:** incomplete/deferred/failed/unresolved result is truthfully labeled but violates its accepted advancement rule.
+- **Human checkpoints:** correction classification or human escalation occurs before parent verification; parent readiness fails.
+- **Final stop:** correction or escalation checkpoint; blocking evidence cannot reach final acceptance.
 
-Separate governance debt, explicitly excluded from correction: stale historical status markers in `AGENTS.md`, `.02`, and `.04`. Their historical contents are not normalized by this task.
+All traces fail if either axis silently determines the other, a role treats the template as runtime authority, parent verification accepts evidence/validation, or blocking evidence advances.
+
+## Validation and review status
+
+The first fresh independent review of this second REMAND returned `REMAND` with four findings: two residual runtime-like template fields, a contradictory Path D reconstruction skip requirement, no explicit failed-evidence representation, and task/active-state checkpoint disagreement. The parent corrected all four. The next fresh re-review returned `REMAND` for two consistency findings: Stage 11 omitted failed/unresolved outcomes in its applicability prose, and the verification role still referred to an “actual chain” rather than task-instance prerequisite resolution. The parent corrected both. A third fresh re-review correctly found that expanding the verification role beyond startup semantics exceeded its conditional authorization. The parent restored that file to a startup-only diff and encoded failure truthfully in the template as a separate observed outcome alongside the obligation state. A fourth fresh independent read-only re-review returned `PASS` with no blocker, high, medium, or low findings. Deterministic validation and parent verification passed. Exact staging, remote freshness, commit, and fast-forward push remain required before presentation.
+
+Separate excluded governance debt remains unchanged: historical status markers in `AGENTS.md`, `.02`, and `.04`.
 
 ## Stop boundary
 
-After correction, validation, independent review, parent verification, exact commit, and fast-forward push, set the active task to awaiting renewed human final acceptance and stop. Do not record human acceptance, perform closeout, activate the chain, select a capability, resume PIAB, activate remaining notebook work, or authorize a successor.
+After successful correction, validation, review, commit, and push, stop at renewed human review. Do not record human acceptance, close HARNESS-CAPABILITY-1, instantiate a capability workflow, select a capability, resume PIAB, activate remaining notebook work, or authorize a successor.

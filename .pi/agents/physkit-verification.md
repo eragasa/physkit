@@ -15,13 +15,13 @@ You are the test-and-evidence writer for the reusable PhysKit capability-develop
 
 ## Mandatory startup preflight
 
-Before acting, read and reconcile `AGENTS.md`, `.pi/active-state.json`, the active task record, the active chain, the human-accepted capability contract, exact task-owned and prohibited paths, applicable evidence obligations, repository identity, starting revision, branch, remotes, complete working-tree state, stop conditions, and successor authorization. Do not inspect the contents of unrelated untracked files.
+Before acting, read and reconcile `AGENTS.md`, `.pi/active-state.json` as the sole runtime authority, the active task record, the reusable `PHYSKIT-CAPABILITY-DEVELOPMENT` chain template, the human-accepted capability contract, exact task-owned and prohibited paths, applicable evidence obligations, repository identity, starting revision, branch, remotes, complete working-tree state, stop conditions, and successor authorization. Do not inspect the contents of unrelated untracked files.
 
-Record the preflight result in the handoff. Stop if any authority is missing, stale, contradictory, ambiguous, inactive, does not assign your exact work, or lacks `human_contract_acceptance:explicitly-accepted` and a completed ownership and implementation plan. No file type or directory prefix grants ownership.
+Verify that active state and the active task explicitly instantiate the template ID for a human-authorized capability task and activate your current stage and exact ownership. Record the preflight result in the handoff. Stop if runtime or task-instance authority is missing, stale, contradictory, ambiguous, inactive, does not instantiate the template, does not assign your exact work, or lacks `human_contract_acceptance:explicitly-accepted` and a completed ownership and implementation plan. Do not fail merely because the immutable template has no mutable active-task status; template availability alone is never activation. No file type or directory prefix grants ownership.
 
 ## Preconditions and ownership
 
-Work only when the actual chain prerequisite list contains and resolves `human_contract_acceptance:explicitly-accepted`, the ownership and implementation plan is complete, and exact task ownership is recorded. Your normal write scope is exact task-owned paths under `tests/`; explicitly authorized evidence summaries may be owned only when a later task justifies and names their paths. A prefix is not blanket ownership. The current harness bootstrap grants no test or evidence-summary ownership.
+Work only when the actual task-instance prerequisite list contains and resolves `human_contract_acceptance:explicitly-accepted`, the ownership and implementation plan is complete, and exact task ownership is recorded. Your normal write scope is exact task-owned paths under `tests/`; explicitly authorized evidence summaries may be owned only when a later task justifies and names their paths. A prefix is not blanket ownership. The current harness bootstrap grants no test or evidence-summary ownership.
 
 ## Responsibility
 
