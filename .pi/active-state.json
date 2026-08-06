@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 17,
+  "state_revision": 18,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -16,7 +16,7 @@
     "sources": {
       "operational_policy": {
         "path": "AGENTS.md",
-        "accepted_revision": "a806fcdd5c1c63881a3bd41c7aea2827300818b9"
+        "accepted_revision": "283a9bb0681892d71698c9eba314342b54924503"
       },
       "control_plane_design": {
         "path": "docs/harness/physkit.harness.04-minimal-pi-control-plane.md",
@@ -39,8 +39,8 @@
   "active_task": {
     "task_id": "FOUNDATIONS-FD1",
     "task_kind": "bounded-production-source-implementation",
-    "status": "production-source-implementation-completed-awaiting-separate-next-stage-authorization",
-    "purpose": "Preserve the completed bounded FOUNDATIONS-FD1 production-source handoff under accepted contract revision 3; all later writer stages remain inactive.",
+    "status": "bounded-source-correction-completed-awaiting-separate-next-stage-authorization",
+    "purpose": "Preserve the corrected FOUNDATIONS-FD1 production-source handoff under accepted contract revision 3 and the synchronized accepted root-policy projection; all later stages remain inactive.",
     "task_record": ".pi/tasks/foundations-fd1.md",
     "material_intake": "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md",
     "material_contract": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
@@ -49,7 +49,7 @@
       "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
       "template_record": ".pi/chains/capability-development.chain.json",
       "current_stage": "implementation",
-      "stage_state": "completed-production-source-layer-awaiting-separate-next-stage-authorization",
+      "stage_state": "completed-corrected-production-source-layer-awaiting-separate-next-stage-authorization",
       "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
       "artifact_path": "A",
       "applicability_axes": {
@@ -90,11 +90,7 @@
     "authorized_paths": [
       "src/physkit/discretization/grid_1d.py",
       "src/physkit/discretization/state_space_1d.py",
-      "src/physkit/discretization/__init__.py",
       "src/physkit/operators/base.py",
-      "src/physkit/operators/discrete_1d.py",
-      "src/physkit/operators/finite_difference_1d.py",
-      "src/physkit/operators/__init__.py",
       ".pi/active-state.json",
       ".pi/tasks/foundations-fd1.md"
     ],
@@ -140,7 +136,7 @@
     "implementation_authorized": true,
     "successor_authorized": false,
     "successor": null,
-    "stop_condition": "Stop after exact nine-path production-source handoff commit and fast-forward push. Do not activate tests, evidence, Sphinx, documentation, diagrams, notebooks, dependencies, packaging, CI, final acceptance, lifecycle, PIAB, or successor work.",
+    "stop_condition": "Stop after the exact five-path corrected production-source handoff and policy-reference synchronization. Do not activate formal verification, evidence, Sphinx, documentation, diagrams, notebooks, dependencies, packaging, CI, final acceptance, lifecycle, PIAB, or successor work.",
     "hc02_remand": {
       "disposition": "REMAND",
       "contract_accepted": false,
@@ -274,6 +270,32 @@
       "parent_conformance_verification": "passed: complete source inspection and independent developmental smoke; no unresolved finding",
       "evidence_limit": "developmental implementation checks only; not accepted software or numerical verification",
       "next_writer_stage": "inactive pending separate human authorization"
+    },
+    "source_correction_handoff": {
+      "status": "completed-explicitly-human-authorized-bounded-source-correction",
+      "starting_revision": "25c96cf43ce8820e79fce670e400451a4eedd1ca",
+      "contract_revision": 3,
+      "correction_authority": "explicit human bounded authorization outside the reusable template automatic correction loop",
+      "findings": {
+        "FD1-SRC-F01": "corrected: Boolean elements are rejected before NumPy coercion",
+        "FD1-SRC-F02": "corrected: correctly typed unrepresentable or nonfinite endpoints raise ValueError",
+        "FD1-SRC-F03": "corrected: correctly typed unrepresentable or nonfinite scale factors raise ValueError after controlled canonicalization"
+      },
+      "corrected_source_paths": [
+        "src/physkit/discretization/grid_1d.py",
+        "src/physkit/discretization/state_space_1d.py",
+        "src/physkit/operators/base.py"
+      ],
+      "automatic_correction_counter": "historically preserved at 1; not reset, incremented, consumed, or reinterpreted",
+      "developmental_checks": "passed: three-path py_compile, required exception taxonomy, real/complex restriction embedding and application, ordinary real/complex scaling, exact N=3,4,8 matrices, public imports, defensive ownership, absence of public compose, and 17 unchanged legacy tests",
+      "parent_conformance_verification": "passed after complete read-only three-source diff inspection and independent developmental checks; no unresolved finding or unrelated refactor",
+      "source_writer_ownership": "inactive-after-corrected-handoff",
+      "formal_verification_stage": "inactive pending separate human authorization",
+      "notebook_stage": "inactive pending separate human authorization",
+      "piab": "parked",
+      "successor_authorized": false,
+      "successor": null,
+      "evidence_limit": "developmental correction checks only; not formal software or numerical verification evidence"
     }
   },
   "checkpoint": null,
@@ -928,15 +950,68 @@
       "decision_date": "2026-08-06",
       "provenance": "explicit human production-source authorization",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-flexible-numerical-pedagogy-policy.001",
+      "subject": "flexible numerical pedagogy policy",
+      "disposition": "accepted numerical sequence and flexible modality policy only",
+      "accepted_content_revision": "283a9bb0681892d71698c9eba314342b54924503",
+      "administrative_recording_revision": "25c96cf43ce8820e79fce670e400451a4eedd1ca",
+      "accepted_boundary": [
+        "descriptive pedagogical-modality vocabulary",
+        "flexible numerical pedagogical sequence",
+        "prototype-to-production bridge",
+        "separation of software verification, numerical verification, physical validation, pedagogical validation, and uncertainty quantification",
+        "flexibility and non-hardening boundary"
+      ],
+      "deferred": [
+        "analytical workflow design",
+        "symbolic workflow design",
+        "formal-proof workflow design",
+        "mixed-modality workflow design"
+      ],
+      "authority_not_granted": [
+        "chain or role modification",
+        "modality schema, registry, validator, enum, stage graph, or runtime field",
+        "FOUNDATIONS-FD1 contract revision or notebook work",
+        "lifecycle work",
+        "PIAB",
+        "successor authorization"
+      ],
+      "decision_date": "2026-08-06",
+      "provenance": "explicit human acceptance instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-foundations-fd1-source-correction.001",
+      "subject": "FOUNDATIONS-FD1 bounded post-handoff source-conformance correction",
+      "disposition": "authorized correction of FD1-SRC-F01, FD1-SRC-F02, and FD1-SRC-F03 in exactly three source paths plus synchronization in exactly two coordination paths",
+      "authority_granted": [
+        "correct Boolean contamination before NumPy coercion",
+        "correct endpoint canonicalization exception taxonomy",
+        "correct scale-factor canonicalization exception taxonomy",
+        "synchronize the current accepted root-policy projection",
+        "record the corrected production-source handoff"
+      ],
+      "authority_not_granted": [
+        "automatic correction counter reset, increment, consumption, or reinterpretation",
+        "FD1 contract revision",
+        "tests, formal evidence, Sphinx, documentation implementation, diagrams, or notebooks",
+        "dependencies, packaging, CI, lifecycle, PIAB, or successor work"
+      ],
+      "starting_revision": "25c96cf43ce8820e79fce670e400451a4eedd1ca",
+      "decision_date": "2026-08-06",
+      "provenance": "explicit human bounded correction authorization",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "FOUNDATIONS-FD1 ownership and implementation plan completed; implementation inactive pending separate authorization",
-    "to": "FOUNDATIONS-FD1 production-source implementation completed; all later writer stages inactive",
-    "timestamp_utc": "2026-08-06T05:19:57Z",
+    "from": "FOUNDATIONS-FD1 production-source implementation completed; all later writer stages inactive",
+    "to": "FOUNDATIONS-FD1 bounded source correction completed; all later writer stages inactive",
+    "timestamp_utc": "2026-08-06T07:45:15Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
-    "reason": "human authorized exact seven-path production source; writer self-verification and parent read-only conformance verification passed with no unresolved finding"
+    "observed_starting_git_revision": "25c96cf43ce8820e79fce670e400451a4eedd1ca",
+    "reason": "human authorized exact correction of FD1-SRC-F01 through FD1-SRC-F03 and policy-reference synchronization; writer checks and parent read-only conformance verification passed with no unresolved finding"
   },
   "resolved_checkpoints": [
     {
@@ -1178,7 +1253,7 @@
     "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
     "template_record": ".pi/chains/capability-development.chain.json",
     "current_stage": "implementation",
-    "stage_state": "completed-production-source-layer-awaiting-separate-next-stage-authorization",
+    "stage_state": "completed-corrected-production-source-layer-awaiting-separate-next-stage-authorization",
     "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
     "artifact_path": "A",
     "applicability_axes": {

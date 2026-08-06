@@ -194,14 +194,17 @@ class _ScaledLinearOperator(LinearOperator):
     def __init__(self, operand: LinearOperator, factor: Number) -> None:
         if isinstance(factor, (bool, np.bool_)) or not isinstance(factor, Number):
             raise TypeError("factor must be a non-Boolean real or complex scalar.")
-        if not np.isfinite(factor):
-            raise ValueError("factor must be finite.")
 
         canonical_factor: float | complex
-        if isinstance(factor, (complex, np.complexfloating)):
-            canonical_factor = complex(factor)
-        else:
-            canonical_factor = float(factor)
+        try:
+            if isinstance(factor, (complex, np.complexfloating)):
+                canonical_factor = complex(factor)
+            else:
+                canonical_factor = float(factor)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ValueError(
+                "factor cannot be canonicalized as a finite real or complex scalar."
+            ) from exc
         if not np.isfinite(canonical_factor):
             raise ValueError("factor must remain finite when canonicalized.")
 

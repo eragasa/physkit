@@ -31,6 +31,13 @@ def _validated_numeric_vector(
 ) -> np.ndarray:
     """Canonicalize one finite real or complex vector without retaining it."""
     try:
+        uncoerced = np.asarray(values, dtype=object)
+    except (TypeError, ValueError) as exc:
+        raise TypeError(f"{name} must be a non-ragged numeric vector.") from exc
+    if any(isinstance(value, (bool, np.bool_)) for value in uncoerced.flat):
+        raise TypeError(f"{name} must not contain Boolean values.")
+
+    try:
         array = np.asarray(values)
     except (TypeError, ValueError) as exc:
         raise TypeError(f"{name} must be a non-ragged numeric vector.") from exc

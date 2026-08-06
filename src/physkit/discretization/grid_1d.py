@@ -170,8 +170,14 @@ class UniformGrid1D:
         ):
             raise TypeError("num_points must be a non-Boolean integral scalar.")
 
-        a_value = float(a)
-        b_value = float(b)
+        try:
+            a_value = float(a)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ValueError("a cannot be canonicalized as a finite float.") from exc
+        try:
+            b_value = float(b)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ValueError("b cannot be canonicalized as a finite float.") from exc
         point_count = int(num_points)
         if not np.isfinite(a_value):
             raise ValueError("a must be finite.")

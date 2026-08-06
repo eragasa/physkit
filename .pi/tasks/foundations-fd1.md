@@ -1,12 +1,12 @@
 # FOUNDATIONS-FD1 — Accepted contract and implementation-plan handoff
 
-**Status:** HC02 `ACCEPT` resolved; ownership and implementation plan completed; implementation inactive pending separate human authorization
+**Status:** Bounded source-conformance correction completed; formal verification and notebook stages inactive
 
 **Task ID:** `FOUNDATIONS-FD1`
 
 **Template ID:** `PHYSKIT-CAPABILITY-DEVELOPMENT`
 
-**Current stage:** `ownership_and_implementation_plan`
+**Current stage:** `implementation` — corrected production-source handoff completed
 
 **Resolved checkpoint:** `FOUNDATIONS-FD1-HC02 — ACCEPT`
 
@@ -14,7 +14,7 @@
 
 **Artifact path:** Path A — reusable library interface required and notebook artifact required
 
-**Implementation authorized:** `false`
+**Implementation authorized:** completed only for FD1-SRC-F01 through FD1-SRC-F03 in the three correction-owned source paths; writer ownership inactive
 
 **Successor authorization:** `false`; successor `null`
 
@@ -232,6 +232,12 @@ No adapter, migration, repair, deprecation, deletion, relocation, replacement, s
 
 The independent reviewer never repairs reviewed work. `correction_cycle_count` is already `1` from the HC02 remand correction, so the immutable workflow's one ordinary automatic correction allowance is exhausted and **no automatic implementation correction/replay/re-review cycle remains**. Any later finding routes directly to `bounded-cycle-exhausted` and human escalation unless a separate human decision explicitly authorizes otherwise.
 
+## Explicitly human-authorized post-handoff source correction
+
+Starting from `25c96cf43ce8820e79fce670e400451a4eedd1ca`, the human authorized one bounded conformance correction for FD1-SRC-F01 (Boolean contamination before NumPy coercion), FD1-SRC-F02 (endpoint canonicalization exception taxonomy), and FD1-SRC-F03 (scaling canonicalization exception taxonomy). This authorization is external to the reusable template's automatic correction loop: `correction_cycle_count` remains historically `1` and is neither reset nor incremented.
+
+During correction, `physkit.physkit-implementation` owns exactly `src/physkit/discretization/grid_1d.py`, `src/physkit/discretization/state_space_1d.py`, and `src/physkit/operators/base.py`. The parent owns exactly `.pi/active-state.json` and this task record. No test, evidence, contract, notebook, documentation, dependency, lifecycle, PIAB, or successor work is authorized. The accepted contract remains revision 3 at `5766b281bfea890cc522cf651f36bd93c0493cbb`.
+
 ## Production-source implementation authorization
 
 The human explicitly authorized the `implementation` stage from `d5fc0dee79ebff5dbe6375f9b0c32661853b1e83` for exactly these seven source-writer paths:
@@ -284,8 +290,38 @@ These are developmental implementation checks only. They are not the required so
 
 `pyproject.toml`; all tests; evidence summaries; Sphinx configuration/pages; diagrams; notebooks; dependencies; packaging; CI; all competing `core`, `math.operators`, `numerics`, QM, and PIAB implementations; lifecycle records; and `package-lock.json`.
 
+## Explicitly human-authorized source-correction handoff
+
+**Result:** FD1-SRC-F01, FD1-SRC-F02, and FD1-SRC-F03 corrected in exactly the three source-owned paths; source-writer ownership is inactive after handoff.
+
+**Starting revision:** `25c96cf43ce8820e79fce670e400451a4eedd1ca`
+
+**Authority:** explicit human bounded authorization outside the reusable template's automatic correction loop. The historical `correction_cycle_count` remains `1`; it was not reset, incremented, consumed, or reinterpreted.
+
+### Corrected findings
+
+- `FD1-SRC-F01` — `_validated_numeric_vector` now detects Boolean elements before ordinary NumPy coercion can erase their type. Pure Boolean arrays and mixed Boolean/numeric sequences raise `TypeError` through `restrict`, `embed`, `apply`, and `@`; object, string, ragged, and nonnumeric inputs remain `TypeError`; wrong rank, wrong length, and nonfinite numeric inputs remain `ValueError`; valid real and complex inputs retain canonical owned C-contiguous outputs.
+- `FD1-SRC-F02` — after endpoint semantic-type validation, controlled built-in-float canonicalization maps correctly typed but unrepresentable endpoints to `ValueError`; nonfinite endpoints remain `ValueError`; wrong semantic types and Booleans remain `TypeError`; valid endpoints remain built-in `float` without changing grid semantics.
+- `FD1-SRC-F03` — after scale-factor semantic-type validation, controlled built-in scalar canonicalization maps correctly typed but unrepresentable factors to `ValueError`; nonfinite canonical factors remain `ValueError`; wrong semantic types and Booleans remain `TypeError`; valid factors remain built-in `float` or `complex` without changing dtype, domain, codomain, ownership, or application semantics.
+
+### Developmental checks and parent verification
+
+- exact three-path `.venv/bin/python -m py_compile`: PASS;
+- required exception-taxonomy smoke cases, including every human-specified Boolean and large-integer case: PASS;
+- valid real/complex restriction, embedding, application, and ordinary scaling: PASS;
+- exact `N=3,4,8` matrices, public imports, defensive ownership, and absence of public `compose`: PASS;
+- unchanged legacy discretization tests: `17 passed in 0.03s`;
+- complete parent read-only inspection of the three-source-file diff: PASS, with no unrelated refactor, unintended input narrowing, or unresolved finding; and
+- coordination JSON parsing, exact-path isolation, diff checks, and complete status are required before commit.
+
+These are developmental correction checks only, not formal software-verification or numerical-verification evidence. The accepted FD1 contract remains revision 3 at `5766b281bfea890cc522cf651f36bd93c0493cbb` and was not revised.
+
+### Root-policy synchronization and preserved history
+
+State revision 18 projects the accepted `AGENTS.md` content revision `283a9bb0681892d71698c9eba314342b54924503`. The administrative acceptance record is revision `25c96cf43ce8820e79fce670e400451a4eedd1ca`. The earlier root-policy acceptance decision at `a806fcdd5c1c63881a3bd41c7aea2827300818b9` remains unchanged as historical provenance. A new durable decision record limits the flexible numerical pedagogy acceptance to its stated boundary and defers analytical, symbolic, formal-proof, and mixed-modality workflow design without authorizing chain, role, FD1-contract, notebook, lifecycle, PIAB, or successor work.
+
 ## Completion and stop
 
-State revision 17 records the production-source layer as complete. Source-writer ownership and every test/evidence, Sphinx, documentation, diagram, notebook, dependency, packaging, and CI writer role are inactive. The next planned writer stage remains inactive pending separate human authorization.
+State revision 18 records the corrected production-source layer as complete. Source-writer ownership and every formal test/evidence, Sphinx, documentation, diagram, notebook, dependency, packaging, and CI writer role are inactive. PIAB remains parked. Successor authorization is `false` and successor is `null`. The next planned writer stage remains inactive pending separate human authorization.
 
 Any finding after this handoff requires human disposition; no automatic post-handoff correction cycle is available. Tests, notebook execution, Sphinx build, review, commit, push, silence, or implementation completion do not imply software or numerical verification, evidence adequacy, final acceptance, lifecycle status, support, closeout, or successor authorization.
