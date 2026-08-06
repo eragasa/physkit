@@ -1,6 +1,6 @@
 # PhysKit Agent Policy
 
-**Status:** Proposed for human review
+**Status:** Accepted by explicit human decision exactly as represented at revision `283a9bb0681892d71698c9eba314342b54924503`
 
 This file is the repository-wide operational policy for agents working in PhysKit. A future, explicitly accepted narrower `AGENTS.md` may override it only within its defined scope.
 
