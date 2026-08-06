@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 18,
+  "state_revision": 19,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -38,9 +38,9 @@
   "control_plane_phase": "operational",
   "active_task": {
     "task_id": "FOUNDATIONS-FD1",
-    "task_kind": "bounded-production-source-implementation",
-    "status": "bounded-source-correction-completed-awaiting-separate-next-stage-authorization",
-    "purpose": "Preserve the corrected FOUNDATIONS-FD1 production-source handoff under accepted contract revision 3 and the synchronized accepted root-policy projection; all later stages remain inactive.",
+    "task_kind": "bounded-early-formal-verification",
+    "status": "task-local-early-formal-verification-completed-awaiting-separate-next-artifact-authorization",
+    "purpose": "Preserve the completed preliminary FD1 software and numerical verification handoff under the explicit human prerequisite exception; evidence_production_and_assessment and all later artifact stages remain incomplete or inactive.",
     "task_record": ".pi/tasks/foundations-fd1.md",
     "material_intake": "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md",
     "material_contract": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
@@ -48,8 +48,8 @@
       "instance_id": "FOUNDATIONS-FD1",
       "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
       "template_record": ".pi/chains/capability-development.chain.json",
-      "current_stage": "implementation",
-      "stage_state": "completed-corrected-production-source-layer-awaiting-separate-next-stage-authorization",
+      "current_stage": "task-local-early-formal-verification",
+      "stage_state": "completed-preliminary-early-formal-verification-awaiting-separate-next-artifact-authorization",
       "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
       "artifact_path": "A",
       "applicability_axes": {
@@ -88,9 +88,11 @@
       "implementation_direction": "M1 new clean surface; all competing grid, state, operator, Laplacian, notebook, and QM implementations remain untouched except additive accepted exports and the additive UniformGrid1D declaration in its accepted defining module"
     },
     "authorized_paths": [
-      "src/physkit/discretization/grid_1d.py",
-      "src/physkit/discretization/state_space_1d.py",
-      "src/physkit/operators/base.py",
+      "tests/physkit/discretization/test_uniform_grid_1d.py",
+      "tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py",
+      "tests/physkit/operators/test_linear_operator.py",
+      "tests/physkit/operators/test_finite_difference_laplacian_1d.py",
+      "docs/verification/foundations-uniform-grid-dirichlet-laplacian.md",
       ".pi/active-state.json",
       ".pi/tasks/foundations-fd1.md"
     ],
@@ -104,39 +106,36 @@
       "sphinx_implementation_paths": []
     },
     "prohibited_work": [
-      "tests or evidence summaries",
-      "Sphinx configuration or pages, diagrams, notebooks, or notebook execution",
+      "production-source changes",
+      "Sphinx configuration or pages, API or concept documentation, diagrams, notebooks, or notebook execution",
       "dependency, packaging, or CI changes",
+      "chain or agent changes, integration review, parent final verification, final acceptance, or closeout",
       "general composition, symbolic operators, equation infrastructure, quantum operators, or PIAB",
       "adapters, migration, repair, replacement, deprecation, relocation, deletion, lifecycle, support, or successor work"
     ],
     "review": {
-      "mode": "bounded production-source handoff with parent read-only conformance verification",
-      "independent_read_only_review": "not invoked; final capability integration review remains a later inactive stage",
+      "mode": "bounded Mode B task-local early formal-verification handoff",
+      "independent_read_only_review": "not invoked by explicit scope; one consolidated capability integration review remains a later inactive stage",
       "repository_artifact_creation": false,
       "material_findings": [],
       "limitations": [
-        "developmental source checks only; no test authoring, evidence production, Sphinx, documentation, diagram, or notebook work",
-        "no software-verification, numerical-verification, validation, lifecycle, support, or final-acceptance conclusion"
+        "only software verification, numerical verification, and a preliminary five-class evidence record are authorized",
+        "documentation, notebook, integration review, parent final verification, evidence acceptance, lifecycle, support, and final acceptance remain inactive"
       ]
     },
     "validation": {
       "production_source_handoff": "passed",
-      "writer_checks": [
-        "seven-path py_compile",
-        "public imports",
-        "comprehensive temporary smoke check",
-        "unchanged legacy discretization tests: 17 passed",
-        "git diff --check",
-        "complete status"
-      ],
-      "parent_conformance_verification": "passed with no unresolved material or nonmaterial finding",
-      "limitations": "developmental implementation evidence only; required verification/evidence stages remain not-run and inactive"
+      "early_formal_verification": "completed-preliminary-handoff",
+      "focused_verification": "passed: 110 tests",
+      "unchanged_legacy_discretization": "passed: 17 tests",
+      "complete_repository_suite": "unrelated collection failure: PhysicalConstantsProtocol cannot be imported in test_ConstantsCGS.py and test_ConstantsSI.py; excluded paths unchanged",
+      "independent_capability_integration_review": "not-run; explicitly deferred to the later consolidated complete-artifact review",
+      "limitations": "the preliminary verification slice does not complete evidence_production_and_assessment and cannot establish evidence acceptance, pedagogical validation, lifecycle, support, or final acceptance"
     },
-    "implementation_authorized": true,
+    "implementation_authorized": false,
     "successor_authorized": false,
     "successor": null,
-    "stop_condition": "Stop after the exact five-path corrected production-source handoff and policy-reference synchronization. Do not activate formal verification, evidence, Sphinx, documentation, diagrams, notebooks, dependencies, packaging, CI, final acceptance, lifecycle, PIAB, or successor work.",
+    "stop_condition": "Stop after the exact seven-path early formal-verification handoff. Do not activate Sphinx, API or concept documentation, diagrams, notebooks, integration review, parent final verification, final acceptance, lifecycle, PIAB, closeout, or successor work.",
     "hc02_remand": {
       "disposition": "REMAND",
       "contract_accepted": false,
@@ -296,13 +295,62 @@
       "successor_authorized": false,
       "successor": null,
       "evidence_limit": "developmental correction checks only; not formal software or numerical verification evidence"
+    },
+    "early_formal_verification_handoff": {
+      "status": "completed-preliminary-task-local-slice",
+      "starting_revision": "5ae0b8792e29cb764866d2600acc3ce47924536e",
+      "authority": "explicit human bounded Mode B authorization with an FD1-local prerequisite exception",
+      "prerequisite_exception": "only notebook/documentation completion before test and preliminary evidence authoring was waived; the reusable chain remains unchanged",
+      "verification_paths": [
+        "tests/physkit/discretization/test_uniform_grid_1d.py",
+        "tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py",
+        "tests/physkit/operators/test_linear_operator.py",
+        "tests/physkit/operators/test_finite_difference_laplacian_1d.py",
+        "docs/verification/foundations-uniform-grid-dirichlet-laplacian.md"
+      ],
+      "software_verification": {
+        "result_state": "required-incomplete",
+        "observed_outcome": "passed",
+        "result": "110 focused tests passed",
+        "incomplete_basis": "later Path A artifacts, synchronization, consolidated integration review, and human evidence disposition remain pending"
+      },
+      "numerical_verification": {
+        "result_state": "required-incomplete",
+        "observed_outcome": "passed",
+        "result": "independent matrices and stencils passed; monotone accepted errors and orders from 1.9986095692 to 1.9999130934",
+        "claim_boundary": "accepted modes 1 and 2, N=17,33,65,129, [0,1], weighted norm, homogeneous boundaries, and binary64 environment only"
+      },
+      "physical_validation": {
+        "result_state": "not-applicable-human-accepted-rationale",
+        "observed_outcome": "not-run",
+        "rationale": "no physical-model adequacy claim"
+      },
+      "pedagogical_validation": {
+        "result_state": "required-incomplete",
+        "observed_outcome": "not-run",
+        "blocker": "notebook and proportional human checklist remain pending"
+      },
+      "uncertainty_quantification": {
+        "result_state": "not-applicable-human-accepted-rationale",
+        "observed_outcome": "not-run",
+        "rationale": "no uncertainty-bearing claim; convergence, truncation, resolution, and floating-point behavior remain numerical verification"
+      },
+      "complete_repository_suite": "collection blocked by two unchanged unrelated constants tests importing absent PhysicalConstantsProtocol",
+      "evidence_production_and_assessment": "incomplete; preliminary record must be refreshed after documentation and notebook work",
+      "independent_capability_integration_review": "not-run and inactive",
+      "verification_writer_ownership": "inactive-after-handoff",
+      "implementation_authorized": false,
+      "production_source_ownership": [],
+      "piab": "parked",
+      "successor_authorized": false,
+      "successor": null
     }
   },
   "checkpoint": null,
   "blockers": [
     {
-      "blocker_id": "foundations-fd1.next-writer-stage-not-authorized",
-      "condition": "production-source implementation is complete; every later verification, evidence, documentation, notebook, Sphinx, dependency, packaging, CI, integration-review, final-acceptance, and closeout stage remains inactive pending separate human authorization"
+      "blocker_id": "foundations-fd1.next-artifact-stage-not-authorized",
+      "condition": "the preliminary early verification handoff is complete; documentation, notebook, Sphinx, dependency, packaging, CI, integration-review, parent-final-verification, final-acceptance, and closeout stages remain inactive pending separate human authorization"
     },
     {
       "blocker_id": "piab.parked",
@@ -1003,15 +1051,41 @@
       "decision_date": "2026-08-06",
       "provenance": "explicit human bounded correction authorization",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-foundations-fd1-early-formal-verification.001",
+      "subject": "FOUNDATIONS-FD1 task-local early formal-verification slice",
+      "disposition": "authorized one bounded Mode B software- and numerical-verification slice before documentation and notebook construction",
+      "task_local_prerequisite_exception": "waives only the reusable template prerequisite that notebook and documentation stages precede test and preliminary evidence authoring for FOUNDATIONS-FD1",
+      "authority_granted": [
+        "create exactly four focused verification test modules",
+        "create one preliminary five-class evidence record",
+        "run the authorized verification and complete-suite checks",
+        "update exactly two coordination records",
+        "commit and fast-forward push exactly seven authorized paths"
+      ],
+      "authority_not_granted": [
+        "modification of the reusable chain template or any agent definition",
+        "completion of evidence_production_and_assessment",
+        "waiver of documentation or notebook obligations",
+        "integration review or parent final verification",
+        "criterion, tolerance, or contract change",
+        "final evidence acceptance",
+        "production source, notebook, Sphinx, API or concept documentation, diagram, dependency, lifecycle, PIAB, closeout, or successor work"
+      ],
+      "starting_revision": "5ae0b8792e29cb764866d2600acc3ce47924536e",
+      "decision_date": "2026-08-06",
+      "provenance": "explicit human bounded Mode B authorization",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "FOUNDATIONS-FD1 production-source implementation completed; all later writer stages inactive",
-    "to": "FOUNDATIONS-FD1 bounded source correction completed; all later writer stages inactive",
-    "timestamp_utc": "2026-08-06T07:45:15Z",
+    "from": "FOUNDATIONS-FD1 bounded source correction completed; all later writer stages inactive",
+    "to": "FOUNDATIONS-FD1 preliminary early formal-verification handoff completed; all writers inactive",
+    "timestamp_utc": "2026-08-06T08:10:09Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "25c96cf43ce8820e79fce670e400451a4eedd1ca",
-    "reason": "human authorized exact correction of FD1-SRC-F01 through FD1-SRC-F03 and policy-reference synchronization; writer checks and parent read-only conformance verification passed with no unresolved finding"
+    "observed_starting_git_revision": "5ae0b8792e29cb764866d2600acc3ce47924536e",
+    "reason": "human authorized the FD1-local early software and numerical verification slice; 110 focused and 17 legacy tests passed, complete-suite unrelated collection failures were bounded, preliminary evidence was recorded, and no later stage was activated"
   },
   "resolved_checkpoints": [
     {
@@ -1252,8 +1326,8 @@
     "instance_id": "FOUNDATIONS-FD1",
     "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
     "template_record": ".pi/chains/capability-development.chain.json",
-    "current_stage": "implementation",
-    "stage_state": "completed-corrected-production-source-layer-awaiting-separate-next-stage-authorization",
+    "current_stage": "task-local-early-formal-verification",
+    "stage_state": "completed-preliminary-early-formal-verification-awaiting-separate-next-artifact-authorization",
     "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
     "artifact_path": "A",
     "applicability_axes": {
@@ -1266,7 +1340,7 @@
     "contract_revision_target": 3,
     "contract_accepted": true,
     "contract_accepted_revision": "5766b281bfea890cc522cf651f36bd93c0493cbb",
-    "implementation_authorized": true,
+    "implementation_authorized": false,
     "implementation_completed": true
   },
   "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
@@ -1286,7 +1360,7 @@
       "src/physkit/operators/finite_difference_1d.py",
       "src/physkit/operators/__init__.py"
     ],
-    "planned_ownership_status": "all later writer ownership inactive pending separate human authorization",
+    "planned_ownership_status": "verification writer inactive after preliminary handoff; every later writer stage inactive pending separate authorization",
     "planned_ownership_record": ".pi/tasks/foundations-fd1.md"
   }
 }

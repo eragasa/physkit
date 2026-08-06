@@ -1,12 +1,12 @@
 # FOUNDATIONS-FD1 — Accepted contract and implementation-plan handoff
 
-**Status:** Bounded source-conformance correction completed; formal verification and notebook stages inactive
+**Status:** Task-local early formal-verification handoff completed; all writer stages inactive pending separate authorization
 
 **Task ID:** `FOUNDATIONS-FD1`
 
 **Template ID:** `PHYSKIT-CAPABILITY-DEVELOPMENT`
 
-**Current stage:** `implementation` — corrected production-source handoff completed
+**Current stage:** `task-local-early-formal-verification` — preliminary handoff completed
 
 **Resolved checkpoint:** `FOUNDATIONS-FD1-HC02 — ACCEPT`
 
@@ -14,7 +14,7 @@
 
 **Artifact path:** Path A — reusable library interface required and notebook artifact required
 
-**Implementation authorized:** completed only for FD1-SRC-F01 through FD1-SRC-F03 in the three correction-owned source paths; writer ownership inactive
+**Implementation authorized:** `false`; implementation is complete and production-source ownership is empty
 
 **Successor authorization:** `false`; successor `null`
 
@@ -320,8 +320,30 @@ These are developmental correction checks only, not formal software-verification
 
 State revision 18 projects the accepted `AGENTS.md` content revision `283a9bb0681892d71698c9eba314342b54924503`. The administrative acceptance record is revision `25c96cf43ce8820e79fce670e400451a4eedd1ca`. The earlier root-policy acceptance decision at `a806fcdd5c1c63881a3bd41c7aea2827300818b9` remains unchanged as historical provenance. A new durable decision record limits the flexible numerical pedagogy acceptance to its stated boundary and defers analytical, symbolic, formal-proof, and mixed-modality workflow design without authorizing chain, role, FD1-contract, notebook, lifecycle, PIAB, or successor work.
 
+## Task-local early formal-verification authorization
+
+Starting from `5ae0b8792e29cb764866d2600acc3ce47924536e`, the human authorized one bounded Mode B software- and numerical-verification slice before documentation and notebook construction. This FD1-local prerequisite exception follows the accepted contract's lightweight VVUQ order and waives only the reusable template prerequisite that notebook/documentation stages precede test and preliminary evidence authoring. The immutable reusable chain and every agent definition remain unchanged.
+
+This exception does not complete `evidence_production_and_assessment`; waive any notebook or documentation obligation; permit integration review or parent final verification; alter a criterion or tolerance; authorize evidence acceptance; or establish a general ordering rule. The five-class evidence stage remains incomplete until every required FD1 artifact exists and the preliminary summary is refreshed.
+
+During this slice, `physkit.physkit-verification` owns exactly the four planned focused test modules and `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md`. The parent owns exactly `.pi/active-state.json` and this task record. Production source, notebook, Sphinx, API/concept documentation, diagram, dependency, chain, role, lifecycle, PIAB, closeout, and successor paths remain prohibited.
+
+## Early formal-verification handoff
+
+**Result:** preliminary software and numerical verification completed under the task-local ordering exception; verification-writer ownership is inactive after handoff.
+
+- focused verification: `110 passed`;
+- unchanged legacy discretization verification: `17 passed`;
+- exact source compilation and accepted public imports: passed;
+- independent direct `N=3,4,8` matrix and real/complex stencil oracles: passed;
+- accepted convergence criteria for modes 1 and 2 on `N=17,33,65,129`: passed, with monotone errors and accepted orders from `1.9986095692` through `1.9999130934`;
+- complete repository suite: collection blocked by two unchanged, unrelated constants tests because `PhysicalConstantsProtocol` cannot be imported from `physkit.constants`; no excluded path was changed; and
+- consolidated independent capability integration review: not run, as explicitly required for a later complete-artifact review.
+
+The preliminary record at `docs/verification/foundations-uniform-grid-dirichlet-laplacian.md` keeps all five evidence classes separate. Software and numerical verification have observed outcome `passed` but remain `required-incomplete` pending later Path A artifacts, synchronization, consolidated integration review, and human disposition. Physical validation and UQ retain their human-accepted Not-applicable rationales. Pedagogical validation remains `required-incomplete` with observed outcome `not-run`; the notebook and proportional human checklist are pending. `evidence_production_and_assessment` is not complete and the preliminary summary must be refreshed after documentation and notebook work.
+
 ## Completion and stop
 
-State revision 18 records the corrected production-source layer as complete. Source-writer ownership and every formal test/evidence, Sphinx, documentation, diagram, notebook, dependency, packaging, and CI writer role are inactive. PIAB remains parked. Successor authorization is `false` and successor is `null`. The next planned writer stage remains inactive pending separate human authorization.
+State revision 19 records the corrected production source and preliminary early verification handoff as complete. Implementation authorization is `false`; production-source and verification ownership are empty. Sphinx, documentation, diagram, notebook, dependency, packaging, CI, integration-review, parent-final-verification, final-acceptance, lifecycle, PIAB, closeout, and successor work remain inactive. Successor authorization is `false` and successor is `null`.
 
 Any finding after this handoff requires human disposition; no automatic post-handoff correction cycle is available. Tests, notebook execution, Sphinx build, review, commit, push, silence, or implementation completion do not imply software or numerical verification, evidence adequacy, final acceptance, lifecycle status, support, closeout, or successor authorization.
