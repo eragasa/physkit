@@ -126,13 +126,76 @@ State each claim, method, provenance, result, and limitation without inflating i
 
 ## Notebook policy
 
-For a supported pedagogical capability, the accepted capability contract must identify a canonical notebook or an explicitly approved exception, including an adequate alternative when a notebook or reusable library interface is unsuitable. The normal notebook structure exposes:
+For a supported pedagogical capability, the accepted capability contract must identify a canonical notebook or an explicitly approved exception, including an adequate alternative when a notebook or reusable library interface is unsuitable. The contract determines the proportional artifact structure in light of the capability's accepted pedagogical modality; no single notebook sequence applies universally.
 
-1. raw mathematical and computational construction;
-2. corresponding use of the human-accepted PhysKit library interface; and
-3. repeated cases, parameter studies, comparisons, or visualization where pedagogically appropriate.
+Where a numerical capability uses both an explicit reference construction and a library-based construction, they must agree under human-accepted references, invariants, and criteria, and the scope of that agreement must be stated. Notebooks are first-class pedagogical artifacts, not substitutes for library tests; execution, saved output, or visual quality does not make a notebook canonical or pedagogically accepted. The independent reusable-library and notebook applicability axes, and their accepted A/B/C/D paths, remain unchanged.
 
-Where both construction stages apply, the explicit and library-based constructions must agree under human-accepted references, invariants, and criteria. State the scope of that agreement. Notebooks are first-class pedagogical artifacts, not substitutes for library tests; execution, saved output, or visual quality does not make a notebook canonical or pedagogically accepted.
+## Pedagogical modalities
+
+### Modality declaration
+
+A human-accepted capability contract should identify its pedagogical modality when that distinction affects artifact structure or evidence. Descriptive labels are:
+
+- numerical;
+- analytical;
+- symbolic;
+- formal-proof; and
+- mixed or not-yet-classified.
+
+These labels are policy vocabulary, not a machine-enforced enumeration, schema, registry, validator, or runtime field. The accepted capability contract remains authoritative for the actual artifact structure. A modality label grants no work, selects no canonical artifact, determines neither the reusable-library nor notebook applicability axis, and assigns no lifecycle state.
+
+### Numerical pedagogical sequence
+
+Only the numerical pedagogical sequence is currently defined:
+
+1. mathematical formulation;
+2. explicit numerical representation or discretization;
+3. transition from transparent prototype to production software;
+4. software verification;
+5. numerical verification;
+6. physical-validation applicability and evidence boundary;
+7. uncertainty-quantification applicability and evidence boundary; and
+8. library-driven exploration, repeated cases, comparison, and visualization.
+
+This is an intellectual sequence, not a mandatory file or notebook count. A small capability may express it as sections of one notebook. A broader capability may use several notebooks, documentation pages, tests, and evidence records. The human-accepted capability contract decides the proportional artifact decomposition.
+
+Numerical work must keep distinct the mathematical model, numerical representation, production software, software verification, numerical verification, physical validation, pedagogical validation, and uncertainty quantification. In particular:
+
+- successful execution is not software verification by itself;
+- software verification is not numerical verification;
+- convergence and truncation error are numerical-verification subjects;
+- numerical agreement is not automatically physical validation;
+- notebook execution is not pedagogical validation;
+- deterministic discretization error is not automatically uncertainty quantification;
+- physical-validation and uncertainty-quantification applicability and evidence boundaries must be discussed explicitly when relevant;
+- a human-approved `Not applicable` disposition requires a claim-based rationale; and
+- absent, difficult, missing, deferred, or unreviewed work is not `Not applicable`.
+
+### Prototype-to-production bridge
+
+When applicable, numerical pedagogical artifacts must explain how transparent mathematical or numerical code maps to reusable production software. Proportional topics may include state-space representation; operator domain and codomain; boundary or initial conditions; data ownership and immutability; dtype and units; validation and exception behavior; sparse or dense representation; public API design; testable invariants; documentation; and deferred extensions.
+
+No capability must address every topic merely because it is listed. The human-accepted contract selects the proportional subset. A notebook should not reproduce every internal production-source detail; it should explain the mapping between the explicit reference construction and the accepted public abstraction.
+
+### Deferred modalities
+
+No general pedagogical sequence is currently accepted for analytical work, symbolic computation, formal or machine-checked proof, or mixed-modality artifacts. This policy proposes none of their stages, evidence obligations, tools, artifact types, or acceptance criteria.
+
+When a capability materially depends on one of these modalities and no accepted capability-specific sequence exists, agents must stop for bounded human scope and contract decisions. They must not invent, infer, or derive a workflow from the numerical sequence or silently apply that sequence.
+
+Classification safeguards are:
+
+- an analytical reference solution used as a numerical oracle does not make the capability analytically modal;
+- equations written in Markdown or LaTeX do not make an artifact a symbolic-computation capability;
+- ordinary test assertions do not constitute a formal-proof system;
+- use of more than one modality does not automatically create a mixed-modality workflow; and
+- modality does not determine whether a reusable library interface or notebook is required; the existing independent applicability axes and A/B/C/D paths remain unchanged.
+
+### Flexibility and non-hardening boundary
+
+This policy revision does not alter the reusable capability-development chain; add or reorder chain stages; modify agent definitions; introduce a modality schema, registry, validator, enumeration implementation, stage graph, or runtime field; prescribe notebook filenames or counts; retroactively invalidate accepted contracts or completed artifacts; revise `FOUNDATIONS-FD1`; authorize notebook work; authorize analytical, symbolic, mixed-modality, or proof-system design; or authorize a successor.
+
+Modality-specific workflows should be hardened only when concrete capabilities demonstrate operational need. Any future hardening requires a separate human-reviewed control-plane revision supported by that demonstrated need.
 
 ## Capability lifecycle
 
