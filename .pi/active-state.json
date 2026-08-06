@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 16,
+  "state_revision": 17,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -38,9 +38,9 @@
   "control_plane_phase": "operational",
   "active_task": {
     "task_id": "FOUNDATIONS-FD1",
-    "task_kind": "capability-implementation-planning",
-    "status": "implementation-plan-completed-awaiting-separate-authorization",
-    "purpose": "Record explicit human acceptance of FOUNDATIONS-FD1 contract revision 3 and preserve the completed exact ownership and implementation plan without activating implementation.",
+    "task_kind": "bounded-production-source-implementation",
+    "status": "production-source-implementation-completed-awaiting-separate-next-stage-authorization",
+    "purpose": "Preserve the completed bounded FOUNDATIONS-FD1 production-source handoff under accepted contract revision 3; all later writer stages remain inactive.",
     "task_record": ".pi/tasks/foundations-fd1.md",
     "material_intake": "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md",
     "material_contract": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
@@ -48,8 +48,8 @@
       "instance_id": "FOUNDATIONS-FD1",
       "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
       "template_record": ".pi/chains/capability-development.chain.json",
-      "current_stage": "ownership_and_implementation_plan",
-      "stage_state": "completed-awaiting-separate-implementation-authorization",
+      "current_stage": "implementation",
+      "stage_state": "completed-production-source-layer-awaiting-separate-next-stage-authorization",
       "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
       "artifact_path": "A",
       "applicability_axes": {
@@ -88,9 +88,15 @@
       "implementation_direction": "M1 new clean surface; all competing grid, state, operator, Laplacian, notebook, and QM implementations remain untouched except additive accepted exports and the additive UniformGrid1D declaration in its accepted defining module"
     },
     "authorized_paths": [
+      "src/physkit/discretization/grid_1d.py",
+      "src/physkit/discretization/state_space_1d.py",
+      "src/physkit/discretization/__init__.py",
+      "src/physkit/operators/base.py",
+      "src/physkit/operators/discrete_1d.py",
+      "src/physkit/operators/finite_difference_1d.py",
+      "src/physkit/operators/__init__.py",
       ".pi/active-state.json",
-      ".pi/tasks/foundations-fd1.md",
-      "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md"
+      ".pi/tasks/foundations-fd1.md"
     ],
     "active_ownership": {
       "parent_coordinator": [],
@@ -102,47 +108,39 @@
       "sphinx_implementation_paths": []
     },
     "prohibited_work": [
-      "production source, test, evidence, notebook, example, dependency, packaging, CI, or Sphinx implementation changes",
-      "chain-template or role changes",
-      "implementation or API acceptance",
-      "evidence-result or validation acceptance",
-      "migration, deprecation, repair, or lifecycle assignment",
-      "PIAB work",
-      "successor work"
+      "tests or evidence summaries",
+      "Sphinx configuration or pages, diagrams, notebooks, or notebook execution",
+      "dependency, packaging, or CI changes",
+      "general composition, symbolic operators, equation infrastructure, quantum operators, or PIAB",
+      "adapters, migration, repair, replacement, deprecation, relocation, deletion, lifecycle, support, or successor work"
     ],
     "review": {
-      "mode": "Mode A acceptance recording plus parent-owned implementation-plan handoff",
-      "independent_read_only_review": "PASS after focused rereview; no unresolved material or protected findings",
+      "mode": "bounded production-source handoff with parent read-only conformance verification",
+      "independent_read_only_review": "not invoked; final capability integration review remains a later inactive stage",
       "repository_artifact_creation": false,
       "material_findings": [],
       "limitations": [
-        "administrative acceptance recording and static implementation planning only; no implementation, tests, evidence, Sphinx build, or notebook creation/execution was run",
-        "Jupyter, nbconvert, and nbformat availability remains intentionally unverified until separately authorized notebook work"
+        "developmental source checks only; no test authoring, evidence production, Sphinx, documentation, diagram, or notebook work",
+        "no software-verification, numerical-verification, validation, lifecycle, support, or final-acceptance conclusion"
       ]
     },
     "validation": {
-      "parent_acceptance_and_plan_verification": "passed before exact commit and push",
-      "checks": [
-        "expected starting revision and initial origin/main",
-        "duplicate-free JSON",
-        "accepted contract revision and source commit",
-        "HC02 ACCEPT resolved and contract accepted",
-        "contract, state, and task consistency",
-        "complete exact-path planned ownership with inactive writer roles",
-        "immutable chain and role files unchanged",
-        "exact three-path isolation and staging",
-        "no source, test, notebook, evidence, dependency, packaging, CI, or Sphinx implementation changes",
-        "no unexpected repository-local artifacts",
+      "production_source_handoff": "passed",
+      "writer_checks": [
+        "seven-path py_compile",
+        "public imports",
+        "comprehensive temporary smoke check",
+        "unchanged legacy discretization tests: 17 passed",
         "git diff --check",
-        "remote freshness immediately before commit and push"
+        "complete status"
       ],
-      "limitations": "administrative acceptance and planning validation only; no implementation or claim-bearing evidence was run",
-      "independent_plan_review": "PASS after correction of two planning blockers and focused rereview"
+      "parent_conformance_verification": "passed with no unresolved material or nonmaterial finding",
+      "limitations": "developmental implementation evidence only; required verification/evidence stages remain not-run and inactive"
     },
-    "implementation_authorized": false,
+    "implementation_authorized": true,
     "successor_authorized": false,
     "successor": null,
-    "stop_condition": "Stop after exact three-path acceptance-record and implementation-plan handoff commit/push. Do not activate implementation, final acceptance, closeout, lifecycle work, PIAB, or any successor.",
+    "stop_condition": "Stop after exact nine-path production-source handoff commit and fast-forward push. Do not activate tests, evidence, Sphinx, documentation, diagrams, notebooks, dependencies, packaging, CI, final acceptance, lifecycle, PIAB, or successor work.",
     "hc02_remand": {
       "disposition": "REMAND",
       "contract_accepted": false,
@@ -222,13 +220,67 @@
       "accepted_artifact_path": "A",
       "implementation_authorized": false,
       "successor_authorized": false
+    },
+    "implementation_authorization": {
+      "disposition": "AUTHORIZED",
+      "source_revision": "d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
+      "contract_revision": 3,
+      "boundary": "seven exact production-source paths only",
+      "source_paths": [
+        "src/physkit/discretization/grid_1d.py",
+        "src/physkit/discretization/state_space_1d.py",
+        "src/physkit/discretization/__init__.py",
+        "src/physkit/operators/base.py",
+        "src/physkit/operators/discrete_1d.py",
+        "src/physkit/operators/finite_difference_1d.py",
+        "src/physkit/operators/__init__.py"
+      ],
+      "coordination_paths": [
+        ".pi/active-state.json",
+        ".pi/tasks/foundations-fd1.md"
+      ],
+      "not_authorized": [
+        "tests",
+        "evidence",
+        "Sphinx",
+        "documentation pages",
+        "diagrams",
+        "notebooks",
+        "dependencies",
+        "packaging",
+        "CI",
+        "legacy changes",
+        "PIAB",
+        "lifecycle",
+        "successor"
+      ]
+    },
+    "implementation_completed": true,
+    "implementation_handoff": {
+      "status": "completed-bounded-production-source-only",
+      "starting_revision": "d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
+      "contract_revision": 3,
+      "completed_paths": [
+        "src/physkit/discretization/grid_1d.py",
+        "src/physkit/discretization/state_space_1d.py",
+        "src/physkit/discretization/__init__.py",
+        "src/physkit/operators/base.py",
+        "src/physkit/operators/discrete_1d.py",
+        "src/physkit/operators/finite_difference_1d.py",
+        "src/physkit/operators/__init__.py"
+      ],
+      "source_writer_ownership": "inactive-after-handoff",
+      "writer_self_verification": "passed: py_compile, public imports, developmental smoke, 17 unchanged legacy tests, git diff --check",
+      "parent_conformance_verification": "passed: complete source inspection and independent developmental smoke; no unresolved finding",
+      "evidence_limit": "developmental implementation checks only; not accepted software or numerical verification",
+      "next_writer_stage": "inactive pending separate human authorization"
     }
   },
   "checkpoint": null,
   "blockers": [
     {
-      "blocker_id": "foundations-fd1.implementation-not-authorized",
-      "condition": "contract revision 3 is accepted and ownership planning is complete, but every implementation, verification, evidence, notebook, documentation, Sphinx, dependency, and packaging writer remains inactive pending separate explicit human authorization"
+      "blocker_id": "foundations-fd1.next-writer-stage-not-authorized",
+      "condition": "production-source implementation is complete; every later verification, evidence, documentation, notebook, Sphinx, dependency, packaging, CI, integration-review, final-acceptance, and closeout stage remains inactive pending separate human authorization"
     },
     {
       "blocker_id": "piab.parked",
@@ -855,15 +907,36 @@
       "decision_date": "2026-08-05",
       "provenance": "explicit human ACCEPT instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-foundations-fd1-production-source-implementation.001",
+      "subject": "FOUNDATIONS-FD1 bounded production-source implementation",
+      "disposition": "authorized exact seven-path production-source implementation from d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
+      "authority_granted": [
+        "implement accepted contract revision 3 in exactly seven named src/physkit paths",
+        "run developmental source self-verification",
+        "update active state and task handoff",
+        "commit exactly seven production paths and two coordination paths and fast-forward push"
+      ],
+      "authority_not_granted": [
+        "tests or evidence summaries",
+        "Sphinx, documentation pages, diagrams, notebooks, or notebook execution",
+        "dependencies, packaging, or CI",
+        "composition, symbolic/equation infrastructure, quantum operators, adapters, legacy changes, PIAB, lifecycle, final acceptance, or successor work"
+      ],
+      "starting_revision": "d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
+      "decision_date": "2026-08-06",
+      "provenance": "explicit human production-source authorization",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "FOUNDATIONS-FD1 awaiting human redisposition of contract revision 3 at HC02",
-    "to": "FOUNDATIONS-FD1 ownership and implementation plan completed; implementation inactive pending separate authorization",
-    "timestamp_utc": "2026-08-05T17:27:46Z",
+    "from": "FOUNDATIONS-FD1 ownership and implementation plan completed; implementation inactive pending separate authorization",
+    "to": "FOUNDATIONS-FD1 production-source implementation completed; all later writer stages inactive",
+    "timestamp_utc": "2026-08-06T05:19:57Z",
     "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "5766b281bfea890cc522cf651f36bd93c0493cbb",
-    "reason": "human explicitly accepted contract revision 3 at the exact starting revision and authorized acceptance recording plus exact implementation planning only"
+    "observed_starting_git_revision": "d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
+    "reason": "human authorized exact seven-path production source; writer self-verification and parent read-only conformance verification passed with no unresolved finding"
   },
   "resolved_checkpoints": [
     {
@@ -1083,6 +1156,13 @@
       "stage": "ownership_and_implementation_plan",
       "state": "completed-handoff-only",
       "authority": "explicit human authorization to prepare the exact plan; implementation remains separately unauthorized"
+    },
+    {
+      "task_id": "FOUNDATIONS-FD1",
+      "stage": "implementation",
+      "state": "completed-production-source-layer-only",
+      "authority": "explicit human bounded production-source authorization",
+      "evidence_limit": "developmental checks only; later verification and evidence remain inactive"
     }
   ],
   "reusable_templates": {
@@ -1097,8 +1177,8 @@
     "instance_id": "FOUNDATIONS-FD1",
     "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
     "template_record": ".pi/chains/capability-development.chain.json",
-    "current_stage": "ownership_and_implementation_plan",
-    "stage_state": "completed-awaiting-separate-implementation-authorization",
+    "current_stage": "implementation",
+    "stage_state": "completed-production-source-layer-awaiting-separate-next-stage-authorization",
     "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
     "artifact_path": "A",
     "applicability_axes": {
@@ -1111,7 +1191,8 @@
     "contract_revision_target": 3,
     "contract_accepted": true,
     "contract_accepted_revision": "5766b281bfea890cc522cf651f36bd93c0493cbb",
-    "implementation_authorized": false
+    "implementation_authorized": true,
+    "implementation_completed": true
   },
   "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
   "capability_ownership": {
@@ -1121,7 +1202,16 @@
     "test_or_evidence_paths": [],
     "notebook_or_documentation_paths": [],
     "sphinx_implementation_paths": [],
-    "planned_ownership_status": "inactive-pending-separate-human-authorization",
+    "completed_production_source_paths": [
+      "src/physkit/discretization/grid_1d.py",
+      "src/physkit/discretization/state_space_1d.py",
+      "src/physkit/discretization/__init__.py",
+      "src/physkit/operators/base.py",
+      "src/physkit/operators/discrete_1d.py",
+      "src/physkit/operators/finite_difference_1d.py",
+      "src/physkit/operators/__init__.py"
+    ],
+    "planned_ownership_status": "all later writer ownership inactive pending separate human authorization",
     "planned_ownership_record": ".pi/tasks/foundations-fd1.md"
   }
 }

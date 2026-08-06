@@ -232,8 +232,60 @@ No adapter, migration, repair, deprecation, deletion, relocation, replacement, s
 
 The independent reviewer never repairs reviewed work. `correction_cycle_count` is already `1` from the HC02 remand correction, so the immutable workflow's one ordinary automatic correction allowance is exhausted and **no automatic implementation correction/replay/re-review cycle remains**. Any later finding routes directly to `bounded-cycle-exhausted` and human escalation unless a separate human decision explicitly authorizes otherwise.
 
+## Production-source implementation authorization
+
+The human explicitly authorized the `implementation` stage from `d5fc0dee79ebff5dbe6375f9b0c32661853b1e83` for exactly these seven source-writer paths:
+
+1. `src/physkit/discretization/grid_1d.py`;
+2. `src/physkit/discretization/state_space_1d.py`;
+3. `src/physkit/discretization/__init__.py`;
+4. `src/physkit/operators/base.py`;
+5. `src/physkit/operators/discrete_1d.py`;
+6. `src/physkit/operators/finite_difference_1d.py`; and
+7. `src/physkit/operators/__init__.py`.
+
+The parent coordinator owns only `.pi/active-state.json` and this task record. Ownership does not overlap. Tests, evidence, Sphinx, documentation pages, diagrams, notebooks, dependencies, packaging, CI, legacy changes, PIAB, lifecycle, final acceptance, and successor work remain inactive.
+
+## Production-source handoff
+
+**Result:** completed for the bounded production-source layer; source-writer ownership is now inactive.
+
+**Starting revision:** `d5fc0dee79ebff5dbe6375f9b0c32661853b1e83`
+
+**Accepted authority:** FOUNDATIONS-FD1 contract revision 3 at `5766b281bfea890cc522cf651f36bd93c0493cbb` and the exact implementation plan committed at the starting revision.
+
+### Exact source changes
+
+- modified `src/physkit/discretization/grid_1d.py` additively with immutable geometry-only `UniformGrid1D`; legacy `Grid1D` and `ActiveSetType1D` remain unchanged;
+- created `src/physkit/discretization/state_space_1d.py` with immutable `HomogeneousDirichletStateSpace1D`, exact semantic identity, restriction, embedding, and real/complex canonicalization;
+- modified `src/physkit/discretization/__init__.py` to preserve legacy exports and add the accepted grid/state-space exports;
+- created `src/physkit/operators/base.py` with `LinearOperator` and a private immutable scaled wrapper;
+- created `src/physkit/operators/discrete_1d.py` with `DiscreteLinearOperator1D` and defensive dense inspection;
+- created `src/physkit/operators/finite_difference_1d.py` with the eager canonical positive-second-derivative CSR Laplacian, including exact `N=3` behavior; and
+- created `src/physkit/operators/__init__.py` with exactly the accepted public operator exports.
+
+### Complete source-writer and parent reading inventory
+
+`AGENTS.md`; `.pi/active-state.json`; `.pi/tasks/foundations-fd1.md`; `.pi/chains/capability-development.chain.json`; `.pi/agents/physkit-implementation.md`; `docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md`; `src/physkit/discretization/grid_1d.py`; `src/physkit/discretization/state_space_1d.py`; `src/physkit/discretization/__init__.py`; `src/physkit/__init__.py`; `pyproject.toml`; `src/physkit/core/grids.py`; `src/physkit/core/state.py`; `src/physkit/core/operator.py`; `src/physkit/numerics/finite_difference.py`; `src/physkit/numerics/differentiation/laplacian.py`; `src/physkit/math/operators/base.py`; `src/physkit/math/operators/continuous1d.py`; `src/physkit/math/operators/discrete1d.py`; `tests/physkit/discretization/test_ActiveSetType1D.py`; and `tests/physkit/discretization/test_Grid1D.py`.
+
+### Developmental checks
+
+- exact seven-path `.venv/bin/python -m py_compile`: PASS;
+- accepted public imports with `PYTHONPATH=src`: PASS;
+- temporary comprehensive writer smoke check: PASS after correcting an overly strict temporary bitwise floating-point oracle; no repository test artifact was created;
+- parent temporary smoke check covering validation, ownership, semantic identity, restriction/embedding, inheritance, domain/codomain identity, CSR canonicalization and defensive copies, exact `N=3,4,8` matrices, negative definiteness, real/complex application, scaling, public documentation presence, and absence of `compose`: PASS after correcting a bug in the temporary parent script;
+- unchanged legacy discretization tests: `17 passed`;
+- `git diff --check`: PASS; and
+- parent complete source inspection and read-only contract-conformance verification: PASS with no unresolved finding.
+
+These are developmental implementation checks only. They are not the required software-verification or numerical-verification evidence and do not establish physical validation, pedagogical validation, UQ, final acceptance, lifecycle status, or support.
+
+### Explicitly untouched
+
+`pyproject.toml`; all tests; evidence summaries; Sphinx configuration/pages; diagrams; notebooks; dependencies; packaging; CI; all competing `core`, `math.operators`, `numerics`, QM, and PIAB implementations; lifecycle records; and `package-lock.json`.
+
 ## Completion and stop
 
-This plan is complete as a handoff only. Planned production, verification, evidence, notebook, documentation, Sphinx, dependency, and packaging ownership is inactive. Implementation requires a separate explicit human authorization that cites this accepted contract and plan.
+State revision 17 records the production-source layer as complete. Source-writer ownership and every test/evidence, Sphinx, documentation, diagram, notebook, dependency, packaging, and CI writer role are inactive. The next planned writer stage remains inactive pending separate human authorization.
 
-After any later authorized implementation, complete evidence production, independent read-only review, correction disposition, and parent verification, stop at `human_final_acceptance` with a Mode B report. Only the human may accept, remand, limit, reject, or defer the implemented outcome and evidence. Tests, notebook execution, Sphinx build, review, commit, push, silence, or plan completion do not imply acceptance, lifecycle status, support, closeout, or successor authorization.
+Any finding after this handoff requires human disposition; no automatic post-handoff correction cycle is available. Tests, notebook execution, Sphinx build, review, commit, push, silence, or implementation completion do not imply software or numerical verification, evidence adequacy, final acceptance, lifecycle status, support, closeout, or successor authorization.
