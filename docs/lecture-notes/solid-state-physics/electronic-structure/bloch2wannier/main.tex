@@ -1,0 +1,285 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Hilbert}{\mathcal H}
+\newcommand{\C}{\mathbb C}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\hc}{\mathrm{h.c.}}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\bra}[1]{\langle #1\rvert}
+\newcommand{\braket}[2]{\langle #1\vert #2\rangle}
+\newcommand{\projector}[1]{\lvert #1\rangle\!\langle #1\rvert}
+
+\title{From Bloch States to Wannier Functions\\
+\large Gauge, Localization, and Operator Reconstruction}
+\author{PhysKit exploratory lecture notes}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fcolorbox{black}{gray!10}{\parbox{0.9\linewidth}{
+\textbf{Artifact status.} These notes accompany the accepted exploratory notebook
+\texttt{bloch2wannier.ipynb}. They are not a canonical or
+supported PhysKit artifact and make no physical- or pedagogical-validation claim.
+}}
+\end{center}
+
+\section{Scope and learning objectives}
+
+We study a finite one-dimensional, two-orbital, periodic tight-binding model.
+The construction separates the physical operator, its matrix representations,
+the retained band subspace, the gauge-dependent Bloch frame, and the resulting
+Wannier basis.
+
+After working through the notebook and these notes, a reader should be able to:
+\begin{enumerate}[label=\arabic*.]
+  \item construct the finite periodic Hamiltonian used in the notebook;
+  \item decompose it into Bloch fibers with a discrete Fourier transform;
+  \item distinguish Bloch eigenvectors from band projectors;
+  \item explain how momentum-dependent phases change the Wannier basis;
+  \item construct and check translated Wannier functions;
+  \item reconstruct the retained dispersion from Wannier matrix elements; and
+  \item state why independently constructed retained spaces require alignment.
+\end{enumerate}
+
+\section{Finite periodic state space}
+
+For $N$ unit cells with orbitals $A$ and $B$ in every cell,
+\begin{equation}
+  \Hilbert_{\mathrm{real}}=\C^N\otimes\C^2,
+  \qquad \dim\Hilbert_{\mathrm{real}}=2N.
+\end{equation}
+The orthonormal basis is
+$\{\ket{R,A},\ket{R,B}\}_{R=0}^{N-1}$, with cell labels understood modulo $N$.
+This is a finite representation of a periodic model, not a material-orbital
+geometry claim.
+
+\section{Real-space Hamiltonian}
+
+The notebook uses the SSH-like Hamiltonian
+\begin{align}
+\hat H={}&\sum_R\Delta\bigl(\projector{R,A}-\projector{R,B}\bigr)\notag\\
+&+\sum_R\left[
+ t_1\ket{R,A}\bra{R,B}
+ +t_2\ket{R+1,A}\bra{R,B}+\hc\right].
+\end{align}
+Here $t_1$ and $t_2$ are intracell and intercell hopping amplitudes, and
+$\pm\Delta$ are onsite energies. The notebook assembles the $2N\times2N$ matrix
+and verifies Hermiticity numerically. That is an internal consistency check, not
+physical validation of the model for a material.
+
+\section{Translation symmetry and Bloch fibers}
+
+The allowed momenta and Fourier matrix are
+\begin{equation}
+ k_j=\frac{2\pi j}{Na},
+ \qquad
+ F_{kR}=\frac{1}{\sqrt N}e^{-\ii kRa}.
+\end{equation}
+With $\mathcal F=F\otimes I_2$,
+\begin{equation}
+ H_k^{\mathrm{full}}=\mathcal F H_{\mathrm{real}}\mathcal F^\dagger.
+\end{equation}
+Translation symmetry makes this matrix block diagonal. Under the notebook's
+conventions, each $2\times2$ block is
+\begin{equation}
+ H(k)=
+ \begin{pmatrix}
+  \Delta & t_1+t_2e^{-\ii ka}\\
+  t_1+t_2e^{\ii ka} & -\Delta
+ \end{pmatrix}.
+\end{equation}
+The executable notebook checks Fourier unitarity, equality of every transformed
+block with $H(k)$, and vanishing of all off-fiber blocks.
+
+\section{Eigenstates, projectors, and gauge freedom}
+
+At each momentum,
+\begin{equation}
+ H(k)\ket{u_{nk}}=E_n(k)\ket{u_{nk}}.
+\end{equation}
+Retaining the lower band gives a normalized vector $\ket{u_k}$ and rank-one
+projector
+\begin{equation}
+ P(k)=\projector{u_k}.
+\end{equation}
+The vector is a choice of frame inside the retained subspace. For an isolated
+band,
+\begin{equation}
+ \ket{u_k}\longmapsto e^{\ii\phi(k)}\ket{u_k}
+\end{equation}
+changes that frame while leaving $P(k)$ unchanged. The notebook demonstrates
+this with a seeded irregular phase field and an executable projector check.
+
+\section{Open-chain parallel transport}
+
+A smoother sampled frame is built sequentially. The phase of
+$\ket{u_{k_{j+1}}}$ is chosen so that
+\begin{equation}
+ \braket{u_{k_j}}{u_{k_{j+1}}}
+\end{equation}
+is real and positive. Neighboring overlap phases are thereby removed along the
+ordered samples.
+
+\paragraph{Boundary of the construction.}
+This is open-chain parallel transport. It does not enforce closure between the
+last and first momentum samples. The remaining closure phase must be addressed
+explicitly before making a periodic-gauge or Berry-phase claim.
+
+\section{Wannier construction}
+
+With $\ket{\psi_k}=\ket{k}\otimes\ket{u_k}$, define
+\begin{equation}
+ \ket{w_{R_0}}=\frac{1}{\sqrt N}\sum_k
+ e^{-\ii kR_0a}\ket{\psi_k}.
+\end{equation}
+Its real-space orbital amplitudes are
+\begin{equation}
+ \braket{R,\alpha}{w_{R_0}}
+ =\frac1N\sum_k e^{\ii k(R-R_0)a}u_\alpha(k),
+\end{equation}
+and its cell probability is
+\begin{equation}
+ p_{R_0}(R)=\sum_\alpha
+ \left|\braket{R,\alpha}{w_{R_0}}\right|^2.
+\end{equation}
+Different phase frames produce different shapes for individual Wannier
+functions while spanning the same retained subspace.
+
+\section{Wannier-basis consistency}
+
+Place the translated Wannier functions in the columns of a $2N\times N$ matrix
+$W$. The notebook checks:
+\begin{align}
+ W^\dagger W &= I_N &&\text{(orthonormality)},\\
+ WW^\dagger &= P_{\mathrm{Bloch}} &&\text{(retained-projector equality)},
+\end{align}
+as well as translation covariance between adjacent center labels. These checks
+establish consistency of the finite representations, not completeness outside
+the retained band.
+
+\section{Exploratory localization diagnostic}
+
+Using minimum-image displacements $x_R$ relative to $R_0$, the notebook computes
+\begin{equation}
+ \Omega_{R_0}=\sum_Rp_{R_0}(R)x_R^2
+ -\left(\sum_Rp_{R_0}(R)x_R\right)^2.
+\end{equation}
+This diagnostic permits a finite-example comparison between random and
+parallel-transport frames.
+
+\paragraph{Boundary of the diagnostic.}
+$\Omega_{R_0}$ is not a periodic-position functional and is not the
+Marzari--Vanderbilt spread. A smaller value in this example is not a
+maximal-localization result.
+
+\section{Hamiltonian in Wannier coordinates}
+
+The retained Hamiltonian is
+\begin{equation}
+ H_{RR'}=\bra{w_R}\hat H\ket{w_{R'}},
+ \qquad H_W=W^\dagger H_{\mathrm{real}}W.
+\end{equation}
+Translation symmetry makes $H_W$ circulant. A row referenced to an origin cell
+defines $H(\Delta R)$, from which the retained dispersion is reconstructed:
+\begin{equation}
+ E(k)=\sum_{\Delta R}e^{\ii k\Delta Ra}H(\Delta R).
+\end{equation}
+The notebook checks this reconstruction against the lower-band eigenvalues at
+every sampled momentum.
+
+\section{The special single-band result}
+
+For one isolated band,
+\begin{equation}
+ H_{RR'}=\frac1N\sum_k e^{\ii k(R-R')a}E(k),
+\end{equation}
+so the $U(1)$ phase does not appear. Let
+$S=W_{\mathrm{smooth}}^\dagger W_{\mathrm{random}}$. The basis change can be
+nontrivial while
+\begin{equation}
+ H_{\mathrm{random}}=S^\dagger H_{\mathrm{smooth}}S,
+ \qquad [H_{\mathrm{smooth}},S]=0
+\end{equation}
+within the notebook's numerical tolerance. Consequently, the two single-band
+Wannier Hamiltonians are elementwise equal in this experiment.
+
+\paragraph{Boundary of the result.}
+This single-band $U(1)$ experiment cannot demonstrate a nonzero
+Wannier-Hamiltonian coordinate difference. A composite retained subspace with
+momentum-dependent $U(M)$ mixing would be a different construction and remains
+deferred.
+
+\section{Motivation for retained-space alignment}
+
+If pristine and doped calculations independently produce
+$\hat H_b^{(P)}$ and $\hat H_d^{(P)}$, their matrices are not automatically in
+identified coordinates. An explicit unitary map
+\begin{equation}
+ \hat U_d:\Hilbert_b^{(P)}\longrightarrow\Hilbert_d^{(P)}
+\end{equation}
+is required before defining
+\begin{equation}
+ \Delta\hat H_d^{(P)}
+ =\hat U_d^\dagger\hat H_d^{(P)}\hat U_d-\hat H_b^{(P)}.
+\end{equation}
+The notebook motivates this expression but does not construct two distinct
+retained spaces, produce $\hat U_d$, or validate a pristine--dopant subtraction.
+
+\section{Representation map and lecture sequence}
+
+The construction can be summarized as
+\begin{equation}
+\Hilbert_{\mathrm{real}}
+\xrightarrow{\mathcal F}
+\bigoplus_k\Hilbert(k)
+\xrightarrow{P(k)}
+\bigoplus_k\Hilbert^{(P)}(k)
+\xrightarrow{\mathrm{gauge}}
+\{\ket{u_k}\}
+\xrightarrow{\mathrm{Fourier}}
+\{\ket{w_R}\}.
+\end{equation}
+
+A suggested lecture order is:
+\begin{enumerate}
+ \item build the real-space basis and matrix;
+ \item derive and verify the Bloch fibers;
+ \item contrast eigenvectors with projectors;
+ \item demonstrate gauge freedom and open-chain smoothing;
+ \item construct and compare Wannier functions;
+ \item check the basis and reconstruct the band;
+ \item explain the special single-band invariance; and
+ \item motivate, but do not claim, retained-space alignment.
+\end{enumerate}
+
+\section{Preserved limitations}
+
+\begin{enumerate}
+ \item The open-chain parallel-transport gauge does not enforce periodic
+ momentum closure.
+ \item The minimum-image quadratic spread is exploratory, not a
+ periodic-position or Marzari--Vanderbilt localization functional.
+ \item The single-band $U(1)$ experiment cannot demonstrate a nonzero
+ Wannier-Hamiltonian coordinate difference; multiband redesign is deferred.
+ \item The pristine--dopant discussion is motivation only and does not construct
+ or validate retained-space alignment.
+\end{enumerate}
+
+Periodic-gauge closure, Zak phase, a robust periodic spread functional,
+composite-band $U(M)$ transformations, entangled-band selection,
+Marzari--Vanderbilt localization, imported electronic-structure data, comparison
+with Wannier90, and formal PhysKit capability status all require separate
+authorization.
+
+\end{document}

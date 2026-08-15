@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 19,
+  "state_revision": 32,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -37,330 +37,85 @@
   },
   "control_plane_phase": "operational",
   "active_task": {
-    "task_id": "FOUNDATIONS-FD1",
-    "task_kind": "bounded-early-formal-verification",
-    "status": "task-local-early-formal-verification-completed-awaiting-separate-next-artifact-authorization",
-    "purpose": "Preserve the completed preliminary FD1 software and numerical verification handoff under the explicit human prerequisite exception; evidence_production_and_assessment and all later artifact stages remain incomplete or inactive.",
-    "task_record": ".pi/tasks/foundations-fd1.md",
-    "material_intake": "docs/harness/physkit.capability.01-uniform-grid-laplacian-intake.md",
-    "material_contract": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
-    "template_instance": {
-      "instance_id": "FOUNDATIONS-FD1",
-      "template_id": "PHYSKIT-CAPABILITY-DEVELOPMENT",
-      "template_record": ".pi/chains/capability-development.chain.json",
-      "current_stage": "task-local-early-formal-verification",
-      "stage_state": "completed-preliminary-early-formal-verification-awaiting-separate-next-artifact-authorization",
-      "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
-      "artifact_path": "A",
-      "applicability_axes": {
-        "reusable_library_interface": "required",
-        "notebook_artifact": "required"
-      },
-      "active_writer_roles": [],
-      "correction_cycle_count": 1,
-      "human_remand_count": 1,
-      "contract_revision_target": 3,
-      "contract_accepted_revision": "5766b281bfea890cc522cf651f36bd93c0493cbb"
-    },
-    "selected_capability": "uniform-grid-dirichlet-discrete-laplacian",
-    "capability_structure": "one integrated but internally layered contract",
-    "primary_representation": "discrete-first",
-    "artifact_path": "A",
-    "applicability_axes": {
-      "reusable_library_interface": "required",
-      "notebook_artifact": "required"
-    },
-    "accepted_scope_decisions": {
-      "mathematical_scope": "closed [a,b], b>a, N>=3, h=(b-a)/(N-1), active interior 1..N-2, homogeneous Dirichlet endpoints, V_h=F^(N-2), F real or complex, D2,h=h^-2 tridiag(1,-2,1) representing d2/dx2",
-      "operator_architecture": "accepted LinearOperator -> DiscreteLinearOperator1D -> FiniteDifferenceLaplacian1D; concrete domain and codomain are HomogeneousDirichletStateSpace1D; scalar scaling accepted; general composition and quantum kinetic energy deferred",
-      "matrix_representation": "accepted eager canonical SciPy CSR computational form with dense inspection derived from CSR, defensive ownership, positive-second-derivative sign, real/complex application, and N=3 edge case",
-      "documentation_standard": "accepted complete NumPy-style source documentation plus MyST Markdown/Sphinx API and concept documentation synchronized with generated inheritance and conceptual Graphviz diagrams",
-      "sphinx_and_diagrams": "accepted minimal Sphinx bootstrap, warnings-as-errors build, generated inheritance diagram, source-controlled conceptual Graphviz diagram, and external dot prerequisite; no build artifacts committed",
-      "lightweight_vvuq": "accepted ten-step proportional profile; no formal learner study and no imported external control-plane ceremony",
-      "evidence_dispositions": {
-        "software verification": "required",
-        "numerical verification": "required",
-        "physical validation": "not-applicable-human-accepted-rationale: no physical-model adequacy claim",
-        "pedagogical validation": "required through proportional human checklist review; no formal learner study",
-        "uncertainty quantification": "not-applicable-human-accepted-rationale: no uncertainty-bearing claim; truncation, convergence, resolution loss, and floating-point behavior remain numerical verification"
-      },
-      "accepted_base_typing_limitation": "LinearOperator.domain and codomain return object only as a minimal typing boundary for this capability; no general PhysKit state-space hierarchy; FiniteDifferenceLaplacian1D narrows both to HomogeneousDirichletStateSpace1D",
-      "implementation_direction": "M1 new clean surface; all competing grid, state, operator, Laplacian, notebook, and QM implementations remain untouched except additive accepted exports and the additive UniformGrid1D declaration in its accepted defining module"
+    "task_id": "LECTURE-NOTES-EXP-1",
+    "task_kind": "bounded-exploratory-lecture-notes-construction",
+    "status": "verified-commit-and-push-authorized-awaiting-human-final-acceptance",
+    "purpose": "Create Markdown and buildable LaTeX lecture-note sources derived from the human-accepted exploratory Bloch-to-Wannier notebook without introducing new scientific or support claims.",
+    "artifact_role": "exploratory companion lecture notes; not canonical, supported, or lifecycle-assigned",
+    "source_artifact": {
+      "path": "notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
+      "human_disposition": "accepted as revised exploratory notebook handoff",
+      "sha256": "9f1e65972b6c76591703e0ad74dc6b50a6c8f1230ee4d96fcc071c787bcab4a5"
     },
     "authorized_paths": [
-      "tests/physkit/discretization/test_uniform_grid_1d.py",
-      "tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py",
-      "tests/physkit/operators/test_linear_operator.py",
-      "tests/physkit/operators/test_finite_difference_laplacian_1d.py",
-      "docs/verification/foundations-uniform-grid-dirichlet-laplacian.md",
-      ".pi/active-state.json",
-      ".pi/tasks/foundations-fd1.md"
+      "notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
+      "notebooks/solid-state-physics/electronic-structure/bloch2wannier.md",
+      "docs/lecture-notes/solid-state-physics/electronic-structure/bloch2wannier/",
+      ".pi/active-state.json"
     ],
     "active_ownership": {
       "parent_coordinator": [],
-      "capability_architect": [],
-      "capability_contract_paths": [],
-      "production_source_paths": [],
-      "test_or_evidence_paths": [],
-      "notebook_or_documentation_paths": [],
-      "sphinx_implementation_paths": []
+      "notebook_documentation_writer": [],
+      "independent_reviewer": []
+    },
+    "accepted_scope_decisions": {
+      "content_source": "derive lecture notes from the accepted exploratory notebook",
+      "claim_boundary": "do not introduce new physical models, numerical conventions, dependencies, canonical status, lifecycle status, validation conclusions, or support claims",
+      "limitation_preservation": [
+        "the open-chain parallel-transport gauge does not enforce periodic momentum closure",
+        "the minimum-image quadratic spread is exploratory rather than a periodic-position or Marzari--Vanderbilt localization functional",
+        "the single-band U(1) experiment cannot demonstrate a nonzero Wannier-Hamiltonian coordinate difference; multiband redesign remains deferred",
+        "the pristine--dopant section is motivation only and does not construct or validate retained-space alignment"
+      ],
+      "latex_boundary": "include buildable LaTeX source and omit generated PDF and build artifacts",
+      "administrative_rename": {
+        "notebook": "notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
+        "markdown": "notebooks/solid-state-physics/electronic-structure/bloch2wannier.md",
+        "latex_directory": "docs/lecture-notes/solid-state-physics/electronic-structure/bloch2wannier/",
+        "displayed_title": "unchanged"
+      }
     },
     "prohibited_work": [
-      "production-source changes",
-      "Sphinx configuration or pages, API or concept documentation, diagrams, notebooks, or notebook execution",
-      "dependency, packaging, or CI changes",
-      "chain or agent changes, integration review, parent final verification, final acceptance, or closeout",
-      "general composition, symbolic operators, equation infrastructure, quantum operators, or PIAB",
-      "adapters, migration, repair, replacement, deprecation, relocation, deletion, lifecycle, support, or successor work"
+      "modification of the accepted notebook",
+      "PhysKit production source, API, tests, dependencies, packaging, CI, or unrelated notebook changes",
+      "new physical models, numerical conventions, formal capability work, multiband redesign, or imported electronic-structure data",
+      "canonical-artifact, Supported, lifecycle, physical-validation, pedagogical-validation, or support claims",
+      "inspection or modification of unrelated untracked package-lock.json",
+      "commit, push, or automatic successor work"
     ],
     "review": {
-      "mode": "bounded Mode B task-local early formal-verification handoff",
-      "independent_read_only_review": "not invoked by explicit scope; one consolidated capability integration review remains a later inactive stage",
-      "repository_artifact_creation": false,
-      "material_findings": [],
-      "limitations": [
-        "only software verification, numerical verification, and a preliminary five-class evidence record are authorized",
-        "documentation, notebook, integration review, parent final verification, evidence acceptance, lifecycle, support, and final acceptance remain inactive"
-      ]
+      "mode": "bounded exact-path rename verification",
+      "reviewer_may_repair": false,
+      "prior_content_review": "PASS from fresh-context builtin reviewer run 18334736 before the human-confirmed exact rename",
+      "post_rename_review": "PASS from fresh-context builtin reviewer run 6dcfdb41; old paths absent, current references and displayed title correct, historical authority preserved, no content or scope inflation, no files modified by reviewer"
     },
     "validation": {
-      "production_source_handoff": "passed",
-      "early_formal_verification": "completed-preliminary-handoff",
-      "focused_verification": "passed: 110 tests",
-      "unchanged_legacy_discretization": "passed: 17 tests",
-      "complete_repository_suite": "unrelated collection failure: PhysicalConstantsProtocol cannot be imported in test_ConstantsCGS.py and test_ConstantsSI.py; excluded paths unchanged",
-      "independent_capability_integration_review": "not-run; explicitly deferred to the later consolidated complete-artifact review",
-      "limitations": "the preliminary verification slice does not complete evidence_production_and_assessment and cannot establish evidence acceptance, pedagogical validation, lifecycle, support, or final acceptance"
+      "status": "passed post-rename",
+      "path_mapping": "passed: all five new artifacts present and all three old artifact paths absent",
+      "filename_references": "passed: Markdown and LaTeX reference bloch2wannier.ipynb; README had no old filename reference",
+      "displayed_title": "passed: From Bloch States to Wannier Functions remains unchanged",
+      "accepted_notebook_content_identity": "passed: SHA-256 9f1e65972b6c76591703e0ad74dc6b50a6c8f1230ee4d96fcc071c787bcab4a5",
+      "latex_build": "passed: temporary-directory make completed and produced main.pdf; outputs removed with the temporary directory",
+      "generated_artifact_exclusion": "passed",
+      "git_diff_check": "passed",
+      "no_staged_files": "passed",
+      "exact_path_isolation": "passed; unrelated untracked package-lock.json remained uninspected and untouched",
+      "independent_review": "PASS; fresh-context reviewer run 6dcfdb41",
+      "parent_verification": "passed: exact rename, references, content hash, build, generated-artifact exclusion, review, unchanged HEAD, and complete status verified"
     },
     "implementation_authorized": false,
     "successor_authorized": false,
     "successor": null,
-    "stop_condition": "Stop after the exact seven-path early formal-verification handoff. Do not activate Sphinx, API or concept documentation, diagrams, notebooks, integration review, parent final verification, final acceptance, lifecycle, PIAB, closeout, or successor work.",
-    "hc02_remand": {
-      "disposition": "REMAND",
-      "contract_accepted": false,
-      "starting_revision": "1ce0e53afe435cba8551875166ff5fc34bd68945",
-      "contract_revision_target": 3,
-      "findings": [
-        "grid geometry improperly owns homogeneous-Dirichlet state-space behavior",
-        "operator compatibility identity omits active-index, boundary, domain, and codomain semantics",
-        "relative discrete L2 norm and observed-order formulas are undefined",
-        "maintained Sphinx API/concept pages must use MyST Markdown",
-        "equations require durable labeled storage in the maintained Markdown concept page without runtime equation-decoration infrastructure"
-      ],
-      "required_corrections": [
-        "separate UniformGrid1D geometry from HomogeneousDirichletStateSpace1D semantics",
-        "make discrete operator domain and codomain explicit immutable state spaces",
-        "retain scalar scaling and defer general public composition",
-        "define weighted norm, relative error, observed order, and exact refinement pairs",
-        "propose MyST/Sphinx paths, configuration, stable labels, diagrams, and notebook synchronization",
-        "retain lightweight VVUQ, evidence, migration, implementation, and successor boundaries"
-      ],
-      "automatic_correction_after_review_authorized": false,
-      "status": "historical; superseded by explicit ACCEPT of corrected contract revision 3"
-    },
-    "implementation_plan": {
-      "status": "completed-handoff-only",
-      "record": ".pi/tasks/foundations-fd1.md",
-      "accepted_contract_path": "docs/capabilities/foundations/uniform-grid-dirichlet-laplacian.md",
-      "accepted_contract_revision": "5766b281bfea890cc522cf651f36bd93c0493cbb",
-      "planned_ownership": {
-        "status": "planned-inactive-pending-separate-human-authorization",
-        "parent_coordinator_configuration_exception": [
-          "pyproject.toml"
-        ],
-        "physkit.physkit-implementation": [
-          "src/physkit/discretization/grid_1d.py",
-          "src/physkit/discretization/state_space_1d.py",
-          "src/physkit/discretization/__init__.py",
-          "src/physkit/operators/base.py",
-          "src/physkit/operators/discrete_1d.py",
-          "src/physkit/operators/finite_difference_1d.py",
-          "src/physkit/operators/__init__.py"
-        ],
-        "physkit.physkit-verification": [
-          "tests/physkit/discretization/test_uniform_grid_1d.py",
-          "tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py",
-          "tests/physkit/operators/test_linear_operator.py",
-          "tests/physkit/operators/test_finite_difference_laplacian_1d.py",
-          "docs/verification/foundations-uniform-grid-dirichlet-laplacian.md"
-        ],
-        "physkit.physkit-notebook-documentation": [
-          "docs/conf.py",
-          "docs/index.md",
-          "docs/api/operators.md",
-          "docs/concepts/uniform-grid-dirichlet-laplacian.md",
-          "docs/_static/diagrams/uniform-grid-dirichlet-laplacian.dot",
-          "notebooks/numerics/differentiation/uniform-grid-dirichlet-laplacian.ipynb"
-        ],
-        "physkit.physkit-capability-integration-reviewer": "read-only integrated review of all planned artifacts"
-      },
-      "implementation_authorized": false,
-      "activation_requirement": "separate explicit human authorization citing the accepted contract and completed plan",
-      "final_evidence_summary": "docs/verification/foundations-uniform-grid-dirichlet-laplacian.md",
-      "final_stop": "human_final_acceptance",
-      "successor_authorized": false,
-      "external_notebook_execution_prerequisite": "externally provisioned Jupyter with nbconvert and nbformat; deterministic version/import preflight required; missing prerequisite stops for human authorization before any repository dependency change",
-      "correction_cycle_count": 1,
-      "automatic_correction_cycles_remaining": 0,
-      "later_finding_route": "bounded-cycle-exhausted and human escalation"
-    },
-    "hc02_acceptance": {
-      "disposition": "ACCEPT",
-      "state": "resolved",
-      "contract_accepted": true,
-      "contract_revision": 3,
-      "accepted_revision": "5766b281bfea890cc522cf651f36bd93c0493cbb",
-      "decision_owner": "human",
-      "accepted_artifact_path": "A",
-      "implementation_authorized": false,
-      "successor_authorized": false
-    },
-    "implementation_authorization": {
-      "disposition": "AUTHORIZED",
-      "source_revision": "d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
-      "contract_revision": 3,
-      "boundary": "seven exact production-source paths only",
-      "source_paths": [
-        "src/physkit/discretization/grid_1d.py",
-        "src/physkit/discretization/state_space_1d.py",
-        "src/physkit/discretization/__init__.py",
-        "src/physkit/operators/base.py",
-        "src/physkit/operators/discrete_1d.py",
-        "src/physkit/operators/finite_difference_1d.py",
-        "src/physkit/operators/__init__.py"
-      ],
-      "coordination_paths": [
-        ".pi/active-state.json",
-        ".pi/tasks/foundations-fd1.md"
-      ],
-      "not_authorized": [
-        "tests",
-        "evidence",
-        "Sphinx",
-        "documentation pages",
-        "diagrams",
-        "notebooks",
-        "dependencies",
-        "packaging",
-        "CI",
-        "legacy changes",
-        "PIAB",
-        "lifecycle",
-        "successor"
-      ]
-    },
-    "implementation_completed": true,
-    "implementation_handoff": {
-      "status": "completed-bounded-production-source-only",
-      "starting_revision": "d5fc0dee79ebff5dbe6375f9b0c32661853b1e83",
-      "contract_revision": 3,
-      "completed_paths": [
-        "src/physkit/discretization/grid_1d.py",
-        "src/physkit/discretization/state_space_1d.py",
-        "src/physkit/discretization/__init__.py",
-        "src/physkit/operators/base.py",
-        "src/physkit/operators/discrete_1d.py",
-        "src/physkit/operators/finite_difference_1d.py",
-        "src/physkit/operators/__init__.py"
-      ],
-      "source_writer_ownership": "inactive-after-handoff",
-      "writer_self_verification": "passed: py_compile, public imports, developmental smoke, 17 unchanged legacy tests, git diff --check",
-      "parent_conformance_verification": "passed: complete source inspection and independent developmental smoke; no unresolved finding",
-      "evidence_limit": "developmental implementation checks only; not accepted software or numerical verification",
-      "next_writer_stage": "inactive pending separate human authorization"
-    },
-    "source_correction_handoff": {
-      "status": "completed-explicitly-human-authorized-bounded-source-correction",
-      "starting_revision": "25c96cf43ce8820e79fce670e400451a4eedd1ca",
-      "contract_revision": 3,
-      "correction_authority": "explicit human bounded authorization outside the reusable template automatic correction loop",
-      "findings": {
-        "FD1-SRC-F01": "corrected: Boolean elements are rejected before NumPy coercion",
-        "FD1-SRC-F02": "corrected: correctly typed unrepresentable or nonfinite endpoints raise ValueError",
-        "FD1-SRC-F03": "corrected: correctly typed unrepresentable or nonfinite scale factors raise ValueError after controlled canonicalization"
-      },
-      "corrected_source_paths": [
-        "src/physkit/discretization/grid_1d.py",
-        "src/physkit/discretization/state_space_1d.py",
-        "src/physkit/operators/base.py"
-      ],
-      "automatic_correction_counter": "historically preserved at 1; not reset, incremented, consumed, or reinterpreted",
-      "developmental_checks": "passed: three-path py_compile, required exception taxonomy, real/complex restriction embedding and application, ordinary real/complex scaling, exact N=3,4,8 matrices, public imports, defensive ownership, absence of public compose, and 17 unchanged legacy tests",
-      "parent_conformance_verification": "passed after complete read-only three-source diff inspection and independent developmental checks; no unresolved finding or unrelated refactor",
-      "source_writer_ownership": "inactive-after-corrected-handoff",
-      "formal_verification_stage": "inactive pending separate human authorization",
-      "notebook_stage": "inactive pending separate human authorization",
-      "piab": "parked",
-      "successor_authorized": false,
-      "successor": null,
-      "evidence_limit": "developmental correction checks only; not formal software or numerical verification evidence"
-    },
-    "early_formal_verification_handoff": {
-      "status": "completed-preliminary-task-local-slice",
-      "starting_revision": "5ae0b8792e29cb764866d2600acc3ce47924536e",
-      "authority": "explicit human bounded Mode B authorization with an FD1-local prerequisite exception",
-      "prerequisite_exception": "only notebook/documentation completion before test and preliminary evidence authoring was waived; the reusable chain remains unchanged",
-      "verification_paths": [
-        "tests/physkit/discretization/test_uniform_grid_1d.py",
-        "tests/physkit/discretization/test_homogeneous_dirichlet_state_space_1d.py",
-        "tests/physkit/operators/test_linear_operator.py",
-        "tests/physkit/operators/test_finite_difference_laplacian_1d.py",
-        "docs/verification/foundations-uniform-grid-dirichlet-laplacian.md"
-      ],
-      "software_verification": {
-        "result_state": "required-incomplete",
-        "observed_outcome": "passed",
-        "result": "110 focused tests passed",
-        "incomplete_basis": "later Path A artifacts, synchronization, consolidated integration review, and human evidence disposition remain pending"
-      },
-      "numerical_verification": {
-        "result_state": "required-incomplete",
-        "observed_outcome": "passed",
-        "result": "independent matrices and stencils passed; monotone accepted errors and orders from 1.9986095692 to 1.9999130934",
-        "claim_boundary": "accepted modes 1 and 2, N=17,33,65,129, [0,1], weighted norm, homogeneous boundaries, and binary64 environment only"
-      },
-      "physical_validation": {
-        "result_state": "not-applicable-human-accepted-rationale",
-        "observed_outcome": "not-run",
-        "rationale": "no physical-model adequacy claim"
-      },
-      "pedagogical_validation": {
-        "result_state": "required-incomplete",
-        "observed_outcome": "not-run",
-        "blocker": "notebook and proportional human checklist remain pending"
-      },
-      "uncertainty_quantification": {
-        "result_state": "not-applicable-human-accepted-rationale",
-        "observed_outcome": "not-run",
-        "rationale": "no uncertainty-bearing claim; convergence, truncation, resolution, and floating-point behavior remain numerical verification"
-      },
-      "complete_repository_suite": "collection blocked by two unchanged unrelated constants tests importing absent PhysicalConstantsProtocol",
-      "evidence_production_and_assessment": "incomplete; preliminary record must be refreshed after documentation and notebook work",
-      "independent_capability_integration_review": "not-run and inactive",
-      "verification_writer_ownership": "inactive-after-handoff",
-      "implementation_authorized": false,
-      "production_source_ownership": [],
-      "piab": "parked",
-      "successor_authorized": false,
-      "successor": null
-    }
+    "stop_condition": "Stop after creation, deterministic validation, independent read-only review, parent verification, and human handoff. Do not commit, push, assign canonical or lifecycle status, or start successor work."
   },
-  "checkpoint": null,
-  "blockers": [
-    {
-      "blocker_id": "foundations-fd1.next-artifact-stage-not-authorized",
-      "condition": "the preliminary early verification handoff is complete; documentation, notebook, Sphinx, dependency, packaging, CI, integration-review, parent-final-verification, final-acceptance, and closeout stages remain inactive pending separate human authorization"
-    },
-    {
-      "blocker_id": "piab.parked",
-      "condition": "PIAB contract, API, notebook, evidence, lifecycle, and implementation work remain parked"
-    },
-    {
-      "blocker_id": "successor.not-authorized",
-      "condition": "no successor task or capability activation is authorized"
-    }
-  ],
+  "checkpoint": {
+    "checkpoint_id": "LECTURE-NOTES-EXP-1-HC01",
+    "kind": "human-final-acceptance",
+    "state": "pending-human-decision-after-rename",
+    "decision_requested": "After reviewed handoff, accept, revise, reject, or defer the exploratory Markdown and LaTeX lecture-note sources.",
+    "acceptance_does_not_authorize": "commit, push, canonical status, lifecycle/support claims, formalization, multiband redesign, or successor work"
+  },
+  "blockers": [],
   "parked_work": [
     {
       "work_id": "pilot.piab-1d-analytical-stationary-states",
@@ -398,12 +153,19 @@
       ],
       "activation_requirement": "separate explicit human authorization establishing a new bounded task and exact scope",
       "successor_authorized": false
+    },
+    {
+      "work_id": "foundations-fd1.remaining-artifact-stages",
+      "subject": "FOUNDATIONS-FD1 work after the completed preliminary early formal-verification handoff",
+      "current_state": "inactive; no later artifact stage authorized",
+      "activation_requirement": "separate explicit human authorization",
+      "successor_authorized": false
     }
   ],
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "FOUNDATIONS-FD1 authorizes one proposed contract only. Implementation, PIAB, remaining notebook work, and successor activation are not authorized."
+    "denial_basis": "LECTURE-NOTES-EXP-1 authorizes only the bounded lecture-note source handoff and stops before any successor."
   },
   "human_decisions": [
     {
@@ -1077,15 +839,111 @@
       "decision_date": "2026-08-06",
       "provenance": "explicit human bounded Mode B authorization",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-notebook-exp-1.001",
+      "subject": "Exploratory From Bloch States to Wannier Functions notebook",
+      "disposition": "authorized exact bounded scope",
+      "authority_granted": [
+        "create and execute notebooks/solid-state-physics/electronic-structure/from-bloch-states-to-wannier-functions.ipynb",
+        "update .pi/active-state.json for NOTEBOOK-EXP-1 coordination",
+        "use NumPy and Matplotlib in an externally provisioned environment without repository dependency changes",
+        "perform embedded deterministic checks and independent read-only technical review"
+      ],
+      "authority_not_granted": [
+        "PhysKit source, API, tests, dependency, packaging, CI, or unrelated notebook changes",
+        "formal capability status, canonical designation, lifecycle or support claims",
+        "multiband redesign, commit, push, formalization, or successor work"
+      ],
+      "known_deferred_issue": "single-band U(1) gauge cannot demonstrate nonzero Wannier-Hamiltonian matrix-coordinate difference",
+      "provenance": "explicit human acceptance of the exact proposed scope",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.remand-notebook-exp-1-hc01.001",
+      "subject": "NOTEBOOK-EXP-1 exploratory handoff presentation structure",
+      "disposition": "REVISE; exact notebook and active-state correction authorized",
+      "authority_granted": [
+        "revise the existing notebook so every Python block produces a graphical result",
+        "place prose interpretation immediately after each executed diagram",
+        "keep deterministic evidence in code and interpretive or non-deterministic explanation in following Markdown",
+        "re-execute, independently review, parent-verify, and return to the same human checkpoint",
+        "update .pi/active-state.json for this bounded revision"
+      ],
+      "authority_not_granted": [
+        "new paths, dependencies, PhysKit source/API/tests, formalization, canonical or lifecycle status, commit, push, multiband redesign, or successor work"
+      ],
+      "provenance": "explicit human revision instruction at NOTEBOOK-EXP-1-HC01",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-notebook-exp-1-and-authorize-lecture-notes-exp-1.001",
+      "subject": "NOTEBOOK-EXP-1 final acceptance and bounded exploratory companion lecture-note sources",
+      "disposition": "ACCEPT revised exploratory notebook handoff; authorize proposed Markdown and LaTeX successor scope",
+      "authority_granted": [
+        "record NOTEBOOK-EXP-1 revised exploratory notebook handoff as human-accepted within its stated limitations",
+        "create the exact Markdown companion path and exact LaTeX lecture-note directory accepted by the human",
+        "derive content only from the accepted notebook while preserving all four stated limitations",
+        "include buildable LaTeX source without generated PDF or build artifacts",
+        "update active state, validate, independently review read-only, and return a human handoff"
+      ],
+      "authority_not_granted": [
+        "modification of the accepted notebook",
+        "new physical models, numerical conventions, dependencies, source, API, tests, packaging, or CI",
+        "canonical, lifecycle, support, physical-validation, or pedagogical-validation claims",
+        "commit, push, formalization, multiband redesign, or successor work"
+      ],
+      "starting_revision": "bd5f657348acef131efe0e1618a5eb1641dfb893",
+      "provenance": "explicit human ACCEPT PROPOSED SUCCESSOR SCOPE instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.rename-lecture-notes-exp-1-to-bloch2wannier.001",
+      "subject": "LECTURE-NOTES-EXP-1 exact artifact path rename",
+      "disposition": "CONFIRM ALL RENAMES",
+      "authority_granted": [
+        "rename the accepted exploratory notebook path to notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
+        "rename the Markdown companion path to notebooks/solid-state-physics/electronic-structure/bloch2wannier.md",
+        "rename the LaTeX lecture-note directory to docs/lecture-notes/solid-state-physics/electronic-structure/bloch2wannier/",
+        "update filename references in Markdown, LaTeX, README if applicable, and active state while leaving the displayed title unchanged",
+        "perform deterministic validation and proportional independent read-only verification"
+      ],
+      "authority_not_granted": [
+        "scientific or pedagogical content revision beyond filename references",
+        "canonical, lifecycle, support, or validation claims",
+        "source, API, tests, dependencies, packaging, CI, commit, push, or successor work"
+      ],
+      "starting_revision": "bd5f657348acef131efe0e1618a5eb1641dfb893",
+      "provenance": "explicit human CONFIRM ALL RENAMES instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-commit-and-push-lecture-notes-exp-1.001",
+      "subject": "LECTURE-NOTES-EXP-1 reviewed bloch2wannier handoff publication",
+      "disposition": "commit and push authorized",
+      "authority_granted": [
+        "stage exactly .pi/active-state.json and the five reviewed bloch2wannier artifacts",
+        "commit the exact reviewed handoff on main",
+        "push the commit to origin/main only if fast-forward preflight remains satisfied"
+      ],
+      "authority_not_granted": [
+        "human final acceptance by commit or push alone",
+        "staging or inspection of unrelated package-lock.json",
+        "canonical, lifecycle, support, or validation claims",
+        "successor work"
+      ],
+      "starting_revision": "bd5f657348acef131efe0e1618a5eb1641dfb893",
+      "provenance": "explicit human comm and push instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "FOUNDATIONS-FD1 bounded source correction completed; all later writer stages inactive",
-    "to": "FOUNDATIONS-FD1 preliminary early formal-verification handoff completed; all writers inactive",
-    "timestamp_utc": "2026-08-06T08:10:09Z",
-    "actor_responsibility": "parent coordinator",
-    "observed_starting_git_revision": "5ae0b8792e29cb764866d2600acc3ce47924536e",
-    "reason": "human authorized the FD1-local early software and numerical verification slice; 110 focused and 17 legacy tests passed, complete-suite unrelated collection failures were bounded, preliminary evidence was recorded, and no later stage was activated"
+    "from": "exact bloch2wannier rename independently reviewed PASS and parent-verified; awaiting human final acceptance",
+    "to": "exact reviewed bloch2wannier handoff authorized for commit and fast-forward push; human final acceptance remains pending",
+    "timestamp_utc": "2026-08-15T06:50:29.987104Z",
+    "actor_responsibility": "human authorization recorded by parent coordinator",
+    "observed_starting_git_revision": "bd5f657348acef131efe0e1618a5eb1641dfb893",
+    "reason": "the human explicitly instructed commit and push after reviewed rename handoff; publication is authorized but is not treated as final acceptance or successor authority"
   },
   "resolved_checkpoints": [
     {
@@ -1113,6 +971,12 @@
       "decision_owner": "human",
       "accepted_revision": "5766b281bfea890cc522cf651f36bd93c0493cbb",
       "resolution": "contract revision 3 accepted within the exact stated Path A, evidence, limitation, M1, and non-authorization boundary"
+    },
+    {
+      "checkpoint_id": "NOTEBOOK-EXP-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "revised executable exploratory notebook handoff accepted within its stated exploratory role and four preserved limitations; no canonical, lifecycle, support, commit, push, or automatic successor authority implied"
     }
   ],
   "closed_tasks": [
