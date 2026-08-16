@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 71,
+  "state_revision": 74,
   "authority": {
     "status": "accepted by explicit human decision at ACTIVE-STATE-NORMALIZATION-1-HC01",
     "governs_only": [
@@ -81,11 +81,11 @@
     "denial_basis": "general successor intent does not identify or accept an exact bounded batch; no successor is active until that human checkpoint is resolved."
   },
   "last_transition": {
-    "from": "KINEMATICS-DIR-1 final handoff human-accepted and awaiting separate closeout",
-    "to": "KINEMATICS-DIR-1 administratively closed and authorized for commit and fast-forward push; successor intent recorded but exact scope unresolved",
-    "timestamp_utc": "2026-08-16T19:29:57Z",
+    "from": "CALCULUS-DIR-1 final handoff human-accepted and awaiting separate closeout",
+    "to": "CALCULUS-DIR-1 administratively closed and authorized for commit and fast-forward push; successor intent recorded but exact scope unresolved",
+    "timestamp_utc": "2026-08-16T20:13:31Z",
     "actor_responsibility": "human closeout, publication, and general successor intent recorded by parent coordinator",
-    "observed_starting_git_revision": "0ab2babd15c125dbb2cb3fb3d77a4789af993b9b",
+    "observed_starting_git_revision": "935f40a770d159e94aabaf54247b17849c976f78",
     "reason": "the human authorized closeout, commit, push, and successor work, but did not identify an exact successor batch"
   }
 }
