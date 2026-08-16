@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 55,
+  "state_revision": 59,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -65,7 +65,7 @@
     {
       "work_id": "notebook-organization.remaining-mappings-and-decisions",
       "subject": "Notebook mappings and protected decisions outside the closed four-mapping viscoelasticity batch",
-      "current_state": "inactive; MODERN-DIR-1 human-accepted and administratively closed; no active next batch",
+      "current_state": "inactive; VONMISES-DIR-1 human-accepted and administratively closed; no active next batch",
       "unresolved": [
         "remaining .07 path and filename mappings",
         "exact- and near-duplicate survivor and retention decisions",
@@ -88,7 +88,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "MODERN-DIR-1 is human-accepted, administratively closed, and authorized for publication only; no successor is authorized."
+    "denial_basis": "VONMISES-DIR-1 is human-accepted, administratively closed, and authorized for publication only; no successor is authorized."
   },
   "human_decisions": [
     {
@@ -1178,15 +1178,83 @@
       "decision_date": "2026-08-16",
       "provenance": "explicit human selection of option 2: CLOSE MODERN-DIR-1, COMMIT, AND PUSH",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-vonmises-dir-1-exact-two-mapping-scope.001",
+      "subject": "VONMISES-DIR-1 exact two-notebook path-only migration",
+      "disposition": "ACCEPT EXACT TWO-MAPPING VON-MISES BATCH",
+      "authority_granted": [
+        "record the exact two-mapping scope in active state",
+        "perform exactly the accepted byte-preserving git mv operations",
+        "run deterministic path, hash, JSON, reference, and staged-isolation checks",
+        "perform independent read-only review and parent verification",
+        "return to VONMISES-DIR-1-HC02 for final human acceptance"
+      ],
+      "authority_not_granted": [
+        "notebook content changes or execution",
+        "physical or numerical convention acceptance",
+        "reference updates",
+        "duplicate, canonical, lifecycle, scientific, or pedagogical decisions",
+        "additional mappings",
+        "package-lock.json handling",
+        "commit or push",
+        "successor work"
+      ],
+      "starting_revision": "aff811f436ccf80c56d94b656852494ab705e3e8",
+      "mapping_source_revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
+      "provenance": "explicit human ACCEPT EXACT TWO-MAPPING VON-MISES BATCH instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-vonmises-dir-1-hc02.001",
+      "subject": "VONMISES-DIR-1 exact reviewed two-mapping byte-preserving handoff",
+      "disposition": "ACCEPT",
+      "authority_granted": [
+        "record final human acceptance of the exact reviewed two-mapping handoff and stated evidence limitations",
+        "resolve VONMISES-DIR-1-HC02 as accepted"
+      ],
+      "authority_not_granted": [
+        "administrative closeout",
+        "commit or push",
+        "notebook execution or content changes",
+        "physical or numerical convention acceptance",
+        "canonical, lifecycle, support, scientific, physical-validation, or pedagogical-validation claims",
+        "additional mappings or successor work"
+      ],
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human accept instruction at VONMISES-DIR-1-HC02",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-vonmises-dir-1-closeout-commit-push.001",
+      "subject": "VONMISES-DIR-1 administrative closeout and accepted-handoff publication",
+      "disposition": "ADMINISTRATIVE CLOSEOUT, COMMIT, PUSH AUTHORIZED",
+      "authority_granted": [
+        "administratively close VONMISES-DIR-1 with active task and checkpoint null",
+        "stage exactly .pi/active-state.json and the two accepted R100 notebook renames",
+        "commit the exact accepted handoff on main",
+        "fast-forward push the commit to origin/main"
+      ],
+      "authority_not_granted": [
+        "package-lock.json inspection, staging, modification, or deletion",
+        "notebook content changes or execution",
+        "physical or numerical convention acceptance",
+        "canonical, lifecycle, support, scientific, physical-validation, or pedagogical-validation claims",
+        "additional mappings or successor work"
+      ],
+      "starting_revision": "aff811f436ccf80c56d94b656852494ab705e3e8",
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human Administrative closeout, commit, push authorized instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "MODERN-DIR-1 exact handoff human-accepted and awaiting separate closeout authorization",
-    "to": "MODERN-DIR-1 human-accepted and administratively closed; exact handoff authorized for commit and fast-forward push; no successor authorized",
-    "timestamp_utc": "2026-08-16T14:51:07Z",
+    "from": "VONMISES-DIR-1 exact handoff human-accepted and awaiting separate closeout authorization",
+    "to": "VONMISES-DIR-1 human-accepted and administratively closed; exact handoff authorized for commit and fast-forward push; no successor authorized",
+    "timestamp_utc": "2026-08-16T15:19:02Z",
     "actor_responsibility": "human closeout and publication authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "db8e37fb0b5e07391526fa84e28111783be67fd9",
-    "reason": "the human explicitly selected closeout plus commit and push, without authorizing any successor"
+    "observed_starting_git_revision": "aff811f436ccf80c56d94b656852494ab705e3e8",
+    "reason": "the human explicitly authorized administrative closeout, commit, and push without authorizing any successor"
   },
   "resolved_checkpoints": [
     {
@@ -1281,6 +1349,18 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "exact reviewed two-mapping byte-preserving handoff accepted within stated structural evidence and nonclaim boundaries; closeout, commit, push, and successor work remain unauthorized"
+    },
+    {
+      "checkpoint_id": "VONMISES-DIR-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact two von Mises byte-preserving path mappings accepted; content changes, execution, physical/numerical convention acceptance, reference updates, additional mappings, commit, push, and successor work excluded"
+    },
+    {
+      "checkpoint_id": "VONMISES-DIR-1-HC02",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact reviewed two-mapping byte-preserving handoff accepted within stated structural evidence and nonclaim boundaries; closeout, commit, push, convention acceptance, and successor work remain unauthorized"
     }
   ],
   "closed_tasks": [
@@ -1614,6 +1694,44 @@
         "additional mappings or successor work"
       ],
       "revision_context": "human-accepted staged handoff based on db8e37fb0b5e07391526fa84e28111783be67fd9; publication separately authorized"
+    },
+    {
+      "task_id": "VONMISES-DIR-1",
+      "task_kind": "bounded-two-notebook-von-mises-path-only-migration",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "accepted_mappings": [
+        {
+          "source": "notebooks/mtsci02/dev__get_vonmises_stress_2D.ipynb",
+          "destination": "notebooks/materials-science/mechanical-properties/two-dimensional-von-mises-stress.ipynb",
+          "sha256": "e63a47d29fed2dd495861c31aab17e1ae2c56707f9e270d7e55ca9c3391542f4"
+        },
+        {
+          "source": "notebooks/mtsci02/dev__get_vonmises_stress_3D.ipynb",
+          "destination": "notebooks/materials-science/mechanical-properties/three-dimensional-von-mises-stress.ipynb",
+          "sha256": "daf59f711b06557b31e8979237305572abd3ea6bd8e2c874502ee791cf92ba50"
+        }
+      ],
+      "accepted_evidence_boundary": [
+        "two staged R100 renames",
+        "zero notebook insertions/deletions",
+        "source/destination SHA-256 identity",
+        "valid JSON and zero saved error outputs",
+        "no operational reference breakage",
+        "exact staged-path isolation",
+        "deterministic verification PASS",
+        "independent integration review and final coordination re-review PASS",
+        "parent verification",
+        "explicit human final acceptance"
+      ],
+      "claims_not_accepted": [
+        "notebook execution or content correctness",
+        "physical or numerical convention acceptance",
+        "scientific, numerical, physical, or pedagogical validation",
+        "canonical, lifecycle, or support status",
+        "additional mappings or successor work"
+      ],
+      "revision_context": "human-accepted staged handoff based on aff811f436ccf80c56d94b656852494ab705e3e8; publication separately authorized"
     }
   ],
   "resolved_stages": [
@@ -1653,6 +1771,18 @@
       "stage": "closeout",
       "state": "completed",
       "authority": "explicit human selection of closeout plus commit and push"
+    },
+    {
+      "task_id": "VONMISES-DIR-1",
+      "stage": "human_final_acceptance",
+      "state": "accepted",
+      "decision_owner": "human"
+    },
+    {
+      "task_id": "VONMISES-DIR-1",
+      "stage": "closeout",
+      "state": "completed",
+      "authority": "explicit human authorization of administrative closeout, commit, and push"
     },
     {
       "task_id": "FOUNDATIONS-FD1",
