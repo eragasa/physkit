@@ -1,6 +1,6 @@
 # PhysKit Agent Policy
 
-**Status:** Accepted by explicit human decision exactly as represented at revision `283a9bb0681892d71698c9eba314342b54924503`
+**Status:** Accepted by explicit human decision on 2026-08-16. This accepted revision adds the lean path-only notebook-migration profile and active-state-normalization rule to the previously accepted policy at revision `283a9bb0681892d71698c9eba314342b54924503`.
 
 This file is the repository-wide operational policy for agents working in PhysKit. A future, explicitly accepted narrower `AGENTS.md` may override it only within its defined scope.
 
@@ -39,6 +39,14 @@ Once `.pi/active-state.json` is separately accepted and created, every session m
 
 Before that file exists, there is no durable active runtime task; only an explicit human instruction may authorize a bounded task. Never infer or begin successor work. Do not invent an active-state schema.
 
+### Active-state normalization
+
+`.pi/active-state.json` must remain a compact current-coordination record. It may retain concise authority references, the current task and checkpoint or explicit null values, current blockers, concise parked-work references, successor authorization, and the latest transition needed to reconstruct present authorization. It must not accumulate a historical ledger of completed tasks, resolved checkpoints or stages, past human decisions, detailed evidence, hashes, command logs, or repeated closeout narratives.
+
+At closeout, remove task-specific current detail that no longer governs active work. Preserve durable history through the Git revisions and accepted artifacts that originally carried it; do not copy that history into a replacement log merely to compact active state. If a prior decision cannot be reconstructed from those durable sources, stop for a human decision about the minimum durable record rather than retaining an unbounded current-state ledger or inventing a new store.
+
+This normalization rule defines information discipline, not a JSON Schema, migration utility, archival format, or authorization to rewrite active state. Compaction of the existing file requires a separate Mode A change after this policy addition is accepted.
+
 ## Human-owned protected decisions
 
 Explicit human approval is required for:
@@ -74,6 +82,31 @@ Every task must identify:
 - successor authorization, if any.
 
 Fail closed when scope, ownership, authority, prerequisites, or a protected decision is unresolved. Follow the bounded work sequence in `.04`, Section 5, proportionally to the accepted task: human acceptance of a capability contract precedes implementation; implementation precedes claim-bearing verification; correction precedes re-review; parent verification precedes final human acceptance; and closeout stops before any successor. Stop at every human checkpoint with no success claim and no automatic successor. Silence, timeout, completion, commit, merge, or push is not acceptance.
+
+### Lean path-only notebook-migration profile
+
+A human may select this proportional profile for a small notebook batch only when all of the following hold:
+
+- the change is limited to moving or renaming already committed notebooks with byte preservation;
+- the human accepts the exact source and destination identities before migration;
+- static preflight finds valid notebook JSON, no saved error outputs requiring disposition, no known exact-duplicate or identity decision, absent and collision-free destinations, and no operational reference whose handling would widen scope;
+- notebook content editing, execution, repair, reference updates, dependency changes, and scientific or pedagogical decisions are excluded; and
+- the batch introduces no API, canonical-artifact, lifecycle, support, validation, physical-model, mathematical, numerical, or curriculum-view decision.
+
+Mapping confidence labels are planning evidence rather than automatic gates. A medium-confidence mapping may use this profile when the uncertainty is limited to the exact path or filename presented to the human and the remaining qualification checks pass. Any unresolved content identity, duplicate survivor, repair, saved-error, reference, or protected-decision issue disqualifies the batch and returns it to an explicit human checkpoint or fuller workflow.
+
+For a qualifying batch, use this sequence:
+
+1. The parent prepares the exact proposal and deterministic static preflight. A separate proposal-review agent is not required unless the parent finds material ambiguity.
+2. The human accepts, revises, rejects, or defers the exact mappings.
+3. After acceptance, the parent acts as the sole migration writer and performs only the accepted byte-preserving moves.
+4. The parent verifies source/destination path state, pre/post hashes, JSON parseability, saved-error status, Git rename identity, zero notebook insertions/deletions, reference integrity, diff hygiene, and exact staged-path isolation.
+5. One independent read-only reviewer inspects the integrated staged change. Do not add separate curator, verifier, coordination, acceptance-record, or closeout reviewers when no concrete finding or unexpected state exists.
+6. The parent performs final verification and presents one human final checkpoint with evidence limitations and complete repository status.
+7. The human may combine final acceptance, administrative closeout, commit, and fast-forward push in one explicit decision. That combined decision still grants no successor.
+8. A concrete finding, failed check, unexpected repository state, or protected ambiguity stops the lean profile. The responsible owner corrects authorized findings, affected checks are replayed, and one proportional re-review occurs.
+
+This profile is the human-approved proportional role and review collapse for qualifying path-only migrations. It does not weaken working-tree protection, evidence-class distinctions, final human authority, fail-closed behavior, or the prohibition on inferred successor work. It does not modify the reusable capability-development workflow or authorize any notebook batch by itself.
 
 ## Working-tree protection
 
