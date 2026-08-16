@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 36,
+  "state_revision": 40,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -88,7 +88,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "SSH-EXP-1 is human-accepted and closed; no successor was authorized."
+    "denial_basis": "CACHE-CLEANUP-1 is human-accepted and closed; no successor was authorized."
   },
   "human_decisions": [
     {
@@ -918,15 +918,77 @@
       "starting_revision": "6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
       "provenance": "explicit human COMMIT AND PUSH SSH, THEN PREPARE CACHE-CLEANUP BATCH instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-cache-cleanup-1-exact-30-directory-scope.001",
+      "subject": "CACHE-CLEANUP-1 exact generated-cache deletion batch",
+      "disposition": "ACCEPT CACHE-CLEANUP-1 EXACT 30-DIRECTORY SCOPE",
+      "authority_granted": [
+        "recursively delete exactly the 30 active-task proposed_delete_paths after replaying ignore and tracked-path preflight",
+        "perform deterministic post-deletion verification and update active state"
+      ],
+      "authority_not_granted": [
+        ".venv cleanup",
+        "package-lock.json inspection or modification",
+        ".gitignore modification",
+        "tracked-file changes",
+        "notebook migration",
+        "commit",
+        "push",
+        "successor work"
+      ],
+      "starting_revision": "36630b31daa8adfccff0aac649e6ab0ccd8ec4e5",
+      "provenance": "explicit human ACCEPT CACHE-CLEANUP-1 EXACT 30-DIRECTORY SCOPE instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-and-close-cache-cleanup-1.001",
+      "subject": "CACHE-CLEANUP-1 final acceptance and administrative closeout",
+      "disposition": "ACCEPT",
+      "authority_granted": [
+        "record final acceptance of the verified exact cleanup",
+        "resolve CACHE-CLEANUP-1-HC02",
+        "complete administrative closeout with no active successor"
+      ],
+      "authority_not_granted": [
+        "commit",
+        "push",
+        ".gitignore modification",
+        ".venv cleanup",
+        "package-lock.json handling",
+        "notebook migration",
+        "successor work"
+      ],
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human ACCEPT instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-cache-cleanup-closeout-push-and-solid-state-batch-preparation.001",
+      "subject": "CACHE-CLEANUP-1 closeout publication and solid-state directory batch preparation",
+      "disposition": "COMMIT AND PUSH CLEANUP CLOSEOUT, THEN PREPARE SOLID-STATE DIRECTORY BATCH",
+      "authority_granted": [
+        "stage, commit, and fast-forward push exactly .pi/active-state.json for the accepted CACHE-CLEANUP-1 closeout",
+        "after successful push, inspect committed notebooks under notebooks/solidstate and accepted mapping authorities read-only",
+        "prepare one exact pending human-scope proposal for a small solid-state directory batch in .pi/active-state.json only"
+      ],
+      "authority_not_granted": [
+        "inspect, stage, modify, or delete unrelated package-lock.json",
+        "move, rename, edit, execute, delete, or stage any notebook before separate exact scope acceptance",
+        "resolve duplicates, saved errors, invalid notebooks, canonical status, lifecycle, curriculum views, or successor migration automatically"
+      ],
+      "starting_revision": "36630b31daa8adfccff0aac649e6ab0ccd8ec4e5",
+      "provenance": "explicit human COMMIT AND PUSH CLEANUP CLOSEOUT, THEN PREPARE SOLID-STATE DIRECTORY BATCH instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "SSH-EXP-1 human-accepted and administratively closed; no active task or successor",
-    "to": "SSH-EXP-1 exact accepted paths authorized for commit and fast-forward push; cache-cleanup batch preparation authorized only after push",
-    "timestamp_utc": "2026-08-16T05:20:00.259703Z",
+    "from": "CACHE-CLEANUP-1 human-accepted and administratively closed; no active task or successor",
+    "to": "CACHE-CLEANUP-1 closeout authorized for exact active-state commit/push; solid-state batch preparation authorized only after successful push",
+    "timestamp_utc": "2026-08-16T08:50:42.304444Z",
     "actor_responsibility": "human authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
-    "reason": "the human explicitly authorized SSH publication followed by proposal-only preparation of an exact cache-cleanup batch"
+    "observed_starting_git_revision": "36630b31daa8adfccff0aac649e6ab0ccd8ec4e5",
+    "reason": "the human explicitly authorized closeout publication followed by proposal-only preparation of one small solid-state directory batch"
   },
   "resolved_checkpoints": [
     {
@@ -973,6 +1035,18 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "exact three-notebook exploratory beginner SSH sequence accepted within its stated model, convention, evidence, and nonclaim boundaries"
+    },
+    {
+      "checkpoint_id": "CACHE-CLEANUP-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "recursive deletion of exactly the listed 30 ignored untracked cache/checkpoint directories accepted; .venv, package-lock.json, .gitignore, tracked content, notebook migration, commit, push, and successor work excluded"
+    },
+    {
+      "checkpoint_id": "CACHE-CLEANUP-1-HC02",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "verified exact 30-directory generated-cache cleanup accepted; no tracked-content, ignore-rule, environment, package-lock, migration, publication, or successor authority granted"
     }
   ],
   "closed_tasks": [
@@ -1167,6 +1241,31 @@
         "model extensions",
         "successor authorization"
       ]
+    },
+    {
+      "task_id": "CACHE-CLEANUP-1",
+      "task_kind": "bounded-generated-cache-cleanup",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "accepted_scope": "exact 30 ignored untracked __pycache__ and .ipynb_checkpoints directory identities recorded in active-state revision 38",
+      "accepted_evidence_boundary": [
+        "zero tracked paths beneath candidates",
+        "all candidates covered by existing ignore rules",
+        "all exact candidates confirmed absent after deletion",
+        "no .gitignore change",
+        "no tracked-content change",
+        "complete status inspection"
+      ],
+      "explicit_exclusions": [
+        ".venv",
+        "package-lock.json",
+        ".gitignore changes",
+        "notebook migration",
+        "commit",
+        "push",
+        "successor work"
+      ],
+      "revision_context": "cleanup performed at HEAD 36630b31daa8adfccff0aac649e6ab0ccd8ec4e5; generated ignored deletions produce no Git content revision"
     }
   ],
   "resolved_stages": [
