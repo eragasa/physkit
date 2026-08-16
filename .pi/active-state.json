@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 51,
+  "state_revision": 55,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -65,7 +65,7 @@
     {
       "work_id": "notebook-organization.remaining-mappings-and-decisions",
       "subject": "Notebook mappings and protected decisions outside the closed four-mapping viscoelasticity batch",
-      "current_state": "inactive; no active task or authorized next batch",
+      "current_state": "inactive; MODERN-DIR-1 human-accepted and administratively closed; no active next batch",
       "unresolved": [
         "remaining .07 path and filename mappings",
         "exact- and near-duplicate survivor and retention decisions",
@@ -88,7 +88,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "CRYSTAL-DIR-1 is human-accepted and closed; no successor was authorized."
+    "denial_basis": "MODERN-DIR-1 is human-accepted, administratively closed, and authorized for publication only; no successor is authorized."
   },
   "human_decisions": [
     {
@@ -1113,15 +1113,80 @@
       "starting_revision": "2b37ea49bcf5f0f87045c1ec74158f419acb38ba",
       "provenance": "explicit human COMMIT AND PUSH CRYSTAL-DIR-1 instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-modern-dir-1-exact-two-mapping-scope.001",
+      "subject": "MODERN-DIR-1 exact two-notebook path-only migration",
+      "disposition": "ACCEPT EXACT TWO-MAPPING MODERN-PHYSICS BATCH",
+      "authority_granted": [
+        "record the exact two-mapping scope in active state",
+        "perform exactly the accepted byte-preserving git mv operations",
+        "run deterministic path, hash, JSON, reference, and staged-isolation checks",
+        "perform independent read-only review and parent verification",
+        "return to MODERN-DIR-1-HC02 for final human acceptance"
+      ],
+      "authority_not_granted": [
+        "notebook content changes or execution",
+        "reference updates",
+        "duplicate, canonical, lifecycle, scientific, or pedagogical decisions",
+        "additional mappings",
+        "package-lock.json handling",
+        "commit or push",
+        "successor work"
+      ],
+      "starting_revision": "db8e37fb0b5e07391526fa84e28111783be67fd9",
+      "mapping_source_revision": "68b7d92678f9ee7ba5eef5f452d3bbb494ff2eed",
+      "provenance": "explicit human ACCEPT EXACT TWO-MAPPING MODERN-PHYSICS BATCH instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-modern-dir-1-hc02.001",
+      "subject": "MODERN-DIR-1 exact reviewed two-mapping byte-preserving handoff",
+      "disposition": "ACCEPT",
+      "authority_granted": [
+        "record final human acceptance of the exact reviewed two-mapping handoff and stated evidence limitations",
+        "resolve MODERN-DIR-1-HC02 as accepted"
+      ],
+      "authority_not_granted": [
+        "administrative closeout",
+        "commit or push",
+        "notebook execution or content changes",
+        "canonical, lifecycle, support, scientific, physical-validation, or pedagogical-validation claims",
+        "additional mappings or successor work"
+      ],
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human ACCEPT instruction at MODERN-DIR-1-HC02",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-modern-dir-1-closeout-commit-push.001",
+      "subject": "MODERN-DIR-1 administrative closeout and accepted-handoff publication",
+      "disposition": "CLOSE MODERN-DIR-1, COMMIT, AND PUSH",
+      "authority_granted": [
+        "administratively close MODERN-DIR-1 with active task and checkpoint null",
+        "stage exactly .pi/active-state.json and the two accepted R100 notebook renames",
+        "commit the exact accepted handoff on main",
+        "fast-forward push the commit to origin/main"
+      ],
+      "authority_not_granted": [
+        "package-lock.json inspection, staging, modification, or deletion",
+        "notebook content changes or execution",
+        "canonical, lifecycle, support, scientific, physical-validation, or pedagogical-validation claims",
+        "additional mappings or successor work"
+      ],
+      "starting_revision": "db8e37fb0b5e07391526fa84e28111783be67fd9",
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human selection of option 2: CLOSE MODERN-DIR-1, COMMIT, AND PUSH",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "CRYSTAL-DIR-1 human-accepted and administratively closed; exact two renames staged",
-    "to": "CRYSTAL-DIR-1 exact accepted handoff authorized for commit and fast-forward push; no successor authorized",
-    "timestamp_utc": "2026-08-16T14:24:33.790009Z",
-    "actor_responsibility": "human authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "2b37ea49bcf5f0f87045c1ec74158f419acb38ba",
-    "reason": "the human explicitly authorized publication of the accepted CRYSTAL-DIR-1 handoff and nothing further"
+    "from": "MODERN-DIR-1 exact handoff human-accepted and awaiting separate closeout authorization",
+    "to": "MODERN-DIR-1 human-accepted and administratively closed; exact handoff authorized for commit and fast-forward push; no successor authorized",
+    "timestamp_utc": "2026-08-16T14:51:07Z",
+    "actor_responsibility": "human closeout and publication authorization recorded by parent coordinator",
+    "observed_starting_git_revision": "db8e37fb0b5e07391526fa84e28111783be67fd9",
+    "reason": "the human explicitly selected closeout plus commit and push, without authorizing any successor"
   },
   "resolved_checkpoints": [
     {
@@ -1204,6 +1269,18 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "exact two R100 crystal-structure rename handoff accepted within stated byte-preservation and nonclaim boundaries; commit, push, canonical/duplicate decisions, and successor work remain unauthorized"
+    },
+    {
+      "checkpoint_id": "MODERN-DIR-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact two modern-physics byte-preserving path mappings accepted; content changes, execution, reference updates, additional mappings, commit, push, and successor work excluded"
+    },
+    {
+      "checkpoint_id": "MODERN-DIR-1-HC02",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact reviewed two-mapping byte-preserving handoff accepted within stated structural evidence and nonclaim boundaries; closeout, commit, push, and successor work remain unauthorized"
     }
   ],
   "closed_tasks": [
@@ -1500,6 +1577,43 @@
         "additional mappings or successor work"
       ],
       "revision_context": "accepted staged handoff based on 2b37ea49bcf5f0f87045c1ec74158f419acb38ba; commit and push not authorized"
+    },
+    {
+      "task_id": "MODERN-DIR-1",
+      "task_kind": "bounded-two-notebook-modern-physics-path-only-migration",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "accepted_mappings": [
+        {
+          "source": "notebooks/qm/deBroglie.ipynb",
+          "destination": "notebooks/modern-physics/matter-waves/de-broglie-relations.ipynb",
+          "sha256": "3e8822fbb82509b145f4f7e2a45a9e36103396a64b25ddfee4f98725f4ffbb65"
+        },
+        {
+          "source": "notebooks/sr/lorentz_transformation.ipynb",
+          "destination": "notebooks/modern-physics/relativity/lorentz-transformation.ipynb",
+          "sha256": "c63964c13d7ad1b235c2084ceaa4e3728c02eb1572de31e68c266a91d4725607"
+        }
+      ],
+      "accepted_evidence_boundary": [
+        "two staged R100 renames",
+        "zero notebook insertions/deletions",
+        "source/destination SHA-256 identity",
+        "valid JSON and zero saved error outputs",
+        "no operational reference breakage",
+        "exact staged-path isolation",
+        "deterministic verification PASS",
+        "independent integration review and final coordination re-review PASS",
+        "parent verification",
+        "explicit human final acceptance"
+      ],
+      "claims_not_accepted": [
+        "notebook execution or content correctness",
+        "scientific, numerical, physical, or pedagogical validation",
+        "canonical, lifecycle, or support status",
+        "additional mappings or successor work"
+      ],
+      "revision_context": "human-accepted staged handoff based on db8e37fb0b5e07391526fa84e28111783be67fd9; publication separately authorized"
     }
   ],
   "resolved_stages": [
@@ -1527,6 +1641,18 @@
       "stage": "closeout",
       "state": "completed",
       "authority": "explicit human administrative closeout authorization"
+    },
+    {
+      "task_id": "MODERN-DIR-1",
+      "stage": "human_final_acceptance",
+      "state": "accepted",
+      "decision_owner": "human"
+    },
+    {
+      "task_id": "MODERN-DIR-1",
+      "stage": "closeout",
+      "state": "completed",
+      "authority": "explicit human selection of closeout plus commit and push"
     },
     {
       "task_id": "FOUNDATIONS-FD1",
