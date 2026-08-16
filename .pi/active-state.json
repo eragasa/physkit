@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 32,
+  "state_revision": 36,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -36,85 +36,8 @@
     ]
   },
   "control_plane_phase": "operational",
-  "active_task": {
-    "task_id": "LECTURE-NOTES-EXP-1",
-    "task_kind": "bounded-exploratory-lecture-notes-construction",
-    "status": "verified-commit-and-push-authorized-awaiting-human-final-acceptance",
-    "purpose": "Create Markdown and buildable LaTeX lecture-note sources derived from the human-accepted exploratory Bloch-to-Wannier notebook without introducing new scientific or support claims.",
-    "artifact_role": "exploratory companion lecture notes; not canonical, supported, or lifecycle-assigned",
-    "source_artifact": {
-      "path": "notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
-      "human_disposition": "accepted as revised exploratory notebook handoff",
-      "sha256": "9f1e65972b6c76591703e0ad74dc6b50a6c8f1230ee4d96fcc071c787bcab4a5"
-    },
-    "authorized_paths": [
-      "notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
-      "notebooks/solid-state-physics/electronic-structure/bloch2wannier.md",
-      "docs/lecture-notes/solid-state-physics/electronic-structure/bloch2wannier/",
-      ".pi/active-state.json"
-    ],
-    "active_ownership": {
-      "parent_coordinator": [],
-      "notebook_documentation_writer": [],
-      "independent_reviewer": []
-    },
-    "accepted_scope_decisions": {
-      "content_source": "derive lecture notes from the accepted exploratory notebook",
-      "claim_boundary": "do not introduce new physical models, numerical conventions, dependencies, canonical status, lifecycle status, validation conclusions, or support claims",
-      "limitation_preservation": [
-        "the open-chain parallel-transport gauge does not enforce periodic momentum closure",
-        "the minimum-image quadratic spread is exploratory rather than a periodic-position or Marzari--Vanderbilt localization functional",
-        "the single-band U(1) experiment cannot demonstrate a nonzero Wannier-Hamiltonian coordinate difference; multiband redesign remains deferred",
-        "the pristine--dopant section is motivation only and does not construct or validate retained-space alignment"
-      ],
-      "latex_boundary": "include buildable LaTeX source and omit generated PDF and build artifacts",
-      "administrative_rename": {
-        "notebook": "notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
-        "markdown": "notebooks/solid-state-physics/electronic-structure/bloch2wannier.md",
-        "latex_directory": "docs/lecture-notes/solid-state-physics/electronic-structure/bloch2wannier/",
-        "displayed_title": "unchanged"
-      }
-    },
-    "prohibited_work": [
-      "modification of the accepted notebook",
-      "PhysKit production source, API, tests, dependencies, packaging, CI, or unrelated notebook changes",
-      "new physical models, numerical conventions, formal capability work, multiband redesign, or imported electronic-structure data",
-      "canonical-artifact, Supported, lifecycle, physical-validation, pedagogical-validation, or support claims",
-      "inspection or modification of unrelated untracked package-lock.json",
-      "commit, push, or automatic successor work"
-    ],
-    "review": {
-      "mode": "bounded exact-path rename verification",
-      "reviewer_may_repair": false,
-      "prior_content_review": "PASS from fresh-context builtin reviewer run 18334736 before the human-confirmed exact rename",
-      "post_rename_review": "PASS from fresh-context builtin reviewer run 6dcfdb41; old paths absent, current references and displayed title correct, historical authority preserved, no content or scope inflation, no files modified by reviewer"
-    },
-    "validation": {
-      "status": "passed post-rename",
-      "path_mapping": "passed: all five new artifacts present and all three old artifact paths absent",
-      "filename_references": "passed: Markdown and LaTeX reference bloch2wannier.ipynb; README had no old filename reference",
-      "displayed_title": "passed: From Bloch States to Wannier Functions remains unchanged",
-      "accepted_notebook_content_identity": "passed: SHA-256 9f1e65972b6c76591703e0ad74dc6b50a6c8f1230ee4d96fcc071c787bcab4a5",
-      "latex_build": "passed: temporary-directory make completed and produced main.pdf; outputs removed with the temporary directory",
-      "generated_artifact_exclusion": "passed",
-      "git_diff_check": "passed",
-      "no_staged_files": "passed",
-      "exact_path_isolation": "passed; unrelated untracked package-lock.json remained uninspected and untouched",
-      "independent_review": "PASS; fresh-context reviewer run 6dcfdb41",
-      "parent_verification": "passed: exact rename, references, content hash, build, generated-artifact exclusion, review, unchanged HEAD, and complete status verified"
-    },
-    "implementation_authorized": false,
-    "successor_authorized": false,
-    "successor": null,
-    "stop_condition": "Stop after creation, deterministic validation, independent read-only review, parent verification, and human handoff. Do not commit, push, assign canonical or lifecycle status, or start successor work."
-  },
-  "checkpoint": {
-    "checkpoint_id": "LECTURE-NOTES-EXP-1-HC01",
-    "kind": "human-final-acceptance",
-    "state": "pending-human-decision-after-rename",
-    "decision_requested": "After reviewed handoff, accept, revise, reject, or defer the exploratory Markdown and LaTeX lecture-note sources.",
-    "acceptance_does_not_authorize": "commit, push, canonical status, lifecycle/support claims, formalization, multiband redesign, or successor work"
-  },
+  "active_task": null,
+  "checkpoint": null,
   "blockers": [],
   "parked_work": [
     {
@@ -165,7 +88,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "LECTURE-NOTES-EXP-1 authorizes only the bounded lecture-note source handoff and stops before any successor."
+    "denial_basis": "SSH-EXP-1 is human-accepted and closed; no successor was authorized."
   },
   "human_decisions": [
     {
@@ -935,15 +858,75 @@
       "starting_revision": "bd5f657348acef131efe0e1618a5eb1641dfb893",
       "provenance": "explicit human comm and push instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-lecture-notes-exp-1-and-activate-ssh-exp-1.001",
+      "subject": "LECTURE-NOTES-EXP-1 final acceptance and SSH-EXP-1 activation",
+      "disposition": "ACCEPT LECTURE-NOTES-EXP-1 AND ACTIVATE SSH-EXP-1",
+      "authority_granted": [
+        "record final acceptance and administrative closeout of LECTURE-NOTES-EXP-1 at revision 6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
+        "activate the accepted beginner three-notebook SSH sequence under notebooks/solid-state-physics/electronic-structure/tight-binding/ssh/",
+        "create and execute exactly ssh_1_models-and-bands.ipynb, ssh_2_chiral-symmetry-and-winding.ipynb, and ssh_3_edge-states-and-wannier-connection.ipynb",
+        "use the accepted model, learning sequence, presentation structure, exclusions, and task-local tolerance",
+        "update active state, validate, independently review read-only, and return a human handoff"
+      ],
+      "authority_not_granted": [
+        "canonical or lifecycle designation, support, physical-validation, or pedagogical-validation claims",
+        "PhysKit source/API/tests, dependencies, packaging, CI, model extensions, or unrelated notebook changes",
+        "commit, push, or successor work"
+      ],
+      "starting_revision": "6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
+      "provenance": "explicit human ACCEPT LECTURE-NOTES-EXP-1 AND ACTIVATE SSH-EXP-1 instruction following accepted path and three-notebook scope discussion",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-and-close-ssh-exp-1.001",
+      "subject": "SSH-EXP-1 final human acceptance and administrative closeout",
+      "disposition": "ACCEPT",
+      "authority_granted": [
+        "record final acceptance of the exact reviewed three-notebook exploratory SSH handoff",
+        "resolve SSH-EXP-1-HC01 as accepted",
+        "complete administrative closeout of SSH-EXP-1 and leave no active successor"
+      ],
+      "authority_not_granted": [
+        "commit or push",
+        "canonical or Supported status",
+        "lifecycle assignment",
+        "physical or pedagogical validation conclusions",
+        "model extensions or successor work"
+      ],
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human ACCEPT instruction (duplicated consecutively with the same disposition)",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-ssh-exp-1-commit-push-and-cache-batch-preparation.001",
+      "subject": "SSH-EXP-1 publication and bounded cache-cleanup batch preparation",
+      "disposition": "COMMIT AND PUSH SSH, THEN PREPARE CACHE-CLEANUP BATCH",
+      "authority_granted": [
+        "stage exactly .pi/active-state.json and the three human-accepted SSH notebooks",
+        "commit the exact accepted SSH handoff on main and fast-forward push to origin/main",
+        "after successful push, inspect generated-cache path identities and existing ignore rules read-only",
+        "prepare a pending human-scope checkpoint for an exact cache-cleanup batch in .pi/active-state.json only"
+      ],
+      "authority_not_granted": [
+        "stage, inspect, modify, or delete unrelated package-lock.json",
+        "delete cache/checkpoint directories before a separate exact human scope decision",
+        "modify .gitignore before exact batch acceptance",
+        "move or modify notebooks, begin directory migration, or activate other successor work"
+      ],
+      "starting_revision": "6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
+      "provenance": "explicit human COMMIT AND PUSH SSH, THEN PREPARE CACHE-CLEANUP BATCH instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "exact bloch2wannier rename independently reviewed PASS and parent-verified; awaiting human final acceptance",
-    "to": "exact reviewed bloch2wannier handoff authorized for commit and fast-forward push; human final acceptance remains pending",
-    "timestamp_utc": "2026-08-15T06:50:29.987104Z",
+    "from": "SSH-EXP-1 human-accepted and administratively closed; no active task or successor",
+    "to": "SSH-EXP-1 exact accepted paths authorized for commit and fast-forward push; cache-cleanup batch preparation authorized only after push",
+    "timestamp_utc": "2026-08-16T05:20:00.259703Z",
     "actor_responsibility": "human authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "bd5f657348acef131efe0e1618a5eb1641dfb893",
-    "reason": "the human explicitly instructed commit and push after reviewed rename handoff; publication is authorized but is not treated as final acceptance or successor authority"
+    "observed_starting_git_revision": "6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
+    "reason": "the human explicitly authorized SSH publication followed by proposal-only preparation of an exact cache-cleanup batch"
   },
   "resolved_checkpoints": [
     {
@@ -977,6 +960,19 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "revised executable exploratory notebook handoff accepted within its stated exploratory role and four preserved limitations; no canonical, lifecycle, support, commit, push, or automatic successor authority implied"
+    },
+    {
+      "checkpoint_id": "LECTURE-NOTES-EXP-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "accepted_revision": "6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
+      "resolution": "reviewed and renamed exploratory Markdown and LaTeX lecture-note handoff accepted within its explicit claim and limitation boundary"
+    },
+    {
+      "checkpoint_id": "SSH-EXP-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact three-notebook exploratory beginner SSH sequence accepted within its stated model, convention, evidence, and nonclaim boundaries"
     }
   ],
   "closed_tasks": [
@@ -1123,6 +1119,54 @@
       },
       "successor_authorized": false,
       "successor": null
+    },
+    {
+      "task_id": "LECTURE-NOTES-EXP-1",
+      "task_kind": "bounded-exploratory-lecture-notes-construction",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "accepted_artifacts": [
+        "notebooks/solid-state-physics/electronic-structure/bloch2wannier.ipynb",
+        "notebooks/solid-state-physics/electronic-structure/bloch2wannier.md",
+        "docs/lecture-notes/solid-state-physics/electronic-structure/bloch2wannier/"
+      ],
+      "accepted_revision": "6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
+      "claim_boundary": "exploratory; not canonical, supported, lifecycle-assigned, physically validated, or pedagogically validated",
+      "successor_authorized_by_same_human_decision": "SSH-EXP-1"
+    },
+    {
+      "task_id": "SSH-EXP-1",
+      "task_kind": "bounded-exploratory-three-notebook-construction",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "accepted_artifacts": [
+        "notebooks/solid-state-physics/electronic-structure/tight-binding/ssh/ssh_1_models-and-bands.ipynb",
+        "notebooks/solid-state-physics/electronic-structure/tight-binding/ssh/ssh_2_chiral-symmetry-and-winding.ipynb",
+        "notebooks/solid-state-physics/electronic-structure/tight-binding/ssh/ssh_3_edge-states-and-wannier-connection.ipynb"
+      ],
+      "accepted_revision_context": "uncommitted handoff based on 6b11984282ecbb795ab0b0d9a14858d9ba4949ad",
+      "accepted_hashes": {
+        "ssh_1_models-and-bands.ipynb": "b3182e68810ffc664377459bed86e995cb87cdaa3f380a0cb0a740d4f2496cb8",
+        "ssh_2_chiral-symmetry-and-winding.ipynb": "cc2ca6dd62a94b81e626df2b59800d36441f1cf3725368b2b466386cde0b3467",
+        "ssh_3_edge-states-and-wannier-connection.ipynb": "4202592786b8abea4511c86be7a26b44cea41a74879cd066a5400b40370da7bb"
+      },
+      "accepted_evidence_boundary": [
+        "valid nbformat 4 JSON with cell IDs",
+        "14 clean sequentially executed code cells with 14 saved PNG outputs",
+        "immediate interpretation Markdown after every code cell",
+        "embedded task-local deterministic assertions using atol=1e-10 and rtol=0.0 where assert_allclose applies",
+        "independent correction re-review PASS from run 6e0662fd",
+        "parent verification of exact scope and repository status"
+      ],
+      "claims_not_accepted": [
+        "canonical artifact or Supported status",
+        "lifecycle assignment",
+        "physical validation",
+        "pedagogical validation",
+        "material applicability",
+        "model extensions",
+        "successor authorization"
+      ]
     }
   ],
   "resolved_stages": [
