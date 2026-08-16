@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 46,
+  "state_revision": 51,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -88,7 +88,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "SOLIDSTATE-DIR-1 is human-accepted and closed; no successor was authorized."
+    "denial_basis": "CRYSTAL-DIR-1 is human-accepted and closed; no successor was authorized."
   },
   "human_decisions": [
     {
@@ -1046,15 +1046,82 @@
       "starting_revision": "a466fc4604e333653b3090263a2caf5390b882aa",
       "provenance": "explicit human COMMIT AND PUSH SOLIDSTATE-DIR-1, THEN PREPARE NEXT CRYSTAL-STRUCTURE BATCH instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-crystal-dir-1-exact-two-mapping-scope.001",
+      "subject": "CRYSTAL-DIR-1 exact two-notebook path-only migration",
+      "disposition": "ACCEPT CRYSTAL-DIR-1 EXACT TWO-MAPPING SCOPE",
+      "authority_granted": [
+        "perform exactly the two proposed git mv operations",
+        "run deterministic path/hash/JSON/reference/staged-isolation checks",
+        "perform independent read-only review and parent verification",
+        "update active state and return a human handoff"
+      ],
+      "authority_not_granted": [
+        "content changes",
+        "notebook execution",
+        "reference updates",
+        "canonical/duplicate decisions",
+        "additional mappings",
+        "package-lock.json handling",
+        "commit",
+        "push",
+        "successor work"
+      ],
+      "starting_revision": "2b37ea49bcf5f0f87045c1ec74158f419acb38ba",
+      "provenance": "explicit human ACCEPT CRYSTAL-DIR-1 EXACT TWO-MAPPING SCOPE instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-and-close-crystal-dir-1.001",
+      "subject": "CRYSTAL-DIR-1 final acceptance and administrative closeout",
+      "disposition": "ACCEPT",
+      "authority_granted": [
+        "record final acceptance of the exact reviewed two-mapping path-only handoff",
+        "resolve CRYSTAL-DIR-1-HC02",
+        "complete administrative closeout with no active successor"
+      ],
+      "authority_not_granted": [
+        "commit",
+        "push",
+        "content changes or execution",
+        "canonical/duplicate decisions",
+        "additional mappings",
+        "package-lock.json handling",
+        "successor work"
+      ],
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human ACCEPT instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-crystal-dir-1-commit-push.001",
+      "subject": "CRYSTAL-DIR-1 accepted handoff publication",
+      "disposition": "COMMIT AND PUSH CRYSTAL-DIR-1",
+      "authority_granted": [
+        "stage .pi/active-state.json with the two accepted staged R100 renames",
+        "commit exactly the accepted CRYSTAL-DIR-1 handoff on main",
+        "fast-forward push the commit to origin/main"
+      ],
+      "authority_not_granted": [
+        "package-lock.json inspection, staging, modification, or deletion",
+        "content changes or notebook execution",
+        "canonical/duplicate decisions",
+        "additional mappings",
+        "successor work"
+      ],
+      "starting_revision": "2b37ea49bcf5f0f87045c1ec74158f419acb38ba",
+      "provenance": "explicit human COMMIT AND PUSH CRYSTAL-DIR-1 instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "SOLIDSTATE-DIR-1 human-accepted and administratively closed; exact two renames staged",
-    "to": "SOLIDSTATE-DIR-1 exact accepted handoff authorized for commit/push; next crystal-structure batch preparation authorized only after successful push",
-    "timestamp_utc": "2026-08-16T09:02:18.563403Z",
+    "from": "CRYSTAL-DIR-1 human-accepted and administratively closed; exact two renames staged",
+    "to": "CRYSTAL-DIR-1 exact accepted handoff authorized for commit and fast-forward push; no successor authorized",
+    "timestamp_utc": "2026-08-16T14:24:33.790009Z",
     "actor_responsibility": "human authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "a466fc4604e333653b3090263a2caf5390b882aa",
-    "reason": "the human explicitly authorized publication of the accepted two-renaming handoff followed by proposal-only crystal-structure batch preparation"
+    "observed_starting_git_revision": "2b37ea49bcf5f0f87045c1ec74158f419acb38ba",
+    "reason": "the human explicitly authorized publication of the accepted CRYSTAL-DIR-1 handoff and nothing further"
   },
   "resolved_checkpoints": [
     {
@@ -1125,6 +1192,18 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "exact two R100 path-only rename handoff accepted within the stated byte-preservation, review, and nonclaim boundaries; commit, push, and successor work remain unauthorized"
+    },
+    {
+      "checkpoint_id": "CRYSTAL-DIR-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact two byte-preserving lattice mappings accepted; content changes, execution, reference updates, canonical/duplicate decisions, additional mappings, commit, push, and successor work excluded"
+    },
+    {
+      "checkpoint_id": "CRYSTAL-DIR-1-HC02",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact two R100 crystal-structure rename handoff accepted within stated byte-preservation and nonclaim boundaries; commit, push, canonical/duplicate decisions, and successor work remain unauthorized"
     }
   ],
   "closed_tasks": [
@@ -1382,6 +1461,45 @@
         "additional mappings or successor work"
       ],
       "revision_context": "accepted staged handoff based on a466fc4604e333653b3090263a2caf5390b882aa; commit and push not authorized"
+    },
+    {
+      "task_id": "CRYSTAL-DIR-1",
+      "task_kind": "bounded-two-notebook-crystal-structure-path-only-migration",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "accepted_mappings": [
+        {
+          "source": "notebooks/lattice/lattice-1d.ipynb",
+          "destination": "notebooks/solid-state-physics/crystal-structure/lattice-1d.ipynb",
+          "sha256": "a0f47361dfbd9eac58fb336513c8d417e5fcb287f949cf14b57720539e6c5a8c",
+          "preflight": "valid JSON; 17 cells; zero saved error outputs; high-confidence .07 mapping; destination absent; imports repository PhysKit APIs by package name rather than source-relative helper path"
+        },
+        {
+          "source": "notebooks/lattice/lattice-3d.ipynb",
+          "destination": "notebooks/solid-state-physics/crystal-structure/lattice-3d.ipynb",
+          "sha256": "ccd6b15238c33f0b9b236cd17251629d54e92eea45a4a043eefc796de52ef869",
+          "preflight": "valid JSON; 24 cells; zero saved error outputs; high-confidence .07 mapping; destination absent; imports repository PhysKit APIs by package name rather than source-relative helper path"
+        }
+      ],
+      "accepted_evidence_boundary": [
+        "two staged R100 renames",
+        "zero notebook insertions/deletions",
+        "source/destination SHA-256 identity",
+        "valid JSON and zero saved error outputs",
+        "location-independent package imports",
+        "no operational reference breakage",
+        "exact staged-path isolation",
+        "independent review PASS",
+        "parent verification"
+      ],
+      "claims_not_accepted": [
+        "notebook execution or content correctness",
+        "canonical or pedagogical acceptance",
+        "competing-treatment or duplicate disposition",
+        "lifecycle or support status",
+        "additional mappings or successor work"
+      ],
+      "revision_context": "accepted staged handoff based on 2b37ea49bcf5f0f87045c1ec74158f419acb38ba; commit and push not authorized"
     }
   ],
   "resolved_stages": [
