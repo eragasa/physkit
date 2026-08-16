@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 40,
+  "state_revision": 46,
   "authority": {
     "status": "accepted",
     "governs_only": [
@@ -88,7 +88,7 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "CACHE-CLEANUP-1 is human-accepted and closed; no successor was authorized."
+    "denial_basis": "SOLIDSTATE-DIR-1 is human-accepted and closed; no successor was authorized."
   },
   "human_decisions": [
     {
@@ -980,15 +980,81 @@
       "starting_revision": "36630b31daa8adfccff0aac649e6ab0ccd8ec4e5",
       "provenance": "explicit human COMMIT AND PUSH CLEANUP CLOSEOUT, THEN PREPARE SOLID-STATE DIRECTORY BATCH instruction",
       "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-solidstate-dir-1-exact-two-mapping-scope.001",
+      "subject": "SOLIDSTATE-DIR-1 exact two-notebook path-only migration",
+      "disposition": "ACCEPT SOLIDSTATE-DIR-1 EXACT TWO-MAPPING SCOPE",
+      "authority_granted": [
+        "perform exactly the two proposed git mv operations",
+        "run deterministic path/hash/JSON/reference/staged-isolation checks",
+        "perform independent read-only review and parent verification",
+        "update active state and return a human handoff"
+      ],
+      "authority_not_granted": [
+        "content changes",
+        "notebook execution",
+        "reference updates",
+        "additional mappings",
+        "duplicate/invalid/saved-error decisions",
+        "package-lock.json handling",
+        "commit",
+        "push",
+        "successor work"
+      ],
+      "starting_revision": "a466fc4604e333653b3090263a2caf5390b882aa",
+      "provenance": "explicit human ACCEPT SOLIDSTATE-DIR-1 EXACT TWO-MAPPING SCOPE instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.accept-and-close-solidstate-dir-1.001",
+      "subject": "SOLIDSTATE-DIR-1 final acceptance and administrative closeout",
+      "disposition": "ACCEPT",
+      "authority_granted": [
+        "record final acceptance of the exact reviewed two-mapping path-only handoff",
+        "resolve SOLIDSTATE-DIR-1-HC02",
+        "complete administrative closeout with no active successor"
+      ],
+      "authority_not_granted": [
+        "commit",
+        "push",
+        "content changes or notebook execution",
+        "additional mappings",
+        "duplicate/error/repair decisions",
+        "package-lock.json handling",
+        "successor work"
+      ],
+      "decision_date": "2026-08-16",
+      "provenance": "explicit human ACCEPT instruction",
+      "decision_actor": "human"
+    },
+    {
+      "decision_id": "human.authorize-solidstate-dir-1-push-and-crystal-batch-preparation.001",
+      "subject": "SOLIDSTATE-DIR-1 publication and next crystal-structure batch preparation",
+      "disposition": "COMMIT AND PUSH SOLIDSTATE-DIR-1, THEN PREPARE NEXT CRYSTAL-STRUCTURE BATCH",
+      "authority_granted": [
+        "stage .pi/active-state.json with the already accepted exact two R100 renames",
+        "commit exactly the accepted SOLIDSTATE-DIR-1 handoff and fast-forward push to origin/main",
+        "after successful push, inspect remaining committed crystal-structure candidate notebooks and accepted planning evidence read-only",
+        "prepare one exact pending human-scope crystal-structure mapping proposal in .pi/active-state.json only"
+      ],
+      "authority_not_granted": [
+        "inspect, stage, modify, or delete unrelated package-lock.json",
+        "move, rename, edit, execute, repair, delete, or stage any additional notebook before separate exact scope acceptance",
+        "resolve duplicates, saved errors, invalid notebooks, canonical/lifecycle status, curriculum views, or automatic successor work"
+      ],
+      "starting_revision": "a466fc4604e333653b3090263a2caf5390b882aa",
+      "provenance": "explicit human COMMIT AND PUSH SOLIDSTATE-DIR-1, THEN PREPARE NEXT CRYSTAL-STRUCTURE BATCH instruction",
+      "decision_actor": "human"
     }
   ],
   "last_transition": {
-    "from": "CACHE-CLEANUP-1 human-accepted and administratively closed; no active task or successor",
-    "to": "CACHE-CLEANUP-1 closeout authorized for exact active-state commit/push; solid-state batch preparation authorized only after successful push",
-    "timestamp_utc": "2026-08-16T08:50:42.304444Z",
+    "from": "SOLIDSTATE-DIR-1 human-accepted and administratively closed; exact two renames staged",
+    "to": "SOLIDSTATE-DIR-1 exact accepted handoff authorized for commit/push; next crystal-structure batch preparation authorized only after successful push",
+    "timestamp_utc": "2026-08-16T09:02:18.563403Z",
     "actor_responsibility": "human authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "36630b31daa8adfccff0aac649e6ab0ccd8ec4e5",
-    "reason": "the human explicitly authorized closeout publication followed by proposal-only preparation of one small solid-state directory batch"
+    "observed_starting_git_revision": "a466fc4604e333653b3090263a2caf5390b882aa",
+    "reason": "the human explicitly authorized publication of the accepted two-renaming handoff followed by proposal-only crystal-structure batch preparation"
   },
   "resolved_checkpoints": [
     {
@@ -1047,6 +1113,18 @@
       "state": "accepted",
       "decision_owner": "human",
       "resolution": "verified exact 30-directory generated-cache cleanup accepted; no tracked-content, ignore-rule, environment, package-lock, migration, publication, or successor authority granted"
+    },
+    {
+      "checkpoint_id": "SOLIDSTATE-DIR-1-HC01",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact two byte-preserving mappings accepted; content changes, execution, reference updates, additional mappings, error/duplicate decisions, commit, push, and successor work excluded"
+    },
+    {
+      "checkpoint_id": "SOLIDSTATE-DIR-1-HC02",
+      "state": "accepted",
+      "decision_owner": "human",
+      "resolution": "exact two R100 path-only rename handoff accepted within the stated byte-preservation, review, and nonclaim boundaries; commit, push, and successor work remain unauthorized"
     }
   ],
   "closed_tasks": [
@@ -1266,6 +1344,44 @@
         "successor work"
       ],
       "revision_context": "cleanup performed at HEAD 36630b31daa8adfccff0aac649e6ab0ccd8ec4e5; generated ignored deletions produce no Git content revision"
+    },
+    {
+      "task_id": "SOLIDSTATE-DIR-1",
+      "task_kind": "bounded-two-notebook-path-only-migration",
+      "status": "closed",
+      "closeout_status": "human-accepted",
+      "accepted_mappings": [
+        {
+          "source": "notebooks/solidstate/drude_model.ipynb",
+          "destination": "notebooks/solid-state-physics/electron-models/drude-model.ipynb",
+          "sha256": "ed71295418f1054293d2f7e81f3fe1cd1ff3694ebfb7578ebd4592a53bca161b",
+          "preflight": "valid JSON; 9 cells; zero saved error outputs; high-confidence .07 mapping; destination absent"
+        },
+        {
+          "source": "notebooks/solidstate/lesson_01_unit_cell.ipynb",
+          "destination": "notebooks/solid-state-physics/crystal-structure/unit-cell.ipynb",
+          "sha256": "f3a4bd4cfe72c154b9aaed4811de02949a520f8edaa7b096549e40223a02a5e0",
+          "preflight": "valid JSON; 5 cells; zero saved error outputs; high-confidence .07 mapping; destination absent"
+        }
+      ],
+      "accepted_evidence_boundary": [
+        "two staged R100 renames",
+        "zero notebook insertions/deletions",
+        "source/destination SHA-256 identity",
+        "valid JSON and zero saved error outputs",
+        "no operational reference breakage",
+        "exact staged-path isolation",
+        "independent migration review and corrected-coordination re-review PASS",
+        "parent verification"
+      ],
+      "claims_not_accepted": [
+        "notebook execution or content correctness",
+        "canonical or pedagogical acceptance",
+        "lifecycle or support status",
+        "repair of pre-existing incomplete drude-model cell",
+        "additional mappings or successor work"
+      ],
+      "revision_context": "accepted staged handoff based on a466fc4604e333653b3090263a2caf5390b882aa; commit and push not authorized"
     }
   ],
   "resolved_stages": [
