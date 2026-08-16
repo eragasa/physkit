@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 65,
+  "state_revision": 68,
   "authority": {
     "status": "accepted by explicit human decision at ACTIVE-STATE-NORMALIZATION-1-HC01",
     "governs_only": [
@@ -38,7 +38,9 @@
   "control_plane_phase": "operational",
   "active_task": null,
   "checkpoint": null,
-  "blockers": [],
+  "blockers": [
+    "successor intent was expressed, but exact successor identity and bounded scope remain unresolved"
+  ],
   "parked_work": [
     {
       "work_id": "pilot.piab-1d-analytical-stationary-states",
@@ -76,14 +78,14 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "MECHPROP-DIR-1 is human-accepted and administratively closed; no successor is authorized."
+    "denial_basis": "general successor intent does not identify or accept an exact bounded batch; no successor is active until that human checkpoint is resolved."
   },
   "last_transition": {
-    "from": "MECHPROP-DIR-1 final handoff human-accepted and awaiting separate closeout",
-    "to": "MECHPROP-DIR-1 administratively closed and exact accepted handoff authorized for commit and fast-forward push; no successor",
-    "timestamp_utc": "2026-08-16T17:38:03Z",
-    "actor_responsibility": "human closeout and publication authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "8459579a5b1fcec14873c2e2af8318cc19265bf7",
-    "reason": "the human selected option 2: closeout, commit, and fast-forward push"
+    "from": "OSCILLATIONS-DIR-1 final handoff human-accepted and awaiting separate closeout",
+    "to": "OSCILLATIONS-DIR-1 administratively closed and authorized for commit and fast-forward push; successor intent recorded but exact scope unresolved",
+    "timestamp_utc": "2026-08-16T18:07:20Z",
+    "actor_responsibility": "human closeout, publication, and general successor intent recorded by parent coordinator",
+    "observed_starting_git_revision": "84482e45edb3d276fca9895bbe51ccaa260feca5",
+    "reason": "the human authorized closeout, commit, push, and successor work, but did not identify an exact successor batch"
   }
 }
