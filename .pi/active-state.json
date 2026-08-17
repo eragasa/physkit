@@ -1,7 +1,7 @@
 {
   "record_type": "physkit.active-state",
   "format_version": 1,
-  "state_revision": 107,
+  "state_revision": 108,
   "authority": {
     "status": "accepted by explicit human decision at ACTIVE-STATE-NORMALIZATION-1-HC01",
     "governs_only": [
@@ -36,82 +36,8 @@
     ]
   },
   "control_plane_phase": "operational",
-  "active_task": {
-    "task_id": "AXIS-NOTEBOOK-REPAIR-1",
-    "task_kind": "bounded-notebook-only-current-implementation-alignment",
-    "status": "A1 repair outcome human-final-accepted; commit and fast-forward push authorized; administrative closeout pending",
-    "purpose": "Apply only the human-selected A1 alignment to the CartesianAxis notebook against the inspected current implementation, without accepting a future public API or broader pedagogical claims.",
-    "baseline_revision": "0e2b5131a009ef290961065b124c2d28c2ae04e3",
-    "authorized_write_paths_after_mode_a_acceptance": [
-      ".pi/active-state.json",
-      "notebooks/core/grids/cartesian-axis.ipynb"
-    ],
-    "active_ownership": {
-      "parent_coordinator_and_sole_notebook_repair_writer": [
-        ".pi/active-state.json",
-        "notebooks/core/grids/cartesian-axis.ipynb"
-      ],
-      "independent_reviewer": "read-only"
-    },
-    "exact_repair": [
-      "Markdown cell db30e249: change Python attribute inventory L and d to length and delta while retaining mathematical L and spacing notation",
-      "Markdown cell db30e249: state that length and delta describe the implementation inspected at baseline revision 0e2b5131a009ef290961065b124c2d28c2ae04e3 and do not establish the future supported public API",
-      "code cells ae2ada28, 061a889d, 6fee5a93, c26adeb4, and 965246ce: replace executable .L accesses with .length only",
-      "the same five code cells: clear historical outputs and set execution_count to null without fabricating or regenerating output"
-    ],
-    "required_validation": [
-      "valid notebook JSON and Python AST for every code cell",
-      "only cell IDs db30e249, ae2ada28, 061a889d, 6fee5a93, c26adeb4, and 965246ce changed",
-      "the five affected code cells have empty outputs and null execution_count",
-      "no executable .L access or learner-facing Python attribute inventory entry for L or d remains",
-      "mathematical formulas, notation, calculations, invalid-case checks, periodic semantics, state-space claims, and all other cells remain unchanged",
-      "no unexpected notebook metadata or output changes",
-      "source, API, tests, dependencies, other notebooks, task records, and unrelated paths unchanged",
-      "independent read-only repair review and parent final verification"
-    ],
-    "inactive_decisions": {
-      "public_api": "length/delta versus L/d aliases or naming remains unresolved and unaccepted",
-      "broader_axis_repairs": "notation normalization, invalid-case strengthening, periodic-domain semantics, state-space claim revision, and source-documentation repair remain inactive",
-      "D2": "conditional and inactive pending explicit acceptance of the explicit-construction lesson role",
-      "migration": "inactive"
-    },
-    "prohibited_work": [
-      "notebook execution or output regeneration",
-      "notation normalization or changes to formulas, calculations, assertions, invalid-case checks, periodic semantics, state-space claims, learning objectives, artifact role, canonical status, lifecycle, support, or validation claims",
-      "source, API, compatibility alias, test, dependency, documentation, policy, task-record, chain, agent, D2, or migration changes",
-      "inspection or modification of unrelated untracked package-lock.json",
-      "commit, push, closeout, PIAB, automatic D2 activation, or successor beyond A1"
-    ],
-    "review": {
-      "mode": "Mode A single-file coordination review followed by one bounded notebook repair and independent read-only review",
-      "assessment_authority": "GRID-REPAIR-ASSESS-1 static assessment and independent option review run 8c862b82",
-      "active_state_review": "PASS with no findings from independent reviewer run a3ced4d0; human-accepted",
-      "repair_review": "PASS with no findings from independent reviewer run 43c1d50d; no correction or re-review required"
-    },
-    "validation": {
-      "status": "parent-final-verification-passed",
-      "scope": "only active-state and notebook cells db30e249, ae2ada28, 061a889d, 6fee5a93, c26adeb4, and 965246ce changed",
-      "structure": "valid notebook JSON; all 15 code cells parse as Python AST; top-level metadata, cell order, and all other cells unchanged",
-      "alignment": "inventory uses length/delta with revision-qualified non-public-API statement; exactly five executable .L accesses changed to .length",
-      "output_handling": "the five affected code cells have empty outputs and null execution_count; notebook not executed",
-      "preservation": "mathematical notation, print labels, formulas, calculations, assertions, invalid-case checks, periodic semantics, state-space claims, and excluded paths unchanged",
-      "diff_hygiene": "staged diff check passed; no unstaged tracked changes",
-      "independent_review": "PASS from run 43c1d50d with no findings",
-      "parent_verification": "PASS at unchanged HEAD 0e2b5131a009ef290961065b124c2d28c2ae04e3"
-    },
-    "repair_authorized": false,
-    "successor_authorized": false,
-    "successor": null,
-    "stop_condition": "Stop after authorized commit and fast-forward push, then await separate administrative closeout. Do not execute, migrate, close out, activate D2, or start successor work without a separate human decision."
-  },
-  "checkpoint": {
-    "checkpoint_id": "AXIS-NOTEBOOK-REPAIR-1-CLOSEOUT",
-    "kind": "separate-human-administrative-closeout",
-    "state": "publication-authorized-closeout-pending",
-    "accepted_outcome": "the exact A1 notebook-only repair within the demonstrated static evidence boundary",
-    "authorized": "commit of the two staged records and fast-forward push to origin/main",
-    "not_authorized": "execution, migration, source/API/test/dependency changes, broader axis repairs, D2 activation, administrative closeout, PIAB, or successor beyond A1"
-  },
+  "active_task": null,
+  "checkpoint": null,
   "blockers": [],
   "parked_work": [
     {
@@ -137,7 +63,7 @@
     {
       "work_id": "notebook-organization.remaining-mappings-and-decisions",
       "authority": "docs/harness/physkit.harness.07-notebook-canonical-path-mapping.md",
-      "current_state": "migration work inactive; AXIS-NOTEBOOK-REPAIR-1 A1 coordination is active; D2 remains conditional and inactive; constants_CGS identity remains deferred",
+      "current_state": "migration work inactive; D2 remains conditional and inactive; constants_CGS identity remains deferred",
       "resumption_requirement": "separate exact human scope acceptance for each batch or protected decision"
     },
     {
@@ -150,14 +76,14 @@
   "successor_authorization": {
     "authorized": false,
     "successor": null,
-    "denial_basis": "AXIS-NOTEBOOK-REPAIR-1 authorizes only the exact A1 workflow through human handoff; D2, migration, broader axis work, and successor beyond A1 are inactive."
+    "denial_basis": "No active task or successor is authorized; D2, migration, broader axis work, and PIAB remain inactive."
   },
   "last_transition": {
-    "from": "AXIS-NOTEBOOK-REPAIR-1 A1 repair outcome human-final-accepted and awaiting separate publication and closeout authorization",
-    "to": "AXIS-NOTEBOOK-REPAIR-1 commit and fast-forward push authorized; administrative closeout pending",
-    "timestamp_utc": "2026-08-17T04:22:56Z",
-    "actor_responsibility": "human publication authorization recorded by parent coordinator",
-    "observed_starting_git_revision": "0e2b5131a009ef290961065b124c2d28c2ae04e3",
-    "reason": "the human authorized commit and push without authorizing administrative closeout, execution, migration, D2, or successor beyond A1"
+    "from": "AXIS-NOTEBOOK-REPAIR-1 published at revision 3bb82154ea11e51d75ccc54d7e2a97dbe9a035cb with administrative closeout pending",
+    "to": "AXIS-NOTEBOOK-REPAIR-1 administratively closed; no active task and no successor",
+    "timestamp_utc": "2026-08-17T04:24:41Z",
+    "actor_responsibility": "human administrative-closeout authorization recorded by parent coordinator",
+    "observed_starting_git_revision": "3bb82154ea11e51d75ccc54d7e2a97dbe9a035cb",
+    "reason": "the human authorized administrative closeout after accepted publication; D2, migration, broader axis work, PIAB, and all successor work remain inactive"
   }
 }
