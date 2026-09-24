@@ -6,16 +6,12 @@ from abc import ABC, abstractmethod
 from typing import Generic, TypeVar
 
 
-class QuantumModel(ABC):
-    """
-    Base physical specification of a quantum-mechanical system.
+class BaseQuantumModel(ABC):
+    """Base physical specification of a quantum-mechanical system.
 
-    A model defines the physical system. It does not define its
-    mathematical representation or solution method.
+    A model defines the physical system. It does not define a numerical
+    representation, solution method, or computational result.
     """
-
-    # Every physical quantum model inherits from this class.
-    pass
 
 
 class QuantumResult(ABC):

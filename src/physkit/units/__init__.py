@@ -6,6 +6,21 @@ physkit.units
 Physical quantity unit systems and conversions
 """
 from .protocols import UnitQuantityProtocol
+from .quantities import (
+    MODEL_SYSTEM_UNIT_CONVERTER,
+    ComplexMatrixQuantity,
+    ComplexSparseMatrixQuantity,
+    ComplexVectorQuantity,
+    MatrixQuantity,
+    ModelSystemQuantity,
+    ModelSystemUnit,
+    PhysicalUnit,
+    PintUnitConverter,
+    ScalarQuantity,
+    SparseMatrixQuantity,
+    Unitless,
+    VectorQuantity,
+)
 from .pressure import Pressure
 from .length import Length
 from .force import Force
@@ -21,6 +36,7 @@ from .dipole import Dipole
 from .density import Density
 from .electricfield import ElectricField
 from .systems import (
+    UnitSystem,
     UnitsSI, 
     UnitsCGS, 
     UnitsImperial, 
@@ -31,7 +47,21 @@ from .systems import (
     UnitsMetal,
 )
 __all__ = [
+  "MODEL_SYSTEM_UNIT_CONVERTER",
+  "ComplexMatrixQuantity",
+  "ComplexSparseMatrixQuantity",
+  "ComplexVectorQuantity",
+  "MatrixQuantity",
+  "ModelSystemQuantity",
+  "ModelSystemUnit",
+  "PhysicalUnit",
+  "PintUnitConverter",
+  "ScalarQuantity",
+  "SparseMatrixQuantity",
+  "Unitless",
   "UnitQuantityProtocol",
+  "VectorQuantity",
+  "UnitSystem",
   "Pressure", 
   "Length",
   "Force",

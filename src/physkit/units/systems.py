@@ -8,6 +8,15 @@
 # These classes provide *conventional defaults* only.
 # They do NOT perform conversions and carry no state.
 
+from enum import StrEnum
+
+from .quantities import (
+    MODEL_SYSTEM_UNIT_CONVERTER,
+    ModelSystemUnit,
+    PhysicalUnit,
+    ScalarQuantity,
+    Unitless,
+)
 from .pressure import Pressure
 from .length import Length
 from .force import Force
@@ -22,6 +31,78 @@ from .viscosity import Viscosity
 from .dipole import Dipole
 from .density import Density
 from .electricfield import ElectricField
+
+
+class UnitSystem(StrEnum):
+    """Select a coherent numerical scale for model-system calculations."""
+
+    NONDIMENSIONAL = "nondimensional"
+    SI = "si"
+    METAL = "metal"
+
+    @property
+    def length_unit(self) -> ModelSystemUnit:
+        """Return the system's numerical length unit."""
+        if self is UnitSystem.NONDIMENSIONAL:
+            return Unitless()
+        if self is UnitSystem.SI:
+            return PhysicalUnit("meter")
+        return PhysicalUnit("angstrom")
+
+    @property
+    def mass_unit(self) -> ModelSystemUnit:
+        """Return the system's numerical particle-mass unit.
+
+        Metal-style mass values use daltons. Their magnitudes match the
+        conventional grams-per-mole values while retaining particle-mass
+        dimensions suitable for quantum mechanics.
+        """
+        if self is UnitSystem.NONDIMENSIONAL:
+            return Unitless()
+        if self is UnitSystem.SI:
+            return PhysicalUnit("kilogram")
+        return PhysicalUnit("dalton")
+
+    @property
+    def time_unit(self) -> ModelSystemUnit:
+        """Return the system's numerical time unit."""
+        if self is UnitSystem.NONDIMENSIONAL:
+            return Unitless()
+        if self is UnitSystem.SI:
+            return PhysicalUnit("second")
+        return PhysicalUnit("picosecond")
+
+    @property
+    def energy_unit(self) -> ModelSystemUnit:
+        """Return the system's numerical energy unit."""
+        if self is UnitSystem.NONDIMENSIONAL:
+            return Unitless()
+        if self is UnitSystem.SI:
+            return PhysicalUnit("joule")
+        return PhysicalUnit("electron_volt")
+
+    @property
+    def action_unit(self) -> ModelSystemUnit:
+        """Return the system's numerical action unit."""
+        if self is UnitSystem.NONDIMENSIONAL:
+            return Unitless()
+        if self is UnitSystem.SI:
+            return PhysicalUnit("joule * second")
+        return PhysicalUnit("electron_volt * picosecond")
+
+    @property
+    def hbar(self) -> ScalarQuantity:
+        """Return reduced Planck's constant in the selected action unit."""
+        if self is UnitSystem.NONDIMENSIONAL:
+            return ScalarQuantity(1.0, Unitless())
+        hbar_si = ScalarQuantity(
+            1.054_571_817e-34,
+            PhysicalUnit("joule * second"),
+        )
+        return MODEL_SYSTEM_UNIT_CONVERTER.convert_scalar(
+            hbar_si,
+            self.action_unit,
+        )
 
 
 class UnitsSI:
