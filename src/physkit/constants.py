@@ -40,8 +40,28 @@ from dataclasses import dataclass
 import math
 from typing import (
     Final,
+    Protocol,
     TypeAlias,
+    runtime_checkable,
 )
+
+
+@runtime_checkable
+class PhysicalConstantsProtocol(Protocol):
+    """Structural interface shared by numerical constants containers."""
+
+    a0: float
+    q: float
+    k_B: float
+    eps0: float | None
+    me0: float
+    N_A: float
+    R_g: float
+    h: float
+    hbar: float
+    m_u: float
+    m_u_u: float | None
+    c: float
 
 
 @dataclass(
@@ -129,14 +149,16 @@ class ConstantsGaussianCGS:
 
     Notes
     -----
-    This container intentionally does not define ``eps0``. Gaussian CGS
-    electromagnetic equations do not use vacuum permittivity in the same
-    form as SI electromagnetic equations.
+    Gaussian CGS electromagnetic equations do not use vacuum permittivity in
+    the same form as SI electromagnetic equations. ``eps0`` is therefore
+    represented explicitly as ``None`` rather than as a fabricated numerical
+    value.
     """
 
     a0: float = 5.291_772_109_03e-9
     q: float = 4.803_204_712_57e-10
     k_B: float = 1.380_649e-16
+    eps0: None = None
     me0: float = 9.109_383_713_9e-28
     N_A: float = 6.022_140_76e23
     R_g: float = 8.314_462_618_153_24e7
@@ -146,6 +168,8 @@ class ConstantsGaussianCGS:
     m_u_u: float = 0.000_000_000_52e-24
     c: float = 2.997_924_58e10
 
+
+ConstantsCGS = ConstantsGaussianCGS
 
 Constants: TypeAlias = (
     ConstantsSI

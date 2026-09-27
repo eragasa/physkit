@@ -123,10 +123,10 @@ class CartesianAxis:
             raise TypeError("upper must be a real scalar.")
 
         if isinstance(N, bool) or not isinstance(N, (int, np.integer)):
-            raise TypeError("N must be an integer.")
+            raise TypeError(f"N{name} must be an integer.")
 
         if not isinstance(endpoint, bool):
-            raise TypeError("endpoint must be a bool.")
+            raise TypeError(f"endpoint_{name} must be a bool.")
 
         self.name: str = name
         self.lower: float = float(lower)
@@ -136,12 +136,8 @@ class CartesianAxis:
 
         self.check_args()
 
-        self.length: float = self.upper - self.lower
-
-        if self.endpoint:
-            self.delta: float = self.length / (self.N - 1)
-        else:
-            self.delta = self.length / self.N
+        self.L: float = self.upper - self.lower
+        self.length: float = self.L
 
         self.values: FloatArray = np.linspace(
             start=self.lower,
@@ -150,6 +146,10 @@ class CartesianAxis:
             endpoint=self.endpoint,
             dtype=np.float64,
         )
+        self.values.setflags(write=False)
+
+        self.d: float = float(self.values[1] - self.values[0])
+        self.delta: float = self.d
 
     def check_args(self) -> None:
         """
@@ -162,16 +162,18 @@ class CartesianAxis:
             greater than ``lower``, or ``N`` is less than 2.
         """
         if not np.isfinite(self.lower):
-            raise ValueError("lower must be finite.")
+            raise ValueError(f"{self.name}_min must be finite.")
 
         if not np.isfinite(self.upper):
-            raise ValueError("upper must be finite.")
+            raise ValueError(f"{self.name}_max must be finite.")
 
         if self.upper <= self.lower:
-            raise ValueError("upper must be greater than lower.")
+            raise ValueError(
+                f"{self.name}_max must be greater than {self.name}_min."
+            )
 
         if self.N < 2:
-            raise ValueError("N must be at least 2.")
+            raise ValueError(f"N{self.name} must be at least 2.")
 
     def __repr__(self) -> str:
         """
@@ -196,9 +198,9 @@ class CartesianGrid1D:
 
     Parameters
     ----------
-    x_lower : float
+    x_min : float
         Lower boundary of the spatial domain.
-    x_upper: float
+    x_max : float
         Upper boundary of the spatial domain.
     Nx : int
         Number of coordinate samples along the x-axis.
@@ -208,8 +210,10 @@ class CartesianGrid1D:
 
     Attributes
     ----------
-    x : CartesianAxis
-        Cartesian x-axis.
+    x : numpy.ndarray
+        Read-only Cartesian x-coordinate samples.
+    x_axis : CartesianAxis
+        Cartesian x-axis metadata.
     shape : tuple[int]
         Shape of a scalar field represented on the grid.
     size : int
@@ -222,9 +226,9 @@ class CartesianGrid1D:
     ...     x_max=1.0,
     ...     Nx=5,
     ... )
-    >>> grid.x.values
+    >>> grid.x
     array([0.  , 0.25, 0.5 , 0.75, 1.  ])
-    >>> grid.x.delta
+    >>> grid.dx
     0.25
     >>> grid.shape
     (5,)
@@ -232,31 +236,38 @@ class CartesianGrid1D:
 
     def __init__(
         self,
-        x_lower: float,
-        x_upper: float,
+        x_min: float,
+        x_max: float,
         Nx: int,
         *,
         endpoint: bool = True,
     ) -> None:
-        self.x: CartesianAxis = CartesianAxis(
+        self.x_axis = CartesianAxis(
             name="x",
-            lower=x_lower,
-            upper=x_upper,
+            lower=x_min,
+            upper=x_max,
             N=Nx,
             endpoint=endpoint,
         )
 
-        self.shape: tuple[int] = (self.x.N,)
-        self.size: int = self.x.N
-        self.delta: float = self.x.delta
+        self.x_min: float = self.x_axis.lower
+        self.x_max: float = self.x_axis.upper
+        self.Nx: int = self.x_axis.N
+        self.endpoint: bool = self.x_axis.endpoint
+        self.x: FloatArray = self.x_axis.values
+        self.Lx: float = self.x_axis.L
+        self.dx: float = self.x_axis.d
+        self.shape: tuple[int] = (self.Nx,)
+        self.size: int = self.Nx
+        self.delta: float = self.dx
 
     def __repr__(self) -> str:
         return (
             f"CartesianGrid1D("
-            f"x_min={self.x.lower}, "
-            f"x_max={self.x.upper}, "
-            f"Nx={self.x.N}, "
-            f"endpoint={self.x.endpoint})"
+            f"x_min={self.x_min}, "
+            f"x_max={self.x_max}, "
+            f"Nx={self.Nx}, "
+            f"endpoint={self.endpoint})"
         )
 
 class ActiveSet1D:
@@ -306,9 +317,9 @@ class ActiveSet1D:
                 "indices must not contain negative values."
             )
 
-        if np.any(self.indices >= self.grid.x.N):
+        if np.any(self.indices >= self.grid.Nx):
             raise ValueError(
-                "indices must be less than grid.x.N."
+                "indices must be less than grid.Nx."
             )
 
         if np.unique(self.indices).size != self.indices.size:
@@ -326,7 +337,7 @@ class ActiveSet1D:
         numpy.ndarray
             Active coordinate values.
         """
-        return self.grid.x.values[self.indices]
+        return self.grid.x[self.indices]
 
     @property
     def size(self) -> int:
@@ -357,29 +368,29 @@ class CartesianGrid2D:
 
     Parameters
     ----------
-    x_lower : float
+    x_min : float
         Lower boundary of the x-coordinate interval.
-    x_upper : float
+    x_max : float
         Upper boundary of the x-coordinate interval.
     Nx : int
         Number of samples along the x-axis.
-    y_lower : float
+    y_min : float
         Lower boundary of the y-coordinate interval.
-    y_upper : float
+    y_max : float
         Upper boundary of the y-coordinate interval.
     Ny : int
         Number of samples along the y-axis.
     endpoint_x : bool, optional
-        Whether ``x_upper`` is included. The default is ``True``.
+        Whether ``x_max`` is included. The default is ``True``.
     endpoint_y : bool, optional
-        Whether ``y_upper`` is included. The default is ``True``.
+        Whether ``y_max`` is included. The default is ``True``.
 
     Attributes
     ----------
-    x : CartesianAxis
-        Cartesian x-axis.
-    y : CartesianAxis
-        Cartesian y-axis.
+    x : numpy.ndarray
+        Read-only Cartesian x-coordinate samples.
+    y : numpy.ndarray
+        Read-only Cartesian y-coordinate samples.
     shape : tuple[int, int]
         Shape of a scalar field represented on the grid.
     size : int
@@ -390,34 +401,44 @@ class CartesianGrid2D:
 
     def __init__(
         self,
-        x_lower: float, x_upper: float, Nx: int,
-        y_lower: float, y_upper: float, Ny: int,
+        x_min: float, x_max: float, Nx: int,
+        y_min: float, y_max: float, Ny: int,
         *,
         endpoint_x: bool = True,
         endpoint_y: bool = True,
     ) -> None:
-        # Construct each Cartesian coordinate axis independently.
-        self.x: CartesianAxis = CartesianAxis(
+        self.x_axis = CartesianAxis(
             name="x",
-            lower=x_lower,
-            upper=x_upper,
+            lower=x_min,
+            upper=x_max,
             N=Nx,
             endpoint=endpoint_x,
         )
-        self.y: CartesianAxis = CartesianAxis(
+        self.y_axis = CartesianAxis(
             name="y",
-            lower=y_lower,
-            upper=y_upper,
+            lower=y_min,
+            upper=y_max,
             N=Ny,
             endpoint=endpoint_y,
         )
 
-        # A scalar field uses one array index for each coordinate axis.
-        self.shape: tuple[int, int] = (self.x.N, self.y.N)
-
-        # Store the total number of grid points and grid spacings.
-        self.size: int = self.x.N * self.y.N
-        self.delta: tuple[float, float] = (self.x.delta, self.y.delta)
+        self.x_min: float = self.x_axis.lower
+        self.x_max: float = self.x_axis.upper
+        self.Nx: int = self.x_axis.N
+        self.endpoint_x: bool = self.x_axis.endpoint
+        self.y_min: float = self.y_axis.lower
+        self.y_max: float = self.y_axis.upper
+        self.Ny: int = self.y_axis.N
+        self.endpoint_y: bool = self.y_axis.endpoint
+        self.x: FloatArray = self.x_axis.values
+        self.y: FloatArray = self.y_axis.values
+        self.Lx: float = self.x_axis.L
+        self.Ly: float = self.y_axis.L
+        self.dx: float = self.x_axis.d
+        self.dy: float = self.y_axis.d
+        self.shape: tuple[int, int] = (self.Nx, self.Ny)
+        self.size: int = self.Nx * self.Ny
+        self.delta: tuple[float, float] = (self.dx, self.dy)
 
     @property
     def mesh(
@@ -433,8 +454,8 @@ class CartesianGrid2D:
             ``(Nx, Ny)``.
         """
         return np.meshgrid(
-            self.x.values,
-            self.y.values,
+            self.x,
+            self.y,
             indexing="ij",
         )
 
@@ -461,14 +482,14 @@ class CartesianGrid2D:
         """Return an unambiguous representation of the grid."""
         return (
             f"CartesianGrid2D("
-            f"x_lower={self.x.lower}, "
-            f"x_upper={self.x.upper}, "
-            f"Nx={self.x.N}, "
-            f"y_lower={self.y.lower}, "
-            f"y_upper={self.y.upper}, "
-            f"Ny={self.y.N}, "
-            f"endpoint_x={self.x.endpoint}, "
-            f"endpoint_y={self.y.endpoint})"
+            f"x_min={self.x_min}, "
+            f"x_max={self.x_max}, "
+            f"Nx={self.Nx}, "
+            f"y_min={self.y_min}, "
+            f"y_max={self.y_max}, "
+            f"Ny={self.Ny}, "
+            f"endpoint_x={self.endpoint_x}, "
+            f"endpoint_y={self.endpoint_y})"
         )
 
 
@@ -482,39 +503,39 @@ class CartesianGrid3D:
 
     Parameters
     ----------
-    x_lower : float
+    x_min : float
         Lower boundary of the x-coordinate interval.
-    x_upper : float
+    x_max : float
         Upper boundary of the x-coordinate interval.
     Nx : int
         Number of samples along the x-axis.
-    y_lower : float
+    y_min : float
         Lower boundary of the y-coordinate interval.
-    y_upper : float
+    y_max : float
         Upper boundary of the y-coordinate interval.
     Ny : int
         Number of samples along the y-axis.
-    z_lower : float
+    z_min : float
         Lower boundary of the z-coordinate interval.
-    z_upper : float
+    z_max : float
         Upper boundary of the z-coordinate interval.
     Nz : int
         Number of samples along the z-axis.
     endpoint_x : bool, optional
-        Whether ``x_upper`` is included. The default is ``True``.
+        Whether ``x_max`` is included. The default is ``True``.
     endpoint_y : bool, optional
-        Whether ``y_upper`` is included. The default is ``True``.
+        Whether ``y_max`` is included. The default is ``True``.
     endpoint_z : bool, optional
-        Whether ``z_upper`` is included. The default is ``True``.
+        Whether ``z_max`` is included. The default is ``True``.
 
     Attributes
     ----------
-    x : CartesianAxis
-        Cartesian x-axis.
-    y : CartesianAxis
-        Cartesian y-axis.
-    z : CartesianAxis
-        Cartesian z-axis.
+    x : numpy.ndarray
+        Read-only Cartesian x-coordinate samples.
+    y : numpy.ndarray
+        Read-only Cartesian y-coordinate samples.
+    z : numpy.ndarray
+        Read-only Cartesian z-coordinate samples.
     shape : tuple[int, int, int]
         Shape of a scalar field represented on the grid.
     size : int
@@ -525,39 +546,52 @@ class CartesianGrid3D:
 
     def __init__(
         self,
-        x_lower: float, x_upper: float, Nx: int,
-        y_lower: float, y_upper: float, Ny: int,
-        z_lower: float, z_upper: float, Nz: int,
+        x_min: float, x_max: float, Nx: int,
+        y_min: float, y_max: float, Ny: int,
+        z_min: float, z_max: float, Nz: int,
         *,
         endpoint_x: bool = True,
         endpoint_y: bool = True,
         endpoint_z: bool = True,
     ) -> None:
-        # Construct each Cartesian coordinate axis independently.
-        self.x: CartesianAxis = CartesianAxis(
-            name="x", lower=x_lower, upper=x_upper, N=Nx,
+        self.x_axis = CartesianAxis(
+            name="x", lower=x_min, upper=x_max, N=Nx,
             endpoint=endpoint_x,
         )
-        self.y: CartesianAxis = CartesianAxis(
-            name="y", lower=y_lower, upper=y_upper, N=Ny,
+        self.y_axis = CartesianAxis(
+            name="y", lower=y_min, upper=y_max, N=Ny,
             endpoint=endpoint_y,
         )
-        self.z: CartesianAxis = CartesianAxis(
-            name="z", lower=z_lower, upper=z_upper, N=Nz,
+        self.z_axis = CartesianAxis(
+            name="z", lower=z_min, upper=z_max, N=Nz,
             endpoint=endpoint_z,
         )
 
-        # A scalar field uses one array index for each coordinate axis.
-        self.shape: tuple[int, int, int] = (
-            self.x.N, self.y.N, self.z.N,
-        )
-
-        # Store the total number of grid points and grid spacings.
-        self.size: int = (
-            self.x.N * self.y.N * self.z.N
-        )
+        self.x_min: float = self.x_axis.lower
+        self.x_max: float = self.x_axis.upper
+        self.Nx: int = self.x_axis.N
+        self.endpoint_x: bool = self.x_axis.endpoint
+        self.y_min: float = self.y_axis.lower
+        self.y_max: float = self.y_axis.upper
+        self.Ny: int = self.y_axis.N
+        self.endpoint_y: bool = self.y_axis.endpoint
+        self.z_min: float = self.z_axis.lower
+        self.z_max: float = self.z_axis.upper
+        self.Nz: int = self.z_axis.N
+        self.endpoint_z: bool = self.z_axis.endpoint
+        self.x: FloatArray = self.x_axis.values
+        self.y: FloatArray = self.y_axis.values
+        self.z: FloatArray = self.z_axis.values
+        self.Lx: float = self.x_axis.L
+        self.Ly: float = self.y_axis.L
+        self.Lz: float = self.z_axis.L
+        self.dx: float = self.x_axis.d
+        self.dy: float = self.y_axis.d
+        self.dz: float = self.z_axis.d
+        self.shape: tuple[int, int, int] = (self.Nx, self.Ny, self.Nz)
+        self.size: int = self.Nx * self.Ny * self.Nz
         self.delta: tuple[float, float, float] = (
-            self.x.delta, self.y.delta, self.z.delta,
+            self.dx, self.dy, self.dz,
         )
 
     @property
@@ -574,9 +608,9 @@ class CartesianGrid3D:
             ``(Nx, Ny, Nz)``.
         """
         return np.meshgrid(
-            self.x.values,
-            self.y.values,
-            self.z.values,
+            self.x,
+            self.y,
+            self.z,
             indexing="ij",
         )
 
@@ -600,16 +634,16 @@ class CartesianGrid3D:
         """Return an unambiguous representation of the grid."""
         return (
             f"CartesianGrid3D("
-            f"x_lower={self.x.lower}, "
-            f"x_upper={self.x.upper}, "
-            f"Nx={self.x.N}, "
-            f"y_lower={self.y.lower}, "
-            f"y_upper={self.y.upper}, "
-            f"Ny={self.y.N}, "
-            f"z_lower={self.z.lower}, "
-            f"z_upper={self.z.upper}, "
-            f"Nz={self.z.N}, "
-            f"endpoint_x={self.x.endpoint}, "
-            f"endpoint_y={self.y.endpoint}, "
-            f"endpoint_z={self.z.endpoint})"
+            f"x_min={self.x_min}, "
+            f"x_max={self.x_max}, "
+            f"Nx={self.Nx}, "
+            f"y_min={self.y_min}, "
+            f"y_max={self.y_max}, "
+            f"Ny={self.Ny}, "
+            f"z_min={self.z_min}, "
+            f"z_max={self.z_max}, "
+            f"Nz={self.Nz}, "
+            f"endpoint_x={self.endpoint_x}, "
+            f"endpoint_y={self.endpoint_y}, "
+            f"endpoint_z={self.endpoint_z})"
         )
