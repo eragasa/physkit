@@ -1,7 +1,12 @@
 """Public lattice-geometry API for :mod:`physkit.periodic`."""
 
+from physkit.periodic.lattice.bravais3d import (
+    BravaisLattice,
+    BravaisLatticeKind,
+)
 from physkit.periodic.lattice.base import (
     Lattice,
+    Lattice3D,
     DirectLattice,
     ReciprocalLattice,
     FirstBrillouinZone,
@@ -27,6 +32,8 @@ from physkit.periodic.lattice.lattice3d import (
 )
 
 __all__ = [
+    "BravaisLattice",
+    "BravaisLatticeKind",
     "DirectLattice",
     "DirectLattice1D",
     "DirectLattice2D",
@@ -36,6 +43,7 @@ __all__ = [
     "FirstBrillouinZone2D",
     "FirstBrillouinZone3D",
     "Lattice",
+    "Lattice3D",
     "ReciprocalLattice",
     "ReciprocalLattice1D",
     "ReciprocalLattice2D",

@@ -1,6 +1,6 @@
 """Public lattice-geometry API for :mod:`physkit.periodic`."""
 
-from physkit.periodic.lattice.base import Lattice
+from physkit.periodic.lattice.base import Lattice, Lattice3D
 from physkit.periodic.lattice.base import (
     DirectLattice,
     ReciprocalLattice,
@@ -43,6 +43,7 @@ __all__ = [
     "FirstBrillouinZone2D",
     "FirstBrillouinZone3D",
     "Lattice",
+    "Lattice3D",
     "KPointPath1D",
     "KPointPath2D",
     "KPointPath3D",

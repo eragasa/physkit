@@ -8,6 +8,7 @@ from scipy.spatial import ConvexHull, HalfspaceIntersection
 from physkit.periodic.lattice.base import (
     FloatArray,
     IntArray,
+    Lattice3D,
 )
 
 from physkit.periodic.lattice.base import (
@@ -18,7 +19,7 @@ from physkit.periodic.lattice.base import (
 )
 
 
-class DirectLattice3D(DirectLattice):
+class DirectLattice3D(DirectLattice, Lattice3D):
     """Three-dimensional direct Bravais lattice."""
     dimension=3
 
@@ -42,6 +43,12 @@ class DirectLattice3D(DirectLattice):
         self.A: FloatArray = np.column_stack(
             (a1_array, a2_array, a3_array)
         )
+        self.A.setflags(write=False)
+
+    @property
+    def primitive_basis_matrix(self) -> FloatArray:
+        """Return the direct primitive basis matrix ``A``."""
+        return self.A
 
     @property
     def a1(self) -> FloatArray:
@@ -72,11 +79,6 @@ class DirectLattice3D(DirectLattice):
         if np.isclose(np.linalg.det(A), 0.0):
             raise ValueError("a1, a2, and a3 must be linearly independent.")
 
-    @property
-    def measure(self) -> float:
-        """Return the primitive-cell volume ``|det(A)|``."""
-        return float(abs(np.linalg.det(self.A)))
-
     def vector(self, indices: IntArray) -> FloatArray:
         """Construct direct-lattice vectors from integer modes."""
         mode_array = np.asarray(indices, dtype=np.int64)
@@ -84,7 +86,7 @@ class DirectLattice3D(DirectLattice):
             raise ValueError("modes must have final dimension 3.")
         return np.asarray(mode_array @ self.A.T, dtype=np.float64)
 
-class ReciprocalLattice3D(ReciprocalLattice):
+class ReciprocalLattice3D(ReciprocalLattice, Lattice3D):
     """Three-dimensional reciprocal Bravais lattice."""
 
     dimension = 3
@@ -115,6 +117,12 @@ class ReciprocalLattice3D(ReciprocalLattice):
         self.B: FloatArray = np.column_stack(
             (b1_array, b2_array, b3_array)
         )
+        self.B.setflags(write=False)
+
+    @property
+    def primitive_basis_matrix(self) -> FloatArray:
+        """Return the reciprocal primitive basis matrix ``B``."""
+        return self.B
 
     @property
     def b1(self) -> FloatArray:
@@ -239,22 +247,6 @@ class ReciprocalLattice3D(ReciprocalLattice):
             b1=B[:, 0],
             b2=B[:, 1],
             b3=B[:, 2],
-        )
-
-    @property
-    def measure(self) -> float:
-        """
-        Return the reciprocal fundamental-region volume.
-
-        Returns
-        -------
-        float
-            Reciprocal-space volume :math:`|\\det B|`.
-        """
-        return float(
-            abs(
-                np.linalg.det(self.B)
-            )
         )
 
     def vector(

@@ -431,6 +431,11 @@ class ReciprocalLattice1D(ReciprocalLattice):
         """
         return self._primitive_basis
 
+    @property
+    def measure(self) -> float:
+        """Return the reciprocal fundamental-region length ``|b1|``."""
+        return abs(self.b1)
+
     def vector(
         self,
         modes: IntArray,

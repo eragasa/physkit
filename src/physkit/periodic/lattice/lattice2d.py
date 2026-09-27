@@ -104,6 +104,7 @@ class DirectLattice2D(DirectLattice):
         self.A: FloatArray = (
             np.column_stack((a1_array, a2_array))
         )
+        self.A.setflags(write=False)
 
     @property
     def a1(self) -> FloatArray:
@@ -320,13 +321,14 @@ class ReciprocalLattice2D(ReciprocalLattice):
         b2_array: FloatArray = np.array(b2, dtype=np.float64, copy=True)
 
         self.check_primitive_vector(b1_array)
-        self.check_primitive_vector(b1_array)
+        self.check_primitive_vector(b2_array)
         self.check_primitive_vectors_linearly_independent(b1_array, b2_array)
         # Reciprocal primitive vectors are stored as columns:
         #     B = [b1 b2].
         self.B: FloatArray = (
             np.column_stack((b1_array, b2_array))
         )
+        self.B.setflags(write=False)
 
     @property
     def b1(self) -> FloatArray:
@@ -359,6 +361,7 @@ class ReciprocalLattice2D(ReciprocalLattice):
                 "primitive vectors must contain only finite values."
             )
 
+    @staticmethod
     def check_primitive_vectors_linearly_independent(
             b1: FloatArray,
             b2: FloatArray
@@ -441,16 +444,13 @@ class ReciprocalLattice2D(ReciprocalLattice):
 
     @property
     def primitive_basis(self) -> FloatArray:
-        """
-        Return the reciprocal primitive-basis matrix.
+        """Return the reciprocal primitive-basis matrix ``B``."""
+        return self.B
 
-        Returns
-        -------
-        FloatArray
-            Read-only matrix with ``b1`` and ``b2`` as columns. Its shape is
-            ``(2, 2)``.
-        """
-        return self._primitive_basis
+    @property
+    def measure(self) -> float:
+        """Return the reciprocal fundamental-region area ``|det(B)|``."""
+        return float(abs(np.linalg.det(self.B)))
 
     def vector(
         self,

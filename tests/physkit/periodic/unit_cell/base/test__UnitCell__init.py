@@ -1,0 +1,107 @@
+from __future__ import annotations
+
+import numpy as np
+import pytest
+
+from physkit.periodic.lattice.lattice3d import DirectLattice3D
+from physkit.periodic.unit_cell.base import AtomicBasis, UnitCell
+from physkit.units.quantities import (
+    PhysicalUnit,
+    ScalarQuantity,
+    Unitless,
+)
+
+
+def test_composes_direct_lattice_scale_and_atomic_basis(
+    fcc_direct_lattice: DirectLattice3D,
+    silicon_basis: AtomicBasis,
+) -> None:
+    lattice_parameter = ScalarQuantity(5.43, PhysicalUnit("angstrom"))
+
+    cell = UnitCell(
+        direct_lattice=fcc_direct_lattice,
+        lattice_parameter=lattice_parameter,
+        atomic_basis=silicon_basis,
+    )
+
+    assert cell.direct_lattice is not fcc_direct_lattice
+    np.testing.assert_array_equal(cell.A.magnitude, fcc_direct_lattice.A)
+    assert cell.lattice_parameter is lattice_parameter
+    assert cell.atomic_basis is silicon_basis
+
+
+def test_exposes_dimensionless_and_physical_vectors_as_columns(
+    silicon_basis: AtomicBasis,
+) -> None:
+    cell = UnitCell(
+        direct_lattice=DirectLattice3D(
+            a1=np.array([1.0, 0.0, 0.0]),
+            a2=np.array([0.2, 2.0, 0.0]),
+            a3=np.array([0.3, 0.4, 3.0]),
+        ),
+        lattice_parameter=ScalarQuantity(2.0, PhysicalUnit("angstrom")),
+        atomic_basis=silicon_basis,
+    )
+    expected_a = np.array(
+        (
+            (1.0, 0.2, 0.3),
+            (0.0, 2.0, 0.4),
+            (0.0, 0.0, 3.0),
+        )
+    )
+
+    np.testing.assert_array_equal(cell.A.magnitude, expected_a)
+    np.testing.assert_array_equal(cell.H.magnitude, 2.0 * expected_a)
+    np.testing.assert_array_equal(cell.a2.magnitude, expected_a[:, 1])
+    np.testing.assert_array_equal(cell.h2.magnitude, 2.0 * expected_a[:, 1])
+    assert isinstance(cell.A.unit, Unitless)
+    assert cell.H.unit.expression == "angstrom"
+
+
+def test_copies_and_freezes_direct_lattice_representation(
+    fcc_direct_lattice: DirectLattice3D,
+    silicon_basis: AtomicBasis,
+) -> None:
+    cell = UnitCell(
+        direct_lattice=fcc_direct_lattice,
+        lattice_parameter=ScalarQuantity(5.43, PhysicalUnit("angstrom")),
+        atomic_basis=silicon_basis,
+    )
+
+    assert cell.direct_lattice is not fcc_direct_lattice
+    assert cell.A.magnitude[0, 0] == 0.5
+    assert fcc_direct_lattice.A.flags.writeable is False
+    with pytest.raises(ValueError):
+        fcc_direct_lattice.A[0, 0] = 99.0
+    with pytest.raises(ValueError):
+        cell.direct_lattice.A[0, 0] = 99.0
+    with pytest.raises(ValueError):
+        cell.H.magnitude[0, 0] = 99.0
+
+
+def test_accepts_any_physical_length_unit(
+    fcc_direct_lattice: DirectLattice3D,
+    silicon_basis: AtomicBasis,
+) -> None:
+    cell = UnitCell(
+        direct_lattice=fcc_direct_lattice,
+        lattice_parameter=ScalarQuantity(10.26121286, PhysicalUnit("bohr")),
+        atomic_basis=silicon_basis,
+    )
+
+    assert cell.lattice_parameter.unit.expression == "bohr"
+
+
+def test_rejects_non_length_lattice_parameter(
+    fcc_direct_lattice: DirectLattice3D,
+    silicon_basis: AtomicBasis,
+) -> None:
+    with pytest.raises(ValueError, match="length dimensionality"):
+        UnitCell(
+            direct_lattice=fcc_direct_lattice,
+            lattice_parameter=ScalarQuantity(
+                5.43,
+                PhysicalUnit("electron_volt"),
+            ),
+            atomic_basis=silicon_basis,
+        )
