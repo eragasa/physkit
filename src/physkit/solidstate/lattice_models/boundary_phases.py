@@ -8,6 +8,18 @@ values. These records are unweighted boundary conditions, not reciprocal-space
 This implementation preserves the represented behavior of
 ``ksdft2effmass.solid_state.boundary_phases`` at donor revision
 ``7bd913151f7e61ed2bdba593df920be36573b502``.
+
+References
+----------
+.. [1] W. Kohn, "Theory of the Insulating State," *Physical Review* 133,
+   A171 (1964). https://doi.org/10.1103/PhysRev.133.A171
+.. [2] Q. Niu, D. J. Thouless, and Y.-S. Wu, "Quantized Hall Conductance
+   as a Topological Invariant," *Physical Review B* 31, 3372--3377
+   (1985). https://doi.org/10.1103/PhysRevB.31.3372
+.. [3] C. Lin, F. H. Zong, and D. M. Ceperley, "Twist-averaged boundary
+   conditions in continuum quantum Monte Carlo algorithms," *Physical
+   Review E* 64, 016702 (2001).
+   https://doi.org/10.1103/PhysRevE.64.016702
 """
 
 from __future__ import annotations

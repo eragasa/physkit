@@ -7,6 +7,11 @@ the reflection and axis-swap operations required by the accepted scalar studies.
 This implementation preserves the represented behavior of
 ``ksdft2effmass.solid_state.symmetry`` at donor revision
 ``7bd913151f7e61ed2bdba593df920be36573b502``.
+
+References
+----------
+.. [1] M. Newman, *Integral Matrices*, Academic Press (1972),
+   ISBN 978-0-12-517850-1.
 """
 
 from __future__ import annotations

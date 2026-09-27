@@ -10,6 +10,15 @@ This implementation preserves the represented behavior of
 ``ksdft2effmass.solid_state.represented_operators`` at donor revision
 ``7bd913151f7e61ed2bdba593df920be36573b502`` while using PhysKit's native sparse
 matrix quantity.
+
+References
+----------
+.. [1] J. C. Slater and G. F. Koster, "Simplified LCAO Method for the
+   Periodic Potential Problem," *Physical Review* 94, 1498 (1954).
+   https://doi.org/10.1103/PhysRev.94.1498
+.. [2] Q. Niu, D. J. Thouless, and Y.-S. Wu, "Quantized Hall Conductance
+   as a Topological Invariant," *Physical Review B* 31, 3372--3377
+   (1985). https://doi.org/10.1103/PhysRevB.31.3372
 """
 
 from __future__ import annotations
