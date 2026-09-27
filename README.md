@@ -104,6 +104,12 @@ Once implementation begins, contributors will be able to extend modules, add exa
 
 ---
 
+## License
+
+PhysKit is licensed under the [Apache License 2.0](LICENSE).
+
+---
+
 ## Background
 
 PhysKit is informed by experience in computational materials science and several decades of work in mathematical and numerical modeling. Teaching responsibilities have included electromagnetism (PHYS 102), modern physics (PHYS 104), solid state physics, computational physics, and related courses. Early materials in the repository will draw from these lecture notes, with new figures and problem sets created as needed.

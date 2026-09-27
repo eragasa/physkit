@@ -7,6 +7,10 @@ name = "physkit"
 version = "0.1.0"
 description = ""
 requires-python = ">=3.14"
+license = "Apache-2.0"
+classifiers = [
+  "License :: OSI Approved :: Apache Software License",
+]
 authors = [
   {name = "Eugene Joseph M. Ragasa"}
 ]
