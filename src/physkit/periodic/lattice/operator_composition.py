@@ -8,8 +8,8 @@ change gauges, establish Hermiticity, or provide physical or scientific validati
 
 This implementation preserves the represented behavior of
 ``ksdft2effmass.solid_state.operator_composition`` at donor revision
-``2578d398b1d0aa3bfafb45f73b39c79ede5f5c42``. The legacy ``SHAPE`` issue name and
-``"shape"`` value remain unchanged for compatibility, although the compared metadata
+``2578d398b1d0aa3bfafb45f73b39c79ede5f5c42``, with finite-geometry mismatch renamed
+from the donor's legacy ``SHAPE`` identity to ``DOMAIN`` because the compared metadata
 is a :class:`~physkit.periodic.lattice.finite_domain.FinitePeriodicDomain`.
 """
 
@@ -26,7 +26,7 @@ from .represented_operators import ScalarFiniteLatticeOperator
 class ScalarFiniteLatticeOperatorCompatibilityIssueCode(StrEnum):
     """Comparison-critical metadata mismatches that prohibit operator addition."""
 
-    SHAPE = "shape"
+    DOMAIN = "domain"
     TWIST_FIBER = "twist_fiber"
     BASIS = "basis"
     UNIT = "unit"
@@ -71,7 +71,7 @@ class ScalarFiniteLatticeOperatorCompatibilityResult:
             raise ValueError("issue_codes must be sorted and unique")
         expected: set[ScalarFiniteLatticeOperatorCompatibilityIssueCode] = set()
         if self.left.domain != self.right.domain:
-            expected.add(ScalarFiniteLatticeOperatorCompatibilityIssueCode.SHAPE)
+            expected.add(ScalarFiniteLatticeOperatorCompatibilityIssueCode.DOMAIN)
         if self.left.twist_fiber != self.right.twist_fiber:
             expected.add(ScalarFiniteLatticeOperatorCompatibilityIssueCode.TWIST_FIBER)
         if self.left.basis_identifier != self.right.basis_identifier:
@@ -122,7 +122,7 @@ class ScalarFiniteLatticeOperatorCompatibilityAnalyzer:
             raise TypeError("right must be ScalarFiniteLatticeOperator")
         issues: set[ScalarFiniteLatticeOperatorCompatibilityIssueCode] = set()
         if left.domain != right.domain:
-            issues.add(ScalarFiniteLatticeOperatorCompatibilityIssueCode.SHAPE)
+            issues.add(ScalarFiniteLatticeOperatorCompatibilityIssueCode.DOMAIN)
         if left.twist_fiber != right.twist_fiber:
             issues.add(ScalarFiniteLatticeOperatorCompatibilityIssueCode.TWIST_FIBER)
         if left.basis_identifier != right.basis_identifier:

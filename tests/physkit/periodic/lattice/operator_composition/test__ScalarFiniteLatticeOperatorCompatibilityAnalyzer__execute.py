@@ -60,8 +60,8 @@ def test_reports_every_represented_metadata_mismatch() -> None:
     assert passing.compatible
     assert failing.issue_codes == (
         ScalarFiniteLatticeOperatorCompatibilityIssueCode.BASIS,
+        ScalarFiniteLatticeOperatorCompatibilityIssueCode.DOMAIN,
         ScalarFiniteLatticeOperatorCompatibilityIssueCode.ENERGY_REFERENCE,
-        ScalarFiniteLatticeOperatorCompatibilityIssueCode.SHAPE,
         ScalarFiniteLatticeOperatorCompatibilityIssueCode.TWIST_FIBER,
         ScalarFiniteLatticeOperatorCompatibilityIssueCode.UNIT,
     )
