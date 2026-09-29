@@ -1,10 +1,16 @@
 """Concrete three-dimensional Bravais-lattice geometry."""
 
 from __future__ import annotations
+
+import math
 from typing import Self
+
 import numpy as np
 from scipy.spatial import ConvexHull, HalfspaceIntersection
 
+from physkit.numerics.linear_algebra.volume import (
+    columns_are_linearly_independent,
+)
 from physkit.periodic.lattice.base import (
     FloatArray,
     IntArray,
@@ -17,6 +23,9 @@ from physkit.periodic.lattice.base import (
     WignerSeitzCell,
     FirstBrillouinZone,
 )
+
+
+_NORMALIZED_VOLUME_ABS_TOLERANCE: float = 1.0e-8
 
 
 class DirectLattice3D(DirectLattice, Lattice3D):
@@ -45,6 +54,186 @@ class DirectLattice3D(DirectLattice, Lattice3D):
         )
         self.A.setflags(write=False)
 
+    @classmethod
+    def from_lattice_parameters(
+        cls,
+        *,
+        a: float,
+        b: float,
+        c: float,
+        alpha_degrees: float,
+        beta_degrees: float,
+        gamma_degrees: float,
+    ) -> Self:
+        r"""Construct the canonical direct basis for six lattice parameters.
+
+        The angles follow the crystallographic convention
+
+        .. math::
+
+            \alpha=\angle(\mathbf a_2,\mathbf a_3),\qquad
+            \beta=\angle(\mathbf a_1,\mathbf a_3),\qquad
+            \gamma=\angle(\mathbf a_1,\mathbf a_2).
+
+        For the angular Gram determinant, let
+
+        .. math::
+
+            s = \frac{\alpha+\beta+\gamma}{2}.
+
+        Its symmetric half-angle identity is
+
+        .. math::
+
+            \Delta = 4\sin(s)\sin(s-\alpha)\sin(s-\beta)
+            \sin(s-\gamma).
+
+        For the third unit direction, define
+
+        .. math::
+
+            \begin{aligned}
+            x_3 &= \cos\beta, \\
+            y_3 &= \frac{\cos\alpha-\cos\beta\cos\gamma}{\sin\gamma}, \\
+            z_3 &= \frac{\sqrt{\Delta}}{\sin\gamma}.
+            \end{aligned}
+
+        The canonical right-handed triclinic direct-basis embedding is then
+
+        .. math::
+
+            \begin{aligned}
+            \mathbf a_1 &= (a, 0, 0), \\
+            \mathbf a_2 &= (b\cos\gamma, b\sin\gamma, 0), \\
+            \mathbf a_3 &= c(x_3,y_3,z_3).
+            \end{aligned}
+
+        This is equivalent to the conventional expression
+
+        .. math::
+
+            \Delta = 1 + 2\cos\alpha\cos\beta\cos\gamma
+            - \cos^2\alpha - \cos^2\beta - \cos^2\gamma.
+
+        The implementation evaluates each signed half-angle sum with
+        :func:`math.fsum` so that whichever angle is small is not lost to
+        subtraction. It uses :func:`math.fma` for the numerator defining
+        ``y_3``. Together these avoid asymmetric cancellation near the
+        positive-definite metric boundaries.
+
+        All lengths are unitless. A common physical-unit convention is to
+        pass ``a=1.0``, ``b=b/a``, and ``c=c/a``, while retaining the
+        physical value of ``a`` in ``UnitCell.lattice_parameter``.
+
+        Parameters
+        ----------
+        a, b, c:
+            Positive finite unitless lattice lengths.
+        alpha_degrees, beta_degrees, gamma_degrees:
+            Finite lattice angles in degrees, strictly between zero and 180.
+
+        Returns
+        -------
+        Self
+            Direct lattice with the canonical direct-basis embedding.
+
+        Raises
+        ------
+        TypeError
+            If any argument is not exactly a built-in ``float``.
+        ValueError
+            If a length or angle is outside its valid range, ``sin(gamma)``
+            vanishes numerically, or the parameters do not define positive
+            volume.
+        """
+        lengths = (("a", a), ("b", b), ("c", c))
+        angles = (
+            ("alpha_degrees", alpha_degrees),
+            ("beta_degrees", beta_degrees),
+            ("gamma_degrees", gamma_degrees),
+        )
+
+        for label, value in (*lengths, *angles):
+            if type(value) is not float:
+                raise TypeError(f"{label} must be a float")
+
+        for label, value in lengths:
+            if not math.isfinite(value) or value <= 0.0:
+                raise ValueError(f"{label} must be a positive finite float")
+
+        for label, value in angles:
+            if not math.isfinite(value) or not 0.0 < value < 180.0:
+                raise ValueError(
+                    f"{label} must be a finite float strictly between 0 and 180"
+                )
+
+        alpha = math.radians(alpha_degrees)
+        beta = math.radians(beta_degrees)
+        gamma = math.radians(gamma_degrees)
+        cos_alpha = math.cos(alpha)
+        cos_beta = math.cos(beta)
+        cos_gamma = math.cos(gamma)
+        sin_gamma = math.sin(gamma)
+
+        if sin_gamma == 0.0:
+            raise ValueError("gamma_degrees must have nonzero sine")
+
+        half_angle_arguments = (
+            0.5 * math.fsum((alpha, beta, gamma)),
+            0.5 * math.fsum((-alpha, beta, gamma)),
+            0.5 * math.fsum((alpha, -beta, gamma)),
+            0.5 * math.fsum((alpha, beta, -gamma)),
+        )
+        half_angle_sines = tuple(
+            math.sin(argument) for argument in half_angle_arguments
+        )
+        if any(
+            not math.isfinite(value) or value <= 0.0
+            for value in half_angle_sines
+        ):
+            raise ValueError(
+                "lattice parameters must define positive volume with a "
+                "resolvable canonical direct basis"
+            )
+
+        delta_quarter = math.prod(half_angle_sines)
+        if not math.isfinite(delta_quarter) or delta_quarter <= 0.0:
+            raise ValueError(
+                "lattice parameters must define positive volume with a "
+                "resolvable canonical direct basis"
+            )
+        sqrt_delta = 2.0 * math.sqrt(delta_quarter)
+
+        x3_unit = cos_beta
+        y3_unit = math.fma(-cos_beta, cos_gamma, cos_alpha) / sin_gamma
+        z3_unit = sqrt_delta / sin_gamma
+        if (
+            not math.isfinite(y3_unit)
+            or not math.isfinite(z3_unit)
+            or z3_unit <= 0.0
+        ):
+            raise ValueError(
+                "lattice parameters must define positive volume with a "
+                "resolvable canonical direct basis"
+            )
+
+        a1 = np.array((a, 0.0, 0.0), dtype=np.float64)
+        a2 = np.array(
+            (b * cos_gamma, b * sin_gamma, 0.0),
+            dtype=np.float64,
+        )
+        a3 = c * np.array(
+            (x3_unit, y3_unit, z3_unit),
+            dtype=np.float64,
+        )
+        if not all(np.all(np.isfinite(vector)) for vector in (a1, a2, a3)):
+            raise ValueError(
+                "lattice parameters must produce finite canonical "
+                "direct-basis components"
+            )
+
+        return cls(a1=a1, a2=a2, a3=a3)
+
     @property
     def primitive_basis_matrix(self) -> FloatArray:
         """Return the direct primitive basis matrix ``A``."""
@@ -68,15 +257,26 @@ class DirectLattice3D(DirectLattice, Lattice3D):
         if not np.all(np.isfinite(vector)):
             raise ValueError("primitive vectors must contain finite values.")
 
-    def check_primitive_vector_linearly_independent(self,
+    def check_primitive_vector_linearly_independent(
+        self,
         a1: FloatArray,
         a2: FloatArray,
-        a3: FloatArray
+        a3: FloatArray,
     ) -> None:
-        """Validate the three primitive vectors."""
+        """Validate the directional independence of the primitive vectors.
 
+        Each column of the direct-basis matrix is normalized by its Euclidean
+        norm before evaluating the absolute determinant. The resulting
+        normalized volume is dimensionless and invariant under basis-vector
+        scale. A normalized volume at or below
+        ``_NORMALIZED_VOLUME_ABS_TOLERANCE`` is treated as numerically
+        dependent.
+        """
         A = np.column_stack((a1, a2, a3))
-        if np.isclose(np.linalg.det(A), 0.0):
+        if not columns_are_linearly_independent(
+            A,
+            norm_vol_atol=_NORMALIZED_VOLUME_ABS_TOLERANCE,
+        ):
             raise ValueError("a1, a2, and a3 must be linearly independent.")
 
     def vector(self, indices: IntArray) -> FloatArray:
