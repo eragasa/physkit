@@ -58,6 +58,61 @@ def test_exposes_dimensionless_and_physical_vectors_as_columns(
     assert cell.H.unit.expression == "angstrom"
 
 
+def test__UnitCell__init__recovers_metric_from_normalized_direct_basis(
+    silicon_basis: AtomicBasis,
+) -> None:
+    physical_a = 5.2
+    physical_b = 6.1
+    physical_c = 7.3
+    requested_angles = np.array([75.0, 80.0, 65.0])
+    lattice_parameter = ScalarQuantity(
+        physical_a,
+        PhysicalUnit("angstrom"),
+    )
+    normalized_lattice = DirectLattice3D.from_lattice_parameters(
+        a=1.0,
+        b=physical_b / physical_a,
+        c=physical_c / physical_a,
+        alpha_degrees=75.0,
+        beta_degrees=80.0,
+        gamma_degrees=65.0,
+    )
+
+    cell = UnitCell(
+        direct_lattice=normalized_lattice,
+        lattice_parameter=lattice_parameter,
+        atomic_basis=silicon_basis,
+    )
+
+    normalized_lengths = np.linalg.norm(cell.A.magnitude, axis=0)
+    physical_vectors = cell.H.magnitude
+    physical_lengths = np.linalg.norm(physical_vectors, axis=0)
+    angle_cosines = np.array(
+        [
+            np.dot(physical_vectors[:, 1], physical_vectors[:, 2])
+            / (physical_lengths[1] * physical_lengths[2]),
+            np.dot(physical_vectors[:, 0], physical_vectors[:, 2])
+            / (physical_lengths[0] * physical_lengths[2]),
+            np.dot(physical_vectors[:, 0], physical_vectors[:, 1])
+            / (physical_lengths[0] * physical_lengths[1]),
+        ]
+    )
+    physical_angles = np.degrees(
+        np.arccos(np.clip(angle_cosines, -1.0, 1.0))
+    )
+
+    assert cell.lattice_parameter is lattice_parameter
+    np.testing.assert_allclose(
+        normalized_lengths,
+        [1.0, physical_b / physical_a, physical_c / physical_a],
+    )
+    np.testing.assert_allclose(
+        physical_lengths,
+        [physical_a, physical_b, physical_c],
+    )
+    np.testing.assert_allclose(physical_angles, requested_angles)
+
+
 def test_copies_and_freezes_direct_lattice_representation(
     fcc_direct_lattice: DirectLattice3D,
     silicon_basis: AtomicBasis,

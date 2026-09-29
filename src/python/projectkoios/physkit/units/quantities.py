@@ -10,15 +10,17 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-import numpy.typing as npt
 import pint
 from scipy import sparse  # type: ignore[import-untyped]
 
-type RealVector = npt.NDArray[np.float64]
-type RealMatrix = npt.NDArray[np.float64]
-type ComplexVector = npt.NDArray[np.complex128]
-type ComplexMatrix = npt.NDArray[np.complex128]
-type IntegerVector = npt.NDArray[np.int64]
+from projectkoios.physkit.numerics.typing.numpy.arrays import (
+    ComplexMatrix,
+    ComplexVector,
+    IntegerVector,
+    RealMatrix,
+    RealVector,
+)
+from projectkoios.physkit.numerics.typing.scipy.sparse import SparseMatrix
 
 MODEL_SYSTEM_PINT_REGISTRY = pint.UnitRegistry()
 """Fixed Pint registry used by public model-system unit records and actions."""
@@ -251,7 +253,7 @@ class SparseMatrixQuantity(ModelSystemQuantity):
     @classmethod
     def from_csr(
         cls,
-        magnitude: sparse.spmatrix | sparse.sparray,
+        magnitude: SparseMatrix,
         unit: ModelSystemUnit,
     ) -> SparseMatrixQuantity:
         """Canonicalize one SciPy sparse matrix as an immutable CSR quantity."""
@@ -374,7 +376,7 @@ class ComplexSparseMatrixQuantity(ModelSystemQuantity):
     @classmethod
     def from_csr(
         cls,
-        magnitude: sparse.spmatrix | sparse.sparray,
+        magnitude: SparseMatrix,
         unit: ModelSystemUnit,
     ) -> ComplexSparseMatrixQuantity:
         """Canonicalize a numeric SciPy sparse matrix as complex128 CSR."""

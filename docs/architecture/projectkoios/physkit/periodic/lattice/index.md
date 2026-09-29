@@ -17,6 +17,7 @@ Defining modules remain the preferred import routes.
 
 ## Navigation
 
+- [Module `lattice3d`](lattice3d/index.md)
 - [Module `gauge_bridges`](gauge_bridges/index.md)
 - [Parent package](../index.md)
 - [Source provenance](../../../../../provenance/finite-periodic-lattice-source-mapping.md)

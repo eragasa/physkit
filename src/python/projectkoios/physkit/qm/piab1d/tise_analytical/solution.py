@@ -10,9 +10,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-import numpy.typing as npt
 
 from projectkoios.physkit.core.results import ResultsObject
+from projectkoios.physkit.numerics.typing.numpy.arrays import IntegerVector
 from projectkoios.physkit.qm.eigenfunctions import (
     SampledEigenfunction1D,
     SampledEigenfunctions1D,
@@ -27,8 +27,6 @@ from projectkoios.physkit.units import (
 )
 
 from ..base import Piab1D
-
-type IntegerVector = npt.NDArray[np.int64]
 
 
 @dataclass(frozen=True, slots=True, eq=False, kw_only=True)
