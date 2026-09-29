@@ -53,6 +53,10 @@
   perturbation models, integral lattice operations, represented scalar operators,
   compatibility-gated sparse operator composition, centered uniform-link sparse
   operator construction, and site-diagonal twist-gauge bridge analysis.
+- Consolidate reviewed two- and three-dimensional metric-tensor explorations into
+  one package-backed nonorthogonal lattice lesson, add exact nearest-image metric
+  geometry, and add unit-free sparse 2D/3D Kronecker-sum assembly for later
+  multidimensional represented operators.
 - Relicense PhysKit from the MIT License to the Apache License 2.0 with the
   authorization of the sole copyright holder. Copies previously distributed
   under the MIT License remain available under those terms.

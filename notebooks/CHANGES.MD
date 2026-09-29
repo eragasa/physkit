@@ -894,3 +894,24 @@ The complete solid-state lecture-note hierarchy formerly rooted at
 `docs/lecturenotes/solidstate/`. The move preserves subject-relative structure
 while aligning the canonical compact path requested for solid-state material.
 Live documentation and notebook prerequisite links now use the new root.
+
+## Forty-eighth extraction: nonorthogonal lattice metric geometry
+
+The reviewed exploratory notebooks formerly staged at
+`notebooks/solid-state-physics/crystal-structure/metric-tensor-2d.ipynb` and
+`metric-tensor-3d.ipynb` were consolidated into
+`notebooks/solidstate/lattices/nonorthogonal-metric-geometry.ipynb` and its
+prerequisite lecture note.
+
+Reusable direct-basis metric construction, fractional-to-Cartesian mapping, and
+exact two- and three-dimensional nearest-image resolution now belong to
+`projectkoios.physkit.periodic.lattice.metric`. The maintained laboratory uses
+those package APIs to check direct--reciprocal duality, metric identities, a
+skew-cell nearest-image counterexample, the two-dimensional mixed-derivative
+coefficient, and equivalent Cartesian and metric Bloch factors.
+
+The former bounded neighbor-shell search was not promoted as a general
+algorithm. The maintained resolver derives a complete finite integer search
+bound from the smallest singular value of the direct basis. Exact source hashes
+and semantic adaptations are recorded in
+`docs/provenance/nonorthogonal-lattice-geometry-notebook-migration.md`.

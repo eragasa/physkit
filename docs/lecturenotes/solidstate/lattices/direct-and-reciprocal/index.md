@@ -80,7 +80,10 @@ interchangeable.
 The
 [computational laboratory](../../../../../notebooks/solidstate/lattices/direct-and-reciprocal-lattices.ipynb)
 constructs direct and reciprocal bases in all three supported dimensions and
-visualizes a two-dimensional example.
+visualizes a two-dimensional example. The follow-on
+[nonorthogonal metric lesson](../nonorthogonal-metric-geometry/index.md) derives
+constant-basis metric tensors, exact nearest periodic images, and metric forms
+of plane-wave factors.
 
 ## Exercises
 

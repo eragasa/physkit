@@ -2,8 +2,9 @@
 
 ## Current responsibility
 
-The package owns reusable unit-free linear-algebra calculations and numerical
-predicates that are independent of lattice or model policy.
+The package owns reusable unit-free linear-algebra calculations, sparse
+separable-operator assembly, and numerical predicates that are independent of
+lattice or model policy.
 
 ## Public contract
 
@@ -13,6 +14,7 @@ locations.
 
 ## Navigation
 
+- [Module `kronecker`](kronecker/index.md)
 - [Module `volume`](volume/index.md)
 - [Parent package](../index.md)
 
@@ -23,5 +25,6 @@ locations.
 
 ## Evidence
 
-Mapped tests verify scale-invariant normalized volume and tolerance behavior.
-They establish numerical software behavior only.
+Mapped tests verify sparse Kronecker-sum shape, ordering, dtype, and spectrum,
+as well as scale-invariant normalized-volume and tolerance behavior. They
+establish numerical software behavior only.
