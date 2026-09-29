@@ -9,7 +9,8 @@ mutate caller-owned sparse inputs.
 ## Invariants
 
 - Exactly two or three axis operators are supplied in a tuple.
-- Every operator is finite, numeric, nonempty, and square.
+- Every operator is finite, floating-point or complex-floating, nonempty, and
+  square; boolean and fixed-width integer dtypes are rejected.
 - The result shape is the product state size squared.
 - The result dtype is the NumPy result type of all axis operators.
 - C-order flattening makes the final tuple axis the fastest-varying state index.
@@ -26,5 +27,6 @@ mutate caller-owned sparse inputs.
 ## Evidence
 
 Tests compare represented spectra with independent sums of one-dimensional
-spectra for real 2D and complex 3D examples and verify ordering and failure
-behavior. They do not establish the adequacy of any consuming physical model.
+spectra for real floating 2D and complex-floating 3D examples and verify
+ordering, signed/unsigned boundary rejection, and other failure behavior. They
+do not establish the adequacy of any consuming physical model.

@@ -12,7 +12,9 @@ Cartesian image.
 - Every vector has the metric dimension.
 - Fractional and Cartesian displacement arrays are finite.
 - `image_fractional = displacement_fractional - translation_indices`.
-- `image_cartesian = A image_fractional` within represented rounding.
+- `image_cartesian = A image_fractional` within a componentwise binary64
+  rounding bound derived from `abs(A) @ abs(image_fractional)` and the spacing
+  of the expected mapped components; area or volume does not set this tolerance.
 - Result arrays own immutable storage.
 
 ## Navigation
@@ -23,10 +25,11 @@ Cartesian image.
 ## Local mapping
 
 - Code: `src/python/projectkoios/physkit/periodic/lattice/metric.py::NearestLatticeImageResult`
-- Tests: `tests/projectkoios/physkit/periodic/lattice/metric/test__NearestLatticeImageResolver__execute.py`
+- Tests: `tests/projectkoios/physkit/periodic/lattice/metric/test__NearestLatticeImage*.py`
 
 ## Evidence
 
-Resolver tests cover correlation, immutable storage, exact integer images, skew
-cells, and two- and three-dimensional results. No physical cutoff or tie policy
-is inferred.
+Tests cover correlation, immutable storage, exact integer images, skew cells,
+and two- and three-dimensional results. Direct-constructor checks use large 2D
+and tiny 3D basis scales, accepting mapped vectors while rejecting materially
+inconsistent vectors. No physical cutoff or tie policy is inferred.

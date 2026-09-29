@@ -60,6 +60,25 @@ def test__DirectLatticeMetric__init__derives_three_dimensional_geometry() -> Non
     assert metric.measure == pytest.approx(abs(np.linalg.det(lattice.A)))
 
 
+@pytest.mark.parametrize("scale", [1.0e-100, 1.0e100])
+def test__DirectLatticeMetric__measure__preserves_representable_scale(
+    scale: float,
+) -> None:
+    basis = scale * np.eye(3)
+    lattice = DirectLattice3D(
+        a1=basis[:, 0],
+        a2=basis[:, 1],
+        a3=basis[:, 2],
+    )
+
+    metric = DirectLatticeMetric(lattice)
+
+    expected_measure = scale**3
+    assert np.isfinite(metric.measure)
+    assert metric.measure == pytest.approx(expected_measure, rel=2.0e-13)
+    assert metric.measure == metric.direct_lattice.measure
+
+
 def test__DirectLatticeMetric__init__owns_immutable_storage() -> None:
     first_vector = np.array([1.0, 0.0])
     second_vector = np.array([0.25, 0.75])

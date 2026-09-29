@@ -102,6 +102,25 @@ def test__SparseKroneckerSumConstructor__execute__rejects_invalid_operator(
         )
 
 
+@pytest.mark.parametrize(
+    "values",
+    [
+        np.array([[np.iinfo(np.int64).min]], dtype=np.int64),
+        np.array([[np.iinfo(np.int64).max]], dtype=np.int64),
+        np.array([[np.iinfo(np.uint64).min]], dtype=np.uint64),
+        np.array([[np.iinfo(np.uint64).max]], dtype=np.uint64),
+        np.array([[True]], dtype=np.bool_),
+    ],
+)
+def test__SparseKroneckerSumConstructor__execute__rejects_exact_dtypes(
+    values: np.ndarray,
+) -> None:
+    exact_operator = sparse.csr_array(values)
+
+    with pytest.raises(TypeError, match="floating-point or complex-floating"):
+        SparseKroneckerSumConstructor().execute((exact_operator, sparse.eye(1)))
+
+
 def test__SparseKroneckerSumConstructor__execute__rejects_nonfinite_values() -> None:
     invalid = sparse.csr_array(np.array([[np.nan, 0.0], [0.0, 1.0]]))
 

@@ -37,7 +37,8 @@ tensor, or validate a physical model.
 ## Evidence
 
 Focused tests cover 2D and 3D metric identities, direct/reciprocal duality,
-immutable storage, fractional-coordinate mapping, a skew-cell case where
+large/small finite measure preservation, immutable storage, scaled Cartesian
+consistency checks, fractional-coordinate mapping, a skew-cell case where
 componentwise rounding is not nearest, an exact search beyond a fixed neighbor
 shell, and three-dimensional agreement with an independent bounded reference.
 These checks establish represented software and numerical behavior only.

@@ -151,8 +151,14 @@ class DirectLatticeMetric(DataObject):
 
     @property
     def measure(self) -> float:
-        r"""Return ``sqrt(det(g))``, equal to ``abs(det(A))``."""
-        return float(np.sqrt(np.linalg.det(self.metric_tensor)))
+        r"""Return ``abs(det(A))``, mathematically equal to ``sqrt(det(g))``.
+
+        The owned direct lattice evaluates the determinant of ``A`` directly.
+        Avoiding ``det(A.T @ A)`` prevents the Gram determinant from
+        overflowing or underflowing when the represented cell measure remains
+        finite.
+        """
+        return self.direct_lattice.measure
 
     def to_cartesian(self, fractional_coordinates: FloatArray) -> FloatArray:
         """Map one or more fractional-coordinate vectors into Cartesian space.
@@ -241,12 +247,29 @@ class NearestLatticeImageResult(ResultsObject):
             raise ValueError(
                 "image_fractional must equal displacement minus translation"
             )
-        expected_cartesian = self.metric.to_cartesian(image_fractional)
-        if not np.allclose(
-            image_cartesian,
-            expected_cartesian,
-            rtol=0.0,
-            atol=8.0 * np.finfo(np.float64).eps * max(1.0, self.metric.measure),
+        with np.errstate(over="ignore", invalid="ignore"):
+            expected_cartesian = self.metric.to_cartesian(image_fractional)
+            componentwise_mapping_magnitudes = np.abs(
+                self.metric.primitive_basis
+            ) @ np.abs(image_fractional)
+        epsilon = np.finfo(np.float64).eps
+        summation_error_factor = (
+            self.metric.dimension * epsilon / (1.0 - self.metric.dimension * epsilon)
+        )
+        mapping_roundoff = (
+            8.0 * summation_error_factor * componentwise_mapping_magnitudes
+        )
+        representation_spacing = 8.0 * np.abs(np.spacing(np.abs(expected_cartesian)))
+        consistency_tolerance = np.maximum(
+            mapping_roundoff,
+            representation_spacing,
+        )
+        with np.errstate(over="ignore", invalid="ignore"):
+            mapping_difference = np.abs(image_cartesian - expected_cartesian)
+        if (
+            not np.all(np.isfinite(expected_cartesian))
+            or not np.all(np.isfinite(consistency_tolerance))
+            or not np.all(mapping_difference <= consistency_tolerance)
         ):
             raise ValueError("image_cartesian must be the mapped fractional image")
 

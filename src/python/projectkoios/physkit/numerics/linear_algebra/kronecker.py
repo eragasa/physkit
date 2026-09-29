@@ -37,8 +37,8 @@ class SparseKroneckerSumConstructor:
         Parameters
         ----------
         axis_operators:
-            Ordered tuple of finite numeric square SciPy sparse matrices or
-            arrays. Tuple order is array-axis order.
+            Ordered tuple of finite floating-point or complex-floating square
+            SciPy sparse matrices or arrays. Tuple order is array-axis order.
 
         Returns
         -------
@@ -61,9 +61,10 @@ class SparseKroneckerSumConstructor:
         for operator in axis_operators:
             if not isinstance(operator, sparse.spmatrix | sparse.sparray):
                 raise TypeError("each axis operator must be a SciPy sparse matrix")
-            if operator.dtype.kind not in "iufc":
+            if operator.dtype.kind not in "fc":
                 raise TypeError(
-                    "axis operators must contain numeric values excluding booleans"
+                    "axis operators must contain floating-point or "
+                    "complex-floating values"
                 )
             rows, columns = operator.shape
             if rows != columns or rows < 1:

@@ -14,8 +14,11 @@ mapping.
   owner.
 - Stored arrays are independent, immutable binary64 arrays.
 - Every derived array is finite; the metric must be invertible in binary64.
-- `A^T B=2πI`, `B^T B=(2π)^2g^{-1}`, and
+- `A^T B=2πI`, `B^T B=(2π)^2g^{-1}`, and mathematically
   `sqrt(det(g))=|det(A)|` up to represented floating-point rounding.
+- Fundamental-region measure is evaluated from the owned direct basis rather
+  than its squared Gram determinant, avoiding avoidable range loss for finite
+  large or small measures.
 
 ## Navigation
 
@@ -29,5 +32,6 @@ mapping.
 ## Evidence
 
 Tests exercise both supported dimensions, duality and metric identities,
-immutable storage, batch coordinate mapping, and invalid inputs. This does not
-establish physical units, material geometry, or scientific validation.
+finite measures whose Gram determinants overflow or underflow, immutable
+storage, batch coordinate mapping, and invalid inputs. This does not establish
+physical units, material geometry, or scientific validation.
