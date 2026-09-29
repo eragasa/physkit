@@ -12,14 +12,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-import numpy.typing as npt
 from scipy import linalg, sparse
 from scipy.sparse import linalg as sparse_linalg
 
+from physkit.numerics.typing.numpy.arrays import RealMatrix, RealVector
+from physkit.numerics.typing.scipy.sparse import SparseMatrix
 
-type RealVector = npt.NDArray[np.float64]
-type RealMatrix = npt.NDArray[np.float64]
-type RealSymmetricOperator = RealMatrix | sparse.spmatrix | sparse.sparray
+
+type RealSymmetricOperator = RealMatrix | SparseMatrix
 
 
 @dataclass(frozen=True, slots=True, eq=False)
@@ -172,7 +172,7 @@ class RealSymmetricEigenpairSolver:
 
     @staticmethod
     def _as_csr(
-        operator: sparse.spmatrix | sparse.sparray,
+        operator: SparseMatrix,
     ) -> sparse.csr_array:
         if operator.dtype.kind not in "iuf":
             raise TypeError("operator must contain real numeric values")

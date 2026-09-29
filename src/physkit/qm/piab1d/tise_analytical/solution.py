@@ -10,9 +10,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-import numpy.typing as npt
 
 from physkit.core.results import ResultsObject
+from physkit.numerics.typing.numpy.arrays import IntegerVector
 from physkit.units import (
     MODEL_SYSTEM_UNIT_CONVERTER,
     PhysicalUnit,
@@ -21,9 +21,6 @@ from physkit.units import (
 )
 
 from ..base import Piab1D
-
-
-type IntegerVector = npt.NDArray[np.int64]
 
 
 @dataclass(frozen=True, slots=True, eq=False)
