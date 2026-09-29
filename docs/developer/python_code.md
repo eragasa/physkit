@@ -3,15 +3,15 @@
 ## Package ownership
 
 Reusable physics, numerical methods, quantities, grids, operators, solvers, and
-visualizers belong under `src/physkit/`. Keep research-campaign orchestration,
-retained campaign records, manuscript workflows, and generated evidence outside
-the package.
+visualizers belong under `src/python/projectkoios/physkit/`. Keep
+research-campaign orchestration, retained campaign records, manuscript workflows,
+and generated evidence outside the package.
 
 Organize dimensional model families explicitly. The clean particle-in-a-box
 implementation uses:
 
 ```text
-physkit/qm/piab1d/
+projectkoios/physkit/qm/piab1d/
 ├── __init__.py
 ├── base.py
 ├── tise_analytical/
@@ -29,13 +29,14 @@ Do not add empty 2D or 3D placeholders. Add a dimensional package only when its
 model and represented mathematics are implemented.
 
 Generic one-dimensional finite-difference operators remain in
-`physkit.operators.operators_1d.fd`. Schrödinger kinetic energy, sampled quantum
-potentials, and Hamiltonian composition belong in
-`physkit.operators.qm.qm_1d`.
+`projectkoios.physkit.operators.operators_1d.fd`. Schrödinger kinetic energy,
+sampled quantum potentials, and Hamiltonian composition belong in
+`projectkoios.physkit.operators.qm.qm_1d`.
 
 Superseded quantum and numerical implementations are retained only under
-`physkit.legacy.qm` and `physkit.legacy.numerics`. Both namespaces are deprecated,
-warn when imported, and must not be dependencies of maintained package code.
+`projectkoios.physkit.legacy.qm` and
+`projectkoios.physkit.legacy.numerics`. Both namespaces are deprecated, warn
+when imported, and must not be dependencies of maintained package code.
 
 ## Public imports
 
@@ -60,8 +61,8 @@ Keep immutable data and results in frozen, slotted dataclasses when practical.
 ## Unit-aware numerical calculations
 
 `UnitSystem` selects a coherent numerical scale. Model and operator boundaries
-retain units, but arrays passed into `physkit.numerics` are stripped to plain
-numerical magnitudes. Numerical results are wrapped with units again by the
+retain units, but arrays passed into `projectkoios.physkit.numerics` are stripped
+to plain numerical magnitudes. Numerical results are wrapped with units again by the
 owning model layer. Numerical matrices remain in the selected scale; they are
 not converted wholesale to canonical SI.
 
@@ -94,6 +95,6 @@ Treat external repositories as read-only donors unless changes are explicitly
 authorized. Record the exact donor revision for migrated numerical behavior. Do
 not add a runtime dependency on a local checkout.
 
-Adapt names and ownership to PhysKit while preserving represented mathematics,
+Adapt names and ownership to Project Koios PhysKit while preserving represented mathematics,
 units, numerical behavior, and relevant verification. Do not copy campaign
 infrastructure when only reusable model or numerical machinery is needed.

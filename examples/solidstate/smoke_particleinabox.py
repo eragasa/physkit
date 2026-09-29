@@ -1,5 +1,5 @@
 import numpy as np
-from physkit.qm.models.piab1d import ParticleInABox1D
+from projectkoios.physkit.qm.models.piab1d import ParticleInABox1D
 
 import math
 

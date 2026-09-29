@@ -1,0 +1,1 @@
+"""Classical statistical energy distributions."""

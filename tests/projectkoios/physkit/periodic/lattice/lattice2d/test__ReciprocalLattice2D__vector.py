@@ -1,0 +1,17 @@
+from __future__ import annotations
+
+import numpy as np
+
+from projectkoios.physkit.periodic.lattice.lattice2d import ReciprocalLattice2D
+
+
+def test_constructs_vectors_from_integer_indices() -> None:
+    lattice = ReciprocalLattice2D(
+        b1=np.array([2.0, 1.0]),
+        b2=np.array([1.0, 3.0]),
+    )
+    indices = np.array([[4, -2], [1, 3]])
+
+    vectors = lattice.vector(indices)
+
+    np.testing.assert_array_equal(vectors, indices @ lattice.B.T)

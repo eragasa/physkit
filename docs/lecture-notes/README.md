@@ -9,7 +9,8 @@ responsibilities and should not duplicate one another.
 ### Maintained Python package
 
 Reusable mathematics, numerical representations, solvers, data models, and
-visualization behavior belong under `src/physkit/`. They require ordinary
+visualization behavior belong under `src/python/projectkoios/physkit/`. They
+require ordinary
 software tests. Do not place reusable implementation inside a manuscript figure
 script or notebook merely to keep an example self-contained.
 
@@ -47,6 +48,22 @@ A figure derived from a retained computational study belongs with that study,
 including its input data and reproduction script. A lecture note may reference
 or reuse the published image without taking ownership of the study.
 
+## Current subject notes
+
+- [Finite-difference quantum harmonic oscillator](qm/qho1d/qho1d__finite_difference.md)
+- [Complex plane waves](waves/plane/complex-plane-waves/index.md)
+- [One-dimensional free-electron Bloch representation](../lecturenotes/solidstate/bloch1d/freeelectron/index.md)
+- [One-dimensional cosine-potential Bloch bands](../lecturenotes/solidstate/bloch1d/cosinepotential/index.md)
+- [Periodic primitive-cell free particle in two dimensions](../lecturenotes/solidstate/semiconductors/effmass_2d/index.md)
+- [Three-dimensional periodic primitive-cell effective-mass reference](../lecturenotes/solidstate/semiconductors/effmass_3d/index.md)
+- [Kronig--Penney delta-comb dispersion](../lecturenotes/solidstate/electronic-structure/kronig-penney/delta-comb/index.md)
+- [Dimensionless periodic Cahn--Hilliard evolution](../lecturenotes/solidstate/phase-field/cahn-hilliard/index.md)
+- [Lennard--Jones and Morse radial pair potentials](../lecturenotes/solidstate/interatomic-potentials/radial-pair-potentials/index.md)
+- [Molar and mass composition of finite mixtures](materials/mixtures/molar-and-mass-composition/index.md)
+- [Site-fraction composition on multiple sublattices](materials/mixtures/sublattice-site-fractions/index.md)
+- [Planar deposition geometry from point and disk sources](deposition/planar-source-geometry/index.md)
+- [Planar three-dimensional Hertz--Knudsen phase-change flux](thermal-transport/phase-change/hertz-knudsen/index.md)
+
 ## Chapter and figure layout
 
 A chapter that owns generated figures should normally use:
@@ -82,7 +99,7 @@ A manuscript-specific figure script should:
 For example, a chapter heatmap should use:
 
 ```python
-from physkit.visualize import HeatMapVisualizer
+from projectkoios.physkit.visualize import HeatMapVisualizer
 ```
 
 rather than reproduce color normalization and plotting behavior locally.

@@ -1,0 +1,1 @@
+"""Maxwell--Boltzmann occupation distribution."""

@@ -6,23 +6,24 @@ Tests mirror the implementation module as a directory. A test for one class
 method uses:
 
 ```text
-tests/<package>/<subpackage>/<module>/test__<ClassName>__<method>.py
+tests/projectkoios/physkit/<subpackage>/<module>/test__<ClassName>__<method>.py
 ```
 
 Examples:
 
 ```text
-src/physkit/units/systems.py
-tests/physkit/units/systems/test__UnitSystem__energy_unit.py
+src/python/projectkoios/physkit/units/systems.py
+tests/projectkoios/physkit/units/systems/test__UnitSystem__energy_unit.py
 
-src/physkit/qm/piab1d/tise_fd/solver.py
-tests/physkit/qm/piab1d/tise_fd/solver/
+src/python/projectkoios/physkit/qm/piab1d/tise_fd/solver.py
+tests/projectkoios/physkit/qm/piab1d/tise_fd/solver/
     test__Piab1dTiseFdSolver__solve.py
 ```
 
-Use `init` for constructor tests and the property name for property tests. Keep
-unrelated classes and methods in separate files. Shared fixtures may live in the
-mirrored module directory's `conftest.py`.
+Use `init` for constructor tests and the property name for property tests. New
+or materially changed top-level test functions use
+`test__surface__facet__behavior`. Keep unrelated classes and methods in separate
+files. Shared fixtures may live in the mirrored module directory's `conftest.py`.
 
 ## Test scope
 
@@ -41,17 +42,17 @@ Run the narrowest relevant test directory while developing, followed by the
 connected numerical layer. Examples:
 
 ```bash
-python -m pytest -q tests/physkit/qm/piab1d
-python -m pytest -q tests/physkit/operators/operators_1d/fd
-python -m pytest -q tests/physkit/operators/qm/qm_1d
-python -m pytest -q tests/physkit/numerics/eigenproblems/real_symmetric
+python -m pytest -q tests/projectkoios/physkit/qm/piab1d
+python -m pytest -q tests/projectkoios/physkit/operators/operators_1d/fd
+python -m pytest -q tests/projectkoios/physkit/operators/qm/qm_1d
+python -m pytest -q tests/projectkoios/physkit/numerics/eigenproblems/real_symmetric
 ```
 
 Also compile changed Python modules and run `git diff --check`.
 
 ## Deprecated tests
 
-Tests retained specifically for `physkit.legacy` use the registered
+Tests retained specifically for `projectkoios.physkit.legacy` use the registered
 `@pytest.mark.deprecated` marker, either directly or through module-level
 `pytestmark`. Maintained implementation tests must not carry this marker or
 import deprecated modules.

@@ -1,0 +1,1 @@
+"""Morse radial pair potential."""
